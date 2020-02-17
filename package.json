@@ -1,0 +1,39 @@
+{
+  "name": "@contakt/nestjs-auth",
+  "version": "1.0.0",
+  "description": "NestJS Authentication Package",
+  "license": "UNLICENSED",
+  "author": {
+    "name": "Sclable Business Solutions GmbH",
+    "email": "support@sclable.com",
+    "url": "https://sclable.com/"
+  },
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "rimraf dist && tsc -p tsconfig.build.json",
+    "watch": "tsc-watch -p tsconfig.build.json"
+  },
+  "dependencies": {
+    "@nestjs/common": "^6.11.5",
+    "@nestjs/jwt": "^6.1.1",
+    "@nestjs/passport": "^6.1.1",
+    "express": "^4.17.1",
+    "keycloak-admin": "^1.13.0",
+    "passport": "^0.4.1",
+    "passport-jwt": "^4.0.0",
+    "passport-keycloak-bearer": "^2.0.3",
+    "passport-local": "^1.0.0",
+    "reflect-metadata": "^0.1.13",
+    "uuid": "^3.4.0"
+  },
+  "devDependencies": {
+    "@types/passport-jwt": "^3.0.3",
+    "@types/passport-local": "^1.0.33",
+    "@types/uuid": "^3.4.7",
+    "tsc-watch": "^4.1.0"
+  },
+  "contributors": [
+    "Norbert Lehotzky <norbert.lehotzky@sclable.com>"
+  ],
+  "types": "dist/index.d.ts"
+}
