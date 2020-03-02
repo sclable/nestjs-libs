@@ -1,12 +1,11 @@
 import { UserID } from '../types'
 
-export interface ApplicationUserContract {
+export interface AuthProviderUserContract {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any
-  id: UserID
-  externalId?: UserID
-  email?: string
-  username?: string
+  externalId: UserID
+  email: string
+  username: string
   firstName?: string
   lastName?: string
 }

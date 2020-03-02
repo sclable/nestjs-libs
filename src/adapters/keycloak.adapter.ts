@@ -2,7 +2,7 @@ import { Inject, Logger } from '@nestjs/common'
 import KcAdminClient from 'keycloak-admin'
 import UserRepresentation from 'keycloak-admin/lib/defs/userRepresentation'
 
-import { ApplicationUserContract, AuthProviderServiceContract } from '../contracts'
+import { AuthProviderServiceContract, AuthProviderUserContract } from '../contracts'
 import { AuthModuleOptions } from '../interfaces'
 import { AUTH_MODULE_OPTIONS } from '../constants'
 
@@ -25,22 +25,10 @@ export class KeycloakAdapter implements AuthProviderServiceContract {
     this.logger.setContext(KeycloakAdapter.name)
   }
 
-  private static createApplicationUserFromUserRepresentation(
-    user: UserRepresentation,
-  ): ApplicationUserContract {
-    return {
-      id: '',
-      externalId: user.id,
-      email: user.email,
-      name: user.firstName + ' ' + user.lastName,
-      username: user.username,
-    }
-  }
-
-  public async getUserById(id: string): Promise<ApplicationUserContract | undefined> {
+  public async getUserById(id: string): Promise<AuthProviderUserContract | undefined> {
     const user = await this.getUser(id)
 
-    return user ? KeycloakAdapter.createApplicationUserFromUserRepresentation(user) : undefined
+    return user ? this.createApplicationUserFromUserRepresentation(user) : undefined
   }
 
   private async login(): Promise<void> {
@@ -76,5 +64,23 @@ export class KeycloakAdapter implements AuthProviderServiceContract {
     this.logger.debug(`1 user successfully fetched from Keycloak API (external ID: ${id})`)
 
     return user
+  }
+
+  private createApplicationUserFromUserRepresentation(
+    user: UserRepresentation,
+  ): AuthProviderUserContract | undefined {
+    if (!user.id) {
+      this.logger.warn(`External user fetched by ID has no external ID`)
+
+      return undefined
+    }
+
+    return {
+      externalId: user.id,
+      email: user.email || '',
+      username: user.username || '',
+      firstName: user.firstName,
+      lastName: user.lastName,
+    }
   }
 }

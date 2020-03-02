@@ -1,5 +1,6 @@
-import { ApplicationUserContract } from './application-user.contract'
+import { AuthProviderUserContract } from '../contracts'
+import { UserID } from '../types'
 
 export interface AuthProviderServiceContract {
-  getUserById(id: string | number): Promise<ApplicationUserContract | undefined>
+  getUserById(id: UserID): Promise<AuthProviderUserContract | undefined>
 }

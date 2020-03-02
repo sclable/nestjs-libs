@@ -9,6 +9,7 @@ import {
 import { JwtPayload } from '../interfaces'
 import { AuthService } from './auth.service'
 import { AUTH_PROVIDER_SERVICE, USER_SERVICE } from '../constants'
+import { UserID } from '../types'
 
 @Injectable()
 export class ExternalAuthService<UserType extends ApplicationUserContract> extends AuthService<
@@ -31,61 +32,70 @@ export class ExternalAuthService<UserType extends ApplicationUserContract> exten
     token: JwtPayload,
     createIfNotExists: boolean = true,
     updateIfChanged: boolean = true,
-  ): Promise<UserType | undefined> {
+  ): Promise<UserType | null> {
     const externalId = token.sub
     if (!externalId) {
-      return undefined
+      return null
     }
 
-    let user = await this.userService.getOneByExternalId(externalId)
+    const user = await this.userService.getOneByExternalId(externalId)
+
     if (!user && createIfNotExists) {
-      user = await this.createApplicationUser(externalId)
+      const userId = await this.createApplicationUser(externalId)
+
+      return userId ? this.userService.getOneById(userId) : null
     } else if (
       !!user &&
       updateIfChanged &&
       AuthService.userDataChanged(user, token) &&
       this.updateLock.indexOf(user.id.toString()) < 0
     ) {
-      await this.updateApplicationUser(externalId, user)
+      const userId = await this.updateApplicationUser(externalId, user)
+
+      return userId ? this.userService.getOneById(userId) : null
     }
 
     return user
   }
 
-  private async createApplicationUser(
-    externalId: string | number,
-  ): Promise<UserType | undefined> {
-    let user = undefined
+  private async createApplicationUser(externalId: UserID): Promise<UserID | null> {
+    let userId = undefined
     try {
       const userData = await this.authProviderService.getUserById(externalId)
       if (!userData) {
-        return undefined
+        return null
       }
 
-      user = await this.userService.createFromExternalUserData(userData)
+      userId = await this.userService.createFromExternalUserData(userData)
     } catch (e) {
       this.logger.warn(`Application user cannot be created (external ID: ${externalId})`)
+      this.logger.debug(e)
 
-      return undefined
+      return null
     }
 
-    this.logger.debug(`New application user created (ID: ${user.id})`)
+    this.logger.debug(`New application user created (ID: ${userId})`)
 
-    return user
+    return userId
   }
 
   private async updateApplicationUser(
-    externalId: string | number,
-    user: ApplicationUserContract,
-  ): Promise<void> {
+    externalId: UserID,
+    user: UserType,
+  ): Promise<UserID | null> {
     this.updateLock.push(user.id.toString())
     const userData = await this.authProviderService.getUserById(externalId)
     if (!userData) {
-      return
+      return null
     }
-    await this.userService.updateFromExternalUserData(userData)
+    const userId = await this.userService.updateFromExternalUserData({
+      ...userData,
+      id: user.id,
+    })
     this.updateLock.splice(this.updateLock.indexOf(user.id.toString()), 1)
 
     this.logger.debug(`Application user updated (ID: ${user.id})`)
+
+    return userId
   }
 }

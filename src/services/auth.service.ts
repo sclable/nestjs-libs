@@ -10,7 +10,12 @@ export abstract class AuthService<UserType extends ApplicationUserContract> {
   protected constructor(@Inject(JwtService) protected readonly jwtService: JwtService) {}
 
   protected static userDataChanged(user: ApplicationUserContract, token: JwtPayload): boolean {
-    return user.name !== token.name || user.email !== token.email
+    return (
+      user.firstName !== token.given_name ||
+      user.lastName !== token.family_name ||
+      user.username !== token.preferred_username ||
+      user.email !== token.email
+    )
   }
 
   public decodeAuthorizationHeaderToken(headerToken: string): JwtPayload {

@@ -16,20 +16,26 @@ export class LocalAuthService<UserType extends ApplicationUserContract> extends 
     super(jwtService)
   }
 
-  public async validateUser(
-    username: string,
-    password: string,
-  ): Promise<UserType | undefined> {
+  public async validateUser(username: string, password: string): Promise<UserType | null> {
     return this.userService.getOneByUsernameAndPassword(username, password)
   }
 
   public async getAccessToken(user: ApplicationUserContract): Promise<string> {
-    const payload = { username: user.name, sub: user.id }
+    const payload = {
+      sub: user.id,
+      // eslint-disable-next-line @typescript-eslint/camelcase
+      preferred_username: user.username,
+      email: user.email,
+      // eslint-disable-next-line @typescript-eslint/camelcase
+      given_name: user.firstName,
+      // eslint-disable-next-line @typescript-eslint/camelcase
+      family_name: user.lastName,
+    }
 
     return this.jwtService.sign(payload)
   }
 
-  public async getApplicationUser(token: JwtPayload): Promise<UserType | undefined> {
-    return token.sub ? this.userService.getOneById(token.sub) : undefined
+  public async getApplicationUser(token: JwtPayload): Promise<UserType | null> {
+    return token.sub ? this.userService.getOneById(token.sub) : null
   }
 }
