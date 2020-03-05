@@ -13,7 +13,7 @@ TBD
 ```typescript
 // app/src/app.module.ts
 
-import { AuthConfig, KeycloakAuthModule } from '@contakt/libs/nestjs-auth'
+import { AuthConfig, KeycloakAuthModule } from '@contakt-libs/nestjs-auth'
 import { Module } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
 
@@ -132,7 +132,7 @@ This guard must be extended from one of the guards provided by the library.
 ```typescript
 // app/src/auth/graphql.guard.ts
 
-import { KeycloakGuard } from '@contakt/libs/nestjs-auth'
+import { KeycloakGuard } from '@contakt-libs/nestjs-auth'
 import { ExecutionContext, Injectable } from '@nestjs/common'
 import { GqlExecutionContext } from '@nestjs/graphql'
 
@@ -155,7 +155,7 @@ Just simply import and apply the needed guards in the application controllers or
 
 Example:
 ```typescript
-  import { KeycloakGuard } from '@contakt/libs/nestjs-auth'
+  import { KeycloakGuard } from '@contakt-libs/nestjs-auth'
 
   @UseGuards(KeycloakGuard)
   @Get('secured')
