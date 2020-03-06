@@ -38,12 +38,12 @@ export class ExternalAuthService<UserType extends ApplicationUserContract> exten
       return null
     }
 
-    const user = await this.userService.getOneByExternalId(externalId)
+    let user: UserType | null = await this.userService.getOneByExternalId(externalId)
 
     if (!user && createIfNotExists) {
       const userId = await this.createApplicationUser(externalId)
 
-      return userId ? this.userService.getOneById(userId) : null
+      user = userId ? await this.userService.getOneById(userId) : null
     } else if (
       !!user &&
       updateIfChanged &&
@@ -52,7 +52,11 @@ export class ExternalAuthService<UserType extends ApplicationUserContract> exten
     ) {
       const userId = await this.updateApplicationUser(externalId, user)
 
-      return userId ? this.userService.getOneById(userId) : null
+      user = userId ? await this.userService.getOneById(userId) : null
+    }
+
+    if (user) {
+      user.resourceAccess = token.resource_access
     }
 
     return user

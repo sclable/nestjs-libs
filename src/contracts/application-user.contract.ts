@@ -1,4 +1,5 @@
 import { UserID } from '../types'
+import { ResourceAccess } from '../interfaces'
 
 export interface ApplicationUserContract {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -9,4 +10,5 @@ export interface ApplicationUserContract {
   username?: string
   firstName?: string
   lastName?: string
+  resourceAccess?: ResourceAccess
 }

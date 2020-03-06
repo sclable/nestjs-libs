@@ -1,3 +1,5 @@
+import { ResourceAccess } from './resource-access.interface'
+
 export interface JwtPayload {
   sub?: string
   jti?: string
@@ -7,4 +9,5 @@ export interface JwtPayload {
   family_name?: string
   preferred_username?: string
   email?: string
+  resource_access?: ResourceAccess
 }
