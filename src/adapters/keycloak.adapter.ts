@@ -25,6 +25,40 @@ export class KeycloakAdapter implements AuthProviderServiceContract {
     this.logger.setContext(KeycloakAdapter.name)
   }
 
+  public async createUsers(users: UserRepresentation[]): Promise<number> {
+    let created = 0
+    try {
+      await this.login()
+      for await (const user of users) {
+        let kcUser: { id: string }
+        try {
+          kcUser = await this.kcAdminClient.users.create(user)
+          created++
+        } catch (error) {
+          this.logger.error(`User cannot be created via Keycloak API: ${error.message}`)
+          continue
+        }
+
+        const clientRoles = user.clientRoles || {}
+        if (!clientRoles) {
+          continue
+        }
+
+        try {
+          await this.assignClientRolesToUser(kcUser.id, clientRoles)
+        } catch (error) {
+          this.logger.error(
+            `Roles cannot be assigned to user via Keycloak API: ${error.message}`,
+          )
+        }
+      }
+    } catch (error) {
+      this.logger.error(`CreateUser error: ${error.message}`)
+    }
+
+    return created
+  }
+
   public async getUserById(id: string): Promise<AuthProviderUserContract | undefined> {
     const user = await this.getUser(id)
 
@@ -81,6 +115,46 @@ export class KeycloakAdapter implements AuthProviderServiceContract {
       username: user.username || '',
       firstName: user.firstName,
       lastName: user.lastName,
+    }
+  }
+
+  private async assignClientRolesToUser(
+    userId: string,
+    clientRoles: Record<string, []>,
+  ): Promise<void> {
+    for await (const clientId of Object.keys(clientRoles)) {
+      const kcClients = await this.kcAdminClient.clients.find({ clientId })
+      if (!kcClients || !kcClients[0]) {
+        continue
+      }
+
+      const kcClient = kcClients[0]
+      if (!kcClient.id) {
+        continue
+      }
+
+      const roles = [...clientRoles[clientId]]
+      for await (const roleName of roles) {
+        const kcRole = await this.kcAdminClient.clients.findRole({
+          id: kcClient.id,
+          roleName,
+        })
+
+        if (!kcRole || !kcRole.id || !kcRole.name) {
+          continue
+        }
+
+        await this.kcAdminClient.users.addClientRoleMappings({
+          id: userId,
+          clientUniqueId: kcClient.id,
+          roles: [
+            {
+              id: kcRole.id,
+              name: kcRole.name,
+            },
+          ],
+        })
+      }
     }
   }
 }

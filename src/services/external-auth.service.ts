@@ -6,7 +6,7 @@ import {
   AuthProviderServiceContract,
   UserServiceContract,
 } from '../contracts'
-import { JwtPayload } from '../interfaces'
+import { CreateAuthProviderUser, JwtPayload } from '../interfaces'
 import { AuthService } from './auth.service'
 import { AUTH_PROVIDER_SERVICE, USER_SERVICE } from '../constants'
 import { UserID } from '../types'
@@ -60,6 +60,10 @@ export class ExternalAuthService<UserType extends ApplicationUserContract> exten
     }
 
     return user
+  }
+
+  public async createAuthUser(users: CreateAuthProviderUser[]): Promise<number> {
+    return this.authProviderService.createUsers(users)
   }
 
   private async createApplicationUser(externalId: UserID): Promise<UserID | null> {
