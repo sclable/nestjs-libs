@@ -1,4 +1,5 @@
-export { UserServiceContract } from './user-service.contract'
 export { ApplicationUserContract } from './application-user.contract'
 export { AuthProviderServiceContract } from './auth-provider-service.contract'
 export { AuthProviderUserContract } from './auth-provider-user.contract'
+export { TestUserServiceContract } from './test-user-service.contract'
+export { UserServiceContract } from './user-service.contract'

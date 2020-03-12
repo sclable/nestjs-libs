@@ -3,7 +3,7 @@ import { JwtModule } from '@nestjs/jwt'
 import { PassportModule } from '@nestjs/passport'
 
 import { ExternalAuthService } from '../services'
-import { KeycloakStrategy } from '../strategies'
+import { KeycloakStrategy, MockStrategy } from '../strategies'
 import { AuthModuleAsyncOptions } from '../interfaces'
 import { KeycloakAuthController } from '../controllers'
 import { AuthModule } from './auth.module'
@@ -32,6 +32,7 @@ export class KeycloakAuthModule extends AuthModule {
         Logger,
         ExternalAuthService,
         KeycloakStrategy,
+        MockStrategy,
         authProviderService,
         this.getUserServiceProvider(),
         this.createAsyncOptionsProvider(asyncOptions),

@@ -3,7 +3,7 @@ import { JwtModule } from '@nestjs/jwt'
 import { PassportModule } from '@nestjs/passport'
 
 import { LocalAuthService } from '../services'
-import { JwtStrategy, LocalStrategy } from '../strategies'
+import { JwtStrategy, LocalStrategy, MockStrategy } from '../strategies'
 import { AuthModuleAsyncOptions, AuthModuleOptions } from '../interfaces'
 import { LocalAuthController } from '../controllers'
 import { AuthModule } from './auth.module'
@@ -36,6 +36,7 @@ export class LocalAuthModule extends AuthModule {
         LocalAuthService,
         LocalStrategy,
         JwtStrategy,
+        MockStrategy,
         this.getUserServiceProvider(),
         this.createAsyncOptionsProvider(asyncOptions),
       ],
