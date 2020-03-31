@@ -1,7 +1,8 @@
 dependencies:
   '@azure/service-bus': 1.1.3
-  '@nestjs/common': 6.11.11
+  '@nestjs/common': 6.11.11_reflect-metadata@0.1.13
   amqp-ts: 1.8.0
+  reflect-metadata: 0.1.13
   rimraf: 2.7.1
 devDependencies:
   '@types/node': 12.11.6
@@ -124,10 +125,11 @@ packages:
     dev: false
     resolution:
       integrity: sha512-0EwRh2YXKKKZOscy9r6Hm2lUm6FX06ppD9NI4Ew8EPuFGaTxGw88PLhSXTcAA9DEKsr8kWpFf047YW8zz7jS9w==
-  /@nestjs/common/6.11.11:
+  /@nestjs/common/6.11.11_reflect-metadata@0.1.13:
     dependencies:
       axios: 0.19.2
       cli-color: 2.0.0
+      reflect-metadata: 0.1.13
       tslib: 1.11.1
       uuid: 7.0.1
     dev: false
@@ -930,6 +932,10 @@ packages:
     dev: false
     resolution:
       integrity: sha512-Ebho8K4jIbHAxnuxi7o42OrZgF/ZTNcsZj6nRKyUmkhLFq8CHItp/fy6hQZuZmP/n3yZ9VBUbp4zz/mX8hmYPw==
+  /reflect-metadata/0.1.13:
+    dev: false
+    resolution:
+      integrity: sha512-Ts1Y/anZELhSsjMcU605fU9RE4Oi3p5ORujwbIKXfWa+0Zxs510Qrmrce5/Jowq3cHSZSJqBjypxmHarc+vEWg==
   /request/2.88.2:
     dependencies:
       aws-sign2: 0.7.0
@@ -1288,6 +1294,7 @@ specifiers:
   '@nestjs/common': ^6.11.11
   '@types/node': 12.11.6
   amqp-ts: ^1.8.0
+  reflect-metadata: ^0.1.13
   rimraf: ^2.7.1
   tsc-watch: 2.2.1
   typescript: 3.8.3
