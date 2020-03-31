@@ -1,9 +1,10 @@
 dependencies:
   '@azure/abort-controller': 1.0.1
   '@azure/storage-blob': 12.1.1
-  '@nestjs/common': 6.11.11
+  '@nestjs/common': 6.11.11_reflect-metadata@0.1.13
   fs-extra: 9.0.0
   minio: 7.0.15
+  reflect-metadata: 0.1.13
   rimraf: 2.7.1
   uuid: 7.0.2
 devDependencies:
@@ -98,10 +99,11 @@ packages:
     dev: false
     resolution:
       integrity: sha512-FhzXfrPe5DZE5KNbFoKXXhGqX362I+dGv0jVINCCQiToqadROZ1tRFtJ3ljnMPs75fZZzwnbq+oIB6NnpBqOzA==
-  /@nestjs/common/6.11.11:
+  /@nestjs/common/6.11.11_reflect-metadata@0.1.13:
     dependencies:
       axios: 0.19.2
       cli-color: 2.0.0
+      reflect-metadata: 0.1.13
       tslib: 1.11.1
       uuid: 7.0.1
     dev: false
@@ -606,6 +608,10 @@ packages:
       node: '>= 6'
     resolution:
       integrity: sha512-BViHy7LKeTz4oNnkcLJ+lVSL6vpiFeX6/d3oSH8zCW7UxP2onchk+vTGB143xuFjHS3deTgkKoXXymXqymiIdA==
+  /reflect-metadata/0.1.13:
+    dev: false
+    resolution:
+      integrity: sha512-Ts1Y/anZELhSsjMcU605fU9RE4Oi3p5ORujwbIKXfWa+0Zxs510Qrmrce5/Jowq3cHSZSJqBjypxmHarc+vEWg==
   /rimraf/2.7.1:
     dependencies:
       glob: 7.1.6
@@ -826,6 +832,7 @@ specifiers:
   '@types/uuid': ^7.0.2
   fs-extra: ^9.0.0
   minio: ^7.0.14
+  reflect-metadata: ^0.1.13
   rimraf: ^2.7.1
   tsc-watch: 2.2.1
   typescript: 3.8.3
