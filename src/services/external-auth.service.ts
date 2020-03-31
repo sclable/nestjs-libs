@@ -67,7 +67,7 @@ export class ExternalAuthService<UserType extends ApplicationUserContract> exten
   }
 
   private async createApplicationUser(externalId: UserID): Promise<UserID | null> {
-    let userId = undefined
+    let userId: string | number | UserID | null = null
     try {
       const userData = await this.authProviderService.getUserById(externalId)
       if (!userData) {
