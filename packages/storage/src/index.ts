@@ -1,0 +1,5 @@
+export { QueueServiceContract, StorageDriverContract } from './contracts'
+export { StorageType } from './enums'
+export { StorageManager } from './storage.manager'
+export { StorageModule } from './storage.module'
+export { StorageModuleAsyncOptions, StorageModuleOptions } from './interfaces'

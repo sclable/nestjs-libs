@@ -1,0 +1,37 @@
+{
+  "name": "@contakt-libs/nestjs-storage",
+  "version": "1.0.0",
+  "description": "Storage adapters for NestJS.",
+  "license": "UNLICENSED",
+  "author": {
+    "name": "Sclable Business Solutions GmbH",
+    "email": "support@sclable.com",
+    "url": "https://sclable.com/"
+  },
+  "contributors": [
+    "Norbert Lehotzky <norbert.lehotzky@sclable.com>"
+  ],
+  "scripts": {
+    "build": "rimraf dist && tsc -p tsconfig.build.json",
+    "watch": "tsc-watch -p tsconfig.build.json"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "dependencies": {
+    "@azure/abort-controller": "^1.0.1",
+    "@azure/storage-blob": "^12.1.1",
+    "@nestjs/common": "^6.11.11",
+    "fs-extra": "^9.0.0",
+    "minio": "^7.0.14",
+    "reflect-metadata": "^0.1.13",
+    "rimraf": "^2.7.1",
+    "uuid": "^7.0.2"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^8.1.0",
+    "@types/minio": "^7.0.5",
+    "@types/uuid": "^7.0.2",
+    "tsc-watch": "2.2.1",
+    "typescript": "3.8.3"
+  }
+}
