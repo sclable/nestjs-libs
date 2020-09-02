@@ -1,5 +1,5 @@
 {
-  "name": "@contakt-libs/nestjs-queue",
+  "name": "@sclable/nestjs-queue",
   "version": "1.0.0",
   "description": "Queue adapters for NestJS.",
   "license": "UNLICENSED",
