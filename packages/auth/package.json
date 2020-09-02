@@ -1,5 +1,5 @@
 {
-  "name": "@contakt-libs/nestjs-auth",
+  "name": "@sclable/nestjs-auth",
   "version": "1.0.0",
   "description": "NestJS Authentication Package",
   "license": "UNLICENSED",
