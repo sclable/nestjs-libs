@@ -1,7 +1,26 @@
 {
   "name": "@sclable/nestjs-libs",
+  "license": "UNLICENSED",
   "private": true,
+  "scripts": {
+    "lint": "eslint . --ext .js,.ts,.tsx --max-warnings 0 --cache --cache-location 'node_modules/.cache/.eslintcache'",
+    "lintfix": "npm run lint -- --fix"
+  },
+  "author": {
+    "name": "Sclable Business Solutions GmbH",
+    "email": "office@sclable.com",
+    "url": "https://sclable.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@git.sclable.com:norbert.lehotzky/nestjs-libs.git"
+  },
   "devDependencies": {
-    "lerna": "^3.22.1"
+    "@sclable/lint": "^1.3.0",
+    "@sclable/tsconfig": "^0.11.6",
+    "husky": "^4.2.5",
+    "lerna": "^3.22.1",
+    "lint-staged": "^10.3.0",
+    "typescript": "^4.0.2"
   }
 }

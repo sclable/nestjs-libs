@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    // We're using ESLint to check for unused locals, it is more flexible.
+    "noUnusedLocals": false,
+    "baseUrl": ".",
+    "declaration": true,
+    "incremental": true,
+    "lib": [ "es2018" ],
+    "outDir": "dist",
+    "paths": {"*": ["packages/*"]},
+    "target": "es2018"
+  },
+  "exclude": [
+    "node_modules",
+    "packages/*/node_modules",
+    "dist",
+    "packages/*/dist"
+  ],
+  "extends": "./node_modules/@sclable/tsconfig/tsconfig.json",
+  "include": [ "packages/**/*.ts", "packages/**/*.tsx" ]
+}
