@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common'
 import { v4 as uuid } from 'uuid'
 
-import { ApplicationUser } from '../interfaces/application-user.interface'
 import { AuthProviderUserContract, UserServiceContract } from '../../src/contracts'
 import { UserID } from '../../src/types'
+import { ApplicationUser } from '../interfaces/application-user.interface'
 
 @Injectable()
 export class UserService implements UserServiceContract<ApplicationUser> {

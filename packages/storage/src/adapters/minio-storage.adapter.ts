@@ -6,10 +6,11 @@ import { Readable } from 'stream'
 import { Injectable, Logger } from '@nestjs/common'
 import { Client } from 'minio'
 
-import { AbstractAdapter } from './abstract.adapter'
-import ReadableStream = NodeJS.ReadableStream
 import { StorageDriverContract } from '../contracts'
 import { FileMetaData, MinioStorageAdapterOptions } from '../interfaces'
+import { AbstractAdapter } from './abstract.adapter'
+
+import ReadableStream = NodeJS.ReadableStream
 
 @Injectable()
 export class MinioStorageAdapter extends AbstractAdapter implements StorageDriverContract {

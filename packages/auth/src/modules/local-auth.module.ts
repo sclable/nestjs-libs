@@ -2,12 +2,12 @@ import { DynamicModule, Global, Logger, Module } from '@nestjs/common'
 import { JwtModule } from '@nestjs/jwt'
 import { PassportModule } from '@nestjs/passport'
 
+import { AUTH_MODULE_OPTIONS } from '../constants'
+import { LocalAuthController } from '../controllers'
+import { AuthModuleAsyncOptions, AuthModuleOptions } from '../interfaces'
 import { LocalAuthService } from '../services'
 import { JwtStrategy, LocalStrategy, MockStrategy } from '../strategies'
-import { AuthModuleAsyncOptions, AuthModuleOptions } from '../interfaces'
-import { LocalAuthController } from '../controllers'
 import { AuthModule } from './auth.module'
-import { AUTH_MODULE_OPTIONS } from '../constants'
 
 @Global()
 @Module({})

@@ -1,10 +1,10 @@
 import { Inject } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
 
-import { ApplicationUserContract, UserServiceContract } from '../contracts'
-import { AuthService } from './auth.service'
-import { JwtPayload } from '../interfaces'
 import { USER_SERVICE } from '../constants'
+import { ApplicationUserContract, UserServiceContract } from '../contracts'
+import { JwtPayload } from '../interfaces'
+import { AuthService } from './auth.service'
 
 export class LocalAuthService<UserType extends ApplicationUserContract> extends AuthService<
   UserType

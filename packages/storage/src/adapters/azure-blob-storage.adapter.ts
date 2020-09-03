@@ -13,17 +13,19 @@ import {
 } from '@azure/storage-blob'
 import { Injectable, Logger, OnModuleInit } from '@nestjs/common'
 
-import { AbstractAdapter } from './abstract.adapter'
-import ReadableStream = NodeJS.ReadableStream
 import {
   QueueMessageContract,
   QueueServiceContract,
   StorageDriverContract,
 } from '../contracts'
 import { AzureBlobStorageAdapterOptions, FileMetaData } from '../interfaces'
+import { AbstractAdapter } from './abstract.adapter'
+
+import ReadableStream = NodeJS.ReadableStream
 
 @Injectable()
-export class AzureBlobStorageAdapter extends AbstractAdapter
+export class AzureBlobStorageAdapter
+  extends AbstractAdapter
   implements StorageDriverContract, OnModuleInit {
   private readonly blobServiceClient: BlobServiceClient
   private readonly onUploadedCallbacks: Map<string, CallableFunction> = new Map()

@@ -1,16 +1,16 @@
 import { Inject, Injectable, Logger, Optional } from '@nestjs/common'
 
+import { AzureBlobStorageAdapter, DummyStorageAdapter, MinioStorageAdapter } from './adapters'
+import { LocalStorageAdapter } from './adapters/local-storage.adapter'
 import { QUEUE_SERVICE, STORAGE_MODULE_OPTIONS } from './constants'
+import { QueueServiceContract, StorageDriverContract } from './contracts'
+import { StorageType } from './enums'
 import {
   AzureBlobStorageAdapterOptions,
   LocalStorageAdapterOptions,
   MinioStorageAdapterOptions,
   StorageModuleOptions,
 } from './interfaces'
-import { QueueServiceContract, StorageDriverContract } from './contracts'
-import { StorageType } from './enums'
-import { AzureBlobStorageAdapter, DummyStorageAdapter, MinioStorageAdapter } from './adapters'
-import { LocalStorageAdapter } from './adapters/local-storage.adapter'
 
 @Injectable()
 export class StorageManager {

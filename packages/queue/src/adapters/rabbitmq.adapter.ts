@@ -1,9 +1,9 @@
 import { Injectable, Logger } from '@nestjs/common'
 import { Connection, Message } from 'amqp-ts'
 
-import { QueueMessage } from '../messages'
-import { RabbitmqAdapterOptions } from '../interfaces/adapter-options'
 import { QueueServiceContract } from '../contracts'
+import { RabbitmqAdapterOptions } from '../interfaces/adapter-options'
+import { QueueMessage } from '../messages'
 
 @Injectable()
 export class RabbitmqAdapter implements QueueServiceContract {

@@ -1,5 +1,5 @@
-import { UserID } from '../types'
 import { ResourceAccess } from '../interfaces'
+import { UserID } from '../types'
 
 export interface ApplicationUserContract {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

@@ -1,11 +1,12 @@
 import { Readable } from 'stream'
 
 import { Logger } from '@nestjs/common'
-import ReadableStream = NodeJS.ReadableStream
 import { v4 as uuidV4 } from 'uuid'
 
 import { StorageDriverContract } from '../contracts'
 import { FileMetaData } from '../interfaces'
+
+import ReadableStream = NodeJS.ReadableStream
 
 export class DummyStorageAdapter implements StorageDriverContract {
   public constructor(private readonly logger: Logger) {

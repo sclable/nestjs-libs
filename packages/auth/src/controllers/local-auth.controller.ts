@@ -11,11 +11,11 @@ import {
   UseGuards,
 } from '@nestjs/common'
 
-import { LocalAuthService } from '../services'
+import { AUTH_MODULE_OPTIONS } from '../constants'
+import { ApplicationUserContract } from '../contracts'
 import { JwtGuard, LocalGuard } from '../guards'
 import { AuthModuleOptions, CheckResponse, LoginResponse } from '../interfaces'
-import { ApplicationUserContract } from '../contracts'
-import { AUTH_MODULE_OPTIONS } from '../constants'
+import { LocalAuthService } from '../services'
 
 @Controller('auth')
 export class LocalAuthController<UserType extends ApplicationUserContract> {

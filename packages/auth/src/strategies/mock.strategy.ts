@@ -1,9 +1,9 @@
-import { Strategy } from 'passport-mock-strategy'
-import { PassportStrategy } from '@nestjs/passport'
 import { Inject, Injectable, Logger } from '@nestjs/common'
+import { PassportStrategy } from '@nestjs/passport'
+import { Strategy } from 'passport-mock-strategy'
 
-import { ApplicationUserContract, TestUserServiceContract } from '../contracts'
 import { USER_SERVICE } from '../constants'
+import { ApplicationUserContract, TestUserServiceContract } from '../contracts'
 
 @Injectable()
 export class MockStrategy<UserType extends ApplicationUserContract> extends PassportStrategy(

@@ -1,14 +1,14 @@
 import { join } from 'path'
 import { Readable } from 'stream'
 
-import fse from 'fs-extra'
 import { Logger, NotImplementedException } from '@nestjs/common'
+import fse from 'fs-extra'
 
-import ReadableStream = NodeJS.ReadableStream
-
-import { AbstractAdapter } from './abstract.adapter'
 import { StorageDriverContract } from '../contracts'
 import { FileMetaData, LocalStorageAdapterOptions } from '../interfaces'
+import { AbstractAdapter } from './abstract.adapter'
+
+import ReadableStream = NodeJS.ReadableStream
 
 const METADATA_FILE_PREFIX = '__meta__'
 
@@ -31,7 +31,7 @@ export class LocalStorageAdapter extends AbstractAdapter implements StorageDrive
 
     try {
       fse.accessSync(this.basePath, fse.constants.R_OK | fse.constants.W_OK)
-    } catch (e) {
+    } catch (error) {
       throw new Error(
         `LocalStorageAdapter: base path "${this.basePath}" is not readable or writable.`,
       )

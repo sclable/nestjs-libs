@@ -1,6 +1,6 @@
 import { AuthProviderUserContract } from '../contracts'
-import { UserID } from '../types'
 import { CreateAuthProviderUser } from '../interfaces'
+import { UserID } from '../types'
 
 export interface AuthProviderServiceContract {
   createUsers(users: CreateAuthProviderUser[]): Promise<number>

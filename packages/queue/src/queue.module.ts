@@ -2,15 +2,15 @@ import { DynamicModule, Global, Logger, Module, Provider } from '@nestjs/common'
 
 import { AzureServiceBusAdapter, RabbitmqAdapter } from './adapters'
 import { DummyAdapter } from './adapters/dummy.adapter'
-import { QueueType } from './enums'
 import { QUEUE_MODULE_OPTIONS, QUEUE_SERVICE } from './constants'
+import { QueueServiceContract } from './contracts'
+import { QueueType } from './enums'
 import {
   AzureServiceBusAdapterOptions,
   QueueModuleAsyncOptions,
   QueueModuleOptions,
   RabbitmqAdapterOptions,
 } from './interfaces'
-import { QueueServiceContract } from './contracts'
 
 @Global()
 @Module({})

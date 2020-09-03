@@ -10,11 +10,11 @@ import {
   UseGuards,
 } from '@nestjs/common'
 
-import { KeycloakGuard } from '../guards'
-import { ApplicationUserContract } from '../contracts'
-import { ExternalAuthService } from '../services'
-import { AuthModuleOptions, CheckResponse } from '../interfaces'
 import { AUTH_MODULE_OPTIONS } from '../constants'
+import { ApplicationUserContract } from '../contracts'
+import { KeycloakGuard } from '../guards'
+import { AuthModuleOptions, CheckResponse } from '../interfaces'
+import { ExternalAuthService } from '../services'
 
 @Controller('auth')
 export class KeycloakAuthController<UserType extends ApplicationUserContract> {

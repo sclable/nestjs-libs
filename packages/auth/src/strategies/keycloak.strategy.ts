@@ -1,12 +1,12 @@
-// @ts-ignore
-import KeycloakBearerStrategy from 'passport-keycloak-bearer'
 import { Inject, Logger, UnauthorizedException } from '@nestjs/common'
 import { PassportStrategy } from '@nestjs/passport'
+// @ts-ignore
+import KeycloakBearerStrategy from 'passport-keycloak-bearer'
 
-import { ExternalAuthService } from '../services'
-import { AuthModuleOptions, JwtPayload } from '../interfaces'
-import { ApplicationUserContract } from '../contracts'
 import { AUTH_MODULE_OPTIONS } from '../constants'
+import { ApplicationUserContract } from '../contracts'
+import { AuthModuleOptions, JwtPayload } from '../interfaces'
+import { ExternalAuthService } from '../services'
 
 export class KeycloakStrategy<
   UserType extends ApplicationUserContract

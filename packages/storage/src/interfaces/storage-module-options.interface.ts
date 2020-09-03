@@ -1,5 +1,5 @@
-import { StorageType } from '../enums'
 import { QueueServiceContract } from '../contracts'
+import { StorageType } from '../enums'
 import {
   AzureBlobStorageAdapterOptions,
   DummyStorageAdapterOptions,

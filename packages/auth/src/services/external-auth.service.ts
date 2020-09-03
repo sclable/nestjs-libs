@@ -1,15 +1,15 @@
 import { Inject, Injectable, Logger } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
 
+import { AUTH_PROVIDER_SERVICE, USER_SERVICE } from '../constants'
 import {
   ApplicationUserContract,
   AuthProviderServiceContract,
   UserServiceContract,
 } from '../contracts'
 import { CreateAuthProviderUser, JwtPayload } from '../interfaces'
-import { AuthService } from './auth.service'
-import { AUTH_PROVIDER_SERVICE, USER_SERVICE } from '../constants'
 import { UserID } from '../types'
+import { AuthService } from './auth.service'
 
 @Injectable()
 export class ExternalAuthService<UserType extends ApplicationUserContract> extends AuthService<
@@ -75,9 +75,9 @@ export class ExternalAuthService<UserType extends ApplicationUserContract> exten
       }
 
       userId = await this.userService.createFromExternalUserData(userData)
-    } catch (e) {
+    } catch (error) {
       this.logger.warn(`Application user cannot be created (external ID: ${externalId})`)
-      this.logger.debug(e)
+      this.logger.debug(error)
 
       return null
     }

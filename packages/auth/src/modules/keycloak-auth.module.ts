@@ -2,14 +2,14 @@ import { DynamicModule, Global, Logger, Module, Provider } from '@nestjs/common'
 import { JwtModule } from '@nestjs/jwt'
 import { PassportModule } from '@nestjs/passport'
 
-import { ExternalAuthService } from '../services'
-import { KeycloakStrategy, MockStrategy } from '../strategies'
-import { AuthModuleAsyncOptions } from '../interfaces'
-import { KeycloakAuthController } from '../controllers'
-import { AuthModule } from './auth.module'
-import { AuthProviderServiceContract } from '../contracts'
 import { KeycloakAdapter } from '../adapters'
 import { AUTH_PROVIDER_SERVICE } from '../constants'
+import { AuthProviderServiceContract } from '../contracts'
+import { KeycloakAuthController } from '../controllers'
+import { AuthModuleAsyncOptions } from '../interfaces'
+import { ExternalAuthService } from '../services'
+import { KeycloakStrategy, MockStrategy } from '../strategies'
+import { AuthModule } from './auth.module'
 
 @Global()
 @Module({})

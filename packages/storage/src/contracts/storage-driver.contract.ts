@@ -1,7 +1,8 @@
 import { Readable } from 'stream'
 
-import ReadableStream = NodeJS.ReadableStream
 import { FileMetaData } from '../interfaces'
+
+import ReadableStream = NodeJS.ReadableStream
 
 export interface StorageDriverContract {
   createBucket(bucket: string): Promise<void>

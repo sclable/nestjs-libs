@@ -4,9 +4,9 @@
 import { ReceiveMode, ServiceBusClient, ServiceBusMessage } from '@azure/service-bus'
 import { Injectable, Logger } from '@nestjs/common'
 
-import { AzureServiceBusMessage, QueueMessage } from '../messages'
-import { AzureServiceBusAdapterOptions } from '../interfaces/adapter-options'
 import { QueueServiceContract } from '../contracts'
+import { AzureServiceBusAdapterOptions } from '../interfaces/adapter-options'
+import { AzureServiceBusMessage, QueueMessage } from '../messages'
 
 @Injectable()
 export class AzureServiceBusAdapter implements QueueServiceContract {

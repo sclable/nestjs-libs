@@ -1,11 +1,11 @@
-import { ExtractJwt, Strategy } from 'passport-jwt'
-import { PassportStrategy } from '@nestjs/passport'
 import { Inject, Injectable, UnauthorizedException } from '@nestjs/common'
+import { PassportStrategy } from '@nestjs/passport'
+import { ExtractJwt, Strategy } from 'passport-jwt'
 
-import { LocalAuthService } from '../services'
-import { AuthModuleOptions, JwtPayload } from '../interfaces'
-import { ApplicationUserContract } from '../contracts'
 import { AUTH_MODULE_OPTIONS } from '../constants'
+import { ApplicationUserContract } from '../contracts'
+import { AuthModuleOptions, JwtPayload } from '../interfaces'
+import { LocalAuthService } from '../services'
 
 @Injectable()
 export class JwtStrategy<UserType extends ApplicationUserContract> extends PassportStrategy(
