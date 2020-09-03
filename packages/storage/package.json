@@ -26,12 +26,5 @@
     "reflect-metadata": "^0.1.13",
     "rimraf": "^2.7.1",
     "uuid": "^7.0.2"
-  },
-  "devDependencies": {
-    "@types/fs-extra": "^8.1.0",
-    "@types/minio": "^7.0.5",
-    "@types/uuid": "^7.0.2",
-    "tsc-watch": "2.2.1",
-    "typescript": "3.8.3"
   }
 }

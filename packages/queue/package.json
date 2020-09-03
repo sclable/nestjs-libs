@@ -23,10 +23,5 @@
     "amqp-ts": "^1.8.0",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^2.7.1"
-  },
-  "devDependencies": {
-    "@types/node": "12.11.6",
-    "tsc-watch": "2.2.1",
-    "typescript": "3.8.3"
   }
 }
