@@ -2,9 +2,9 @@ import { Inject, Logger } from '@nestjs/common'
 import KcAdminClient from 'keycloak-admin'
 import UserRepresentation from 'keycloak-admin/lib/defs/userRepresentation'
 
+import { AUTH_MODULE_OPTIONS } from '../constants'
 import { AuthProviderServiceContract, AuthProviderUserContract } from '../contracts'
 import { AuthModuleOptions } from '../interfaces'
-import { AUTH_MODULE_OPTIONS } from '../constants'
 
 const MASTER_REALM = 'master'
 
@@ -87,9 +87,9 @@ export class KeycloakAdapter implements AuthProviderServiceContract {
     try {
       await this.login()
       user = await this.kcAdminClient.users.findOne({ id })
-    } catch (e) {
+    } catch (error) {
       this.logger.warn(
-        `User cannot be fetched from Keycloak API (external ID: ${id}), error: ${e.message}`,
+        `User cannot be fetched from Keycloak API (external ID: ${id}), error: ${error.message}`,
       )
 
       return undefined

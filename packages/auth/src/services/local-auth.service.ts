@@ -23,12 +23,9 @@ export class LocalAuthService<UserType extends ApplicationUserContract> extends 
   public async getAccessToken(user: ApplicationUserContract): Promise<string> {
     const payload = {
       sub: user.id,
-      // eslint-disable-next-line @typescript-eslint/camelcase
       preferred_username: user.username,
       email: user.email,
-      // eslint-disable-next-line @typescript-eslint/camelcase
       given_name: user.firstName,
-      // eslint-disable-next-line @typescript-eslint/camelcase
       family_name: user.lastName,
     }
 

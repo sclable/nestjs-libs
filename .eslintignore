@@ -1,2 +1,0 @@
-// TODO fix: Parsing error: Cannot read property 'map' of undefined
-packages/auth/src/adapters/keycloak.adapter.ts

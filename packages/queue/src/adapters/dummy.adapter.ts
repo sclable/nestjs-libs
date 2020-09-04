@@ -7,7 +7,7 @@ export class DummyAdapter implements QueueServiceContract {
     this.logger.setContext(DummyAdapter.name)
   }
 
-  public async addConsumer<PayloadType>(queueName: string): Promise<void> {
+  public async addConsumer(queueName: string): Promise<void> {
     this.logger.log(`Consumer added to queue: ${queueName}`)
   }
 
