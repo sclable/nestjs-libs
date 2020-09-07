@@ -3,9 +3,9 @@
 ## Features
 At this time the library has the following adapters implemented:
 * dummy (does nothing)
-* local (uses local file system)
-* minio (uses minio service)
-* azure-blob-storage (uses azure blob storage)
+* local (local file system)
+* minio (MinIO service)
+* azure-blob-storage (Azure Blob Storage)
 
 ## Setting up
 
@@ -20,11 +20,7 @@ npm install --save @sclable/nestjs-storage
 
 import { Module } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
-import {
-  StorageModule as StorageModuleLibrary,
-  StorageModuleOptions,
-  StorageType,
-} from '@sclable/nestjs-auth'
+import { StorageModule, StorageModuleOptions, StorageType } from '@sclable/nestjs-auth'
 
 @Module({
   imports: [
@@ -76,7 +72,7 @@ export class AppModule {}
 ```
 
 ### Create configuration file
-In the application's configuration folder there must be a file which configures the storage library. You can simply copy `src/examples/storage.config.ts` and make some changes if needed.
+In the application's configuration folder there must be a file which configures the storage library. You can simply copy `src/examples/storage.config.ts`. Make some changes if needed.
 ```javascript
 import path from 'path'
 
@@ -122,6 +118,7 @@ export default registerAs(
 
 ```
 ### Add configuration to your .env file
+You can remove the ones you don't need.
 ```dotenv
 ## STORAGE_DEFAULT_DRIVER=[dummy|local|minio|azure]
 STORAGE_DEFAULT_DRIVER=minio
@@ -165,6 +162,7 @@ public disk(driver?: StorageType): StorageDriverContract {...}
 ### Interacting with the disk
 `StorageDriverContract` defines what one can do with a disk.
 ```javascript
+export interface StorageDriverContract {
   createBucket(bucket: string): Promise<void>
   putObject(
     bucket: string,
@@ -178,5 +176,6 @@ public disk(driver?: StorageType): StorageDriverContract {...}
   getMetaData(bucket: string, id: string): Promise<FileMetaData | null>
   getDownloadUrl(bucket: string, id: string, filename: string): Promise<string>
   getUploadUrl(bucket: string, id: string, onUploaded: (record: any) => void): Promise<string>
+}
 ```
 
