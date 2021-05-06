@@ -1,0 +1,103 @@
+# Change Log
+
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [0.11.6](https://git.sclable.com/packages/ts-monorepo/compare/@sclable/tsconfig@0.11.5...@sclable/tsconfig@0.11.6) (2020-08-10)
+
+**Note:** Version bump only for package @sclable/tsconfig
+
+
+
+
+
+## [0.11.5](https://git.sclable.com/packages/ts-monorepo/compare/@sclable/tsconfig@0.11.4...@sclable/tsconfig@0.11.5) (2020-07-13)
+
+**Note:** Version bump only for package @sclable/tsconfig
+
+
+
+
+
+## [0.11.4](https://git.sclable.com/packages/ts-monorepo/compare/@sclable/tsconfig@0.11.3...@sclable/tsconfig@0.11.4) (2019-06-18)
+
+**Note:** Version bump only for package @sclable/tsconfig
+
+
+
+
+
+## [0.11.3](https://git.sclable.com/packages/ts-monorepo/compare/@sclable/tsconfig@0.11.2...@sclable/tsconfig@0.11.3) (2019-05-24)
+
+**Note:** Version bump only for package @sclable/tsconfig
+
+
+
+
+
+## [0.11.2](https://git.sclable.com/packages/ts-monorepo/compare/@sclable/tsconfig@0.11.1...@sclable/tsconfig@0.11.2) (2019-04-23)
+
+**Note:** Version bump only for package @sclable/tsconfig
+
+
+
+
+
+## [0.11.1](https://git.sclable.com/packages/ts-monorepo/compare/@sclable/tsconfig@0.11.0...@sclable/tsconfig@0.11.1) (2019-03-20)
+
+
+### Bug Fixes
+
+* **ci:** attempt to fix authentication issues ([3eb6a91](https://git.sclable.com/packages/ts-monorepo/commits/3eb6a91))
+
+
+
+
+
+# 0.11.0 (2019-03-20)
+
+
+
+## 0.10.1 (2019-03-01)
+
+
+
+# 0.10.0 (2019-02-28)
+
+
+
+# 0.9.0 (2019-02-04)
+
+
+
+## 0.7.1 (2019-01-21)
+
+
+### Bug Fixes
+
+* **tsconfig:** Typos in README.md ([5ba5bcf](https://git.sclable.com/packages/ts-monorepo/commits/5ba5bcf))
+
+
+
+# 0.7.0 (2018-12-19)
+
+
+### Features
+
+* **pkg:** tsconfig ([2e3e704](https://git.sclable.com/packages/ts-monorepo/commits/2e3e704))
+
+
+
+
+
+## [0.10.1](https://git.sclable.com/packages/ts-monorepo/compare/v0.10.0...v0.10.1) (2019-03-01)
+
+**Note:** Version bump only for package @sclable/tsconfig
+
+
+
+
+
+# [0.10.0](https://git.sclable.com/packages/ts-monorepo/compare/v0.9.1...v0.10.0) (2019-02-28)
+
+**Note:** Version bump only for package @sclable/tsconfig

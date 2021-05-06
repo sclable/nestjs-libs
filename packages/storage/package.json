@@ -26,5 +26,9 @@
     "reflect-metadata": "^0.1.13",
     "rimraf": "^2.7.1",
     "uuid": "^7.0.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:sclable/nestjs-libs.git"
   }
 }

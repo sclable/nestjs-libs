@@ -1,0 +1,25 @@
+{
+  "name": "@sclable/tsconfig",
+  "version": "0.11.6",
+  "description": "Canonical TypeScript configuration for Sclable projects.",
+  "keywords": [
+    "typescript",
+    "sclable",
+    "configuration",
+    "tsc",
+    "compilerOptions"
+  ],
+  "author": {
+    "name": "Sclable Business Solutions GmbH",
+    "email": "office@sclable.com",
+    "url": "https://www.sclable.com/"
+  },
+  "contributors": [
+    "Lorenz Leutgeb <lorenz.leutgeb@sclable.com>"
+  ],
+  "license": "UNLICENSED",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:sclable/nestjs-libs.git"
+  }
+}
