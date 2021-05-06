@@ -1,0 +1,23 @@
+{
+  "name": "@sclable/prettier-config",
+  "version": "0.2.4",
+  "description": "Prettier configuration",
+  "scripts": {},
+  "author": {
+    "name": "Sclable Business Solutions GmbH",
+    "email": "office@sclable.com",
+    "url": "https://www.sclable.com/"
+  },
+  "contributors": [
+    "Lorenz Leutgeb <lorenz.leutgeb@sclable.com>"
+  ],
+  "license": "UNLICENSED",
+  "main": "index.json",
+  "peerDependencies": {
+    "prettier": "*"
+  },
+  "repository": {
+      "type": "git",
+      "url": "git@github.com:sclable/nestjs-libs.git"
+  }
+}

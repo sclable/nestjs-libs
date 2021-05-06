@@ -23,5 +23,9 @@
     "amqp-ts": "^1.8.0",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^2.7.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:sclable/nestjs-libs.git"
   }
 }

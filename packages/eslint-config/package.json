@@ -1,0 +1,35 @@
+{
+  "name": "@sclable/eslint-config",
+  "version": "0.2.1",
+  "description": "ESLint configurations to be shared inside Sclable",
+  "author": {
+    "name": "Sclable Business Solutions GmbH",
+    "email": "office@sclable.com",
+    "url": "https://www.sclable.com/"
+  },
+  "contributors": [
+    "Konstantinos Maninakis <konstantinos.maninakis@sclable.com>",
+    "Lorenz Leutgeb <lorenz.leutgeb@sclable.com>"
+  ],
+  "license": "UNLICENSED",
+  "main": "index.js",
+  "files": [
+    "index.js"
+  ],
+  "dependencies": {
+    "@typescript-eslint/eslint-plugin": "^2.12.0",
+    "@typescript-eslint/parser": "^2.12.0",
+    "@vue/eslint-config-typescript": "^5.0.1",
+    "eslint-config-prettier": "^6.7.0",
+    "eslint-plugin-cypress": "^2.8.1",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-no-only-tests": "^2.4.0",
+    "eslint-plugin-prettier": "^3.1.2",
+    "eslint-plugin-react": "^7.17.0",
+    "eslint-plugin-vue": "^6.0.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:sclable/nestjs-libs.git"
+  }
+}
