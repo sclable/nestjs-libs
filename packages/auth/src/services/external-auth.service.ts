@@ -12,9 +12,9 @@ import { UserID } from '../types'
 import { AuthService } from './auth.service'
 
 @Injectable()
-export class ExternalAuthService<UserType extends ApplicationUserContract> extends AuthService<
-  UserType
-> {
+export class ExternalAuthService<
+  UserType extends ApplicationUserContract
+> extends AuthService<UserType> {
   private updateLock: string[] = []
 
   public constructor(

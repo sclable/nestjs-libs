@@ -16,7 +16,7 @@ references it. This is commonly done with the `extends` field in a file named
 
 ```js
 module.exports = {
-  extends: ['@sclable/lint'],
+  extends: ['@sclable'],
 }
 ```
 
@@ -24,7 +24,7 @@ It's recommended to start with a config that looks like this:
 
 ```js
 module.exports = {
-  extends: ['@sclable/lint'],
+  extends: ['@sclable'],
   root: true,
   ignorePatterns: ['!.eslintrc.js', 'dist'],
   rules: {
@@ -207,4 +207,4 @@ It is recommended that this file is checked-in to Git.
 [husky]: https://npmjs.com/package/husky
 [yorkie]: https://github.com/yyx990803/yorkie
 [vscode-eslint-ext]: https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint
-[eslint-config-mainjs]: https://git.sclable.com/sclable-platform/ts-monorepo/blob/docs/lint-update-readme/packages/eslint-config/index.js
+[eslint-config-mainjs]: https://git.sclable.com/sclable-platform/ts-monorepo/blob/master/packages/eslint-config/index.js

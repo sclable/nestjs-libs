@@ -3,6 +3,47 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.5.1](https://git.sclable.com/sclable-platform/ts-monorepo/compare/@sclable/eslint-config@0.4.0...@sclable/eslint-config@0.5.1) (2021-01-19)
+
+
+### Bug Fixes
+
+* **lint:** publishing problems ([be3d86a](https://git.sclable.com/sclable-platform/ts-monorepo/commits/be3d86af9ded3869d4527e46330943238a51ddb2))
+
+
+
+
+
+# [0.4.0](https://git.sclable.com/sclable-platform/ts-monorepo/compare/@sclable/eslint-config@0.3.1...@sclable/eslint-config@0.4.0) (2021-01-18)
+
+
+### Features
+
+* **lint:** add vue3 support ([951d7d4](https://git.sclable.com/sclable-platform/ts-monorepo/commits/951d7d4c3e5d22cfbf890c7e792cd692389e8201))
+
+
+
+
+
+## [0.3.1](https://git.sclable.com/sclable-platform/ts-monorepo/compare/@sclable/eslint-config@0.3.0...@sclable/eslint-config@0.3.1) (2020-09-03)
+
+**Note:** Version bump only for package @sclable/eslint-config
+
+
+
+
+
+# [0.3.0](https://git.sclable.com/sclable-platform/ts-monorepo/compare/@sclable/eslint-config@0.2.1...@sclable/eslint-config@0.3.0) (2020-08-31)
+
+
+### Features
+
+* **eslint-config:** forbid too short/long id's ([aaa59ca](https://git.sclable.com/sclable-platform/ts-monorepo/commits/aaa59caf14b6fe8417d4c0ba4c61df74d77511aa))
+
+
+
+
+
 ## [0.2.1](https://git.sclable.com/sclable-platform/ts-monorepo/compare/@sclable/eslint-config@0.2.0...@sclable/eslint-config@0.2.1) (2020-08-10)
 
 **Note:** Version bump only for package @sclable/eslint-config

@@ -7,12 +7,14 @@ module.exports = {
     'cypress/globals': true,
   },
   extends: [
-    'plugin:cypress/recommended',
-    'plugin:vue/recommended',
     'eslint:recommended',
+    'plugin:cypress/recommended',
     'plugin:@typescript-eslint/recommended',
-    '@vue/typescript/recommended',
+    'plugin:vue/vue3-recommended',
     'plugin:prettier/recommended',
+    '@vue/typescript/recommended',
+    '@vue/prettier',
+    '@vue/prettier/@typescript-eslint',
     'prettier',
     'prettier/vue',
   ],
@@ -56,6 +58,14 @@ module.exports = {
       { blankLine: 'always', prev: '*', next: 'return' },
     ],
     'sort-imports': ['warn', { ignoreDeclarationSort: true }],
+    'id-length': [
+      'warn',
+      {
+        min: 2,
+        max: 50,
+        exceptions: ['i', 'j', 'x', 'y', 'z', '_'],
+      },
+    ],
 
     /*
      * Rules implemented by `no-only-tests` follow
@@ -114,7 +124,7 @@ module.exports = {
      * =======================================================================================
      */
     '@typescript-eslint/array-type': ['error', { default: 'array' }],
-    '@typescript-eslint/ban-ts-ignore': 'off',
+    '@typescript-eslint/ban-ts-comment': 'off',
     '@typescript-eslint/consistent-type-definitions': ['warn', 'interface'],
     '@typescript-eslint/explicit-function-return-type': [
       'warn',
@@ -128,7 +138,6 @@ module.exports = {
     '@typescript-eslint/prefer-function-type': 'warn',
     '@typescript-eslint/indent': 'off',
     '@typescript-eslint/prefer-for-of': 'error',
-    '@typescript-eslint/interface-name-prefix': ['error', 'never'],
     '@typescript-eslint/member-delimiter-style': [
       'warn',
       {
@@ -221,7 +230,7 @@ module.exports = {
   parserOptions: {
     parser: '@typescript-eslint/parser',
     sourceType: 'module',
-    ecmaVersion: 2019,
+    ecmaVersion: 2020,
     ecmaFeatures: {
       jsx: true,
     },

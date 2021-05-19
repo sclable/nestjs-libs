@@ -1,8 +1,6 @@
-# DEPRECATED: tsconfig
+# tsconfig
 
 This package bundles a `tsconfig.json` to be extended by Sclable projects.
-It is deprecated and you should use ESLint in conjunction with
-`@sclable/lint` instead.
 
 ## Usage
 

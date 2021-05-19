@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.11.7](https://git.sclable.com/packages/ts-monorepo/compare/@sclable/tsconfig@0.11.6...@sclable/tsconfig@0.11.7) (2020-09-03)
+
+
+### Bug Fixes
+
+* **tsconfig:** undeprecate package ([5e5329c](https://git.sclable.com/packages/ts-monorepo/commits/5e5329ca9dfe49358e9974d0134fbfdc92715126)), closes [#54](https://git.sclable.com/packages/ts-monorepo/issues/54)
+
+
+
+
+
 ## [0.11.6](https://git.sclable.com/packages/ts-monorepo/compare/@sclable/tsconfig@0.11.5...@sclable/tsconfig@0.11.6) (2020-08-10)
 
 **Note:** Version bump only for package @sclable/tsconfig

@@ -3,6 +3,58 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.1](https://git.sclable.com/sclable-platform/ts-monorepo/compare/@sclable/lint@1.4.0...@sclable/lint@1.6.1) (2021-01-19)
+
+
+### Bug Fixes
+
+* **lint:** publishing problems ([be3d86a](https://git.sclable.com/sclable-platform/ts-monorepo/commits/be3d86af9ded3869d4527e46330943238a51ddb2))
+
+
+
+
+
+# [1.4.0](https://git.sclable.com/sclable-platform/ts-monorepo/compare/@sclable/lint@1.3.2...@sclable/lint@1.4.0) (2021-01-18)
+
+
+### Features
+
+* **lint:** add vue3 support ([951d7d4](https://git.sclable.com/sclable-platform/ts-monorepo/commits/951d7d4c3e5d22cfbf890c7e792cd692389e8201))
+
+
+
+
+
+## [1.3.2](https://git.sclable.com/sclable-platform/ts-monorepo/compare/@sclable/lint@1.3.1...@sclable/lint@1.3.2) (2020-10-07)
+
+
+### Bug Fixes
+
+* **lint:** reference to shared config ([c24bf3b](https://git.sclable.com/sclable-platform/ts-monorepo/commits/c24bf3b541120540d46caf1e9fa269cda4e759f1))
+
+
+
+
+
+## [1.3.1](https://git.sclable.com/sclable-platform/ts-monorepo/compare/@sclable/lint@1.3.0...@sclable/lint@1.3.1) (2020-09-03)
+
+**Note:** Version bump only for package @sclable/lint
+
+
+
+
+
+# [1.3.0](https://git.sclable.com/sclable-platform/ts-monorepo/compare/@sclable/lint@1.2.2...@sclable/lint@1.3.0) (2020-08-31)
+
+
+### Features
+
+* **eslint-config:** forbid too short/long id's ([aaa59ca](https://git.sclable.com/sclable-platform/ts-monorepo/commits/aaa59caf14b6fe8417d4c0ba4c61df74d77511aa))
+
+
+
+
+
 ## [1.2.2](https://git.sclable.com/sclable-platform/ts-monorepo/compare/@sclable/lint@1.2.1...@sclable/lint@1.2.2) (2020-08-12)
 
 **Note:** Version bump only for package @sclable/lint
