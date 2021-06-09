@@ -10,7 +10,7 @@ At this time the library has the following adapters implemented:
 ## Setting up
 
 ### Requirements
-@nestjs/config package needs to be installed in the project.
+`@nestjs/config` package needs to be installed in the project.
 See: https://docs.nestjs.com/techniques/configuration
 
 ### Install
@@ -24,7 +24,7 @@ npm install --save @sclable/nestjs-storage
 
 import { Module } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
-import { StorageModule, StorageModuleOptions, StorageType } from '@sclable/nestjs-auth'
+import { StorageModule, StorageModuleOptions, StorageType } from '@sclable/nestjs-storage'
 
 @Module({
   imports: [
@@ -78,6 +78,8 @@ export class AppModule {}
 ### Create configuration file
 In the application's configuration folder there must be a file which configures the storage library. You can simply copy `src/examples/storage.config.ts`. Make some changes if needed.
 ```javascript
+// app/config/storage.ts
+
 import path from 'path'
 
 import { registerAs } from '@nestjs/config'
