@@ -1,6 +1,6 @@
 {
   "name": "@sclable/prettier-config",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "Prettier configuration",
   "scripts": {},
   "author": {
@@ -17,7 +17,7 @@
     "prettier": "*"
   },
   "repository": {
-      "type": "git",
-      "url": "git@github.com:sclable/nestjs-libs.git"
+    "type": "git",
+    "url": "git@github.com:sclable/nestjs-libs.git"
   }
 }

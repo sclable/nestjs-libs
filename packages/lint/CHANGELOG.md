@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.6.2 (2021-06-09)
+
+**Note:** Version bump only for package @sclable/lint
+
+
+
+
+
 ## [1.6.1](https://git.sclable.com/sclable-platform/ts-monorepo/compare/@sclable/lint@1.4.0...@sclable/lint@1.6.1) (2021-01-19)
 
 

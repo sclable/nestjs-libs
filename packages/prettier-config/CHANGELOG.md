@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.2.5 (2021-06-09)
+
+**Note:** Version bump only for package @sclable/prettier-config
+
+
+
+
+
 ## [0.2.4](https://git.sclable.com/sclable-platform/ts-monorepo/compare/@sclable/prettier-config@0.2.3...@sclable/prettier-config@0.2.4) (2020-03-24)
 
 

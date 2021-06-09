@@ -1,6 +1,6 @@
 {
     "name": "@sclable/lint",
-    "version": "1.6.1",
+    "version": "1.6.2",
     "author": {
         "name": "Sclable Business Solutions GmbH",
         "email": "office@sclable.com",
@@ -21,7 +21,7 @@
         "index.js"
     ],
     "repository": {
-    "type": "git",
-    "url": "git@github.com:sclable/nestjs-libs.git"
+        "type": "git",
+        "url": "git@github.com:sclable/nestjs-libs.git"
     }
 }
