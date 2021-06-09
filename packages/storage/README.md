@@ -9,6 +9,10 @@ At this time the library has the following adapters implemented:
 
 ## Setting up
 
+### Requirements
+@nestjs/config package needs to be installed in the project.
+See: https://docs.nestjs.com/techniques/configuration
+
 ### Install
 ```bash
 npm install --save @sclable/nestjs-storage
