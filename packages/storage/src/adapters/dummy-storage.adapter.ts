@@ -29,7 +29,7 @@ export class DummyStorageAdapter implements StorageDriverContract {
   }
 
   public async getObjectStream(bucket: string, id: string): Promise<ReadableStream> {
-    const result = `random-string-${uuidV4}`
+    const result = `random-string-${uuidV4()}`
 
     this.logger.log(`Object returned: ${bucket}/${id}, result: ${result}`)
 
@@ -41,7 +41,7 @@ export class DummyStorageAdapter implements StorageDriverContract {
   }
 
   public async getObject(bucket: string, id: string): Promise<Buffer> {
-    const result = `random-string-${uuidV4}`
+    const result = `random-string-${uuidV4()}`
 
     this.logger.log(`Object returned: ${bucket}/${id}, result: ${result}`)
 
