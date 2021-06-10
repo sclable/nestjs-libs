@@ -80,8 +80,7 @@ In the application's configuration folder there must be a file which configures 
 ```javascript
 // app/config/storage.ts
 
-import path from 'path'
-
+import { join } from 'path';
 import { registerAs } from '@nestjs/config'
 import { StorageModuleOptions, StorageType } from '@sclable/nestjs-storage'
 
@@ -94,10 +93,10 @@ export default registerAs(
         enabled: true,
       },
       [StorageType.LOCAL]: {
-        basePath: path.join(
+        basePath: join(
           __dirname,
-          '../../../..',
-          process.env.STORAGE_LOCAL_BASE_PATH || 'storage/build',
+          '..',
+          process.env.STORAGE_LOCAL_BASE_PATH || 'storage',
         ),
       },
       [StorageType.MINIO]: {
@@ -130,7 +129,7 @@ You can remove the ones you don't need.
 STORAGE_DEFAULT_DRIVER=minio
 STORAGE_LINK_EXPIRY_IN_SECONDS=60
 ## STORAGE_LOCAL_BASE_PATH is relative to application root
-STORAGE_LOCAL_BASE_PATH=storage/build
+STORAGE_LOCAL_BASE_PATH=storage
 STORAGE_MINIO_ENDPOINT=localhost
 STORAGE_MINIO_PORT=9000
 STORAGE_MINIO_SSL=false
