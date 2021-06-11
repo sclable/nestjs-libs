@@ -112,6 +112,7 @@ Uses the local file system to store data.
 You might add the following enviroment config to your .env file:
 ```dotenv
 STORAGE_DEFAULT_DRIVER=local
+
 ## STORAGE_LOCAL_BASE_PATH is relative to application root
 STORAGE_LOCAL_BASE_PATH=storage
 ```
@@ -124,8 +125,6 @@ To use minio you have to install minio packages to your application.
 $ npm install --save minio
 $ npm install --save-dev @types/minio
 ```
-
-TODO>> docker-compose
 
 You might add the following enviroment config to your .env file:
 ```dotenv
