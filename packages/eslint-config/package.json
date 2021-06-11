@@ -33,5 +33,8 @@
   "repository": {
     "type": "git",
     "url": "git@github.com:sclable/nestjs-libs.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
   }
 }
