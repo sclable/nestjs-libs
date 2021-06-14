@@ -97,7 +97,7 @@ import { StorageModule, StorageModuleOptions, StorageType } from '@sclable/nestj
 export class AppModule {}
 ```
 ## Adapters
-It is possible to use all the adapters parallelly 
+It is possible to use different storage types (adapters/drivers) parallelly so the application can manage different ways of storing for different purposes. In that case you have to define the `StorageType` when getting the disk. However, a default driver (adapter) is defined in config, so when you do not specify the `StorageType` when requesting the disk that default applies. When the app has only one storage type the default can always be used. 
 
 ### Dummy Adapter
 Serves only testing purposes, stores nothing and returns random values.
