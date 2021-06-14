@@ -97,6 +97,7 @@ import { StorageModule, StorageModuleOptions, StorageType } from '@sclable/nestj
 export class AppModule {}
 ```
 ## Adapters
+It is possible to use all the adapters parallelly 
 
 ### Dummy Adapter
 Serves only testing purposes, stores nothing and returns random values.
