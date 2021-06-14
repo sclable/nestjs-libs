@@ -6,21 +6,78 @@ At this time the library has the following adapters implemented:
 * local (local file system)
 * minio (MinIO service)
 * azure-blob-storage (Azure Blob Storage)
+## Requirements
+`@nestjs/config` package needs to be installed in the project.
+See: https://docs.nestjs.com/techniques/configuration
+
+## Installation
+```bash
+$ npm install --save @sclable/nestjs-storage
+```
 
 ## Setting up
 
-### Install
-```bash
-npm install --save @sclable/nestjs-storage
+### Create a config file
+In the application's configuration folder there must be a file which configures the storage library. You can simply copy `src/examples/storage.config.ts` and remove the parts you don't need (minio, azure).
+```javascript
+// config/storage.ts
+
+import { join } from 'path';
+import { registerAs } from '@nestjs/config'
+import { StorageModuleOptions, StorageType } from '@sclable/nestjs-storage'
+
+export default registerAs(
+  'storage',
+  (): StorageModuleOptions => ({
+    defaultDriver: (process.env.STORAGE_DEFAULT_DRIVER || StorageType.DUMMY) as StorageType,
+    config: {
+      [StorageType.DUMMY]: {
+        enabled: true,
+      },
+      [StorageType.LOCAL]: {
+        basePath: join(
+          __dirname,
+          '../..',
+          process.env.STORAGE_LOCAL_BASE_PATH || 'storage',
+        ),
+      },
+      [StorageType.MINIO]: {
+        endPoint: process.env.STORAGE_MINIO_ENDPOINT || 'localhost',
+        port: +(process.env.STORAGE_MINIO_PORT || 9000),
+        useSSL: process.env.STORAGE_MINIO_SSL === 'true',
+        accessKey: process.env.STORAGE_MINIO_ACCESS_KEY || 'minio',
+        secretKey: process.env.STORAGE_MINIO_SECRET_KEY || 'minio123',
+        linkExpiryInSeconds: +(process.env.STORAGE_LINK_EXPIRY_IN_SECONDS || 60),
+      },
+      [StorageType.AZURE]: {
+        accountName:
+          process.env.STORAGE_AZURE_ACCOUNT_NAME || 'define STORAGE_AZURE_ACCOUNT_NAME',
+        accountKey:
+          process.env.STORAGE_AZURE_ACCOUNT_KEY || 'define STORAGE_AZURE_ACCOUNT_KEY',
+        linkExpiryInSeconds: +(process.env.STORAGE_LINK_EXPIRY_IN_SECONDS || 60),
+        fileUploadedQueueName:
+          process.env.STORAGE_AZURE_FILE_UPLOADED_QUEUE_NAME ||
+          'define STORAGE_AZURE_FILE_UPLOADED_QUEUE_NAME',
+      },
+    },
+  }),
+)
+
+```
+### Add configuration to your .env file
+```dotenv
+## STORAGE_DEFAULT_DRIVER=[dummy|local|minio|azure]
+STORAGE_DEFAULT_DRIVER=dummy
+STORAGE_LINK_EXPIRY_IN_SECONDS=60
 ```
 
 ### Import StorageModule to your application
 ```javascript
-// app/src/app.module.ts
+// src/app.module.ts
 
 import { Module } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
-import { StorageModule, StorageModuleOptions, StorageType } from '@sclable/nestjs-auth'
+import { StorageModule, StorageModuleOptions, StorageType } from '@sclable/nestjs-storage'
 
 @Module({
   imports: [
@@ -39,9 +96,57 @@ import { StorageModule, StorageModuleOptions, StorageType } from '@sclable/nestj
 })
 export class AppModule {}
 ```
-In case you need to use the `azure-blob-storage` adapter and you need to rely on storage callback events then you need to attach a queue service as well.
+## Adapters
+It is possible to use different storage types (adapters/drivers) parallelly so the application can manage different ways of storing for different purposes. In that case you have to define the `StorageType` when getting the disk. However, a default driver (adapter) is defined in config, so when you do not specify the `StorageType` when requesting the disk that default applies. When the app has only one storage type the default can always be used. 
+
+### Dummy Adapter
+Serves only testing purposes, stores nothing and returns random values.
+
+You might add the following enviroment config to your .env file:
+```dotenv
+STORAGE_DEFAULT_DRIVER=dummy
+```
+
+### Local Adapter
+Uses the local file system to store data.
+
+You might add the following enviroment config to your .env file:
+```dotenv
+STORAGE_DEFAULT_DRIVER=local
+
+## STORAGE_LOCAL_BASE_PATH is relative to application root
+STORAGE_LOCAL_BASE_PATH=storage
+```
+
+### Minio Adapter
+See: https://min.io/.
+
+To use minio you have to install minio packages to your application.
+```bash
+$ npm install --save minio
+$ npm install --save-dev @types/minio
+```
+
+You might add the following enviroment config to your .env file:
+```dotenv
+STORAGE_DEFAULT_DRIVER=minio
+
+STORAGE_MINIO_ENDPOINT=localhost
+STORAGE_MINIO_PORT=9000
+STORAGE_MINIO_SSL=false
+STORAGE_MINIO_ACCESS_KEY=minio
+STORAGE_MINIO_SECRET_KEY=minio123
+```
+
+### Azure Adapter
+To use Azure Blob Storage you have to install the related packages to your application.
+```bash
+$ npm install --save @azure/abort-controller azure/storage-blob
+```
+
+In case you need to rely on storage callback events then you need to attach a queue service as well to the StorageModule.
 ```javascript
-// app/src/app.module.ts
+// src/app.module.ts
 
 import { Module } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
@@ -71,70 +176,14 @@ import { QUEUE_SERVICE, QueueServiceContract } from '@sclable/nestjs-queue'
 export class AppModule {}
 ```
 
-### Create configuration file
-In the application's configuration folder there must be a file which configures the storage library. You can simply copy `src/examples/storage.config.ts`. Make some changes if needed.
-```javascript
-import path from 'path'
-
-import { registerAs } from '@nestjs/config'
-import { StorageModuleOptions, StorageType } from '@sclable/nestjs-storage'
-
-export default registerAs(
-  'storage',
-  (): StorageModuleOptions => ({
-    defaultDriver: (process.env.STORAGE_DEFAULT_DRIVER || StorageType.DUMMY) as StorageType,
-    config: {
-      [StorageType.DUMMY]: {
-        enabled: true,
-      },
-      [StorageType.LOCAL]: {
-        basePath: path.join(
-          __dirname,
-          '../../../..',
-          process.env.STORAGE_LOCAL_BASE_PATH || 'storage/build',
-        ),
-      },
-      [StorageType.MINIO]: {
-        endPoint: process.env.STORAGE_MINIO_ENDPOINT || 'localhost',
-        port: +(process.env.STORAGE_MINIO_PORT || 9000),
-        useSSL: process.env.STORAGE_MINIO_SSL === 'true',
-        accessKey: process.env.STORAGE_MINIO_ACCESS_KEY || 'minio',
-        secretKey: process.env.STORAGE_MINIO_SECRET_KEY || 'minio123',
-        linkExpiryInSeconds: +(process.env.STORAGE_LINK_EXPIRY_IN_SECONDS || 60),
-      },
-      [StorageType.AZURE]: {
-        accountName:
-          process.env.STORAGE_AZURE_ACCOUNT_NAME || 'define STORAGE_AZURE_ACCOUNT_NAME',
-        accountKey:
-          process.env.STORAGE_AZURE_ACCOUNT_KEY || 'define STORAGE_AZURE_ACCOUNT_KEY',
-        linkExpiryInSeconds: +(process.env.STORAGE_LINK_EXPIRY_IN_SECONDS || 60),
-        fileUploadedQueueName:
-          process.env.STORAGE_AZURE_FILE_UPLOADED_QUEUE_NAME ||
-          'define STORAGE_AZURE_FILE_UPLOADED_QUEUE_NAME',
-      },
-    },
-  }),
-)
-
-```
-### Add configuration to your .env file
-You can remove the ones you don't need.
+You might add the following enviroment config to your .env file:
 ```dotenv
-## STORAGE_DEFAULT_DRIVER=[dummy|local|minio|azure]
-STORAGE_DEFAULT_DRIVER=minio
-STORAGE_LINK_EXPIRY_IN_SECONDS=60
-## STORAGE_LOCAL_BASE_PATH is relative to application root
-STORAGE_LOCAL_BASE_PATH=storage/build
-STORAGE_MINIO_ENDPOINT=localhost
-STORAGE_MINIO_PORT=9000
-STORAGE_MINIO_SSL=false
-STORAGE_MINIO_ACCESS_KEY=minio
-STORAGE_MINIO_SECRET_KEY=minio123
+STORAGE_DEFAULT_DRIVER=azure
+
 STORAGE_AZURE_ACCOUNT_NAME=
 STORAGE_AZURE_ACCOUNT_KEY=
 STORAGE_AZURE_FILE_UPLOADED_QUEUE_NAME=
 ```
-
 ## Usage
 StorageManager. Import, inject and use.
 ```javascript
