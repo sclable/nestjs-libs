@@ -6,41 +6,22 @@ At this time the library has the following adapters implemented:
 * rabbitmq (RabbitMQ)
 * azure-service-bus (Azure Service Bus)
 
+## Requirements
+`@nestjs/config` package needs to be installed in the project.
+See: https://docs.nestjs.com/techniques/configuration
+
+## Installation
+```bash
+$ npm install --save @sclable/nestjs-queue
+```
+
 ## Setting up
 
-### Install
-```bash
-npm install --save @sclable/nestjs-queue
-```
-
-### Import QueueModule to your application
-```javascript
-// app/src/app.module.ts
-
-import { Module } from '@nestjs/common'
-import { ConfigService } from '@nestjs/config'
-import { QueueModule, QueueModuleOptions, QueueType } from '@sclable/nestjs-queue'
-
-@Module({
-  imports: [
-    // ...
-    QueueModule.forRootAsync({
-      useFactory: (config: ConfigService) =>
-        config.get<QueueModuleOptions>('queue', {
-          type: QueueType.DUMMY,
-          config: {},
-        }),
-      inject: [ConfigService],
-    }),
-    // ...
-  ],
-})
-export class AppModule {}
-```
-
 ### Create configuration file
-In the application's configuration folder there must be a file which configures the storage library. You can simply copy `src/examples/queue.config.ts`. Make some changes if needed.
+In the application's configuration folder there must be a file which configures the storage library. You can simply copy `src/examples/queue.config.ts` and remove the parts you don't need.
 ```javascript
+// config/queue.ts
+
 import { registerAs } from '@nestjs/config'
 import { QueueModuleOptions, QueueType } from '@sclable/nestjs-queue'
 
@@ -73,10 +54,66 @@ You can remove the ones you don't need.
 ```dotenv
 ## QUEUE_TYPE=[dummy|rabbitmq|azure-service-bus]
 QUEUE_TYPE=dummy
+```
+
+### Import QueueModule to your application
+```javascript
+// app/src/app.module.ts
+
+import { Module } from '@nestjs/common'
+import { ConfigService } from '@nestjs/config'
+import { QueueModule, QueueModuleOptions, QueueType } from '@sclable/nestjs-queue'
+
+@Module({
+  imports: [
+    // ...
+    QueueModule.forRootAsync({
+      useFactory: (config: ConfigService) =>
+        config.get<QueueModuleOptions>('queue', {
+          type: QueueType.DUMMY,
+          config: {},
+        }),
+      inject: [ConfigService],
+    }),
+    // ...
+  ],
+})
+export class AppModule {}
+```
+
+## Adapters
+TBD
+
+### Dummy Adapter
+TBD
+
+You need to add the following enviroment config to your .env file:
+```dotenv
+## QUEUE_TYPE=[dummy|rabbitmq|azure-service-bus]
+QUEUE_TYPE=dummy
+```
+
+### RabbitMQ Adapter
+TBD
+
+You need to add the following enviroment config to your .env file:
+```dotenv
+## QUEUE_TYPE=[dummy|rabbitmq|azure-service-bus]
+QUEUE_TYPE=rabbitmq
+
 QUEUE_RABBITMQ_HOSTNAME=localhost
 QUEUE_RABBITMQ_PORT=5672
 QUEUE_RABBITMQ_USERNAME=guest
 QUEUE_RABBITMQ_PASSWORD=guest
+```
+### Azure Adapter
+TBD
+
+You need to add the following enviroment config to your .env file:
+```dotenv
+## QUEUE_TYPE=[dummy|rabbitmq|azure-service-bus]
+QUEUE_TYPE=azure-service-bus
+
 QUEUE_AZURE_SERVICE_BUS_CONNECTION_STRING=
 ```
 
