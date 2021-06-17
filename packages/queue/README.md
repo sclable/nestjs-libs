@@ -82,21 +82,21 @@ export class AppModule {}
 ```
 
 ## Adapters
-TBD
+Only one adapter can be used in the application, defined by the `QUEUE_TYPE` environment variable.
 
 ### Dummy Adapter
-TBD
+The dumy adapter serves only testing purposes, the message is sent to the void, the listener is not getting any messages. Still the implementation is valid even if there are no queue service is running.
 
-You need to add the following enviroment config to your .env file:
+You need to add the following configuration to your .env file:
 ```dotenv
 ## QUEUE_TYPE=[dummy|rabbitmq|azure-service-bus]
 QUEUE_TYPE=dummy
 ```
 
 ### RabbitMQ Adapter
-TBD
+Uses RabbitMQ as a queue service.
 
-You need to add the following enviroment config to your .env file:
+You need to add the following configuration to your .env file:
 ```dotenv
 ## QUEUE_TYPE=[dummy|rabbitmq|azure-service-bus]
 QUEUE_TYPE=rabbitmq
@@ -107,9 +107,9 @@ QUEUE_RABBITMQ_USERNAME=guest
 QUEUE_RABBITMQ_PASSWORD=guest
 ```
 ### Azure Adapter
-TBD
+Uses Azure Service Bus as a queue service.
 
-You need to add the following enviroment config to your .env file:
+You need to add the following configuration to your .env file:
 ```dotenv
 ## QUEUE_TYPE=[dummy|rabbitmq|azure-service-bus]
 QUEUE_TYPE=azure-service-bus
