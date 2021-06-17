@@ -129,18 +129,21 @@ export class SomeService {
     private readonly queueService: QueueServiceContract,
   ) {}
 
-  public sendMessage(queueName: string, payload: PayloadType): Promise<void> {
+  public sendMessage<PayloadType>(
+    queueName: string,
+    payload: PayloadType,
+  ): Promise<void> {
     return this.queueService.sendMessage<PayloadType>(queueName, payload)
   }
 
-  public listen(queueName: string): Promise<void> {
-    return this.queueService.addConsumer<PayloadType>(queueName,
-      message: QueueMessage<PayloadType> => {
+  public listen<PayloadType>(queueName: string): Promise<void> {
+    return this.queueService.addConsumer<PayloadType>(
+      queueName,
+      (message: QueueMessage<PayloadType>) => {
         console.info(message)
         message.ack()
-      }
+      },
     )
-  }
 }
 ```
 
