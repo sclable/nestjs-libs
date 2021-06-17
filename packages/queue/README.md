@@ -96,6 +96,11 @@ QUEUE_TYPE=dummy
 ### RabbitMQ Adapter
 Uses RabbitMQ as a queue service.
 
+To use RabbitMQ you have to install `amqp-ts` package to your application.
+```bash
+$ npm install --save amqp-ts
+```
+
 You need to add the following configuration to your .env file:
 ```dotenv
 ## QUEUE_TYPE=[dummy|rabbitmq|azure-service-bus]
@@ -108,6 +113,11 @@ QUEUE_RABBITMQ_PASSWORD=guest
 ```
 ### Azure Adapter
 Uses Azure Service Bus as a queue service.
+
+To use Azure Service Bus you have to install `@azure/service-bus` package to your application.
+```bash
+$ npm install --save @azure/service-bus
+```
 
 You need to add the following configuration to your .env file:
 ```dotenv
