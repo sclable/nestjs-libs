@@ -6,41 +6,22 @@ At this time the library has the following adapters implemented:
 * rabbitmq (RabbitMQ)
 * azure-service-bus (Azure Service Bus)
 
+## Requirements
+`@nestjs/config` package needs to be installed in the project.
+See: https://docs.nestjs.com/techniques/configuration
+
+## Installation
+```bash
+$ npm install --save @sclable/nestjs-queue
+```
+
 ## Setting up
 
-### Install
-```bash
-npm install --save @sclable/nestjs-queue
-```
-
-### Import QueueModule to your application
-```javascript
-// app/src/app.module.ts
-
-import { Module } from '@nestjs/common'
-import { ConfigService } from '@nestjs/config'
-import { QueueModule, QueueModuleOptions, QueueType } from '@sclable/nestjs-queue'
-
-@Module({
-  imports: [
-    // ...
-    QueueModule.forRootAsync({
-      useFactory: (config: ConfigService) =>
-        config.get<QueueModuleOptions>('queue', {
-          type: QueueType.DUMMY,
-          config: {},
-        }),
-      inject: [ConfigService],
-    }),
-    // ...
-  ],
-})
-export class AppModule {}
-```
-
 ### Create configuration file
-In the application's configuration folder there must be a file which configures the storage library. You can simply copy `src/examples/queue.config.ts`. Make some changes if needed.
+In the application's configuration folder there must be a file which configures the storage library. You can simply copy `src/examples/queue.config.ts` and remove the parts you don't need.
 ```javascript
+// config/queue.ts
+
 import { registerAs } from '@nestjs/config'
 import { QueueModuleOptions, QueueType } from '@sclable/nestjs-queue'
 
@@ -73,10 +54,76 @@ You can remove the ones you don't need.
 ```dotenv
 ## QUEUE_TYPE=[dummy|rabbitmq|azure-service-bus]
 QUEUE_TYPE=dummy
+```
+
+### Import QueueModule to your application
+```javascript
+// app/src/app.module.ts
+
+import { Module } from '@nestjs/common'
+import { ConfigService } from '@nestjs/config'
+import { QueueModule, QueueModuleOptions, QueueType } from '@sclable/nestjs-queue'
+
+@Module({
+  imports: [
+    // ...
+    QueueModule.forRootAsync({
+      useFactory: (config: ConfigService) =>
+        config.get<QueueModuleOptions>('queue', {
+          type: QueueType.DUMMY,
+          config: {},
+        }),
+      inject: [ConfigService],
+    }),
+    // ...
+  ],
+})
+export class AppModule {}
+```
+
+## Adapters
+Only one adapter can be used in the application, defined by the `QUEUE_TYPE` environment variable.
+
+### Dummy Adapter
+The dumy adapter serves only testing purposes, the message is sent to the void, the listener is not getting any messages. Still the implementation is valid even if there are no queue service is running.
+
+You need to add the following configuration to your .env file:
+```dotenv
+## QUEUE_TYPE=[dummy|rabbitmq|azure-service-bus]
+QUEUE_TYPE=dummy
+```
+
+### RabbitMQ Adapter
+Uses RabbitMQ as a queue service.
+
+To use RabbitMQ you have to install `amqp-ts` package to your application.
+```bash
+$ npm install --save amqp-ts
+```
+
+You need to add the following configuration to your .env file:
+```dotenv
+## QUEUE_TYPE=[dummy|rabbitmq|azure-service-bus]
+QUEUE_TYPE=rabbitmq
+
 QUEUE_RABBITMQ_HOSTNAME=localhost
 QUEUE_RABBITMQ_PORT=5672
 QUEUE_RABBITMQ_USERNAME=guest
 QUEUE_RABBITMQ_PASSWORD=guest
+```
+### Azure Adapter
+Uses Azure Service Bus as a queue service.
+
+To use Azure Service Bus you have to install `@azure/service-bus` package to your application.
+```bash
+$ npm install --save @azure/service-bus
+```
+
+You need to add the following configuration to your .env file:
+```dotenv
+## QUEUE_TYPE=[dummy|rabbitmq|azure-service-bus]
+QUEUE_TYPE=azure-service-bus
+
 QUEUE_AZURE_SERVICE_BUS_CONNECTION_STRING=
 ```
 
@@ -92,18 +139,21 @@ export class SomeService {
     private readonly queueService: QueueServiceContract,
   ) {}
 
-  public sendMessage(queueName: string, payload: PayloadType): Promise<void> {
+  public sendMessage<PayloadType>(
+    queueName: string,
+    payload: PayloadType,
+  ): Promise<void> {
     return this.queueService.sendMessage<PayloadType>(queueName, payload)
   }
 
-  public listen(queueName: string): Promise<void> {
-    return this.queueService.addConsumer<PayloadType>(queueName,
-      message: QueueMessage<PayloadType> => {
+  public listen<PayloadType>(queueName: string): Promise<void> {
+    return this.queueService.addConsumer<PayloadType>(
+      queueName,
+      (message: QueueMessage<PayloadType>) => {
         console.info(message)
         message.ack()
-      }
+      },
     )
-  }
 }
 ```
 

@@ -24,9 +24,9 @@
     "uuid": "^7.0.2"
   },
   "peerDependencies": {
-    "@nestjs/common": "^6.11.11",
     "@azure/abort-controller": "^1.0.1",
     "@azure/storage-blob": "^12.1.1",
+    "@nestjs/common": ">=6.11.11",
     "minio": "^7.0.14"
   },
   "repository": {
