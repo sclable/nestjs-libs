@@ -12,6 +12,12 @@ import {
   StorageModuleOptions,
 } from './interfaces'
 
+/**
+ * Storage Manager Service
+ *
+ * Inject it for
+ */
+
 @Injectable()
 export class StorageManager {
   private readonly disks: Map<StorageType, StorageDriverContract> = new Map<

@@ -54,7 +54,7 @@ export class MinioStorageAdapter extends AbstractAdapter implements StorageDrive
     const size = metadata && metadata.size ? metadata.size : undefined
     let result: string
     try {
-      result = await this.minioClient.putObject(bucket, id, content, size, metadata)
+      result = (await this.minioClient.putObject(bucket, id, content, size, metadata)).etag
       this.logger.debug(`File is uploaded successfully: ${bucket}/${id} (etag: ${result})`)
     } catch (error) {
       const message = error instanceof Error ? error.message : 'Unknown Error'
