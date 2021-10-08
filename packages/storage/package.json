@@ -1,6 +1,6 @@
 {
   "name": "@sclable/nestjs-storage",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Storage adapters for NestJS.",
   "license": "UNLICENSED",
   "author": {
