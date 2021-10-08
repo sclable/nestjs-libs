@@ -1,30 +1,30 @@
 {
-  "name": "@sclable/lint",
-  "version": "1.6.2",
-  "author": {
-      "name": "Sclable Business Solutions GmbH",
-      "email": "office@sclable.com",
-      "url": "https://www.sclable.com/"
-  },
-  "license": "UNLICENSED",
-  "contributors": [
-      "Lorenz Leutgeb <lorenz.leutgeb@sclable.com>",
-      "Konstantinos Maninakis <maninak@sclable.com>"
-  ],
-  "dependencies": {
-      "@sclable/eslint-config": "file:../eslint-config",
-      "eslint": "^7.18",
-      "prettier": "^2.2.1"
-  },
-  "main": "index.js",
-  "files": [
-      "index.js"
-  ],
-  "repository": {
-      "type": "git",
-      "url": "git@github.com:sclable/nestjs-libs.git"
-  },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
-  }
+    "name": "@sclable/lint",
+    "version": "1.6.3",
+    "author": {
+        "name": "Sclable Business Solutions GmbH",
+        "email": "office@sclable.com",
+        "url": "https://www.sclable.com/"
+    },
+    "license": "UNLICENSED",
+    "contributors": [
+        "Lorenz Leutgeb <lorenz.leutgeb@sclable.com>",
+        "Konstantinos Maninakis <maninak@sclable.com>"
+    ],
+    "dependencies": {
+        "@sclable/eslint-config": "file:../eslint-config",
+        "eslint": "^7.18",
+        "prettier": "^2.2.1"
+    },
+    "main": "index.js",
+    "files": [
+        "index.js"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "git@github.com:sclable/nestjs-libs.git"
+    },
+    "publishConfig": {
+        "registry": "https://npm.pkg.github.com"
+    }
 }
