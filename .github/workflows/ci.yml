@@ -56,9 +56,10 @@ jobs:
       with:
         name: build-artifacts
     - run: npx lerna list -l
+    - run: echo //npm.pkg.github.com/:_authToken=${NPM_TOKEN} > .npmrc
+      env:
+        NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
     - run: |
         git config user.email "ci@sclable.com"
         git config user.name "Sclable CI"
-    - run: npx lerna publish -y
-      env:
-        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+    - run: npx lerna publish -y --registry=https://npm.pkg.github.com
