@@ -1,6 +1,6 @@
 {
   "name": "@sclable/eslint-config",
-  "version": "0.5.4",
+  "version": "0.5.5",
   "description": "ESLint configurations to be shared inside Sclable",
   "author": {
     "name": "Sclable Business Solutions GmbH",

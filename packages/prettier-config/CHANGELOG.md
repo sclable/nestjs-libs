@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.2.8 (2021-10-11)
+
+**Note:** Version bump only for package @sclable/prettier-config
+
+
+
+
+
 ## 0.2.7 (2021-10-08)
 
 **Note:** Version bump only for package @sclable/prettier-config
