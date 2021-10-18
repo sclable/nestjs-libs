@@ -1,4 +1,4 @@
-import { DynamicModule, Provider } from '@nestjs/common'
+import { Provider } from '@nestjs/common'
 
 import { AUTH_MODULE_OPTIONS, USER_SERVICE } from '../constants'
 import { ApplicationUserContract, UserServiceContract } from '../contracts'
@@ -6,12 +6,6 @@ import { AuthModuleAsyncOptions, AuthModuleOptions } from '../interfaces'
 
 // eslint-disable-next-line @typescript-eslint/no-extraneous-class
 export abstract class AuthModule {
-  // @ts-ignore
-  public static abstract forRootAsync(
-    asyncOptions: AuthModuleAsyncOptions,
-    provideControllers?: boolean,
-  ): DynamicModule
-
   protected static createAsyncOptionsProvider(
     asyncOptions: AuthModuleAsyncOptions,
   ): Provider<AuthModuleOptions> {

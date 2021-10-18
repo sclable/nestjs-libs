@@ -35,7 +35,8 @@ export class KeycloakAdapter implements AuthProviderServiceContract {
           kcUser = await this.kcAdminClient.users.create(user)
           created++
         } catch (error) {
-          this.logger.error(`User cannot be created via Keycloak API: ${error.message}`)
+          const message = error instanceof Error ? error.message : 'Unknown Error'
+          this.logger.error(`User cannot be created via Keycloak API: ${message}`)
           continue
         }
 
@@ -47,13 +48,13 @@ export class KeycloakAdapter implements AuthProviderServiceContract {
         try {
           await this.assignClientRolesToUser(kcUser.id, clientRoles)
         } catch (error) {
-          this.logger.error(
-            `Roles cannot be assigned to user via Keycloak API: ${error.message}`,
-          )
+          const message = error instanceof Error ? error.message : 'Unknown Error'
+          this.logger.error(`Roles cannot be assigned to user via Keycloak API: ${message}`)
         }
       }
     } catch (error) {
-      this.logger.error(`CreateUser error: ${error.message}`)
+      const message = error instanceof Error ? error.message : 'Unknown Error'
+      this.logger.error(`CreateUser error: ${message}`)
     }
 
     return created
@@ -88,8 +89,9 @@ export class KeycloakAdapter implements AuthProviderServiceContract {
       await this.login()
       user = await this.kcAdminClient.users.findOne({ id })
     } catch (error) {
+      const message = error instanceof Error ? error.message : 'Unknown Error'
       this.logger.warn(
-        `User cannot be fetched from Keycloak API (external ID: ${id}), error: ${error.message}`,
+        `User cannot be fetched from Keycloak API (external ID: ${id}), error: ${message}`,
       )
 
       return undefined

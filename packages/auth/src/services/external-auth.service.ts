@@ -13,7 +13,7 @@ import { AuthService } from './auth.service'
 
 @Injectable()
 export class ExternalAuthService<
-  UserType extends ApplicationUserContract
+  UserType extends ApplicationUserContract,
 > extends AuthService<UserType> {
   private updateLock: string[] = []
 

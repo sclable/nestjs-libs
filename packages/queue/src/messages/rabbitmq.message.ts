@@ -4,7 +4,8 @@ import { QueueMessage } from './queue.message'
 
 export class RabbitmqMessage<PayloadType>
   extends AmqpMessage
-  implements QueueMessage<PayloadType> {
+  implements QueueMessage<PayloadType>
+{
   public getContent(): PayloadType {
     return super.getContent() as PayloadType
   }

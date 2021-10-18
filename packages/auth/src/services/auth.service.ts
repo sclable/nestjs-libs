@@ -48,5 +48,5 @@ export abstract class AuthService<UserType extends ApplicationUserContract> {
     this.blackList = this.blackList.filter(({ exp }) => exp && exp > Date.now() / 1000)
   }
 
-  public abstract async getApplicationUser(token: JwtPayload): Promise<UserType | null>
+  public abstract getApplicationUser(token: JwtPayload): Promise<UserType | null>
 }
