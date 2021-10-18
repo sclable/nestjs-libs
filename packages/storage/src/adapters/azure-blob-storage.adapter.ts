@@ -26,7 +26,8 @@ import ReadableStream = NodeJS.ReadableStream
 @Injectable()
 export class AzureBlobStorageAdapter
   extends AbstractAdapter
-  implements StorageDriverContract, OnModuleInit {
+  implements StorageDriverContract, OnModuleInit
+{
   private readonly blobServiceClient: BlobServiceClient
   private readonly onUploadedCallbacks: Map<string, CallableFunction> = new Map()
 
@@ -93,7 +94,7 @@ export class AzureBlobStorageAdapter
 
     this.logger.debug(`Metadata returned for: ${bucket}/${id}`)
 
-    return Object.assign({}, (properties.metadata as unknown) as FileMetaData, {
+    return Object.assign({}, properties.metadata as unknown as FileMetaData, {
       lastModified: properties.lastModified,
       etag: properties.etag,
     })

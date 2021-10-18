@@ -7,7 +7,7 @@ import { JwtPayload } from '../interfaces'
 import { AuthService } from './auth.service'
 
 export class LocalAuthService<
-  UserType extends ApplicationUserContract
+  UserType extends ApplicationUserContract,
 > extends AuthService<UserType> {
   public constructor(
     @Inject(USER_SERVICE) private readonly userService: UserServiceContract<UserType>,

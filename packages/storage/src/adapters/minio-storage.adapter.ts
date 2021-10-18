@@ -57,8 +57,9 @@ export class MinioStorageAdapter extends AbstractAdapter implements StorageDrive
       result = await this.minioClient.putObject(bucket, id, content, size, metadata)
       this.logger.debug(`File is uploaded successfully: ${bucket}/${id} (etag: ${result})`)
     } catch (error) {
-      this.logger.error(`Error during file upload ${bucket}/${id}`)
-      throw new Error(`File upload failed ${error.toString()}`)
+      const message = error instanceof Error ? error.message : 'Unknown Error'
+      this.logger.error(`Error during file upload ${bucket}/${id}: ${message}`)
+      throw new Error(`File upload failed: ${message}`)
     }
 
     return result

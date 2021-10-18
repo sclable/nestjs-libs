@@ -9,7 +9,7 @@ import { AuthModuleOptions, JwtPayload } from '../interfaces'
 import { ExternalAuthService } from '../services'
 
 export class KeycloakStrategy<
-  UserType extends ApplicationUserContract
+  UserType extends ApplicationUserContract,
 > extends PassportStrategy(KeycloakBearerStrategy) {
   public constructor(
     @Inject(AUTH_MODULE_OPTIONS) authModuleOptions: AuthModuleOptions,
