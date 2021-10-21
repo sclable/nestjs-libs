@@ -84,10 +84,8 @@ AUTH_PROVIDER_DB_PASSWORD=KCAdmin123
 ```
 
 ### Create ApplicationUser entity
-ApplicationUser must fulfill the ApplicationUserContract defined in `src/contracts/application-user.contract.ts'.
+ApplicationUser must fulfill the ApplicationUserContract defined in `src/contracts/application-user.contract.ts'.`
 ```typescript
-// lib/src/contracts/application-user.contract.ts'
-
 export interface ApplicationUserContract {
   [key: string]: any
   id: string | number
@@ -103,8 +101,6 @@ An example can be found here: `examples/interfaces/application-user.interface.ts
 ### Implement UserService
 UserService must fulfill the UserServiceContract defined in `src/contracts/user-service.contract.ts`.
 ```typescript
-// lib/src/contracts/user-service.contract.ts
-
 import { ApplicationUserContract } from './application-user.contract'
 
 export interface UserServiceContract<UserType extends ApplicationUserContract> {
@@ -125,7 +121,7 @@ by the library so the application can use it directly ONLY FOR TESTING PURPOSES.
 Note: not all the functions need to be implemented (return undefined, throw exception, etc.)
  * for Keycloak authentication `getOneByUsernameAndPassword()` can be omitted
  * for local authentication `createFromExternalUserDat()` and `updateFromExternalUserData()` can be omitted.
- 
+
 ### GraphQL
 For GraphQL usage a GraphQL guard must be created within the application according to the NestJS recommendations.
 This guard must be extended from one of the guards provided by the library.

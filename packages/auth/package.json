@@ -14,10 +14,6 @@
     "watch": "tsc-watch -p tsconfig.build.json"
   },
   "dependencies": {
-    "@nestjs/common": "^6.11.5",
-    "@nestjs/jwt": "^6.1.1",
-    "@nestjs/passport": "^6.1.1",
-    "express": "^4.17.1",
     "keycloak-admin": "^1.13.0",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
@@ -26,6 +22,11 @@
     "passport-mock-strategy": "^2.0.0",
     "reflect-metadata": "^0.1.13",
     "uuid": "^3.4.0"
+  },
+  "peerDependencies": {
+    "@nestjs/common": ">=6.11.11",
+    "@nestjs/jwt": ">=6.1.2",
+    "@nestjs/passport": ">=6.2.0"
   },
   "contributors": [
     "Norbert Lehotzky <norbert.lehotzky@sclable.com>"
