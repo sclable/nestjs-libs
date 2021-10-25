@@ -3,44 +3,78 @@
 ## Features
 
 ### Local (JWT) authentication
-TBD
-
-### Keycloak authentication
-TBD
-
-## Setting up
-### Import the required module to the application module.
+Create an `auth.module.ts` for your application and import `LocalAuthModule`. 
 ```typescript
-// app/src/app.module.ts
-
-import { AuthConfig, KeycloakAuthModule } from '@contakt-libs/nestjs-auth'
-import { Module } from '@nestjs/common'
-import { ConfigService } from '@nestjs/config'
-
-import { UserService } from './services' // this must be implemented by the application
+// app/src/auth/auth.module.ts
 
 @Module({
   imports: [
-    // ...
-    KeycloakAuthModule.forRootAsync({
-      // eslint-disable-next-line @typescript-eslint/no-use-before-define
-      imports: [AppModule],
+    LocalAuthModule.forRootAsync({
+      imports: [UserModule],
+      inject: [ConfigService, UserService],
       useFactory: (config: ConfigService, userService: UserService) => ({
         config: config.get<AuthConfig>('auth', {}),
         userService,
       }),
-      inject: [ConfigService, UserService],
-    }),
-    // ...
+    })
   ],
-  exports: [UserService],
-  providers: [UserService],
-  // ...
+  providers: [
+    // set as global guard
+    {
+      provide: APP_GUARD,
+      useClass: JwtGuard,
+    },
+    LocalGuard,
+  ],
+})
+export class AuthModule {}
+```
+
+### Keycloak authentication
+Create an `auth.module.ts` for your application and import `LocalAuthModule`. 
+```typescript
+// app/src/auth/auth.module.ts
+
+@Module({
+  imports: [
+    KeycloakAuthModule.forRootAsync({
+      imports: [UserModule],
+      inject: [ConfigService, UserService],
+      useFactory: (config: ConfigService, userService: UserService) => ({
+        config: config.get<AuthConfig>('auth', {}),
+        userService,
+      }),
+    }),
+  ],
+  providers: [
+    // set as global guard
+    {
+      provide: APP_GUARD,
+      useClass: KeycloakGuard,
+    },
+  ],
+})
+export class AuthModule {}
+```
+
+## Setting up
+Import your authentication module to the app module
+```typescript
+// app/src/app.module.ts
+
+@Module({
+  imports: [
+    ConfigModule.forRoot({ isGlobal: true, load: [auth] }),
+    AuthModule,
+    UserModule,
+  ],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}
 ```
 
-There is a second argument of the `forRootAsync()` function which can be used to disable the built in controllers.
+There is a second argument of the `forRootAsync()` function which can be used to disable the built in controllers. If enabled (default) the modules will provide an `auth/logout` and if `testEndpointEnabled` is enabled in the config an `auth/check` endpoint which returns the user's info. Local authentication module also provides an `auth/login` endpoint to provide username and password as the JWT authentication's entry point.
 ```typescript
 public static abstract forRootAsync(
   asyncOptions: AuthModuleAsyncOptions,
@@ -144,6 +178,20 @@ export class GraphqlGuard extends KeycloakGuard {
 ```
 
 ## Usage
+### Global guards
+
+To setup global guard in nestjs provide and `APP_GUARD` provider from the auth or app module. `JwtGuard` has an additional dependency on `LocalGuard` (for the `auth/login` endpoint) so it also needs to be provided in the same module.
+```typescript
+providers: [
+    {
+      provide: APP_GUARD,
+      useClass: JwtGuard, // or KeycloakGuard
+    },
+    LocalGuard,
+  ],
+```
+### Scoped guards
+
 Just simply import and apply the needed guards in the application controllers or resolvers.
 * JwtGuard
 * LocalGuard
@@ -159,3 +207,6 @@ Example:
     // ...
   }
 ```
+
+### Public endpoint
+For an unauthenticated public endpoint use the `@Public()` decorator.
