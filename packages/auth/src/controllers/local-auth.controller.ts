@@ -25,8 +25,8 @@ export class LocalAuthController<UserType extends ApplicationUserContract> {
     @Inject(LocalAuthService) private readonly authService: LocalAuthService<UserType>,
   ) {}
 
-  @UseGuards(JwtGuard)
   @LocalAuth()
+  @UseGuards(JwtGuard)
   @Post('login')
   @HttpCode(200)
   // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/explicit-module-boundary-types
