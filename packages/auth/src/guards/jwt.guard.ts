@@ -1,4 +1,4 @@
-import { ExecutionContext } from '@nestjs/common'
+import { ExecutionContext, Inject } from '@nestjs/common'
 import { Reflector } from '@nestjs/core'
 import { AuthGuard } from '@nestjs/passport'
 import { Observable } from 'rxjs'
@@ -8,8 +8,8 @@ import { LocalGuard } from './local.guard'
 
 export class JwtGuard extends AuthGuard('jwt') {
   public constructor(
-    private readonly reflector: Reflector,
-    private readonly localGuard: LocalGuard,
+    @Inject(Reflector) private readonly reflector: Reflector,
+    @Inject(LocalGuard) private readonly localGuard: LocalGuard,
   ) {
     super()
   }
