@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.10](https://github.com/sclable/nestjs-libs/compare/@sclable/nestjs-auth@1.0.9...@sclable/nestjs-auth@1.0.10) (2021-10-25)
+
+
+### Bug Fixes
+
+* **auth:** use direct injection ([8f5ccdc](https://github.com/sclable/nestjs-libs/commit/8f5ccdc71da3584585b9376ce81531c627b02b0c))
+
+
+
+
+
 ## [1.0.9](https://github.com/sclable/nestjs-libs/compare/@sclable/nestjs-auth@1.0.8...@sclable/nestjs-auth@1.0.9) (2021-10-25)
 
 
