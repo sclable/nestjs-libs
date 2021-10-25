@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.9](https://github.com/sclable/nestjs-libs/compare/@sclable/nestjs-auth@1.0.8...@sclable/nestjs-auth@1.0.9) (2021-10-25)
+
+
+### Bug Fixes
+
+* **auth:** fix decorator order ([be79be7](https://github.com/sclable/nestjs-libs/commit/be79be74db10a639d300d82e167a3f911be6e915))
+
+
+
+
+
 ## 1.0.8 (2021-10-25)
 
 
