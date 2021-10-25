@@ -4,6 +4,7 @@ import { PassportModule } from '@nestjs/passport'
 
 import { AUTH_MODULE_OPTIONS } from '../constants'
 import { LocalAuthController } from '../controllers'
+import { LocalGuard } from '../guards'
 import { AuthModuleAsyncOptions, AuthModuleOptions } from '../interfaces'
 import { LocalAuthService } from '../services'
 import { JwtStrategy, LocalStrategy, MockStrategy } from '../strategies'
@@ -34,6 +35,7 @@ export class LocalAuthModule extends AuthModule {
       providers: [
         Logger,
         LocalAuthService,
+        LocalGuard,
         LocalStrategy,
         JwtStrategy,
         MockStrategy,
