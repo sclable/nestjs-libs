@@ -13,7 +13,8 @@ import {
 
 import { AUTH_MODULE_OPTIONS } from '../constants'
 import { ApplicationUserContract } from '../contracts'
-import { JwtGuard, LocalGuard } from '../guards'
+import { LocalAuth } from '../decorators'
+import { JwtGuard } from '../guards'
 import { AuthModuleOptions, CheckResponse, LoginResponse } from '../interfaces'
 import { LocalAuthService } from '../services'
 
@@ -24,7 +25,8 @@ export class LocalAuthController<UserType extends ApplicationUserContract> {
     @Inject(LocalAuthService) private readonly authService: LocalAuthService<UserType>,
   ) {}
 
-  @UseGuards(LocalGuard)
+  @UseGuards(JwtGuard)
+  @LocalAuth()
   @Post('login')
   @HttpCode(200)
   // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/explicit-module-boundary-types
