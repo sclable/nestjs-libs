@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.11](https://github.com/sclable/nestjs-libs/compare/@sclable/nestjs-auth@1.0.10...@sclable/nestjs-auth@1.0.11) (2021-10-25)
+
+
+### Bug Fixes
+
+* **auth:** fix missing provider ([a4451a5](https://github.com/sclable/nestjs-libs/commit/a4451a5928dcff5364ab10e60d923315279479d7))
+
+
+
+
+
 ## [1.0.10](https://github.com/sclable/nestjs-libs/compare/@sclable/nestjs-auth@1.0.9...@sclable/nestjs-auth@1.0.10) (2021-10-25)
 
 
