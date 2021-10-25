@@ -1,6 +1,6 @@
 {
     "name": "@sclable/lint",
-    "version": "1.6.9",
+    "version": "1.6.10",
     "author": {
         "name": "Sclable Business Solutions GmbH",
         "email": "office@sclable.com",
@@ -12,7 +12,7 @@
         "Konstantinos Maninakis <maninak@sclable.com>"
     ],
     "dependencies": {
-        "@sclable/eslint-config": "^0.5.9",
+        "@sclable/eslint-config": "^0.5.10",
         "eslint": "^7.18",
         "prettier": "^2.2.1"
     },

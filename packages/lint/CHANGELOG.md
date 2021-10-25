@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.10](https://github.com/sclable/nestjs-libs/compare/@sclable/lint@1.6.9...@sclable/lint@1.6.10) (2021-10-25)
+
+
+### Bug Fixes
+
+* **lint:** use proper versions for cross-dependency ([d654a91](https://github.com/sclable/nestjs-libs/commit/d654a914f1ef581c472f8d8e8b8b9d9905b23877))
+
+
+
+
+
 ## 1.6.9 (2021-10-25)
 
 
