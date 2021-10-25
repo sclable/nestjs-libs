@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.12](https://github.com/sclable/nestjs-libs/compare/@sclable/nestjs-auth@1.0.11...@sclable/nestjs-auth@1.0.12) (2021-10-25)
+
+
+### Bug Fixes
+
+* **auth:** handle @Public() decorator in keycloak guard ([9a7fb8b](https://github.com/sclable/nestjs-libs/commit/9a7fb8b658341daea9a05e05b8eff6ef4a1e9554))
+
+
+
+
+
 ## [1.0.11](https://github.com/sclable/nestjs-libs/compare/@sclable/nestjs-auth@1.0.10...@sclable/nestjs-auth@1.0.11) (2021-10-25)
 
 
