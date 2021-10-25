@@ -1,6 +1,6 @@
 {
   "name": "@sclable/nestjs-queue",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Queue adapters for NestJS.",
   "license": "UNLICENSED",
   "author": {
