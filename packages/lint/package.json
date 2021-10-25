@@ -12,7 +12,7 @@
         "Konstantinos Maninakis <maninak@sclable.com>"
     ],
     "dependencies": {
-        "@sclable/eslint-config": "file:../eslint-config",
+        "@sclable/eslint-config": "^0.5.9",
         "eslint": "^7.18",
         "prettier": "^2.2.1"
     },
