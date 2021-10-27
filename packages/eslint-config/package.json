@@ -1,6 +1,6 @@
 {
   "name": "@sclable/eslint-config",
-  "version": "0.5.10",
+  "version": "0.5.11",
   "description": "ESLint configurations to be shared inside Sclable",
   "author": {
     "name": "Sclable Business Solutions GmbH",
@@ -17,7 +17,7 @@
     "index.js"
   ],
   "dependencies": {
-    "@sclable/prettier-config": "^0.2.12",
+    "@sclable/prettier-config": "^0.2.13",
     "@typescript-eslint/eslint-plugin": "^4.13.0",
     "@typescript-eslint/parser": "^4.13.0",
     "@vue/eslint-config-prettier": "^6.0.0",
