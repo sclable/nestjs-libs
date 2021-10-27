@@ -2,7 +2,7 @@
   "name": "@sclable/nestjs-storage",
   "version": "1.0.8",
   "description": "Storage adapters for NestJS.",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "author": {
     "name": "Sclable Business Solutions GmbH",
     "email": "support@sclable.com",
@@ -34,6 +34,8 @@
     "url": "git@github.com:sclable/nestjs-libs.git"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
-  }
+    "registry": "https://registry.npmjs.org",
+    "access": "public"
+  },
+  "gitHead": "e4864ea0c0b3d5a45e983c64e5fdd22ad69de945"
 }

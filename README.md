@@ -8,15 +8,16 @@ To manage packages in this repository, we use [Lerna][lerna.js]. Consider readin
 * [Storage](./packages/storage/README.md) (@sclable/nestjs-storage)
 * [Queue](./packages/queue/README.md) (@sclable/nestjs-queue)
 
-## Setup GitHub registry
+### Support packages
+* [Lint](./packages/lint/README.md) (@sclable/lint)
+* [ESLint configuration](./packages/eslint-config/README.md) (@sclable/eslint-config)
+* [Prettier configuration](./packages/prettier-config/README.md) (@sclable/prettier-config)
+* [TypeScript configuration](./packages/tsconfig/README.md) (@sclable/tsconfig)
 
-Create a github [Personal Access Token](https://docs.github.com/en/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token)
+## Example project
 
-Edit local `~/.npmrc`. You have to comment out our Sclable registry with `#`
-```
-@sclable:registry=https://npm.pkg.github.com
-//npm.pkg.github.com/:_authToken="<token>"
-```
+An example project is also available at [https://github.com/sclable/nestjs-libs-example] to show around some features 
+and usage of the nestjs libraries.
 
 ## Contribution
 
