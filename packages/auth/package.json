@@ -2,7 +2,7 @@
   "name": "@sclable/nestjs-auth",
   "version": "1.0.12",
   "description": "NestJS Authentication Package",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "author": {
     "name": "Sclable Business Solutions GmbH",
     "email": "support@sclable.com",
@@ -29,7 +29,8 @@
     "@nestjs/passport": ">=6.2.0"
   },
   "contributors": [
-    "Norbert Lehotzky <norbert.lehotzky@sclable.com>"
+    "Norbert Lehotzky <norbert.lehotzky@sclable.com>",
+    "Adam Koleszar <adam.koleszar@sclable.com>"
   ],
   "types": "dist/index.d.ts",
   "repository": {
@@ -37,6 +38,8 @@
     "url": "git@github.com:sclable/nestjs-libs.git"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
-  }
+    "registry": "https://registry.npmjs.org",
+    "access": "public"
+  },
+  "gitHead": "e4864ea0c0b3d5a45e983c64e5fdd22ad69de945"
 }

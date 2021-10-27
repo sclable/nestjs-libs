@@ -11,7 +11,7 @@
     "Konstantinos Maninakis <konstantinos.maninakis@sclable.com>",
     "Lorenz Leutgeb <lorenz.leutgeb@sclable.com>"
   ],
-  "license": "UNLICENSED",
+  "license": "MIT",
   "main": "index.js",
   "files": [
     "index.js"
@@ -35,6 +35,8 @@
     "url": "git@github.com:sclable/nestjs-libs.git"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
-  }
+    "registry": "https://registry.npmjs.org",
+    "access": "public"
+  },
+  "gitHead": "e4864ea0c0b3d5a45e983c64e5fdd22ad69de945"
 }

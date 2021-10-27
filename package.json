@@ -1,7 +1,6 @@
 {
   "name": "@sclable/nestjs-libs",
-  "license": "UNLICENSED",
-  "private": true,
+  "license": "MIT",
   "scripts": {
     "prepare": "tsc && ./dist.js",
     "lint": "eslint . --ext .js,.ts,.tsx --max-warnings 0 --cache --cache-location 'node_modules/.cache/.eslintcache'",

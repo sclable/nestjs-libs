@@ -5,7 +5,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [10.x, 12.x, 14.x]
+        node-version: [12.x, 14.x]
     steps:
       - uses: actions/checkout@v2
       - name: Using NodeJS version ${{ matrix.node-version }}
@@ -16,31 +16,9 @@ jobs:
       - run: npm ci
       - uses: actions/upload-artifact@v2
         with:
-          name: build-artifacts
+          name: build-artifacts-${{ matrix.node-version }}
           path: packages/*/dist
       - run: npx lerna run test
-
-  check-version-bump:
-    runs-on: ubuntu-latest
-    if: ${{ github.base_ref == 'refs/heads/master' }}
-    steps:
-    - uses: actions/checkout@v2
-    - run: git checkout master
-    - run: changed_packages=$(git diff origin/master..$BRANCH --name-only | grep 'packages/' | sed 's|packages/\(\w*\)/.*|packages/\1|g' | sort | uniq)
-      env:
-        BRANCH: ${{ github.ref }}
-    - run: |
-        for package in ${changed_packages}; do
-          echo "Found changes in package ${package}:"
-          git checkout origin/master
-          master_version=$(cat packages/${package}/package.json | jq -r '.version')
-          git switch -
-          current_version=$(cat packages/${package}/package.json | jq -r '.version')
-          if [[ ${master_version} == ${current_version} ]]; then
-            echo "Changes found in package ${package}, but version same as master. Please bump the version in packages/${package}/package.json"
-            #exit 1
-          fi
-        done
 
   publish:
     runs-on: ubuntu-latest
@@ -52,17 +30,17 @@ jobs:
         fetch-depth: 0
     - uses: actions/setup-node@v2
       with:
-        node-version: '15'
+        node-version: '14'
         cache: 'npm'
     - run: npm ci
     - uses: actions/download-artifact@v2
       with:
-        name: build-artifacts
+        name: build-artifacts-14.x
     - run: npx lerna list -l
-    - run: echo //npm.pkg.github.com/:_authToken=${NPM_TOKEN} > .npmrc
+    - run: echo //registry.npmjs.org/:_authToken=${NPM_TOKEN} > .npmrc
       env:
-        NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        NPM_TOKEN: ${{ secrets.NPMJS_REGISTRY_TOKEN }}
     - run: |
         git config user.email "ci@sclable.com"
         git config user.name "Sclable CI"
-    - run: npx lerna publish -y --registry=https://npm.pkg.github.com
+    - run: npx lerna publish -y
