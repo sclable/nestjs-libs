@@ -25,7 +25,7 @@
     "@sclable/tsconfig": "file:packages/tsconfig"
   },
   "devDependencies": {
-    "@azure/abort-controller": "1.0.1",
+    "@azure/abort-controller": "1.0.4",
     "@azure/service-bus": "1.1.10",
     "@azure/storage-blob": "12.1.1",
     "@commitlint/cli": "12.1.4",
@@ -35,7 +35,7 @@
     "@nestjs/core": "6.11.11",
     "@nestjs/jwt": "6.1.2",
     "@nestjs/passport": "6.2.0",
-    "@types/fs-extra": "8.1.0",
+    "@types/fs-extra": "9.0.13",
     "@types/minio": "7.0.7",
     "@types/node": "12.11.6",
     "@types/passport-jwt": "3.0.5",
