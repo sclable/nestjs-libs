@@ -9,6 +9,7 @@ export interface QueueModuleOptions {
   type: QueueType
   config: {
     [QueueType.DUMMY]?: DummyAdapterOptions
+    [QueueType.INMEMORY]?: Record<string, unknown>
     [QueueType.RABBITMQ]?: RabbitmqAdapterOptions
     [QueueType.AZURE_SERVICE_BUS]?: AzureServiceBusAdapterOptions
   }

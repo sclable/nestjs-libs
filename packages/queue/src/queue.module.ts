@@ -1,6 +1,6 @@
 import { DynamicModule, Global, Logger, Module, Provider } from '@nestjs/common'
 
-import { AzureServiceBusAdapter, RabbitmqAdapter } from './adapters'
+import { AzureServiceBusAdapter, InmemoryAdapter, RabbitmqAdapter } from './adapters'
 import { DummyAdapter } from './adapters/dummy.adapter'
 import { QUEUE_MODULE_OPTIONS, QUEUE_SERVICE } from './constants'
 import { QueueServiceContract } from './contracts'
@@ -33,6 +33,11 @@ export class QueueModule {
               throw Error('Dummy Queue Adapter is disabled, enable it to use')
             }
             qs = new DummyAdapter(logger)
+            break
+          }
+
+          case QueueType.INMEMORY: {
+            qs = new InmemoryAdapter(logger)
             break
           }
 
