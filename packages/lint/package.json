@@ -13,7 +13,7 @@
   ],
   "dependencies": {
     "@sclable/eslint-config": "^0.5.11",
-    "eslint": "^7.18",
+    "eslint": "^8.1",
     "prettier": "^2.2.1"
   },
   "main": "index.js",
