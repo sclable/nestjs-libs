@@ -10,8 +10,7 @@
   },
   "main": "dist/index.js",
   "scripts": {
-    "build": "rimraf dist && tsc -p tsconfig.build.json",
-    "watch": "tsc-watch -p tsconfig.build.json"
+    "build": "rimraf dist && tsc -p tsconfig.build.json"
   },
   "dependencies": {
     "keycloak-admin": "^1.13.0",

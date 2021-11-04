@@ -5,7 +5,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [12.x, 14.x]
+        node-version: [12.x, 14.x, 16.x]
     steps:
       - uses: actions/checkout@v2
       - name: Using NodeJS version ${{ matrix.node-version }}
@@ -18,7 +18,8 @@ jobs:
         with:
           name: build-artifacts-${{ matrix.node-version }}
           path: packages/*/dist
-      - run: npx lerna run test
+      - run: npm run lint
+      - run: npm test
 
   publish:
     runs-on: ubuntu-latest
@@ -30,13 +31,12 @@ jobs:
         fetch-depth: 0
     - uses: actions/setup-node@v2
       with:
-        node-version: '14'
+        node-version: '16'
         cache: 'npm'
     - run: npm ci
     - uses: actions/download-artifact@v2
       with:
-        name: build-artifacts-14.x
-    - run: npx lerna list -l
+        name: build-artifacts-16.x
     - run: echo //registry.npmjs.org/:_authToken=${NPM_TOKEN} > .npmrc
       env:
         NPM_TOKEN: ${{ secrets.NPMJS_REGISTRY_TOKEN }}

@@ -12,8 +12,7 @@
     "Norbert Lehotzky <norbert.lehotzky@sclable.com>"
   ],
   "scripts": {
-    "build": "rimraf dist && tsc -p tsconfig.build.json",
-    "watch": "tsc-watch -p tsconfig.build.json"
+    "build": "rimraf dist && tsc -p tsconfig.build.json"
   },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
