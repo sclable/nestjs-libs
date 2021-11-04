@@ -7,40 +7,45 @@ jobs:
       matrix:
         node-version: [12.x, 14.x, 16.x]
     steps:
-      - uses: actions/checkout@v2
-      - name: Using NodeJS version ${{ matrix.node-version }}
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup NodeJS ${{ matrix.node-version }}
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
-      - run: npm ci
-      - uses: actions/upload-artifact@v2
-        with:
-          name: build-artifacts-${{ matrix.node-version }}
-          path: packages/*/dist
-      - run: npm run lint
-      - run: npm test
+      - name: Install
+        run: npm ci
+      - name: Lint and Test
+        run: |
+          npm run lint
+          npm test
 
   publish:
     runs-on: ubuntu-latest
     if: ${{ github.ref == 'refs/heads/master' }} # publish only from master
     needs: [build]
     steps:
-    - uses: actions/checkout@v2
+    - name: Checkout
+      uses: actions/checkout@v2
       with:
         fetch-depth: 0
-    - uses: actions/setup-node@v2
+        token: ${{ secrets.NPM_TOKEN }}
+    - name: Configure CI user
+      run: |
+        git config user.email "ci@sclable.com"
+        git config user.name "Sclable CI"
+    - name: Setup NodeJS
+      uses: actions/setup-node@v2
       with:
         node-version: '16'
         cache: 'npm'
-    - run: npm ci
-    - uses: actions/download-artifact@v2
-      with:
-        name: build-artifacts-16.x
-    - run: echo //registry.npmjs.org/:_authToken=${NPM_TOKEN} > .npmrc
+
+    - name: Install
+      run: npm ci
+    - name: Publish
       env:
         NPM_TOKEN: ${{ secrets.NPMJS_REGISTRY_TOKEN }}
-    - run: |
-        git config user.email "ci@sclable.com"
-        git config user.name "Sclable CI"
-    - run: npx lerna publish -y
+      run: |
+        echo //registry.npmjs.org/:_authToken=${NPM_TOKEN} > .npmrc
+        npx lerna publish -y
