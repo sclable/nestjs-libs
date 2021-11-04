@@ -33,7 +33,7 @@ jobs:
       uses: actions/checkout@v2
       with:
         fetch-depth: 0
-        token: ${{ secrets.NPM_TOKEN }}
+        token: ${{ secrets.GIT_PUSH_TOKEN }}
     - name: Configure CI user
       run: |
         git config user.email "ci@sclable.com"
