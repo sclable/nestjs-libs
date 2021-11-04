@@ -20,7 +20,7 @@
     "passport-local": "^1.0.0",
     "passport-mock-strategy": "^2.0.0",
     "reflect-metadata": "^0.1.13",
-    "uuid": "^3.4.0"
+    "uuid": "^8.3.2"
   },
   "peerDependencies": {
     "@nestjs/common": ">=6.11.11",

@@ -1,4 +1,5 @@
 {
+  "extends": "./node_modules/@sclable/tsconfig/tsconfig.json",
   "compilerOptions": {
     // We're using ESLint to check for unused locals, it is more flexible.
     "noUnusedLocals": false,
@@ -16,6 +17,5 @@
     "dist",
     "packages/*/dist"
   ],
-  "extends": "./node_modules/@sclable/tsconfig/tsconfig.json",
   "include": [ "packages/**/*.ts", "packages/**/*.tsx" ]
 }
