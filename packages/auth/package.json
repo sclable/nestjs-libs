@@ -1,6 +1,6 @@
 {
   "name": "@sclable/nestjs-auth",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "description": "NestJS Authentication Package",
   "license": "MIT",
   "author": {
