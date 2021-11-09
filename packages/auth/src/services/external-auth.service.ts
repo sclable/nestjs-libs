@@ -16,16 +16,15 @@ export class ExternalAuthService<
   UserType extends ApplicationUserContract,
 > extends AuthService<UserType> {
   private updateLock: string[] = []
+  private readonly logger: Logger = new Logger(AuthService.name)
 
   public constructor(
     @Inject(AUTH_PROVIDER_SERVICE)
     private readonly authProviderService: AuthProviderServiceContract,
     @Inject(USER_SERVICE) private readonly userService: UserServiceContract<UserType>,
     @Inject(JwtService) protected readonly jwtService: JwtService,
-    @Inject(Logger) private readonly logger: Logger,
   ) {
     super(jwtService)
-    this.logger.setContext(AuthService.name)
   }
 
   public async getApplicationUser(

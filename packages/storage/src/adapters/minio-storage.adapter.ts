@@ -15,14 +15,11 @@ import ReadableStream = NodeJS.ReadableStream
 @Injectable()
 export class MinioStorageAdapter extends AbstractAdapter implements StorageDriverContract {
   private readonly minioClient: Client
+  private readonly logger: Logger = new Logger(MinioStorageAdapter.name)
 
-  public constructor(
-    protected readonly options: MinioStorageAdapterOptions,
-    protected readonly logger: Logger,
-  ) {
+  public constructor(protected readonly options: MinioStorageAdapterOptions) {
     super()
     this.minioClient = new Client(this.options)
-    this.logger.setContext(MinioStorageAdapter.name)
     this.logger.log('MINIO Storage Disk initialized')
   }
 

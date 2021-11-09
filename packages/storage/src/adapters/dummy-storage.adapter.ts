@@ -9,8 +9,8 @@ import { FileMetaData } from '../interfaces'
 import ReadableStream = NodeJS.ReadableStream
 
 export class DummyStorageAdapter implements StorageDriverContract {
-  public constructor(private readonly logger: Logger) {
-    this.logger.setContext(DummyStorageAdapter.name)
+  private readonly logger: Logger = new Logger(DummyStorageAdapter.name)
+  public constructor() {
     this.logger.log('DUMMY Storage Disk initialized')
   }
 

@@ -18,9 +18,12 @@ import {
 export class QueueModule {
   public static forRootAsync(asyncOptions: QueueModuleAsyncOptions): DynamicModule {
     const queueServiceProvider: Provider = {
-      inject: [QUEUE_MODULE_OPTIONS, Logger],
+      inject: [QUEUE_MODULE_OPTIONS],
       provide: QUEUE_SERVICE,
-      useFactory: (options: QueueModuleOptions, logger: Logger) => {
+      useFactory: (
+        options: QueueModuleOptions,
+        logger: Logger = new Logger(QueueModule.name),
+      ) => {
         let qs: QueueServiceContract
 
         if (!options.config[options.type]) {
@@ -32,19 +35,18 @@ export class QueueModule {
             if (!options.config[QueueType.DUMMY]?.enabled) {
               throw Error('Dummy Queue Adapter is disabled, enable it to use')
             }
-            qs = new DummyAdapter(logger)
+            qs = new DummyAdapter()
             break
           }
 
           case QueueType.INMEMORY: {
-            qs = new InmemoryAdapter(logger)
+            qs = new InmemoryAdapter()
             break
           }
 
           case QueueType.RABBITMQ: {
             qs = new RabbitmqAdapter(
               options.config[QueueType.RABBITMQ] as RabbitmqAdapterOptions,
-              logger,
             )
             break
           }
@@ -52,7 +54,6 @@ export class QueueModule {
           case QueueType.AZURE_SERVICE_BUS: {
             qs = new AzureServiceBusAdapter(
               options.config[QueueType.AZURE_SERVICE_BUS] as AzureServiceBusAdapterOptions,
-              logger,
             )
             break
           }

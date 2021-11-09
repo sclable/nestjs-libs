@@ -8,12 +8,12 @@ import { QueueMessage } from '../messages'
 @Injectable()
 export class RabbitmqAdapter implements QueueServiceContract {
   private connection: Connection
+  private readonly logger: Logger = new Logger(RabbitmqAdapter.name)
 
-  public constructor(options: RabbitmqAdapterOptions, private readonly logger: Logger) {
+  public constructor(options: RabbitmqAdapterOptions) {
     this.connection = new Connection(
       `amqp://${options.username}:${options.password}@${options.hostname}:${options.port}`,
     )
-    this.logger.setContext(RabbitmqAdapter.name)
   }
 
   public async sendMessage<PayloadType>(

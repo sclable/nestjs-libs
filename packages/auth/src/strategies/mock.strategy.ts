@@ -9,12 +9,11 @@ import { ApplicationUserContract, TestUserServiceContract } from '../contracts'
 export class MockStrategy<UserType extends ApplicationUserContract> extends PassportStrategy(
   Strategy,
 ) {
+  private readonly logger: Logger = new Logger(MockStrategy.name)
   public constructor(
-    @Inject(Logger) private readonly logger: Logger,
     @Inject(USER_SERVICE) private readonly userService: TestUserServiceContract<UserType>,
   ) {
     super()
-    this.logger.setContext(MockStrategy.name)
   }
 
   protected async validate(): Promise<UserType | null> {

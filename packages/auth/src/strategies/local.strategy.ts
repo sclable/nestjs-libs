@@ -9,12 +9,11 @@ import { LocalAuthService } from '../services'
 export class LocalStrategy<UserType extends ApplicationUserContract> extends PassportStrategy(
   Strategy,
 ) {
+  private readonly logger: Logger = new Logger(LocalStrategy.name)
   public constructor(
     @Inject(LocalAuthService) private readonly authService: LocalAuthService<UserType>,
-    @Inject(Logger) private readonly logger: Logger,
   ) {
     super()
-    this.logger.setContext(LocalStrategy.name)
   }
 
   protected async validate(username: string, password: string): Promise<UserType> {

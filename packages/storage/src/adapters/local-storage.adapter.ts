@@ -14,11 +14,9 @@ const METADATA_FILE_PREFIX = '__meta__'
 
 export class LocalStorageAdapter extends AbstractAdapter implements StorageDriverContract {
   private readonly basePath: string
+  private readonly logger: Logger = new Logger(LocalStorageAdapter.name)
 
-  public constructor(
-    private readonly options: LocalStorageAdapterOptions,
-    private readonly logger: Logger,
-  ) {
+  public constructor(private readonly options: LocalStorageAdapterOptions) {
     super()
     this.basePath = this.options.basePath
 
@@ -37,7 +35,6 @@ export class LocalStorageAdapter extends AbstractAdapter implements StorageDrive
       )
     }
 
-    this.logger.setContext(LocalStorageAdapter.name)
     this.logger.log('LOCAL Storage Disk initialized')
   }
 

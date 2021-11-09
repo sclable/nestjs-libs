@@ -1,4 +1,4 @@
-import { Inject, Injectable, Logger, Optional } from '@nestjs/common'
+import { Inject, Injectable, Optional } from '@nestjs/common'
 
 import { AzureBlobStorageAdapter, DummyStorageAdapter, MinioStorageAdapter } from './adapters'
 import { LocalStorageAdapter } from './adapters/local-storage.adapter'
@@ -26,7 +26,6 @@ export class StorageManager {
   >()
 
   public constructor(
-    @Inject(Logger) private readonly logger: Logger,
     @Inject(STORAGE_MODULE_OPTIONS)
     private readonly storageModuleOptions: StorageModuleOptions,
     @Optional() @Inject(QUEUE_SERVICE) private readonly queueService: QueueServiceContract,
@@ -63,7 +62,7 @@ export class StorageManager {
         if (!this.storageModuleOptions.config[StorageType.DUMMY]?.enabled) {
           throw Error('Dummy Storage Disk is disabled, but accessed.')
         }
-        this.disks.set(StorageType.DUMMY, new DummyStorageAdapter(this.logger))
+        this.disks.set(StorageType.DUMMY, new DummyStorageAdapter())
         break
       }
 
@@ -72,7 +71,6 @@ export class StorageManager {
           StorageType.LOCAL,
           new LocalStorageAdapter(
             this.storageModuleOptions.config[StorageType.LOCAL] as LocalStorageAdapterOptions,
-            this.logger,
           ),
         )
         break
@@ -83,7 +81,6 @@ export class StorageManager {
           StorageType.MINIO,
           new MinioStorageAdapter(
             this.storageModuleOptions.config[StorageType.MINIO] as MinioStorageAdapterOptions,
-            this.logger,
           ),
         )
         break
@@ -96,7 +93,6 @@ export class StorageManager {
             this.storageModuleOptions.config[
               StorageType.AZURE
             ] as AzureBlobStorageAdapterOptions,
-            this.logger,
             this.queueService,
           ),
         )

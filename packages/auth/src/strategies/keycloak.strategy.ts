@@ -11,17 +11,16 @@ import { ExternalAuthService } from '../services'
 export class KeycloakStrategy<
   UserType extends ApplicationUserContract,
 > extends PassportStrategy(KeycloakBearerStrategy) {
+  private readonly logger: Logger = new Logger(KeycloakStrategy.name)
   public constructor(
     @Inject(AUTH_MODULE_OPTIONS) authModuleOptions: AuthModuleOptions,
     @Inject(ExternalAuthService) private readonly authService: ExternalAuthService<UserType>,
-    @Inject(Logger) private readonly logger: Logger,
   ) {
     super({
       realm: authModuleOptions.config.providerRealm,
       url: authModuleOptions.config.providerUrl,
       loggingLevel: authModuleOptions.config.loglevel || 'error',
     })
-    this.logger.setContext(KeycloakStrategy.name)
   }
 
   public async validate(jwtPayload: JwtPayload): Promise<UserType> {

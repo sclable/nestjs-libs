@@ -3,9 +3,7 @@ import { Logger } from '@nestjs/common'
 import { QueueServiceContract } from '../contracts'
 
 export class DummyAdapter implements QueueServiceContract {
-  public constructor(private readonly logger: Logger) {
-    this.logger.setContext(DummyAdapter.name)
-  }
+  private readonly logger: Logger = new Logger(DummyAdapter.name)
 
   public async addConsumer(queueName: string): Promise<void> {
     this.logger.log(`Consumer added to queue: ${queueName}`)
