@@ -1,0 +1,27 @@
+{
+  "name": "@sclable/nestjs-async-provider",
+  "version": "1.0.0",
+  "description": "ASync Provider interface for building Nestjs modules",
+  "license": "MIT",
+  "author": {
+    "name": "Sclable Business Solutions GmbH",
+    "email": "support@sclable.com",
+    "url": "https://sclable.com/"
+  },
+  "contributors": [
+    "Adam Koleszar <adam.koleszar@sclable.com>"
+  ],
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "peerDependencies": {
+    "@nestjs/common": ">=6.11.11"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:sclable/nestjs-libs.git"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org",
+    "access": "public"
+  }
+}
