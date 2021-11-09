@@ -30,10 +30,10 @@ export class AzureBlobStorageAdapter
 {
   private readonly blobServiceClient: BlobServiceClient
   private readonly onUploadedCallbacks: Map<string, CallableFunction> = new Map()
+  private readonly logger: Logger = new Logger(AzureBlobStorageAdapter.name)
 
   public constructor(
     private readonly options: AzureBlobStorageAdapterOptions,
-    private readonly logger: Logger,
     private readonly queueService?: QueueServiceContract,
   ) {
     super()
@@ -41,7 +41,6 @@ export class AzureBlobStorageAdapter
       `https://${options.accountName}.blob.core.windows.net`,
       new StorageSharedKeyCredential(options.accountName, options.accountKey),
     )
-    this.logger.setContext(AzureBlobStorageAdapter.name)
     this.logger.log('AZURE Storage Disk initialized')
   }
 

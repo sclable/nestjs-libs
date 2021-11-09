@@ -1,3 +1,4 @@
+/** Supported storage types */
 export enum StorageType {
   DUMMY = 'dummy',
   LOCAL = 'local',

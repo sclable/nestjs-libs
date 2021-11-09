@@ -1,3 +1,6 @@
+/**
+ * Extend this class to add more adapters
+ */
 export abstract class AbstractAdapter {
   protected buckets: string[] = []
 

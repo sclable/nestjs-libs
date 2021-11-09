@@ -5,7 +5,9 @@
     "prepare": "tsc && ./dist.js && husky install",
     "lint": "eslint . --ext .js,.ts,.tsx --max-warnings 0 --cache --cache-location 'node_modules/.cache/.eslintcache'",
     "lintfix": "npm run lint -- --fix",
-    "test": "jest"
+    "test": "jest",
+    "clean": "rimraf packages/*/node_modules; npx rimraf node_modules",
+    "clean:dist": "rimraf packages/*/dist; npx rimraf dist"
   },
   "author": {
     "name": "Sclable Business Solutions GmbH",
@@ -21,6 +23,7 @@
     "npm": "^8.1.0"
   },
   "dependencies": {
+    "@sclable/nestjs-async-provider": "file:packages/async-provider",
     "@sclable/nestjs-auth": "file:packages/auth",
     "@sclable/nestjs-queue": "file:packages/queue",
     "@sclable/nestjs-storage": "file:packages/storage"
@@ -32,16 +35,16 @@
     "@commitlint/cli": "14.1.0",
     "@commitlint/config-conventional": "14.1.0",
     "@commitlint/prompt-cli": "14.1.0",
-    "@nestjs/common": "6.11.11",
-    "@nestjs/core": "6.11.11",
-    "@nestjs/jwt": "6.1.2",
-    "@nestjs/passport": "6.2.0",
-    "@nestjs/testing": "6.11.11",
+    "@nestjs/common": "8.2.0",
+    "@nestjs/core": "8.2.0",
+    "@nestjs/jwt": "8.0.0",
+    "@nestjs/passport": "8.0.1",
+    "@nestjs/testing": "8.2.0",
     "@sclable/lint": "1.7.0",
     "@sclable/tsconfig": "0.11.18",
     "@types/fs-extra": "9.0.13",
     "@types/jest": "27.0.2",
-    "@types/minio": "7.0.7",
+    "@types/minio": "7.0.11",
     "@types/node": "12.11.6",
     "@types/passport-jwt": "3.0.5",
     "@types/passport-local": "1.0.34",
@@ -50,11 +53,11 @@
     "glob": "7.2.0",
     "husky": "7.0.4",
     "jest": "27.3.1",
-    "lerna": "3.22.1",
+    "lerna": "4.0.0",
     "lint-staged": "10.5.4",
     "minio": "7.0.19",
     "rimraf": "3.0.2",
-    "rxjs": "6.6.7",
+    "rxjs": "7.4.0",
     "shelljs": "0.8.4",
     "ts-jest": "27.0.7",
     "typescript": "4.4.4"

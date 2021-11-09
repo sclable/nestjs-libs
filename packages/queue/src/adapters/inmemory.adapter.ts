@@ -8,10 +8,7 @@ import { InmemoryMessage } from '../messages'
 export class InmemoryAdapter implements QueueServiceContract {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private queues: Record<string, Subject<InmemoryMessage<any>>> = {}
-
-  public constructor(private readonly logger: Logger) {
-    this.logger.setContext(InmemoryAdapter.name)
-  }
+  private readonly logger: Logger = new Logger(InmemoryAdapter.name)
 
   public async sendMessage<PayloadType>(
     queueName: string,

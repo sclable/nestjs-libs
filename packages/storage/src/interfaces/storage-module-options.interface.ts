@@ -8,8 +8,14 @@ import {
 } from './storage-adapter-options'
 
 export interface StorageModuleOptions {
+  /**
+   * Default storage driver
+   * Used for access without specifying storage driver
+   */
   defaultDriver: StorageType
+  /** Optional queue service provider for storage events */
   queueService?: QueueServiceContract
+  /** Driver configurations */
   config: {
     [StorageType.DUMMY]?: DummyStorageAdapterOptions
     [StorageType.LOCAL]?: LocalStorageAdapterOptions

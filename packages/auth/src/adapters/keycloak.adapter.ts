@@ -13,16 +13,15 @@ const MASTER_REALM = 'master'
  */
 export class KeycloakAdapter implements AuthProviderServiceContract {
   private kcAdminClient: KcAdminClient
+  private readonly logger: Logger = new Logger(KeycloakAdapter.name)
 
   public constructor(
     @Inject(AUTH_MODULE_OPTIONS) private readonly authModuleOptions: AuthModuleOptions,
-    @Inject(Logger) private readonly logger: Logger,
   ) {
     this.kcAdminClient = new KcAdminClient({
       baseUrl: authModuleOptions.config.providerUrl,
       realmName: MASTER_REALM, // must be master to be able to authenticate properly
     })
-    this.logger.setContext(KeycloakAdapter.name)
   }
 
   public async createUsers(users: UserRepresentation[]): Promise<number> {

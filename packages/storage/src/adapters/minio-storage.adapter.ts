@@ -15,14 +15,11 @@ import ReadableStream = NodeJS.ReadableStream
 @Injectable()
 export class MinioStorageAdapter extends AbstractAdapter implements StorageDriverContract {
   private readonly minioClient: Client
+  private readonly logger: Logger = new Logger(MinioStorageAdapter.name)
 
-  public constructor(
-    protected readonly options: MinioStorageAdapterOptions,
-    protected readonly logger: Logger,
-  ) {
+  public constructor(protected readonly options: MinioStorageAdapterOptions) {
     super()
     this.minioClient = new Client(this.options)
-    this.logger.setContext(MinioStorageAdapter.name)
     this.logger.log('MINIO Storage Disk initialized')
   }
 
@@ -54,7 +51,7 @@ export class MinioStorageAdapter extends AbstractAdapter implements StorageDrive
     const size = metadata && metadata.size ? metadata.size : undefined
     let result: string
     try {
-      result = await this.minioClient.putObject(bucket, id, content, size, metadata)
+      result = (await this.minioClient.putObject(bucket, id, content, size, metadata)).etag
       this.logger.debug(`File is uploaded successfully: ${bucket}/${id} (etag: ${result})`)
     } catch (error) {
       const message = error instanceof Error ? error.message : 'Unknown Error'

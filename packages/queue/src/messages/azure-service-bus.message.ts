@@ -14,9 +14,7 @@ export class AzureServiceBusMessage<PayloadType extends AzureServiceBusMessagePa
   public constructor(
     private readonly original: ServiceBusMessage,
     private readonly logger: Logger,
-  ) {
-    this.logger.setContext(AzureServiceBusMessage.name)
-  }
+  ) {}
 
   public getContent(): PayloadType {
     return this.original.body as PayloadType

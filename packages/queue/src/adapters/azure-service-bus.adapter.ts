@@ -11,12 +11,12 @@ import { AzureServiceBusMessage, QueueMessage } from '../messages'
 @Injectable()
 export class AzureServiceBusAdapter implements QueueServiceContract {
   private serviceBusClient: ServiceBusClient
+  private readonly logger: Logger = new Logger(AzureServiceBusAdapter.name)
 
-  public constructor(options: AzureServiceBusAdapterOptions, private readonly logger: Logger) {
+  public constructor(options: AzureServiceBusAdapterOptions) {
     this.serviceBusClient = ServiceBusClient.createFromConnectionString(
       options.connectionString,
     )
-    this.logger.setContext(AzureServiceBusAdapter.name)
   }
 
   public async addConsumer<PayloadType>(
