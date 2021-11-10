@@ -1,8 +1,4 @@
-export {
-  AuthConfig,
-  AuthModuleAsyncOptions,
-  AuthModuleOptions,
-} from './auth-modul-options.interface'
+export { AuthConfig, AuthModuleOptions } from './auth-modul-options.interface'
 export { CheckResponse } from './check-response.interface'
 export { CreateAuthProviderUser } from './create-auth-provider-user.interface'
 export { LoginResponse } from './login-response.interface'

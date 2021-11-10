@@ -12,12 +12,9 @@ import {
   generateBlobSASQueryParameters,
 } from '@azure/storage-blob'
 import { Injectable, Logger, OnModuleInit } from '@nestjs/common'
+import { QueueMessage, QueueServiceContract } from '@sclable/nestjs-queue'
 
-import {
-  QueueMessageContract,
-  QueueServiceContract,
-  StorageDriverContract,
-} from '../contracts'
+import { StorageDriverContract } from '../contracts'
 import { AzureBlobStorageAdapterOptions, FileMetaData } from '../interfaces'
 import { AbstractAdapter } from './abstract.adapter'
 
@@ -129,7 +126,7 @@ export class AzureBlobStorageAdapter
       this.onUploadedCallbacks.set(
         id,
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        (message: QueueMessageContract<any>) => {
+        (message: QueueMessage<any>) => {
           this.logger.log(`External file upload finished: ${bucket}/${id}`)
           onUploaded(message)
           this.onUploadedCallbacks.delete(id)
@@ -178,7 +175,7 @@ export class AzureBlobStorageAdapter
 
   private fileUploadedHandler = (
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    message: QueueMessageContract<any>,
+    message: QueueMessage<any>,
   ): void => {
     message.ack()
     const body = message.getContent()

@@ -1,11 +1,12 @@
 import { DynamicModule, Global, Logger, Module } from '@nestjs/common'
 import { JwtModule } from '@nestjs/jwt'
 import { PassportModule } from '@nestjs/passport'
+import { AsyncProvider, createAsyncProviders } from '@sclable/nestjs-async-provider'
 
 import { AUTH_MODULE_OPTIONS } from '../constants'
 import { LocalAuthController } from '../controllers'
 import { LocalGuard } from '../guards'
-import { AuthModuleAsyncOptions, AuthModuleOptions } from '../interfaces'
+import { AuthModuleOptions } from '../interfaces'
 import { LocalAuthService } from '../services'
 import { JwtStrategy, LocalStrategy, MockStrategy } from '../strategies'
 import { AuthModule } from './auth.module'
@@ -14,10 +15,11 @@ import { AuthModule } from './auth.module'
 @Module({})
 export class LocalAuthModule extends AuthModule {
   public static forRootAsync(
-    asyncOptions: AuthModuleAsyncOptions,
+    asyncOptions: AsyncProvider<AuthModuleOptions>,
     provideControllers: boolean = true,
   ): DynamicModule {
     const controllers = provideControllers ? [LocalAuthController] : []
+    const asyncProviders = createAsyncProviders(asyncOptions, AUTH_MODULE_OPTIONS)
 
     return {
       module: LocalAuthModule,
@@ -40,9 +42,9 @@ export class LocalAuthModule extends AuthModule {
         JwtStrategy,
         MockStrategy,
         this.getUserServiceProvider(),
-        this.createAsyncOptionsProvider(asyncOptions),
+        ...asyncProviders,
       ],
-      exports: [this.createAsyncOptionsProvider(asyncOptions)],
+      exports: [...asyncProviders],
       controllers,
     }
   }
