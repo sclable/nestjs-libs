@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.1.0](https://github.com/sclable/nestjs-libs/compare/@sclable/nestjs-auth@1.0.16...@sclable/nestjs-auth@1.1.0) (2021-11-10)
+
+
+### Features
+
+* use common async provider library ([dc2f75f](https://github.com/sclable/nestjs-libs/commit/dc2f75f2e44b2aa283bbd3f3de20418604fb48fb))
+
+
+
+
+
 ## [1.0.16](https://github.com/sclable/nestjs-libs/compare/@sclable/nestjs-auth@1.0.15...@sclable/nestjs-auth@1.0.16) (2021-11-09)
 
 **Note:** Version bump only for package @sclable/nestjs-auth

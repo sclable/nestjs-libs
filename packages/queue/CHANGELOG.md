@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.1.0](https://github.com/sclable/nestjs-libs/compare/@sclable/nestjs-queue@1.0.11...@sclable/nestjs-queue@1.1.0) (2021-11-10)
+
+
+### Features
+
+* use common async provider library ([dc2f75f](https://github.com/sclable/nestjs-libs/commit/dc2f75f2e44b2aa283bbd3f3de20418604fb48fb))
+
+
+
+
+
 ## [1.0.11](https://github.com/sclable/nestjs-libs/compare/@sclable/nestjs-queue@1.0.10...@sclable/nestjs-queue@1.0.11) (2021-11-09)
 
 **Note:** Version bump only for package @sclable/nestjs-queue
