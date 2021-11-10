@@ -9,9 +9,9 @@ import {
   QueueType,
 } from '../src'
 
-let service: QueueServiceContract
-
 describe('Dummy adapter ', () => {
+  let service: QueueServiceContract
+
   beforeAll(async () => {
     const testModule = await Test.createTestingModule({
       imports: [

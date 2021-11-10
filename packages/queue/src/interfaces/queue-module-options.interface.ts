@@ -14,10 +14,3 @@ export interface QueueModuleOptions {
     [QueueType.AZURE_SERVICE_BUS]?: AzureServiceBusAdapterOptions
   }
 }
-
-export interface QueueModuleAsyncOptions {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  useFactory: (...args: any[]) => QueueModuleOptions
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  inject: any[]
-}

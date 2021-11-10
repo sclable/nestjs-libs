@@ -9,9 +9,9 @@ import {
   QueueType,
 } from '../src'
 
-let service: QueueServiceContract
-
 describe('Inmemory adapter ', () => {
+  let service: QueueServiceContract
+
   beforeAll(async () => {
     const testModule = await Test.createTestingModule({
       imports: [

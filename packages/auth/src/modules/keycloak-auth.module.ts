@@ -1,12 +1,13 @@
 import { DynamicModule, Global, Logger, Module, Provider } from '@nestjs/common'
 import { JwtModule } from '@nestjs/jwt'
 import { PassportModule } from '@nestjs/passport'
+import { AsyncProvider, createAsyncProviders } from '@sclable/nestjs-async-provider'
 
 import { KeycloakAdapter } from '../adapters'
-import { AUTH_PROVIDER_SERVICE } from '../constants'
+import { AUTH_MODULE_OPTIONS, AUTH_PROVIDER_SERVICE } from '../constants'
 import { AuthProviderServiceContract } from '../contracts'
 import { KeycloakAuthController } from '../controllers'
-import { AuthModuleAsyncOptions } from '../interfaces'
+import { AuthModuleOptions } from '../interfaces'
 import { ExternalAuthService } from '../services'
 import { KeycloakStrategy, MockStrategy } from '../strategies'
 import { AuthModule } from './auth.module'
@@ -15,7 +16,7 @@ import { AuthModule } from './auth.module'
 @Module({})
 export class KeycloakAuthModule extends AuthModule {
   public static forRootAsync(
-    asyncOptions: AuthModuleAsyncOptions,
+    asyncOptions: AsyncProvider<AuthModuleOptions>,
     provideControllers: boolean = true,
   ): DynamicModule {
     const authProviderService: Provider<AuthProviderServiceContract> = {
@@ -24,6 +25,7 @@ export class KeycloakAuthModule extends AuthModule {
     }
 
     const controllers = provideControllers ? [KeycloakAuthController] : []
+    const asyncProviders = createAsyncProviders(asyncOptions, AUTH_MODULE_OPTIONS)
 
     return {
       module: KeycloakAuthModule,
@@ -35,9 +37,9 @@ export class KeycloakAuthModule extends AuthModule {
         MockStrategy,
         authProviderService,
         this.getUserServiceProvider(),
-        this.createAsyncOptionsProvider(asyncOptions),
+        ...asyncProviders,
       ],
-      exports: [this.createAsyncOptionsProvider(asyncOptions)],
+      exports: [...asyncProviders],
       controllers,
     }
   }

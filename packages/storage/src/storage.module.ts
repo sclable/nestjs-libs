@@ -1,8 +1,9 @@
-import { DynamicModule, Global, Logger, Module, Provider } from '@nestjs/common'
+import { DynamicModule, Global, Module, Provider } from '@nestjs/common'
+import { AsyncProvider, createAsyncProviders } from '@sclable/nestjs-async-provider'
+import { QUEUE_SERVICE, QueueServiceContract } from '@sclable/nestjs-queue'
 
-import { QUEUE_SERVICE, STORAGE_MODULE_OPTIONS } from './constants'
-import { QueueServiceContract } from './contracts'
-import { StorageModuleAsyncOptions, StorageModuleOptions } from './interfaces'
+import { STORAGE_MODULE_OPTIONS } from './constants'
+import { StorageModuleOptions } from './interfaces'
 import { StorageManager } from './storage.manager'
 
 /**
@@ -38,26 +39,27 @@ import { StorageManager } from './storage.manager'
 @Module({})
 // eslint-disable-next-line @typescript-eslint/no-extraneous-class
 export class StorageModule {
-  public static forRootAsync(asyncOptions: StorageModuleAsyncOptions): DynamicModule {
+  public static forRoot(options: StorageModuleOptions): DynamicModule {
+    const optionsProvider: Provider<StorageModuleOptions> = {
+      provide: STORAGE_MODULE_OPTIONS,
+      useValue: options,
+    }
+
     return {
       module: StorageModule,
-      providers: [
-        Logger,
-        StorageManager,
-        this.createQueueServiceProvider(),
-        this.createAsyncOptionsProvider(asyncOptions),
-      ],
-      exports: [StorageManager, this.createAsyncOptionsProvider(asyncOptions)],
+      providers: [StorageManager, optionsProvider, this.createQueueServiceProvider()],
     }
   }
 
-  private static createAsyncOptionsProvider(
-    asyncOptions: StorageModuleAsyncOptions,
-  ): Provider<StorageModuleOptions> {
+  public static forRootAsync(
+    asyncOptions: AsyncProvider<StorageModuleOptions>,
+  ): DynamicModule {
+    const asyncProviders = createAsyncProviders(asyncOptions, STORAGE_MODULE_OPTIONS)
+
     return {
-      inject: asyncOptions.inject || [],
-      provide: STORAGE_MODULE_OPTIONS,
-      useFactory: asyncOptions.useFactory,
+      module: StorageModule,
+      providers: [StorageManager, this.createQueueServiceProvider(), ...asyncProviders],
+      exports: [StorageManager, ...asyncProviders],
     }
   }
 

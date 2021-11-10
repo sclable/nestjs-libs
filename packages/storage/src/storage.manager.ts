@@ -1,9 +1,10 @@
 import { Inject, Injectable, Optional } from '@nestjs/common'
+import { QueueServiceContract } from '@sclable/nestjs-queue'
 
 import { AzureBlobStorageAdapter, DummyStorageAdapter, MinioStorageAdapter } from './adapters'
 import { LocalStorageAdapter } from './adapters/local-storage.adapter'
 import { QUEUE_SERVICE, STORAGE_MODULE_OPTIONS } from './constants'
-import { QueueServiceContract, StorageDriverContract } from './contracts'
+import { StorageDriverContract } from './contracts'
 import { StorageType } from './enums'
 import {
   AzureBlobStorageAdapterOptions,
