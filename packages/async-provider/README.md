@@ -41,4 +41,4 @@ export class SomeModule {
 ```
 
 ## API documentation
-(Github Wiki)[https://github.com/sclable/nestjs-libs/wiki/async-provider]
+[Github Wiki](https://github.com/sclable/nestjs-libs/wiki/async-provider)

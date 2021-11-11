@@ -170,4 +170,4 @@ export interface QueueServiceContract {
 ```
 
 ## API documentation
-(Github Wiki)[https://github.com/sclable/nestjs-libs/wiki/queue]
+[Github Wiki](https://github.com/sclable/nestjs-libs/wiki/queue)
