@@ -4,7 +4,7 @@ import { EventPublisher } from '@nestjs/cqrs'
 import { Aggregate, AggregateConstructor } from './aggregate'
 import { EVENTS_ON_AGGREGATE_METADATA } from './decorators'
 import { EventRegistry } from './event-store'
-import { EventConstructor, EventStoreProvider } from './interfaces'
+import { Event, EventConstructor, EventStoreProvider } from './interfaces'
 
 /** @hidden */
 export function getRepositoryToken<T extends Aggregate>(
@@ -25,7 +25,7 @@ export class Repository<T extends Aggregate> {
   /** @hidden */
   public constructor(
     private readonly aggregateType: AggregateConstructor<T>,
-    private readonly publisher: EventPublisher,
+    private readonly publisher: EventPublisher<Event>,
     private readonly eventStore: EventStoreProvider,
     eventRegistry: EventRegistry,
   ) {

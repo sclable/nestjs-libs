@@ -9,7 +9,7 @@ import {
   EventStoreOptions,
   InmemoryEventStoreProvider,
 } from './event-store'
-import { AsyncProvider, EVENT_STORE_PROVIDER, EventStoreProvider } from './interfaces'
+import { AsyncProvider, EVENT_STORE_PROVIDER, Event, EventStoreProvider } from './interfaces'
 import { RateLimitedEventBus } from './rate-limited-event-bus'
 import { Repository, getRepositoryToken } from './repository'
 
@@ -151,7 +151,12 @@ export class ESCQRSModule {
         eventStore: EventStoreProvider,
         eventRegistry: EventRegistry,
       ) => {
-        return new Repository<T>(agg, new EventPublisher(eventBus), eventStore, eventRegistry)
+        return new Repository<T>(
+          agg,
+          new EventPublisher<Event>(eventBus),
+          eventStore,
+          eventRegistry,
+        )
       },
     }))
 

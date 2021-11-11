@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common'
-import { EventBus, IEvent, IEventHandler } from '@nestjs/cqrs'
+import { EventBus, IEventHandler } from '@nestjs/cqrs'
 import pLimit, { Limit } from 'p-limit'
 
 import { Event } from './interfaces'
@@ -15,22 +15,21 @@ import { Event } from './interfaces'
  * *Note*: If an event-handler throws an error, the rest of them will work fine.
  */
 @Injectable()
-export class RateLimitedEventBus extends EventBus {
+export class RateLimitedEventBus extends EventBus<Event> {
   private limits: { [key: string]: Limit } = {}
 
-  public bind(handler: IEventHandler<IEvent>, name: string): void {
+  public bind(handler: IEventHandler<Event>, name: string): void {
     const stream$ = name ? this.ofEventName(name) : this.subject$
     stream$.subscribe(event => {
-      const sourcedEvent = event as Event
-      if (sourcedEvent.customOptions && sourcedEvent.customOptions.skipQueue) {
+      if (event.customOptions && event.customOptions.skipQueue) {
         handler.handle(event)
 
         return
       }
       const id =
-        sourcedEvent.customOptions && sourcedEvent.customOptions.queueById
-          ? sourcedEvent.customOptions.queueById
-          : sourcedEvent.aggregateId
+        event.customOptions && event.customOptions.queueById
+          ? event.customOptions.queueById
+          : event.aggregateId
 
       if (!this.limits[id]) {
         this.limits[id] = pLimit(1)

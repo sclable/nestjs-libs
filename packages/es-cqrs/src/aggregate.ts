@@ -45,7 +45,7 @@ import { Event, EventConstructor, EventSourcedAggregate } from './interfaces'
  * ```
  *
  */
-export class Aggregate extends AggregateRoot implements EventSourcedAggregate {
+export class Aggregate extends AggregateRoot<Event> implements EventSourcedAggregate {
   public revision: number = 0
 
   public constructor(public readonly id: string, public readonly userId: string) {
