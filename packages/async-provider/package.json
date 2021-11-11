@@ -1,6 +1,6 @@
 {
   "name": "@sclable/nestjs-async-provider",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "ASync Provider interface for building Nestjs modules",
   "license": "MIT",
   "author": {

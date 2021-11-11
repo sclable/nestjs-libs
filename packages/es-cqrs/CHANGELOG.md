@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [8.0.1](https://github.com/sclable/nestjs-libs/compare/@sclable/nestjs-es-cqrs@8.0.0...@sclable/nestjs-es-cqrs@8.0.1) (2021-11-11)
+
+**Note:** Version bump only for package @sclable/nestjs-es-cqrs
+
+
+
+
+
 # [8.0.0](https://github.com/sclable/nestjs-libs/compare/@sclable/nestjs-es-cqrs@7.0.0...@sclable/nestjs-es-cqrs@8.0.0) (2021-11-11)
 
 
