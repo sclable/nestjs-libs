@@ -1,6 +1,6 @@
 {
   "name": "@sclable/nestjs-storage",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Storage adapters for NestJS.",
   "license": "MIT",
   "author": {
@@ -17,7 +17,7 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "dependencies": {
-    "@sclable/nestjs-async-provider": "^1.0.2",
+    "@sclable/nestjs-async-provider": "^1.0.3",
     "fs-extra": "^9.0.0",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^2.7.1",
