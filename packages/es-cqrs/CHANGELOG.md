@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [7.0.0](https://github.com/sclable/nestjs-libs/compare/@sclable/nestjs-es-cqrs@6.0.1...@sclable/nestjs-es-cqrs@7.0.0) (2021-11-11)
+
+
+### chore
+
+* **es-cqrs:** add version 7 ([8e717eb](https://github.com/sclable/nestjs-libs/commit/8e717ebe231101c52c9d7e61c6f65949667a2fed))
+
+
+### BREAKING CHANGES
+
+* **es-cqrs:** * minimum *nestjs* version is increased to v7
+* no actual breaking changes in the API
+
+
+
+
+
 ## 6.0.1 (2021-11-11)
 
 **Note:** Version bump only for package @sclable/nestjs-es-cqrs
