@@ -1,4 +1,4 @@
-# Sclabe ES-CQRS library
+# Sclable ES-CQRS library
 
 This library provides an event-sourced CQRS implementation for **NestJS**. It is built upon the
 [`@nestjs/cqrs`](https://github.com/nestjs/cqrs) package and provides an inmemory implementation
@@ -36,7 +36,7 @@ snapshots of the aggregate after every few events.
 ## Versioning
 
 As the project builds upon [`@nestjs/cqrs`](https://github.com/nestjs/cqrs), the version will follow 
-the main *nestjs* versions. So if your application uses v6 please use v6 from this package too.
+the main *nestjs* versions. So if your application uses v7 please use v7 from this package too.
 
 ## Install
 
@@ -47,8 +47,8 @@ npm install @sclable/nestjs-es-cqrs
 ## Usage
 
 * create aggregates according to your data model (see [Aggregate](src/aggregate.ts))
-* create commands and events according to your write model (see [Nestjs/CQRS](https://docs.nestjs.com/v6/recipes/cqrs))
-* create your command and event handlers (see [Nestjs/CQRS](https://docs.nestjs.com/v6/recipes/cqrs))
+* create commands and events according to your write model (see [Nestjs/CQRS](https://docs.nestjs.com/v7/recipes/cqrs))
+* create your command and event handlers (see [Nestjs/CQRS](https://docs.nestjs.com/v7/recipes/cqrs))
 * import the `ESCQRSModule` into your module and register the command and event handlers (see [ESCQRSModule](src/es-cqrs.module.ts))
 * hook commands to your REST API or your GraphQL mutations
 
