@@ -4,6 +4,7 @@ This [monolithic repository][monolithic_repository] provides essential packages 
 To manage packages in this repository, we use [Lerna][lerna.js]. Consider reading the docs.
 
 ## Packages
+* [Async Provider](.packages/async-provider/README.md) (@sclable/nestjs-async-provider)
 * [Authentication](./packages/auth/README.md) (@sclable/nestjs-auth)
 * [ES/CQRS](./packages/es-cqrs/README.md) (@sclable/nestjs-es-cqrs)
 * [Storage](./packages/storage/README.md) (@sclable/nestjs-storage)
@@ -11,7 +12,7 @@ To manage packages in this repository, we use [Lerna][lerna.js]. Consider readin
 
 ## Example project
 
-An example project is also available at (nestjs-libs-example)[https://github.com/sclable/nestjs-libs-example] to show 
+An example project is also available at [nestjs-libs-example](https://github.com/sclable/nestjs-libs-example) to show 
 around some features and usage of the nestjs libraries.
 
 ## Contribution

@@ -10,5 +10,6 @@
     "packages/storage/index.ts"
   ],
   "exclude": ["**/*.spec.ts"],
-  "excludeExternals": true
+  "excludeExternals": true,
+  "readme": "none"
 }
