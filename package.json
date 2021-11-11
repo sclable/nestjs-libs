@@ -25,6 +25,7 @@
   "dependencies": {
     "@sclable/nestjs-async-provider": "file:packages/async-provider",
     "@sclable/nestjs-auth": "file:packages/auth",
+    "@sclable/nestjs-es-cqrs": "file:packages/es-cqrs",
     "@sclable/nestjs-queue": "file:packages/queue",
     "@sclable/nestjs-storage": "file:packages/storage"
   },

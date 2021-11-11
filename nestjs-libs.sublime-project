@@ -1,0 +1,28 @@
+{
+  "folders": [
+    {
+      "path": ".",
+      "folder_exclude_patterns": [
+        ".idea",
+        ".nyc_output",
+        "coverage",
+        "dist",
+        "node_modules",
+        "test-bucket"
+      ],
+      "file_include_patterns": [
+        ".husky/*",
+        "/*.js",
+        "*.json",
+        "*.ts",
+        ".editorconfig",
+        "*.eslint*",
+        ".git*",
+        "*.txt",
+        "*.md",
+        "*.sh",
+        "*.yml"
+      ]
+    }
+  ]
+}
