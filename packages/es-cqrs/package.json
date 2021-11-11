@@ -1,0 +1,38 @@
+{
+  "name": "@sclable/nestjs-es-cqrs",
+  "version": "6.0.0",
+  "description": "Sclable ES-CQRS library for nestjs",
+  "author": {
+    "name": "Sclable Business Solutions GmbH",
+    "email": "office@sclable.com",
+    "url": "https://www.sclable.com/"
+  },
+  "contributors": [
+    "Adam Koleszar <adam.koleszar@sclable.com>"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:sclable/nestjs-libs.git"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "license": "MIT",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org",
+    "access": "public"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.9.2",
+    "@nestjs/cqrs": "^6",
+    "lodash": "^4.17.12",
+    "p-limit": "^2.2.0",
+    "uuid": "^8.3.2"
+  },
+  "peerDependencies": {
+    "@nestjs/common": "^6 || ^7 || ^8",
+    "@nestjs/core": "^6 || ^7 || ^8"
+  }
+}
