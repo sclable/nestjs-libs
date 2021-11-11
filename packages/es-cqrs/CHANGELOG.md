@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 6.0.1 (2021-11-11)
+
+**Note:** Version bump only for package @sclable/nestjs-es-cqrs
+
+
+
+
+
 ## [3.1.4](https://git.sclable.com/sclable-platform/ts-monorepo/compare/@sclable-platform/es-cqrs@3.1.3...@sclable-platform/es-cqrs@3.1.4) (2021-11-05)
 
 
