@@ -1,0 +1,14 @@
+{
+  "theme": "./node_modules/typedoc-github-wiki-theme/dist",
+  "out": "docs",
+  "tsconfig": "./tsconfig.json",
+  "entryPoints": [
+    "packages/async-provider/index.ts",
+    "packages/auth/index.ts",
+    "packages/es-cqrs/index.ts",
+    "packages/queue/index.ts",
+    "packages/storage/index.ts"
+  ],
+  "exclude": ["**/*.spec.ts"],
+  "excludeExternals": true
+}

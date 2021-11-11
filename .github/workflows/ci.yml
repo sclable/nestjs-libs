@@ -43,7 +43,7 @@ jobs:
       with:
         node-version: '16'
         cache: 'npm'
-    - name: Install
+    - name: Install and generate docs
       run: npm ci
     - name: Publish
       env:
@@ -51,3 +51,35 @@ jobs:
       run: |
         echo //registry.npmjs.org/:_authToken=${NPM_TOKEN} > .npmrc
         npx lerna publish -y
+    - name: Generate documentation
+      run: npx typedoc
+    - name: Save documentation
+      uses: actions/upload-artifact@v2
+      with:
+        path: docs
+        retention-days: 1
+  docs:
+    runs-on: ubuntu-latest
+    if: ${{ github.ref == 'refs/heads/master' }}
+    needs: [publish]
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        repository: ${{github.repository}}.wiki
+        token: ${{ secrets.GIT_PUSH_TOKEN }}
+    - name: Configure CI user
+      run: |
+        git config user.email "ci@sclable.com"
+        git config user.name "Sclable CI"
+    - name: Load documentation
+      uses: actions/download-artifact@v2
+      with:
+        name: docs
+        path: .
+    - name: Commit and push
+      run: |
+        git add .
+        git commit -am "Update documentation"
+        git push origin master
+
