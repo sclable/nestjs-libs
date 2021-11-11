@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.0.0](https://github.com/sclable/nestjs-libs/compare/@sclable/nestjs-es-cqrs@7.0.0...@sclable/nestjs-es-cqrs@8.0.0) (2021-11-11)
+
+
+### chore
+
+* **es-cqrs:** add version 8 ([75d5683](https://github.com/sclable/nestjs-libs/commit/75d568317b64c09794bac295a729ce81b47d41db))
+
+
+### BREAKING CHANGES
+
+* **es-cqrs:** minimum nestjs version is increased to v8
+no actual breaking changes in the API
+
+
+
+
+
 # [7.0.0](https://github.com/sclable/nestjs-libs/compare/@sclable/nestjs-es-cqrs@6.0.1...@sclable/nestjs-es-cqrs@7.0.0) (2021-11-11)
 
 
