@@ -5,14 +5,9 @@ To manage packages in this repository, we use [Lerna][lerna.js]. Consider readin
 
 ## Packages
 * [Authentication](./packages/auth/README.md) (@sclable/nestjs-auth)
+* [ES/CQRS](./packages/es-cqrs/README.md) (@sclable/nestjs-es-cqrs)
 * [Storage](./packages/storage/README.md) (@sclable/nestjs-storage)
 * [Queue](./packages/queue/README.md) (@sclable/nestjs-queue)
-
-### Support packages
-* [Lint](./packages/lint/README.md) (@sclable/lint)
-* [ESLint configuration](./packages/eslint-config/README.md) (@sclable/eslint-config)
-* [Prettier configuration](./packages/prettier-config/README.md) (@sclable/prettier-config)
-* [TypeScript configuration](./packages/tsconfig/README.md) (@sclable/tsconfig)
 
 ## Example project
 
