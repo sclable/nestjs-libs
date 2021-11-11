@@ -20,7 +20,7 @@ import { Repository, getRepositoryToken } from './repository'
  * so provide database configuration as the second parameter for this module.
  *
  * Example: `app.module.ts`
- * ```
+ * ```typescript
  * import { ESCQRSModule, EventStoreOptions } from '@sclable/es-cqrs'
  *
  * const eventStoreOptions: EventStoreOptions = {
@@ -43,7 +43,7 @@ import { Repository, getRepositoryToken } from './repository'
  * The module accepts options asyncronously as well from an options provider
  *
  * Example: `app.module.ts`
- * ```
+ * ```typescript
  * import { ESCQRSModule, EventStoreOptions } from '@sclable/es-cqrs'
  *
  * @Module({
@@ -63,7 +63,7 @@ import { Repository, getRepositoryToken } from './repository'
  * or an options factory
  *
  * Example: `app.module.ts`
- * ```
+ * ```typescript
  * import { ESCQRSModule, EventStoreOptions } from '@sclable/es-cqrs'
  *
  * class OptionsFactory implements EventStoreOptionsFactory {
@@ -87,7 +87,7 @@ import { Repository, getRepositoryToken } from './repository'
  * `AggregateConstructor[]`.
  *
  * Example: `aggregates/index.ts`
- * ```
+ * ```typescript
  * import { AccountAggregate } from './account.aggregate'
  * import { UserAggregate } from './user.aggregate'
  * import { Aggregate, AggregateConstructor } from '@sclable/es-cqrs'
@@ -101,7 +101,7 @@ import { Repository, getRepositoryToken } from './repository'
  * In order to handle commands and events add the handlers as providers to your feature module
  *
  * Example: `my.module.ts`
- * ```
+ * ```typescript
  * import { Module } from '@nestjs/common'
  * import { ReplayService, ESCQRSModule } from '@sclable/es-cqrs'
  * import { aggregates } from './aggregates'

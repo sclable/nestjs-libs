@@ -14,7 +14,7 @@ import { Event, EventConstructor, EventSourcedAggregate } from './interfaces'
  * current revision. To make this easier call `this.uppedRevision()` for both.
  *
  * Example:
- * ```
+ * ```typescript
  * import { Aggregate, Event } from '@sclable/es-cqrs'
  * import { AccountCreatedEvent, AccountNameChangedEvent } from './events'
  * import { v4 as uuidv4 } from 'uuid'

@@ -24,7 +24,7 @@ export interface EventStoreOptions {
  * Implement this factory interface to create a options for the event store
  *
  * Example:
- * ```
+ * ```typescript
  * class OptionsFactory implements EventStoreOptionsFactory {
  *   public async createEventStoreOptions() {
  *     return { logging: true }
@@ -40,7 +40,7 @@ export interface EventStoreOptionsFactory {
  * Asyncronous options for the event store
  *
  * Example (`useFactory`): `app.module.ts`
- * ```
+ * ```typescript
  * @Module({
  *   imports: [
  *     ESCQRSModule.forRootAsync({
@@ -55,7 +55,7 @@ export interface EventStoreOptionsFactory {
  * ```
  *
  * Example (`useClass` / `useExisting`): `app.module.ts`
- * ```
+ * ```typescript
  * class OptionsFactory implements EventStoreOptionsFactory {
  *   public async createEventStoreOptions() {
  *     return { logging: true }
@@ -75,7 +75,7 @@ export interface EventStoreOptionsFactory {
  * It is also possible to add additional imports for the options factory if the service required is in another module
  *
  * Example (`imports`): `app.module.ts`
- * ```
+ * ```typescript
  * @Module({
  *   imports: [
  *     ESCQRSModule.forRootAsync({

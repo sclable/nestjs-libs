@@ -22,7 +22,7 @@ export class ReplayFinished extends DefaultEvent<Record<string, never>> {}
  * Can be run in a separate script.
  *
  * Example: `replay.ts`
- * ```
+ * ```typescript
  * @EventHandler(ReplayFinished)
  * class ReplayFinishedHandler implements IEventHandler<ReplayFinished> {
  *   public handle() {

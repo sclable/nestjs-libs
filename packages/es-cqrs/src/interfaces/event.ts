@@ -7,7 +7,7 @@ import { CustomEventOptions } from './custom-event-options'
  *
  * In order for the event-store to replay your events implement the `Event` interface and create a constructor according
  * to [[EventConstructor]], or for conveniency extend the [[DefaultEvent]] class:
- * ```
+ * ```typescript
  * constructor(
  *   public readonly aggregateId: string,
  *   public readonly aggregateType: string,
@@ -20,7 +20,7 @@ import { CustomEventOptions } from './custom-event-options'
  * It is recommended to define `data` as an interface with the event
  *
  * Example:
- * ```
+ * ```typescript
  * import { Event } from '@sclable/es-cqrs'
  *
  * interface EventData {
@@ -43,7 +43,7 @@ import { CustomEventOptions } from './custom-event-options'
  * To use [[CustomEventOptions]] define that as the forth parameter
  *
  * Example:
- * ```
+ * ```typescript
  * @EventForModule('MyModule')
  * export class AccountCreatedEvent implements Event {
  *   public constructor(
@@ -61,7 +61,7 @@ import { CustomEventOptions } from './custom-event-options'
  * Or use it as a computed parameter
  *
  * Example:
- * ```
+ * ```typescript
  * @EventForModule('MyModule')
  * export class AccountCreatedEvent implements Event {
  *   public constructor(
@@ -80,7 +80,7 @@ import { CustomEventOptions } from './custom-event-options'
  *
  * Example:
  *
- * ```
+ * ```typescript
  * import { EventHandler, IEventHandler } from '@sclable/es-cqrs'
  * import { AccountCreatedEvent } from './events'
  *

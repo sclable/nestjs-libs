@@ -4,7 +4,7 @@ import { CustomEventOptions, Event } from './interfaces'
  * Default [[Event]] implementation
  *
  * Usage:
- * ```
+ * ```typescript
  * interface EventData {
  *   param1: string,
  *   param2: number,

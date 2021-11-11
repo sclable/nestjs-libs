@@ -12,7 +12,7 @@ import { StorageManager } from './storage.manager'
  * so provide a factory for getting the configuration.
  *
  * Example: `app.module.ts`
- * ```
+ * ```typescript
  * import { Module } from '@nestjs/common'
  * import { ConfigService } from '@nestjs/config'
  * import { StorageModule, StorageModuleOptions, StorageType } from '@sclable/nestjs-storage'

@@ -101,9 +101,5 @@ If the new parameter can be optional, a simple condition in the event-handler wi
 
 In case of a required new parameter, where no default value can be added, a complete event DB migration is needed.
 
-## Documentation
-
-```bash
-npm install -g typedoc
-typedoc --mode file --excludeNotExported --out packages/es-cqrs/docs packages/es-cqrs/
-```
+## API documentation
+(Github Wiki)[https://github.com/sclable/nestjs-libs/wiki/es-cqrs]

@@ -228,3 +228,5 @@ export interface StorageDriverContract {
 }
 ```
 
+## API documentation
+(Github Wiki)[https://github.com/sclable/nestjs-libs/wiki/storage]

@@ -11,8 +11,8 @@ To manage packages in this repository, we use [Lerna][lerna.js]. Consider readin
 
 ## Example project
 
-An example project is also available at [https://github.com/sclable/nestjs-libs-example] to show around some features 
-and usage of the nestjs libraries.
+An example project is also available at (nestjs-libs-example)[https://github.com/sclable/nestjs-libs-example] to show 
+around some features and usage of the nestjs libraries.
 
 ## Contribution
 

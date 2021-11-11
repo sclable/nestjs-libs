@@ -210,3 +210,6 @@ Example:
 
 ### Public endpoint
 For an unauthenticated public endpoint use the `@Public()` decorator.
+
+## API documentation
+(Github Wiki)[https://github.com/sclable/nestjs-libs/wiki/auth]

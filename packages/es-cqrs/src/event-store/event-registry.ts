@@ -5,8 +5,7 @@ import { EventStoreException } from './event-store.exception'
 
 /**
  * @hidden
- * The EventRegisty stores constructors for events to reconstruct them when they come back from the
- * *wolkenkit-eventstore*
+ * The EventRegisty stores constructors for events to reconstruct them when they come back from the [[EventStoreProvider]]
  */
 @Injectable()
 export class EventRegistry {

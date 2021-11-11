@@ -6,7 +6,7 @@ import { ICommand as INestCommand } from '@nestjs/cqrs'
  * Implement this to create unique commands. There is no restriction on what the command class can have.
  *
  * Example:
- * ```
+ * ```typescript
  * import { Command } from '@sclable/es-cqrs'
  * import { v4 } from 'uuid'
  *
@@ -22,7 +22,7 @@ import { ICommand as INestCommand } from '@nestjs/cqrs'
  * method should return the object needed for this command to finish (usually an ID).
  *
  * Example:
- * ```
+ * ```typescript
  * import { CommandHandler, ICommandHandler, InjectRepository, Repository } from '@sclable/es-cqrs'
  * import { AccountNameChangeCommand } from './commands'
  * import { AccountAggregate } from './aggregates'
