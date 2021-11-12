@@ -1,6 +1,6 @@
 {
   "name": "@sclable/nestjs-graphql-scalar-uuid",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "UUID validation for @nestjs/graphql",
   "keywords": [
     "nestjs",

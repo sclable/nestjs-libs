@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.0.1 (2021-11-12)
+
+**Note:** Version bump only for package @sclable/nestjs-graphql-scalar-uuid
+
+
+
+
+
 ## [0.11.8](https://git.sclable.com/sclable-platform/ts-monorepo/compare/@sclable-platform/nestjs-graphql-scalar-uuid@0.11.7...@sclable-platform/nestjs-graphql-scalar-uuid@0.11.8) (2021-11-03)
 
 
