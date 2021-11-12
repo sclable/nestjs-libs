@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.0.1 (2021-11-12)
+
+**Note:** Version bump only for package @sclable/nestjs-es-cqrs-schematics
+
+
+
+
+
 ## [0.2.9](https://git.sclable.com/sclable-platform/ts-monorepo/compare/@sclable-platform/es-cqrs-schematics@0.2.8...@sclable-platform/es-cqrs-schematics@0.2.9) (2021-10-27)
 
 **Note:** Version bump only for package @sclable-platform/es-cqrs-schematics
