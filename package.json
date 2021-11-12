@@ -2,10 +2,15 @@
   "name": "@sclable/nestjs-libs",
   "license": "MIT",
   "scripts": {
-    "prepare": "tsc && ./dist.js && husky install",
+    "precompile": "lerna run precompile",
+    "compile": "tsc -p tsconfig-build.json",
+    "postinstall": "husky install",
+    "prepare": "npm run compile && npm run dist",
     "lint": "eslint . --ext .js,.ts,.tsx --max-warnings 0 --cache --cache-location 'node_modules/.cache/.eslintcache'",
     "lintfix": "npm run lint -- --fix",
+    "pretest": "npm run compile",
     "test": "jest",
+    "dist": "./dist.js && lerna run dist",
     "clean": "rimraf packages/*/node_modules; npx rimraf node_modules",
     "clean:dist": "rimraf packages/*/dist; npx rimraf dist"
   },
@@ -26,10 +31,13 @@
     "@sclable/nestjs-async-provider": "file:packages/async-provider",
     "@sclable/nestjs-auth": "file:packages/auth",
     "@sclable/nestjs-es-cqrs": "file:packages/es-cqrs",
+    "@sclable/nestjs-es-cqrs-schematics": "file:packages/es-cqrs-schematics",
     "@sclable/nestjs-queue": "file:packages/queue",
     "@sclable/nestjs-storage": "file:packages/storage"
   },
   "devDependencies": {
+    "@angular-devkit/core": "12.2.13",
+    "@angular-devkit/schematics": "12.2.13",
     "@azure/abort-controller": "1.0.4",
     "@azure/service-bus": "1.1.10",
     "@azure/storage-blob": "12.1.1",
@@ -50,12 +58,15 @@
     "@types/node": "16.11.7",
     "@types/passport-jwt": "3.0.5",
     "@types/passport-local": "1.0.34",
+    "@types/pluralize": "^0.0.29",
     "@types/supertest": "2.0.11",
     "@types/uuid": "8.3.1",
     "amqp-ts": "1.8.0",
     "glob": "7.2.0",
+    "glob-promise": "^4.2.2",
     "husky": "7.0.4",
     "jest": "27.3.1",
+    "json-schema-to-typescript": "^10.1.5",
     "lerna": "4.0.0",
     "lint-staged": "10.5.4",
     "minio": "7.0.19",
@@ -75,7 +86,7 @@
     ]
   },
   "lint-staged": {
-    "*.{js,ts,jsx,tsx}": "eslint --fix --max-warnings 0 --cache --cache-location 'node_modules/.cache/.eslintcache'"
+    "*.{js,ts,jsx,tsx}": "eslint --cache --cache-location 'node_modules/.cache/.eslintcache'"
   },
   "jest": {
     "preset": "ts-jest",

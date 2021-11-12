@@ -1,0 +1,7 @@
+{
+  "exclude": [
+    "**/*.spec.ts",
+    "packages/es-cqrs-schematics/**/templates/**/*.ts"
+  ],
+  "extends": "./tsconfig.json"
+}

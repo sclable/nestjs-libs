@@ -1,0 +1,19 @@
+# Compiler output
+packages/*/dist
+dist
+
+# Test files
+*Test.js
+
+node_modules
+packages/*/node_modules
+
+# es-cqrs-schematics templates and generated files
+packages/es-cqrs-schematics/src/**/templates
+packages/es-cqrs-schematics/src/**/*schema.d.ts
+
+coverage
+
+!.eslintrc.js
+
+/index.js

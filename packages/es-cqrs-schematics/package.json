@@ -1,0 +1,46 @@
+{
+  "name": "@sclable/nestjs-es-cqrs-schematics",
+  "version": "1.0.0",
+  "description": "Schematics for the ES/CQRS package",
+  "scripts": {
+    "precompile": "node bin/schema2ts.js",
+    "dist": "node bin/dist.js"
+  },
+  "keywords": [
+    "schematics"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:sclable/nestjs-libs.git"
+  },
+  "author": {
+    "name": "Sclable Business Solutions GmbH",
+    "email": "office@sclable.com",
+    "url": "https://www.sclable.com/"
+  },
+  "contributors": [
+    "Adam Koleszar <adam.koleszar@sclable.com>"
+  ],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org",
+    "access": "public"
+  },
+  "license": "MIT",
+  "schematics": "./dist/src/collection.json",
+  "dependencies": {
+    "eslint": "^8.1.0",
+    "fs-extra": "^10.0.0",
+    "pluralize": "^8.0.0",
+    "prettier": "^2.4.1",
+    "ts-morph": "^12.1.0"
+  },
+  "peerDependencies": {
+    "@angular-devkit/core": ">=12.0.0",
+    "@angular-devkit/schematics": ">=12.0.0"
+  },
+  "main": "dist/src/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ]
+}

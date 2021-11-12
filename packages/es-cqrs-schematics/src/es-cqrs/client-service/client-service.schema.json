@@ -1,0 +1,73 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "id": "client-service",
+  "title": "ClientServiceSchema",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "moduleName": {
+      "type": "string"
+    },
+    "graphqlType": {
+      "type": "string",
+      "enum": ["query", "mutation", "subscription"]
+    },
+    "graphqlFunction": {
+      "type": "string"
+    },
+    "returnType": {
+      "type": "string"
+    },
+    "readParameters": {
+      "type": "string",
+      "description": "Space separated list of parameters to read from graphql response"
+    },
+    "parameters": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/parameter"
+      }
+    },
+    "imports": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/import"
+      }
+    }
+  },
+  "required": ["name", "moduleName", "graphqlType", "graphqlFunction"],
+  "definitions": {
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "importPath": {
+          "type": "string"
+        }
+      },
+      "required": ["name", "type"]
+    },
+    "import": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string"
+        },
+        "imports": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": ["path", "imports"]
+    }
+  }
+}

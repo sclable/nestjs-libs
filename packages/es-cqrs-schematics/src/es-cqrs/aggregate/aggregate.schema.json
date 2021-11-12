@@ -1,0 +1,47 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "id": "event-handler",
+  "title": "AggregateSchema",
+  "type": "object",
+  "properties": {
+    "aggregate": {
+      "type": "string"
+    },
+    "fileName": {
+      "type": "string"
+    },
+    "command": {
+      "$ref": "#/definitions/command"
+    },
+    "imports": {
+      "type": "array",
+      "items": {
+        "$ref": "src/es-cqrs/schema.json#/definitions/import"
+      }
+    }
+  },
+  "required": ["aggregate", "fileName", "command"],
+  "definitions": {
+    "command": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "eventClass": {
+          "type": "string"
+        },
+        "eventData": {
+          "type": "string"
+        },
+        "parameters": {
+          "type": "array",
+          "items": {
+            "$ref": "src/es-cqrs/schema.json#/definitions/parameter"
+          }
+        }
+      },
+      "required": ["name", "eventClass", "eventData"]
+    }
+  }
+}
