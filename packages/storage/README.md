@@ -1,24 +1,32 @@
 # NestJS Storage Library
 
 ## Features
+
 At this time the library has the following adapters implemented:
+
 * dummy (does nothing)
 * local (local file system)
 * minio (MinIO service)
 * azure-blob-storage (Azure Blob Storage)
+
 ## Requirements
+
 `@nestjs/config` package needs to be installed in the project.
-See: https://docs.nestjs.com/techniques/configuration
+See: <https://docs.nestjs.com/techniques/configuration>
 
 ## Installation
+
 ```bash
-$ npm install --save @sclable/nestjs-storage
+npm install --save @sclable/nestjs-storage
 ```
 
 ## Setting up
 
 ### Create a config file
-In the application's configuration folder there must be a file which configures the storage library. You can simply copy `src/examples/storage.config.ts` and remove the parts you don't need (minio, azure).
+
+In the application's configuration folder there must be a file which configures the storage library. You can simply copy
+`src/examples/storage.config.ts` and remove the parts you don't need (minio, azure).
+
 ```javascript
 // config/storage.ts
 
@@ -64,7 +72,9 @@ export default registerAs(
 )
 
 ```
+
 ### Add configuration to your .env file
+
 ```dotenv
 ## STORAGE_DEFAULT_DRIVER=[dummy|local|minio|azure]
 STORAGE_DEFAULT_DRIVER=dummy
@@ -72,6 +82,7 @@ STORAGE_LINK_EXPIRY_IN_SECONDS=60
 ```
 
 ### Import StorageModule to your application
+
 ```javascript
 // src/app.module.ts
 
@@ -96,21 +107,30 @@ import { StorageModule, StorageModuleOptions, StorageType } from '@sclable/nestj
 })
 export class AppModule {}
 ```
+
 ## Adapters
-It is possible to use different storage types (adapters/drivers) parallelly so the application can manage different ways of storing for different purposes. In that case you have to define the `StorageType` when getting the disk. However, a default driver (adapter) is defined in config, so when you do not specify the `StorageType` when requesting the disk that default applies. When the app has only one storage type the default can always be used. 
+
+It is possible to use different storage types (adapters/drivers) parallelly so the application can manage different ways
+of storing for different purposes. In that case you have to define the `StorageType` when getting the disk. However, a
+default driver (adapter) is defined in config, so when you do not specify the `StorageType` when requesting the disk
+that default applies. When the app has only one storage type the default can always be used.
 
 ### Dummy Adapter
+
 Serves only testing purposes, stores nothing and returns random values.
 
 You might add the following enviroment config to your .env file:
+
 ```dotenv
 STORAGE_DEFAULT_DRIVER=dummy
 ```
 
 ### Local Adapter
+
 Uses the local file system to store data.
 
 You might add the following enviroment config to your .env file:
+
 ```dotenv
 STORAGE_DEFAULT_DRIVER=local
 
@@ -119,15 +139,18 @@ STORAGE_LOCAL_BASE_PATH=storage
 ```
 
 ### Minio Adapter
-See: https://min.io/.
+
+See: <https://min.io/>.
 
 To use minio you have to install minio packages to your application.
+
 ```bash
-$ npm install --save minio
-$ npm install --save-dev @types/minio
+npm install --save minio
+npm install --save-dev @types/minio
 ```
 
 You might add the following enviroment config to your .env file:
+
 ```dotenv
 STORAGE_DEFAULT_DRIVER=minio
 
@@ -139,12 +162,16 @@ STORAGE_MINIO_SECRET_KEY=minio123
 ```
 
 ### Azure Adapter
+
 To use Azure Blob Storage you have to install the related packages to your application.
+
 ```bash
-$ npm install --save @azure/abort-controller azure/storage-blob
+npm install --save @azure/abort-controller azure/storage-blob
 ```
 
-In case you need to rely on storage callback events then you need to attach a queue service as well to the StorageModule.
+In case you need to rely on storage callback events then you need to attach a queue service as well to the
+StorageModule.
+
 ```javascript
 // src/app.module.ts
 
@@ -177,6 +204,7 @@ export class AppModule {}
 ```
 
 You might add the following enviroment config to your .env file:
+
 ```dotenv
 STORAGE_DEFAULT_DRIVER=azure
 
@@ -184,8 +212,11 @@ STORAGE_AZURE_ACCOUNT_NAME=
 STORAGE_AZURE_ACCOUNT_KEY=
 STORAGE_AZURE_FILE_UPLOADED_QUEUE_NAME=
 ```
+
 ## Usage
+
 StorageManager. Import, inject and use.
+
 ```javascript
 import { StorageManager } from '@sclable/nestjs-storage'
 
@@ -203,13 +234,19 @@ export class SomeService {
 ```
 
 ### Getting a disk
-Returns a storage disk, basically an implemented adapter. Without any parameters it returns the default storage adapter (defined in the config) or providing a `StorageType` any adapters can be retrieved. This means across the whole application you can use several different adapters parallely.
+
+Returns a storage disk, basically an implemented adapter. Without any parameters it returns the default storage adapter
+(defined in the config) or providing a `StorageType` any adapters can be retrieved. This means across the whole
+application you can use several different adapters parallely.
+
 ```javascript
 public disk(driver?: StorageType): StorageDriverContract {...}
 ```
 
 ### Interacting with the disk
+
 `StorageDriverContract` defines what one can do with a disk.
+
 ```javascript
 export interface StorageDriverContract {
   createBucket(bucket: string): Promise<void>
@@ -229,4 +266,5 @@ export interface StorageDriverContract {
 ```
 
 ## API documentation
+
 [Github Wiki](https://github.com/sclable/nestjs-libs/wiki/storage)

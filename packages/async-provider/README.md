@@ -3,11 +3,13 @@
 Helper interface and function to create providers asynchronously for dynamic modules.
 
 ## Install
+
 ```bash
 npm i @sclable/nestjs-async-provider
 ```
 
 ## Usage
+
 ```typescript
 import { Module, Provider } from '@nestjs/common'
 import { AsyncProvider, createAsyncProviders } from '@sclable/nestjs-async-provider'
@@ -41,4 +43,5 @@ export class SomeModule {
 ```
 
 ## API documentation
+
 [Github Wiki](https://github.com/sclable/nestjs-libs/wiki/async-provider)

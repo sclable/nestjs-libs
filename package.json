@@ -8,6 +8,8 @@
     "prepare": "npm run compile && npm run dist",
     "lint": "eslint . --ext .js,.ts,.tsx --max-warnings 0 --cache --cache-location 'node_modules/.cache/.eslintcache'",
     "lintfix": "npm run lint -- --fix",
+    "lint:md": "markdownlint --ignore-path .gitignore --ignore '**/CHANGELOG.md' --config .markdownlintrc '**/*.md'",
+    "lintfix:md": "npm run lint:md -- --fix",
     "pretest": "npm run compile",
     "test": "jest",
     "dist": "./dist.js && lerna run dist",
@@ -72,6 +74,7 @@
     "json-schema-to-typescript": "10.1.5",
     "lerna": "4.0.0",
     "lint-staged": "10.5.4",
+    "markdownlint-cli": "^0.29.0",
     "minio": "7.0.19",
     "rimraf": "3.0.2",
     "rxjs": "7.4.0",
@@ -89,7 +92,8 @@
     ]
   },
   "lint-staged": {
-    "*.{js,ts,jsx,tsx}": "eslint --cache --cache-location 'node_modules/.cache/.eslintcache'"
+    "*.{js,ts,jsx,tsx}": "eslint --cache --cache-location 'node_modules/.cache/.eslintcache'",
+    "*.md": "markdownlint --ignore-path .gitignore --ignore '**/CHANGELOG.md' --config .markdownlintrc"
   },
   "jest": {
     "preset": "ts-jest",

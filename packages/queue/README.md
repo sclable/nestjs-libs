@@ -1,24 +1,31 @@
 # NestJS Queue Library
 
 ## Features
+
 At this time the library has the following adapters implemented:
+
 * dummy (does nothing)
 * rabbitmq (RabbitMQ)
 * azure-service-bus (Azure Service Bus)
 
 ## Requirements
+
 `@nestjs/config` package needs to be installed in the project.
-See: https://docs.nestjs.com/techniques/configuration
+See: <https://docs.nestjs.com/techniques/configuration>
 
 ## Installation
+
 ```bash
-$ npm install --save @sclable/nestjs-queue
+npm install --save @sclable/nestjs-queue
 ```
 
 ## Setting up
 
 ### Create configuration file
-In the application's configuration folder there must be a file which configures the storage library. You can simply copy `src/examples/queue.config.ts` and remove the parts you don't need.
+
+In the application's configuration folder there must be a file which configures the storage library. You can simply copy
+`src/examples/queue.config.ts` and remove the parts you don't need.
+
 ```javascript
 // config/queue.ts
 
@@ -50,13 +57,16 @@ export default registerAs(
 ```
 
 ### Add configuration to your .env file
+
 You can remove the ones you don't need.
+
 ```dotenv
 ## QUEUE_TYPE=[dummy|rabbitmq|azure-service-bus]
 QUEUE_TYPE=dummy
 ```
 
 ### Import QueueModule to your application
+
 ```javascript
 // app/src/app.module.ts
 
@@ -82,26 +92,33 @@ export class AppModule {}
 ```
 
 ## Adapters
+
 Only one adapter can be used in the application, defined by the `QUEUE_TYPE` environment variable.
 
 ### Dummy Adapter
-The dumy adapter serves only testing purposes, the message is sent to the void, the listener is not getting any messages. Still the implementation is valid even if there are no queue service is running.
+
+The dumy adapter serves only testing purposes, the message is sent to the void, the listener is not getting any
+messages. Still the implementation is valid even if there are no queue service is running.
 
 You need to add the following configuration to your .env file:
+
 ```dotenv
 ## QUEUE_TYPE=[dummy|rabbitmq|azure-service-bus]
 QUEUE_TYPE=dummy
 ```
 
 ### RabbitMQ Adapter
+
 Uses RabbitMQ as a queue service.
 
 To use RabbitMQ you have to install `amqp-ts` package to your application.
+
 ```bash
-$ npm install --save amqp-ts
+npm install --save amqp-ts
 ```
 
 You need to add the following configuration to your .env file:
+
 ```dotenv
 ## QUEUE_TYPE=[dummy|rabbitmq|azure-service-bus]
 QUEUE_TYPE=rabbitmq
@@ -111,15 +128,19 @@ QUEUE_RABBITMQ_PORT=5672
 QUEUE_RABBITMQ_USERNAME=guest
 QUEUE_RABBITMQ_PASSWORD=guest
 ```
+
 ### Azure Adapter
+
 Uses Azure Service Bus as a queue service.
 
 To use Azure Service Bus you have to install `@azure/service-bus` package to your application.
+
 ```bash
-$ npm install --save @azure/service-bus
+npm install --save @azure/service-bus
 ```
 
 You need to add the following configuration to your .env file:
+
 ```dotenv
 ## QUEUE_TYPE=[dummy|rabbitmq|azure-service-bus]
 QUEUE_TYPE=azure-service-bus
@@ -128,7 +149,9 @@ QUEUE_AZURE_SERVICE_BUS_CONNECTION_STRING=
 ```
 
 ## Usage
+
 QueueService. Import, inject and use.
+
 ```javascript
 import { QUEUE_SERVICE, QueueMessage, QueueServiceContract } from '@sclable/nestjs-queue'
 
@@ -158,7 +181,9 @@ export class SomeService {
 ```
 
 ## Functions
+
 `QueueServiceContract` defines what one can to with the service.
+
 ```javascript
 export interface QueueServiceContract {
   sendMessage<PayloadType>(queueName: string, payload: PayloadType): Promise<void>
@@ -170,4 +195,5 @@ export interface QueueServiceContract {
 ```
 
 ## API documentation
+
 [Github Wiki](https://github.com/sclable/nestjs-libs/wiki/queue)

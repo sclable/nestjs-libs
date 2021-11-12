@@ -35,7 +35,7 @@ snapshots of the aggregate after every few events.
 
 ## Versioning
 
-As the project builds upon [`@nestjs/cqrs`](https://github.com/nestjs/cqrs), the version will follow 
+As the project builds upon [`@nestjs/cqrs`](https://github.com/nestjs/cqrs), the version will follow
 the main *nestjs* versions. So if your application uses v7 please use v7 from this package too.
 
 ## Install
@@ -102,4 +102,5 @@ If the new parameter can be optional, a simple condition in the event-handler wi
 In case of a required new parameter, where no default value can be added, a complete event DB migration is needed.
 
 ## API documentation
+
 [Github Wiki](https://github.com/sclable/nestjs-libs/wiki/es-cqrs)

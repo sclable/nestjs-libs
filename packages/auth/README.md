@@ -3,7 +3,9 @@
 ## Features
 
 ### Local (JWT) authentication
-Create an `auth.module.ts` for your application and import `LocalAuthModule`. 
+
+Create an `auth.module.ts` for your application and import `LocalAuthModule`.
+
 ```typescript
 // app/src/auth/auth.module.ts
 
@@ -31,7 +33,9 @@ export class AuthModule {}
 ```
 
 ### Keycloak authentication
-Create an `auth.module.ts` for your application and import `LocalAuthModule`. 
+
+Create an `auth.module.ts` for your application and import `LocalAuthModule`.
+
 ```typescript
 // app/src/auth/auth.module.ts
 
@@ -58,7 +62,9 @@ export class AuthModule {}
 ```
 
 ## Setting up
+
 Import your authentication module to the app module
+
 ```typescript
 // app/src/app.module.ts
 
@@ -74,7 +80,11 @@ Import your authentication module to the app module
 export class AppModule {}
 ```
 
-There is a second argument of the `forRootAsync()` function which can be used to disable the built in controllers. If enabled (default) the modules will provide an `auth/logout` and if `testEndpointEnabled` is enabled in the config an `auth/check` endpoint which returns the user's info. Local authentication module also provides an `auth/login` endpoint to provide username and password as the JWT authentication's entry point.
+There is a second argument of the `forRootAsync()` function which can be used to disable the built in controllers. If
+enabled (default) the modules will provide an `auth/logout` and if `testEndpointEnabled` is enabled in the config an
+`auth/check` endpoint which returns the user's info. Local authentication module also provides an `auth/login` endpoint
+to provide username and password as the JWT authentication's entry point.
+
 ```typescript
 public static abstract forRootAsync(
   asyncOptions: AuthModuleAsyncOptions,
@@ -83,7 +93,9 @@ public static abstract forRootAsync(
 ```
 
 ### Create configuration file
+
 Check `examples/config/auth.config.ts` as a reference.
+
 ```typescript
 // app/src/config/auth.config.ts
 
@@ -102,6 +114,7 @@ export default registerAs('auth', () => ({
 ```
 
 ### Add configuration to app's .env file
+
 ```dotenv
 AUTH_LOGLEVEL=info
 AUTH_TEST_ENDPOINT_ENABLED=false
@@ -118,7 +131,9 @@ AUTH_PROVIDER_DB_PASSWORD=KCAdmin123
 ```
 
 ### Create ApplicationUser entity
+
 ApplicationUser must fulfill the ApplicationUserContract defined in `src/contracts/application-user.contract.ts'.`
+
 ```typescript
 export interface ApplicationUserContract {
   [key: string]: any
@@ -133,7 +148,9 @@ export interface ApplicationUserContract {
 An example can be found here: `examples/interfaces/application-user.interface.ts`.
 
 ### Implement UserService
+
 UserService must fulfill the UserServiceContract defined in `src/contracts/user-service.contract.ts`.
+
 ```typescript
 import { ApplicationUserContract } from './application-user.contract'
 
@@ -153,12 +170,15 @@ An example implementation can be found here: `examples/services/user.service.ts`
 by the library so the application can use it directly ONLY FOR TESTING PURPOSES.
 
 Note: not all the functions need to be implemented (return undefined, throw exception, etc.)
- * for Keycloak authentication `getOneByUsernameAndPassword()` can be omitted
- * for local authentication `createFromExternalUserDat()` and `updateFromExternalUserData()` can be omitted.
+
+* for Keycloak authentication `getOneByUsernameAndPassword()` can be omitted
+* for local authentication `createFromExternalUserDat()` and `updateFromExternalUserData()` can be omitted.
 
 ### GraphQL
+
 For GraphQL usage a GraphQL guard must be created within the application according to the NestJS recommendations.
 This guard must be extended from one of the guards provided by the library.
+
 ```typescript
 // app/src/auth/graphql.guard.ts
 
@@ -178,9 +198,13 @@ export class GraphqlGuard extends KeycloakGuard {
 ```
 
 ## Usage
+
 ### Global guards
 
-To setup global guard in nestjs provide and `APP_GUARD` provider from the auth or app module. `JwtGuard` has an additional dependency on `LocalGuard` (for the `auth/login` endpoint) so it also needs to be provided in the same module.
+To setup global guard in nestjs provide and `APP_GUARD` provider from the auth or app module. `JwtGuard` has an
+additional dependency on `LocalGuard` (for the `auth/login` endpoint) so it also needs to be provided in the same
+module.
+
 ```typescript
 providers: [
     {
@@ -190,14 +214,17 @@ providers: [
     LocalGuard,
   ],
 ```
+
 ### Scoped guards
 
 Just simply import and apply the needed guards in the application controllers or resolvers.
+
 * JwtGuard
 * LocalGuard
 * KeycloakGuard
 
 Example:
+
 ```typescript
   import { KeycloakGuard } from '@contakt-libs/nestjs-auth'
 
@@ -209,7 +236,9 @@ Example:
 ```
 
 ### Public endpoint
+
 For an unauthenticated public endpoint use the `@Public()` decorator.
 
 ## API documentation
+
 [Github Wiki](https://github.com/sclable/nestjs-libs/wiki/auth)
