@@ -7,6 +7,8 @@ To manage packages in this repository, we use [Lerna][lerna.js]. Consider readin
 * [Async Provider](.packages/async-provider/README.md) (@sclable/nestjs-async-provider)
 * [Authentication](./packages/auth/README.md) (@sclable/nestjs-auth)
 * [ES/CQRS](./packages/es-cqrs/README.md) (@sclable/nestjs-es-cqrs)
+* [ES/CQRS Schematics](.packages/es-cqrs-schematics/README.md) (@sclable/nestjs-es-cqrs-schematics)
+* [GraphQL UUID Scalar](.packages/graphql-scalar-uuid/README.md) (@sclable/nestjs-graphql-scalar-uuid)
 * [Storage](./packages/storage/README.md) (@sclable/nestjs-storage)
 * [Queue](./packages/queue/README.md) (@sclable/nestjs-queue)
 
