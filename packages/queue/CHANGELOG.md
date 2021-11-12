@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.3](https://github.com/sclable/nestjs-libs/compare/@sclable/nestjs-queue@1.1.2...@sclable/nestjs-queue@1.1.3) (2021-11-12)
+
+**Note:** Version bump only for package @sclable/nestjs-queue
+
+
+
+
+
 ## [1.1.2](https://github.com/sclable/nestjs-libs/compare/@sclable/nestjs-queue@1.1.1...@sclable/nestjs-queue@1.1.2) (2021-11-11)
 
 **Note:** Version bump only for package @sclable/nestjs-queue
