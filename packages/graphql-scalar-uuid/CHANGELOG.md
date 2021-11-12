@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.2](https://github.com/sclable/nestjs-libs/compare/@sclable/nestjs-graphql-scalar-uuid@1.0.1...@sclable/nestjs-graphql-scalar-uuid@1.0.2) (2021-11-12)
+
+
+### Bug Fixes
+
+* **graphql-scalar-uuid:** switch class validator dependency ([386de02](https://github.com/sclable/nestjs-libs/commit/386de026d8caa8c40321390977d8a2acd8b0db08))
+
+
+
+
+
 ## 1.0.1 (2021-11-12)
 
 **Note:** Version bump only for package @sclable/nestjs-graphql-scalar-uuid
