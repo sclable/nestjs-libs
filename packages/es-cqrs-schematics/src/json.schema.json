@@ -1,0 +1,32 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "id": "JsonInput",
+  "title": "JsonInputSchema",
+  "type": "object",
+  "properties": {
+    "jsonPath": {
+      "type": "string",
+      "description": "json to load",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      },
+      "x-prompt": "JSON filename"
+    },
+    "rule": {
+      "type": "string",
+      "default": "all",
+      "description": "rule to use",
+      "$default": {
+        "$source": "argv",
+        "index": 1
+      },
+      "x-prompt": "Rule"
+    },
+    "skipFormat": {
+      "type": "boolean",
+      "default": "false"
+    }
+  },
+  "required": ["jsonPath", "rule"]
+}

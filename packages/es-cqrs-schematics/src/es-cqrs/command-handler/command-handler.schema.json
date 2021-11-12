@@ -1,0 +1,30 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "id": "command",
+  "title": "CommandHandlerSchema",
+  "type": "object",
+  "properties": {
+    "command": {
+      "type": "string"
+    },
+    "commandClass": {
+      "type": "string"
+    },
+    "moduleName": {
+      "type": "string"
+    },
+    "parameters": {
+      "type": "array",
+      "items": {
+        "$ref": "src/es-cqrs/schema.json#/definitions/parameter"
+      }
+    },
+    "imports": {
+      "type": "array",
+      "items": {
+        "$ref": "src/es-cqrs/schema.json#/definitions/import"
+      }
+    }
+  },
+  "required": ["command", "commandClass", "moduleName"]
+}

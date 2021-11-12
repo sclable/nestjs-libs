@@ -1,0 +1,5 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "id": "Nest6Migration",
+  "title": "Nest6MigrationSchema"
+}

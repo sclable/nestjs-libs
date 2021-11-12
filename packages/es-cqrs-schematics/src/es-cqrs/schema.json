@@ -1,0 +1,63 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "id": "EsCqrs",
+  "title": "EsCqrsSchema",
+  "type": "object",
+  "description": "EsCqrs",
+  "properties": {
+    "moduleName": {
+      "type": "string"
+    },
+    "verb": {
+      "type": "string"
+    },
+    "subject": {
+      "type": "string"
+    },
+    "parameters": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/parameter"
+      }
+    },
+    "imports": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/import"
+      }
+    }
+  },
+  "required": ["verb", "subject", "moduleName"],
+  "definitions": {
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "importPath": {
+          "type": "string"
+        }
+      },
+      "required": ["name", "type"]
+    },
+    "import": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string"
+        },
+        "imports": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": ["path", "imports"]
+    }
+  }
+}
