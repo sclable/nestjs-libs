@@ -1,0 +1,40 @@
+{
+  "name": "@sclable/nestjs-graphql-scalar-uuid",
+  "version": "1.0.0",
+  "description": "UUID validation for @nestjs/graphql",
+  "keywords": [
+    "nestjs",
+    "graphql",
+    "scalar",
+    "uuid"
+  ],
+  "author": {
+    "name": "Sclable Business Solutions GmbH",
+    "email": "office@sclable.com",
+    "url": "https://www.sclable.com/"
+  },
+  "contributors": [
+    "Adam Koleszar <adam.koleszar@sclable.com>"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:sclable/nestjs-libs.git"
+  },
+  "license": "MIT",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org",
+    "access": "public"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "class-validator": "^0.13.0",
+    "graphql": "^15.5.1"
+  },
+  "peerDependencies": {
+    "@nestjs/graphql": ">=6.6.2"
+  }
+}
