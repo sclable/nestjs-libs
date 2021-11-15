@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [8.0.4](https://github.com/sclable/nestjs-libs/compare/@sclable/nestjs-es-cqrs@8.0.3...@sclable/nestjs-es-cqrs@8.0.4) (2021-11-15)
+
+
+### Bug Fixes
+
+* **deps:** update p-limit imports ([ed7d071](https://github.com/sclable/nestjs-libs/commit/ed7d071ca9976a63cc0f40f33b77776a90218213))
+
+
+
+
+
 ## [8.0.3](https://github.com/sclable/nestjs-libs/compare/@sclable/nestjs-es-cqrs@8.0.2...@sclable/nestjs-es-cqrs@8.0.3) (2021-11-12)
 
 **Note:** Version bump only for package @sclable/nestjs-es-cqrs
