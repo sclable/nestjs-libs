@@ -28,7 +28,7 @@
     "@babel/runtime": "^7.9.2",
     "@nestjs/cqrs": "^8",
     "lodash": "^4.17.12",
-    "p-limit": "^2.2.0",
+    "p-limit": "^4.0.0",
     "uuid": "^8.3.2"
   },
   "peerDependencies": {
