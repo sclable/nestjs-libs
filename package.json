@@ -74,7 +74,7 @@
     "json-schema-to-typescript": "10.1.5",
     "lerna": "4.0.0",
     "lint-staged": "12.0.2",
-    "markdownlint-cli": "^0.29.0",
+    "markdownlint-cli": "0.29.0",
     "minio": "7.0.19",
     "rimraf": "3.0.2",
     "rxjs": "7.4.0",
@@ -96,7 +96,8 @@
     "*.md": "markdownlint --ignore-path .gitignore --ignore '**/CHANGELOG.md' --config .markdownlintrc"
   },
   "jest": {
-    "preset": "ts-jest",
+    "preset": "ts-jest/presets/js-with-ts",
+    "transformIgnorePatterns": ["node_modules/(?!(p-limit|yocto-))"],
     "testEnvironment": "node",
     "testRegex": ".*/test/.*\\.spec\\.ts$"
   }

@@ -9,7 +9,9 @@
     "lib": [ "es2018" ],
     "outDir": "dist",
     "paths": {"*": ["packages/*"]},
-    "target": "es2018"
+    "moduleResolution": "node",
+    "target": "es2018",
+    "allowJs": true
   },
   "exclude": [
     "node_modules",
