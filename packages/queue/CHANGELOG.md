@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.5](https://github.com/sclable/nestjs-libs/compare/@sclable/nestjs-queue@1.1.4...@sclable/nestjs-queue@1.1.5) (2022-01-04)
+
+
+### Bug Fixes
+
+* **queue:** upgrade azure-service-bus to v7.4.0 ([6bf7bab](https://github.com/sclable/nestjs-libs/commit/6bf7bababf1db1c31b81ed931380c6bcb90db3ec))
+
+
+
+
+
 ## [1.1.4](https://github.com/sclable/nestjs-libs/compare/@sclable/nestjs-queue@1.1.3...@sclable/nestjs-queue@1.1.4) (2022-01-04)
 
 **Note:** Version bump only for package @sclable/nestjs-queue
