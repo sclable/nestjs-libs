@@ -1,7 +1,11 @@
 /**
  * @see https://docs.microsoft.com/en-us/javascript/api/@azure/service-bus/?view=azure-node-latest
  */
-import { ProcessErrorArgs, ServiceBusClient, ServiceBusReceivedMessage } from '@azure/service-bus'
+import {
+  ProcessErrorArgs,
+  ServiceBusClient,
+  ServiceBusReceivedMessage,
+} from '@azure/service-bus'
 import { Injectable, Logger } from '@nestjs/common'
 
 import { QueueServiceContract } from '../contracts'
@@ -14,9 +18,7 @@ export class AzureServiceBusAdapter implements QueueServiceContract {
   private readonly logger: Logger = new Logger(AzureServiceBusAdapter.name)
 
   public constructor(options: AzureServiceBusAdapterOptions) {
-    this.serviceBusClient = new ServiceBusClient(
-      options.connectionString,
-    )
+    this.serviceBusClient = new ServiceBusClient(options.connectionString)
   }
 
   public async addConsumer<PayloadType>(
@@ -48,8 +50,6 @@ export class AzureServiceBusAdapter implements QueueServiceContract {
     queueName: string,
     payload: PayloadType,
   ): Promise<void> {
-    return this.serviceBusClient
-      .createSender(queueName)
-      .sendMessages({body: payload})
+    return this.serviceBusClient.createSender(queueName).sendMessages({ body: payload })
   }
 }
