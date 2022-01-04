@@ -1,7 +1,7 @@
 /**
  * @see https://docs.microsoft.com/en-us/javascript/api/@azure/service-bus/?view=azure-node-latest
  */
-import { ReceiveMode, ServiceBusClient, ServiceBusMessage } from '@azure/service-bus'
+import { ProcessErrorArgs, ServiceBusClient, ServiceBusReceivedMessage } from '@azure/service-bus'
 import { Injectable, Logger } from '@nestjs/common'
 
 import { QueueServiceContract } from '../contracts'
@@ -14,7 +14,7 @@ export class AzureServiceBusAdapter implements QueueServiceContract {
   private readonly logger: Logger = new Logger(AzureServiceBusAdapter.name)
 
   public constructor(options: AzureServiceBusAdapterOptions) {
-    this.serviceBusClient = ServiceBusClient.createFromConnectionString(
+    this.serviceBusClient = new ServiceBusClient(
       options.connectionString,
     )
   }
@@ -23,8 +23,7 @@ export class AzureServiceBusAdapter implements QueueServiceContract {
     queueName: string,
     consumer: (msg: QueueMessage<PayloadType>) => Promise<void> | void,
   ): Promise<void> {
-    const queueClient = this.serviceBusClient.createQueueClient(queueName)
-    const receiver = queueClient.createReceiver(ReceiveMode.peekLock)
+    const receiver = this.serviceBusClient.createReceiver(queueName)
 
     const errorHandler = (error: Error): void => {
       this.logger.error(
@@ -34,11 +33,14 @@ export class AzureServiceBusAdapter implements QueueServiceContract {
       )
     }
 
-    const messageHandler = async (message: ServiceBusMessage): Promise<void> => {
-      consumer(new AzureServiceBusMessage<PayloadType>(message, this.logger))
+    const messageHandler = async (message: ServiceBusReceivedMessage): Promise<void> => {
+      consumer(new AzureServiceBusMessage<PayloadType>(message, receiver, this.logger))
     }
 
-    receiver.registerMessageHandler(messageHandler, errorHandler)
+    receiver.subscribe({
+      processMessage: messageHandler,
+      processError: async (args: ProcessErrorArgs) => errorHandler(args.error),
+    })
     this.logger.log(`Consumer added to queue: ${queueName}`)
   }
 
@@ -47,8 +49,7 @@ export class AzureServiceBusAdapter implements QueueServiceContract {
     payload: PayloadType,
   ): Promise<void> {
     return this.serviceBusClient
-      .createQueueClient(queueName)
-      .createSender()
-      .send({ body: payload })
+      .createSender(queueName)
+      .sendMessages({body: payload})
   }
 }

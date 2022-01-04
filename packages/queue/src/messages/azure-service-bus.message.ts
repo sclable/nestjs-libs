@@ -1,4 +1,4 @@
-import { ServiceBusMessage } from '@azure/service-bus'
+import { ServiceBusReceivedMessage, ServiceBusReceiver } from '@azure/service-bus'
 import { Logger } from '@nestjs/common'
 
 import { QueueMessage } from './queue.message'
@@ -12,7 +12,8 @@ export class AzureServiceBusMessage<PayloadType extends AzureServiceBusMessagePa
   implements QueueMessage<PayloadType>
 {
   public constructor(
-    private readonly original: ServiceBusMessage,
+    private readonly original: ServiceBusReceivedMessage,
+    private readonly receiver: ServiceBusReceiver,
     private readonly logger: Logger,
   ) {}
 
@@ -21,18 +22,18 @@ export class AzureServiceBusMessage<PayloadType extends AzureServiceBusMessagePa
   }
 
   public ack(): void {
-    this.original.complete().catch(error => {
+    this.receiver.completeMessage(this.original).catch(error => {
       this.logger.error(`AzureServiceBusMessage.ack() failed: ${JSON.stringify(error)}`)
     })
   }
 
   public reject(requeue: boolean): void {
     if (requeue) {
-      this.original.abandon().catch(error => {
+      this.receiver.abandonMessage(this.original).catch(error => {
         this.logger.error(`AzureServiceBusMessage.reject() failed: ${JSON.stringify(error)}`)
       })
     } else {
-      this.original.deadLetter().catch(error => {
+      this.receiver.deadLetterMessage(this.original).catch(error => {
         this.logger.error(`AzureServiceBusMessage.reject() failed: ${JSON.stringify(error)}`)
       })
     }
