@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.3](https://github.com/sclable/nestjs-libs/compare/@sclable/nestjs-es-cqrs-schematics@1.0.2...@sclable/nestjs-es-cqrs-schematics@1.0.3) (2022-01-05)
+
+
+### Bug Fixes
+
+* **es-cqrs-schematics:** update to angular schematics v13 ([e748441](https://github.com/sclable/nestjs-libs/commit/e748441fcab12026627867bb59cd90df2f503b2a))
+
+
+
+
+
 ## [1.0.2](https://github.com/sclable/nestjs-libs/compare/@sclable/nestjs-es-cqrs-schematics@1.0.1...@sclable/nestjs-es-cqrs-schematics@1.0.2) (2021-11-22)
 
 **Note:** Version bump only for package @sclable/nestjs-es-cqrs-schematics
