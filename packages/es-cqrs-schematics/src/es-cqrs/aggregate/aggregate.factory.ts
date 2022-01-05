@@ -11,7 +11,8 @@ import {
   template,
   url,
 } from '@angular-devkit/schematics'
-import { Project } from 'ts-morph'
+import { Project, Scope } from 'ts-morph'
+import { SemicolonPreference } from 'typescript'
 
 import { pastParticiple } from '../../past-participle'
 import { EsCqrsSchema, Import, Parameter } from '../schema'
@@ -60,7 +61,9 @@ function transform(options: EsCqrsSchema): AggregateSchema {
         pastParticiple(options.verb),
       )}`,
       eventData: needEventDataType
-        ? `{${parameters.map(param => param.name).join(',')}}`
+        ? parameters.length > 0
+          ? `{ ${parameters.map(param => param.name).join(', ')} }`
+          : '{}'
         : parameters[0].name,
       name: `${strings.camelize(options.verb)}${strings.classify(options.subject)}`,
       parameters,
@@ -106,12 +109,14 @@ function updateAggregate(options: AggregateSchema): Rule {
             type: param.type,
           })),
         returnType: 'void',
+        scope: Scope.Public,
       })
       aggregateClass.addMethod({
         statements: '/* no-op */',
         name: `on${options.command.eventClass}`,
-        parameters: [{ name: 'event', type: options.command.eventClass }],
+        parameters: [{ name: '_event', type: options.command.eventClass }],
         returnType: 'void',
+        scope: Scope.Public,
       })
       const eventImports = aggregate.getImportDeclaration('./events')
       if (eventImports) {
@@ -147,6 +152,10 @@ function updateAggregate(options: AggregateSchema): Rule {
         }
       })
     }
+    aggregate.formatText({
+      indentSize: 2,
+      semicolons: SemicolonPreference.Remove,
+    })
 
     if (!tree.exists(aggregatePath)) {
       tree.create(aggregatePath, aggregate.getFullText())

@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "id": "command",
+  "$id": "command",
   "title": "CommandSchema",
   "type": "object",
   "properties": {

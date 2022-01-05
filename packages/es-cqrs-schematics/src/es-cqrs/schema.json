@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "id": "EsCqrs",
+  "$id": "es-cqrs",
   "title": "EsCqrsSchema",
   "type": "object",
   "description": "EsCqrs",

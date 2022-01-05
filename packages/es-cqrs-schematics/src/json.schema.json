@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "id": "JsonInput",
+  "$id": "json-input",
   "title": "JsonInputSchema",
   "type": "object",
   "properties": {
@@ -21,7 +21,7 @@
         "$source": "argv",
         "index": 1
       },
-      "x-prompt": "Rule"
+      "x-prompt": "Rule [all|command|event|command-handler|event-handler|aggregate|client-service|nest6-migration]"
     },
     "skipFormat": {
       "type": "boolean",

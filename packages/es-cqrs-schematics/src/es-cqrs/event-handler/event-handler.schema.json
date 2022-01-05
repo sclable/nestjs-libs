@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "id": "event-handler",
+  "$id": "event-handler",
   "title": "EventHandlerSchema",
   "type": "object",
   "properties": {

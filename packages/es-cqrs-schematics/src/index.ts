@@ -5,11 +5,16 @@ import { format } from './es-cqrs/format'
 import { JsonInputSchema } from './json.schema'
 
 export function json(options: JsonInputSchema): Rule {
-  // TODO(adam.koleszar): skipFormat handling
   const jsonObject = readJsonSync(options.jsonPath)
+  const rules: Rule[] = []
   if (Array.isArray(jsonObject)) {
-    return chain([...jsonObject.map(obj => schematic(options.rule, obj)), format()])
+    rules.push(...jsonObject.map(obj => schematic(options.rule, obj)))
+  } else {
+    rules.push(schematic(options.rule, jsonObject))
+  }
+  if (!options.skipFormat) {
+    rules.push(format())
   }
 
-  return chain([schematic(options.rule, jsonObject), format()])
+  return chain(rules)
 }
