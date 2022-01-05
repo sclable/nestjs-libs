@@ -13,9 +13,6 @@
     "moduleName": {
       "type": "string"
     },
-    "moduleToken": {
-      "type": "string"
-    },
     "parameters": {
       "type": "array",
       "items": {

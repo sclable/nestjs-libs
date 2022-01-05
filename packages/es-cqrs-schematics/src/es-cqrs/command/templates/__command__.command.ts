@@ -1,6 +1,6 @@
-import { Command } from '@sclable/es-cqrs'
+import { Command } from '@sclable/nestjs-es-cqrs'
 <% for (let imp of imports) { %>
-import { <% for (let i of imp.imports) { %><%= i %>, <% } %>} from '<%= imp.path %>'<% } %>
+import { <% imp.imports.join(', ') %> } from '<%= imp.path %>'<% } %>
 
 export class <%= commandClass %> implements Command {
   constructor(

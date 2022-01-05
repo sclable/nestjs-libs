@@ -57,7 +57,7 @@ function generate(options: CommandHandlerSchema): Source {
       ...strings,
       ...options,
     }),
-    move(join('src' as Path, options.moduleName, 'command-handlers')),
+    move(join('src' as Path, strings.dasherize(options.moduleName), 'command-handlers')),
   ])
 }
 

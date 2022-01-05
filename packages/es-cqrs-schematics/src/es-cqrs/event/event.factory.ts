@@ -41,8 +41,6 @@ function transform(options: EsCqrsSchema): EventSchema {
     }
   })
   const imports: Import[] = []
-  const defaultToken = `${strings.underscore(options.moduleName)}_module_name`.toUpperCase()
-  importMap.set('../constants', new Set([defaultToken]))
   importMap.forEach((namedImports, path) => imports.push({ path, imports: [...namedImports] }))
 
   return {
@@ -52,7 +50,6 @@ function transform(options: EsCqrsSchema): EventSchema {
     )}`,
     imports,
     moduleName: options.moduleName || '',
-    moduleToken: defaultToken,
     parameters,
   }
 }
@@ -63,7 +60,7 @@ function generate(options: EventSchema): Source {
       ...strings,
       ...options,
     }),
-    move(join('src' as Path, options.moduleName, 'events')),
+    move(join('src' as Path, strings.dasherize(options.moduleName), 'events')),
   ])
 }
 

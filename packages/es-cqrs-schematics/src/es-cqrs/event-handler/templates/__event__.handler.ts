@@ -1,4 +1,4 @@
-import { EventHandler, IEventHandler } from '@sclable/es-cqrs'
+import { EventHandler, IEventHandler } from '@sclable/nestjs-es-cqrs'
 import { <%= eventClass %> } from '../events'
 
 @EventHandler(<%= eventClass %>)

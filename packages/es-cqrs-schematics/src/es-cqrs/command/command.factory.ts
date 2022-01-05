@@ -16,10 +16,7 @@ import { EsCqrsSchema, Import } from '../schema'
 import { CommandSchema } from './command.schema'
 
 export function main(options: EsCqrsSchema): Rule {
-  return chain([
-    standalone(transform(options)),
-    // format(),
-  ])
+  return chain([standalone(transform(options))])
 }
 
 export function standalone(options: CommandSchema): Rule {
@@ -56,7 +53,7 @@ function generate(options: CommandSchema): Source {
       ...strings,
       ...options,
     }),
-    move(join('src' as Path, options.moduleName, 'commands')),
+    move(join('src' as Path, strings.dasherize(options.moduleName), 'commands')),
   ])
 }
 
