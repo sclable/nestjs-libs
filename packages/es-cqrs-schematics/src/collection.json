@@ -56,7 +56,7 @@
       "factory": "./es-cqrs/aggregate/aggregate.factory#main",
       "schema": "./es-cqrs/schema.json"
     },
-    "aggregate-standalone": {
+    "aggregate.standalone": {
       "description": "ES/CQRS aggregate",
       "factory": "./es-cqrs/aggregate/aggregate.factory#standalone",
       "schema": "./es-cqrs/aggregate/aggregate.schema.json"
@@ -67,7 +67,7 @@
       "schema": "./es-cqrs/client-service/client-service.schema.json"
     },
     "nest6-migration": {
-      "description": "migrate from nest5 to nest6",
+      "description": "migrate from @nestjs/cqrs@5 to @nestjs/cqrs@6",
       "factory": "./es-cqrs/nest6-migration/nest6-migration.factory#main",
       "schema": "./es-cqrs/nest6-migration/nest6-migration.schema.json"
     }

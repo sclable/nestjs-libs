@@ -1,0 +1,14 @@
+import { Aggregate, EventSourcableAggregate } from '@sclable/nestjs-es-cqrs'
+
+import { schematicTestEvents, TestDataAdded } from './events'
+
+@EventSourcableAggregate(...schematicTestEvents)
+export class SchematicTest extends Aggregate {
+  public addTestData(): void {
+    this.applyEvent(TestDataAdded, {})
+  }
+
+  public onTestDataAdded(_event: TestDataAdded): void {
+    /* no-op */
+  }
+}

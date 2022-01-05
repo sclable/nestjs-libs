@@ -39,8 +39,8 @@
     "@sclable/nestjs-storage": "file:packages/storage"
   },
   "devDependencies": {
-    "@angular-devkit/core": "12.2.13",
-    "@angular-devkit/schematics": "12.2.13",
+    "@angular-devkit/core": "13.1.2",
+    "@angular-devkit/schematics": "13.1.2",
     "@azure/abort-controller": "1.0.4",
     "@azure/service-bus": "7.4.0",
     "@azure/storage-blob": "12.8.0",
@@ -55,6 +55,7 @@
     "@nestjs/testing": "8.2.3",
     "@sclable/lint": "1.7.0",
     "@sclable/tsconfig": "0.11.18",
+    "@types/eslint": "8.2.1",
     "@types/fs-extra": "9.0.13",
     "@types/jest": "27.0.3",
     "@types/minio": "7.0.11",
@@ -67,6 +68,7 @@
     "amqp-ts": "1.8.0",
     "apollo-server-core": "3.6.1",
     "apollo-server-express": "3.6.1",
+    "enhanced-resolve": "5.8.3",
     "glob": "7.2.0",
     "glob-promise": "4.2.2",
     "husky": "7.0.4",
@@ -78,6 +80,7 @@
     "minio": "7.0.25",
     "rimraf": "3.0.2",
     "rxjs": "7.4.0",
+    "rxjs6": "npm:rxjs@6.6.7",
     "shelljs": "0.8.4",
     "supertest": "6.1.6",
     "ts-jest": "27.0.7",
@@ -96,6 +99,7 @@
     "*.md": "markdownlint --ignore-path .gitignore --ignore '**/CHANGELOG.md' --config .markdownlintrc"
   },
   "jest": {
+    "resolver": "<rootDir>/jest-resolver.js",
     "preset": "ts-jest/presets/js-with-ts",
     "transformIgnorePatterns": [
       "node_modules/(?!(p-limit|yocto-))"
