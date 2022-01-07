@@ -143,5 +143,5 @@ describe('Event Schematic', () => {
     expect(formattedTree.readContent(generatedFile1)).toBe(generatedText1WithParams)
     expect(formattedTree.readContent(generatedFile2)).toBe(generatedText2WithParams)
     expect(tree.readContent(generatedIndexFile)).toBe(generatedIndexFormattedText)
-  }, 10000)
+  }, 15000)
 })
