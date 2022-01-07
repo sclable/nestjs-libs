@@ -12,9 +12,9 @@ import {
   url,
 } from '@angular-devkit/schematics'
 import { Project, Scope } from 'ts-morph'
-import { SemicolonPreference } from 'typescript'
 
 import { pastParticiple } from '../../past-participle'
+import { formatCodeSettings } from '../format'
 import { EsCqrsSchema, Import, Parameter } from '../schema'
 import { AggregateSchema } from './aggregate.schema'
 
@@ -152,10 +152,7 @@ function updateAggregate(options: AggregateSchema): Rule {
         }
       })
     }
-    aggregate.formatText({
-      indentSize: 2,
-      semicolons: SemicolonPreference.Remove,
-    })
+    aggregate.formatText(formatCodeSettings)
 
     if (!tree.exists(aggregatePath)) {
       tree.create(aggregatePath, aggregate.getFullText())

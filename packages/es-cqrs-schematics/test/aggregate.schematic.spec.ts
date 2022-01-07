@@ -1,4 +1,3 @@
-import { readFileSync } from 'fs'
 import { join as pathJoin } from 'path'
 
 import { Tree } from '@angular-devkit/schematics'
@@ -8,6 +7,88 @@ import { AggregateSchema } from '../src/es-cqrs/aggregate/aggregate.schema'
 import { format } from '../src/es-cqrs/format'
 import { EsCqrsSchema } from '../src/es-cqrs/schema'
 import { SchematicTestRunner } from './schematic-test-runner'
+
+const generatedText = `import { Aggregate, EventSourcableAggregate } from '@sclable/nestjs-es-cqrs'
+
+import { schematicTestEvents, TestDataAdded } from './events'
+
+@EventSourcableAggregate(...schematicTestEvents)
+export class SchematicTest extends Aggregate {
+  public addTestData(): void {
+    this.applyEvent(TestDataAdded, {})
+  }
+
+  public onTestDataAdded(_event: TestDataAdded): void {
+    /* no-op */
+  }
+}
+`
+const generatedTextWithParams = `import { Aggregate, EventSourcableAggregate } from '@sclable/nestjs-es-cqrs'
+
+import { Parameter } from './parameter'
+import { schematicTestEvents, TestDataAdded } from './events'
+
+@EventSourcableAggregate(...schematicTestEvents)
+export class SchematicTest extends Aggregate {
+  public addTestData(param1: string, param2: number, param3: Parameter): void {
+    this.applyEvent(TestDataAdded, { param1, param2, param3 })
+  }
+
+  public onTestDataAdded(_event: TestDataAdded): void {
+    /* no-op */
+  }
+}
+`
+const generatedTextUpdated = `import { Aggregate, EventSourcableAggregate } from '@sclable/nestjs-es-cqrs'
+
+import { Parameter } from './parameter'
+import { schematicTestEvents, TestDataAdded, TestDataRemoved } from './events'
+import { UpdateParameter } from "../update-parameter"
+
+@EventSourcableAggregate(...schematicTestEvents)
+export class SchematicTest extends Aggregate {
+  public addTestData(param1: string, param2: number, param3: Parameter): void {
+    this.applyEvent(TestDataAdded, { param1, param2, param3 })
+  }
+
+  public onTestDataAdded(_event: TestDataAdded): void {
+    /* no-op */
+  }
+
+  public removeTestData(param1: string, param2: number, param3: UpdateParameter): void {
+    this.applyEvent(TestDataRemoved, { param1, param2, param3 })
+  }
+
+  public onTestDataRemoved(_event: TestDataRemoved): void {
+    /* no-op */
+  }
+}
+`
+const generatedTextFormatted = `import { Aggregate, EventSourcableAggregate } from '@sclable/nestjs-es-cqrs'
+
+import { UpdateParameter } from '../update-parameter'
+import { TestDataAdded, TestDataRemoved, schematicTestEvents } from './events'
+import { Parameter } from './parameter'
+
+@EventSourcableAggregate(...schematicTestEvents)
+export class SchematicTest extends Aggregate {
+  public addTestData(param1: string, param2: number, param3: Parameter): void {
+    this.applyEvent(TestDataAdded, { param1, param2, param3 })
+  }
+
+  public onTestDataAdded(_event: TestDataAdded): void {
+    /* no-op */
+  }
+
+  public removeTestData(param1: string, param2: number, param3: UpdateParameter): void {
+    this.applyEvent(TestDataRemoved, { param1, param2, param3 })
+  }
+
+  public onTestDataRemoved(_event: TestDataRemoved): void {
+    /* no-op */
+  }
+}
+`
 
 describe('Aggregate Schematic', () => {
   const aggregateData: AggregateSchema = {
@@ -31,18 +112,6 @@ describe('Aggregate Schematic', () => {
     subject: 'testData',
   }
   const generatedFile = '/src/schematic-test/schematic-test.aggregate.ts'
-  const generatedText = readFileSync(
-    pathJoin(__dirname, 'schematic-test.aggregate.ts.result'),
-  ).toString()
-  const generatedTextWithParams = readFileSync(
-    pathJoin(__dirname, 'schematic-test.aggregate.ts.param.result'),
-  ).toString()
-  const generatedTextUpdated = readFileSync(
-    pathJoin(__dirname, 'schematic-test.aggregate.ts.update.result'),
-  ).toString()
-  const generatedTextFormatted = readFileSync(
-    pathJoin(__dirname, 'schematic-test.aggregate.ts.format.result'),
-  ).toString()
   let runner: SchematicTestRunner
 
   beforeAll(() => {

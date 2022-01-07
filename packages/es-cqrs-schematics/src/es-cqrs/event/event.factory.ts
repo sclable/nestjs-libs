@@ -13,15 +13,12 @@ import {
 import { Project, VariableDeclarationKind } from 'ts-morph'
 
 import { pastParticiple } from '../../past-participle'
-import { appendToArray } from '../format'
+import { appendToArray, formatCodeSettings } from '../format'
 import { EsCqrsSchema, Import } from '../schema'
 import { EventSchema } from './event.schema'
 
 export function main(options: EsCqrsSchema): Rule {
-  return chain([
-    standalone(transform(options)),
-    // format(),
-  ])
+  return chain([standalone(transform(options))])
 }
 
 export function standalone(options: EventSchema): Rule {
@@ -55,10 +52,13 @@ function transform(options: EsCqrsSchema): EventSchema {
 }
 
 function generate(options: EventSchema): Source {
+  const needEventDataType = options.parameters &&
+    (options.parameters.length > 1 || options.parameters.length > 0 && options.parameters.filter(p => !!p.importPath).length === 0)
   return apply(url('./templates'), [
     template({
       ...strings,
       ...options,
+      needEventDataType,
     }),
     move(join('src' as Path, strings.dasherize(options.moduleName), 'events')),
   ])
@@ -66,7 +66,12 @@ function generate(options: EventSchema): Source {
 
 function updateIndex(options: EventSchema): Rule {
   return (tree: Tree) => {
-    const indexPath = join('src' as Path, options.moduleName, 'events', 'index.ts')
+    const indexPath = join(
+      'src' as Path,
+      strings.dasherize(options.moduleName),
+      'events',
+      'index.ts',
+    )
     const indexSrc = tree.read(indexPath)
     const project = new Project({ tsConfigFilePath: 'tsconfig.json' })
     const eventsIndex = project.createSourceFile(
@@ -114,7 +119,7 @@ function updateIndex(options: EventSchema): Rule {
         namedExport.addNamedExport(options.eventClass)
       }
     }
-
+    eventsIndex.formatText(formatCodeSettings)
     if (!tree.exists(indexPath)) {
       tree.create(indexPath, eventsIndex.getFullText())
     } else {

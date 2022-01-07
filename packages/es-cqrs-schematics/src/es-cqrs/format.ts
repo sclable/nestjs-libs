@@ -1,6 +1,12 @@
 import { Rule, Tree, chain } from '@angular-devkit/schematics'
 import { ESLint } from 'eslint'
 import { Options, format as prettierFormat, resolveConfig } from 'prettier'
+import { FormatCodeSettings, SemicolonPreference } from 'typescript'
+
+export const formatCodeSettings: FormatCodeSettings = {
+  indentSize: 2,
+  semicolons: SemicolonPreference.Remove,
+}
 
 const defaultPrettierOptions: Options = {
   arrowParens: 'avoid',

@@ -13,7 +13,7 @@ import {
 import { Project, VariableDeclarationKind } from 'ts-morph'
 
 import { pastParticiple } from '../../past-participle'
-import { appendToArray } from '../format'
+import { appendToArray, formatCodeSettings } from '../format'
 import { EsCqrsSchema, Import } from '../schema'
 import { EventHandlerSchema } from './event-handler.schema'
 
@@ -66,7 +66,12 @@ function generate(options: EventHandlerSchema): Source {
 
 function updateIndex(options: EventHandlerSchema): Rule {
   return (tree: Tree) => {
-    const indexPath = join('src' as Path, options.moduleName, 'event-handlers', 'index.ts')
+    const indexPath = join(
+      'src' as Path,
+      strings.dasherize(options.moduleName),
+      'event-handlers',
+      'index.ts',
+    )
     const indexSrc = tree.read(indexPath)
     const project = new Project({ tsConfigFilePath: 'tsconfig.json' })
     const eventHandlersIndex = project.createSourceFile(
@@ -98,7 +103,7 @@ function updateIndex(options: EventHandlerSchema): Rule {
           .setInitializer(appendToArray(array.getText(), eventHandlerClass))
       }
     }
-
+    eventHandlersIndex.formatText(formatCodeSettings)
     if (!tree.exists(indexPath)) {
       tree.create(indexPath, eventHandlersIndex.getFullText())
     } else {

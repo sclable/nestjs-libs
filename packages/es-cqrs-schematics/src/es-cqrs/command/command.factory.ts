@@ -12,6 +12,7 @@ import {
 } from '@angular-devkit/schematics'
 import { Project } from 'ts-morph'
 
+import { formatCodeSettings } from '../format'
 import { EsCqrsSchema, Import } from '../schema'
 import { CommandSchema } from './command.schema'
 
@@ -59,7 +60,12 @@ function generate(options: CommandSchema): Source {
 
 function updateIndex(options: CommandSchema): Rule {
   return (tree: Tree) => {
-    const indexPath = join('src' as Path, options.moduleName, 'commands', 'index.ts')
+    const indexPath = join(
+      'src' as Path,
+      strings.dasherize(options.moduleName),
+      'commands',
+      'index.ts',
+    )
     const indexSrc = tree.read(indexPath)
     const project = new Project({ tsConfigFilePath: 'tsconfig.json' })
     const commandsIndex = project.createSourceFile(
@@ -75,6 +81,7 @@ function updateIndex(options: CommandSchema): Rule {
         namedExports: [`${options.commandClass}`],
       })
     }
+    commandsIndex.formatText(formatCodeSettings)
     if (!tree.exists(indexPath)) {
       tree.create(indexPath, commandsIndex.getFullText())
     } else {

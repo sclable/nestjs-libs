@@ -1,14 +1,11 @@
-<% const aggregateClass = classify(moduleName)
-   const aggregate = camelize(moduleName) %>
-import { CommandHandler, InjectRepository, ICommandHandler, Repository } from '@sclable/nestjs-es-cqrs'
+import { CommandHandler, ICommandHandler, InjectRepository, Repository } from '@sclable/nestjs-es-cqrs'
+
 import { <%= commandClass %> } from '../commands'
 import { <%= aggregateClass %> } from '../<%= dasherize(moduleName) %>.aggregate'
 
 @CommandHandler(<%= commandClass %>)
 export class <%= commandClass %>Handler implements ICommandHandler<<%= commandClass %>> {
-  constructor(
-    @InjectRepository(<%= aggregateClass %>) private readonly <%= camelize(moduleName) %>Repository: Repository<<%= aggregateClass %>>,
-  ) {}
+  constructor(@InjectRepository(<%= aggregateClass %>) private readonly <%= camelize(moduleName) %>Repository: Repository<<%= aggregateClass %>>) {}
 
   public async execute(cmd: <%= commandClass %>): Promise<void> {
     const <%= aggregate %> = await this.<%= aggregate %>Repository.find(cmd.id, cmd.userId)

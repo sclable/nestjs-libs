@@ -12,7 +12,7 @@ import {
 } from '@angular-devkit/schematics'
 import { Project, VariableDeclarationKind } from 'ts-morph'
 
-import { appendToArray } from '../format'
+import { appendToArray, formatCodeSettings } from '../format'
 import { EsCqrsSchema, Import } from '../schema'
 import { CommandHandlerSchema } from './command-handler.schema'
 
@@ -52,10 +52,14 @@ function transform(options: EsCqrsSchema): CommandHandlerSchema {
 }
 
 function generate(options: CommandHandlerSchema): Source {
+  const aggregate = strings.camelize(options.moduleName)
+  const aggregateClass = strings.classify(options.moduleName)
   return apply(url('./templates'), [
     template({
       ...strings,
       ...options,
+      aggregate,
+      aggregateClass,
     }),
     move(join('src' as Path, strings.dasherize(options.moduleName), 'command-handlers')),
   ])
@@ -63,7 +67,12 @@ function generate(options: CommandHandlerSchema): Source {
 
 function updateIndex(options: CommandHandlerSchema): Rule {
   return (tree: Tree) => {
-    const indexPath = join('src' as Path, options.moduleName, 'command-handlers', 'index.ts')
+    const indexPath = join(
+      'src' as Path,
+      strings.dasherize(options.moduleName),
+      'command-handlers',
+      'index.ts',
+    )
     const indexSrc = tree.read(indexPath)
     const project = new Project({ tsConfigFilePath: 'tsconfig.json' })
     const commandHandlersIndex = project.createSourceFile(
@@ -95,7 +104,7 @@ function updateIndex(options: CommandHandlerSchema): Rule {
           .setInitializer(appendToArray(array.getText(), commandHandlerClass))
       }
     }
-
+    commandHandlersIndex.formatText(formatCodeSettings)
     if (!tree.exists(indexPath)) {
       tree.create(indexPath, commandHandlersIndex.getFullText())
     } else {
