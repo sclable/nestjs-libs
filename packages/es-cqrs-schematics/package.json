@@ -1,6 +1,6 @@
 {
   "name": "@sclable/nestjs-es-cqrs-schematics",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Schematics for the ES/CQRS package",
   "scripts": {
     "precompile": "node bin/schema2ts.js",

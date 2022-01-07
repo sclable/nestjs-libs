@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.5](https://github.com/sclable/nestjs-libs/compare/@sclable/nestjs-es-cqrs-schematics@1.0.4...@sclable/nestjs-es-cqrs-schematics@1.0.5) (2022-01-07)
+
+
+### Bug Fixes
+
+* **es-cqrs:** fix import paths, add more tests, better initial format ([fc58e68](https://github.com/sclable/nestjs-libs/commit/fc58e68542eb392e90e7a0512cc90137e285ea16))
+* **test:** adjust test timings ([68871ac](https://github.com/sclable/nestjs-libs/commit/68871ac1a004520195d0c9923888febdee7c751a))
+
+
+
+
+
 ## [1.0.4](https://github.com/sclable/nestjs-libs/compare/@sclable/nestjs-es-cqrs-schematics@1.0.3...@sclable/nestjs-es-cqrs-schematics@1.0.4) (2022-01-05)
 
 
