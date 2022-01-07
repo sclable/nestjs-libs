@@ -96,7 +96,9 @@ describe('Command Schematic', () => {
   })
 
   test('main', async () => {
-    const tree = await runner.runSchematicAsync('command-handler', mainData, Tree.empty()).toPromise()
+    const tree = await runner
+      .runSchematicAsync('command-handler', mainData, Tree.empty())
+      .toPromise()
     expect(tree.files).toHaveLength(2)
     expect(tree.files).toEqual([generatedFile1, generatedIndexFile])
     expect(tree.readContent(generatedFile1)).toBe(generatedText1)

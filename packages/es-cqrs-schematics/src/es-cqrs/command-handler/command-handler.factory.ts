@@ -54,6 +54,7 @@ function transform(options: EsCqrsSchema): CommandHandlerSchema {
 function generate(options: CommandHandlerSchema): Source {
   const aggregate = strings.camelize(options.moduleName)
   const aggregateClass = strings.classify(options.moduleName)
+
   return apply(url('./templates'), [
     template({
       ...strings,

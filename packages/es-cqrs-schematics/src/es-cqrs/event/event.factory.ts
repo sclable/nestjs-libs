@@ -52,8 +52,12 @@ function transform(options: EsCqrsSchema): EventSchema {
 }
 
 function generate(options: EventSchema): Source {
-  const needEventDataType = options.parameters &&
-    (options.parameters.length > 1 || options.parameters.length > 0 && options.parameters.filter(p => !!p.importPath).length === 0)
+  const needEventDataType =
+    options.parameters &&
+    (options.parameters.length > 1 ||
+      (options.parameters.length > 0 &&
+        options.parameters.filter(param => !!param.importPath).length === 0))
+
   return apply(url('./templates'), [
     template({
       ...strings,
