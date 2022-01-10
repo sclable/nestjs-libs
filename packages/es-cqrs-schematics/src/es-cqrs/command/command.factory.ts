@@ -13,7 +13,8 @@ import {
 import { Project } from 'ts-morph'
 
 import { formatCodeSettings } from '../format'
-import { EsCqrsSchema, Import } from '../schema'
+import { EsCqrsSchema } from '../schema'
+import { getImports } from '../utils'
 import { CommandSchema } from './command.schema'
 
 export function main(options: EsCqrsSchema): Rule {
@@ -25,26 +26,12 @@ export function standalone(options: CommandSchema): Rule {
 }
 
 function transform(options: EsCqrsSchema): CommandSchema {
-  const importMap: Map<string, Set<string>> = new Map()
-  const parameters = options.parameters || []
-  parameters.forEach(param => {
-    if (param.importPath) {
-      if (!importMap.has(param.importPath)) {
-        importMap.set(param.importPath, new Set())
-      }
-      const importPathSet = importMap.get(param.importPath)
-      importPathSet && importPathSet.add(param.type)
-    }
-  })
-  const imports: Import[] = []
-  importMap.forEach((namedImports, path) => imports.push({ path, imports: [...namedImports] }))
-
   return {
     command: `${strings.dasherize(options.verb)}-${strings.dasherize(options.subject)}`,
     commandClass: `${strings.classify(options.verb)}${strings.classify(options.subject)}`,
-    imports,
+    imports: getImports(options.parameters ?? []),
     moduleName: options.moduleName || '',
-    parameters,
+    parameters: options.parameters,
   }
 }
 

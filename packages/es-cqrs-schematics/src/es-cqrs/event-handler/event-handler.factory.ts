@@ -14,7 +14,7 @@ import { Project, VariableDeclarationKind } from 'ts-morph'
 
 import { pastParticiple } from '../../past-participle'
 import { appendToArray, formatCodeSettings } from '../format'
-import { EsCqrsSchema, Import } from '../schema'
+import { EsCqrsSchema } from '../schema'
 import { EventHandlerSchema } from './event-handler.schema'
 
 export function main(options: EsCqrsSchema): Rule {
@@ -29,28 +29,12 @@ export function standalone(options: EventHandlerSchema): Rule {
 }
 
 function transform(options: EsCqrsSchema): EventHandlerSchema {
-  const importMap: Map<string, Set<string>> = new Map()
-  const parameters = options.parameters || []
-  parameters.forEach(param => {
-    if (param.importPath) {
-      if (!importMap.has(param.importPath)) {
-        importMap.set(param.importPath, new Set())
-      }
-      const importPathSet = importMap.get(param.importPath)
-      importPathSet && importPathSet.add(param.type)
-    }
-  })
-  const imports: Import[] = []
-  importMap.forEach((namedImports, path) => imports.push({ path, imports: [...namedImports] }))
-
   return {
     event: `${strings.dasherize(options.subject)}-${pastParticiple(options.verb)}`,
     eventClass: `${strings.classify(options.subject)}${strings.classify(
       pastParticiple(options.verb),
     )}`,
-    imports,
     moduleName: options.moduleName || '',
-    parameters,
   }
 }
 

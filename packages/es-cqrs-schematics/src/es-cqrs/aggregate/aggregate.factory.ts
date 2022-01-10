@@ -15,7 +15,8 @@ import { Project, Scope } from 'ts-morph'
 
 import { pastParticiple } from '../../past-participle'
 import { formatCodeSettings } from '../format'
-import { EsCqrsSchema, Import, Parameter } from '../schema'
+import { EsCqrsSchema, Parameter } from '../schema'
+import { getImports } from '../utils'
 import { AggregateSchema } from './aggregate.schema'
 
 export function main(options: EsCqrsSchema): Rule {
@@ -41,18 +42,6 @@ function transform(options: EsCqrsSchema): AggregateSchema {
   const parameters = options.parameters || []
   const needEventDataType =
     parameters.length > 1 || parameters.filter(param => !!param.importPath).length === 0
-  const importMap: Map<string, Set<string>> = new Map()
-  parameters.forEach(param => {
-    if (param.importPath) {
-      if (!importMap.has(param.importPath)) {
-        importMap.set(param.importPath, new Set())
-      }
-      const importPathSet = importMap.get(param.importPath)
-      importPathSet && importPathSet.add(param.type)
-    }
-  })
-  const imports: Import[] = []
-  importMap.forEach((namedImports, path) => imports.push({ path, imports: [...namedImports] }))
 
   return {
     aggregate: options.moduleName,
@@ -69,7 +58,7 @@ function transform(options: EsCqrsSchema): AggregateSchema {
       parameters,
     },
     fileName: strings.dasherize(options.moduleName),
-    imports,
+    imports: getImports(options.parameters ?? []),
   }
 }
 

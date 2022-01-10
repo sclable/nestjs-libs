@@ -1,5 +1,5 @@
 {
-  "theme": "./node_modules/typedoc-github-wiki-theme/dist",
+  "theme": "github-wiki",
   "out": "docs",
   "tsconfig": "./tsconfig.json",
   "entryPoints": [

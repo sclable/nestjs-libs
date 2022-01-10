@@ -115,7 +115,7 @@ function updateModules(): Rule {
         }
       })
       const escqrsImport = moduleFile.getImportDeclarationOrThrow(
-        im => im.getModuleSpecifierValue() === '@sclable/es-cqrs',
+        im => im.getModuleSpecifierValue() === '@sclable/nestjs-es-cqrs',
       )
       escqrsImport.getNamedImports().forEach(im => {
         if (paramsToRemove.includes(im.getName())) {

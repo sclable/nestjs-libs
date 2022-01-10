@@ -13,7 +13,7 @@ import {
 import { Project, VariableDeclarationKind } from 'ts-morph'
 
 import { appendToArray, formatCodeSettings } from '../format'
-import { EsCqrsSchema, Import } from '../schema'
+import { EsCqrsSchema } from '../schema'
 import { CommandHandlerSchema } from './command-handler.schema'
 
 export function main(options: EsCqrsSchema): Rule {
@@ -28,26 +28,11 @@ export function standalone(options: CommandHandlerSchema): Rule {
 }
 
 function transform(options: EsCqrsSchema): CommandHandlerSchema {
-  const importMap: Map<string, Set<string>> = new Map()
-  const parameters = options.parameters || []
-  parameters.forEach(param => {
-    if (param.importPath) {
-      if (!importMap.has(param.importPath)) {
-        importMap.set(param.importPath, new Set())
-      }
-      const importPathSet = importMap.get(param.importPath)
-      importPathSet && importPathSet.add(param.type)
-    }
-  })
-  const imports: Import[] = []
-  importMap.forEach((namedImports, path) => imports.push({ path, imports: [...namedImports] }))
-
   return {
     command: `${strings.dasherize(options.verb)}-${strings.dasherize(options.subject)}`,
     commandClass: `${strings.classify(options.verb)}${strings.classify(options.subject)}`,
-    imports,
     moduleName: options.moduleName || '',
-    parameters,
+    parameters: options.parameters || [],
   }
 }
 
