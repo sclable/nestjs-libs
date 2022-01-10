@@ -9,6 +9,10 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+    ignore:
+      - dependency-name: "@types/node"
+      # ignore non-LTS versions
+        versions: ["17.x"]
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
