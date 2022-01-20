@@ -9,5 +9,11 @@ export function all(options: EsCqrsSchema): Rule {
     schematic('event', options),
     schematic('event-handler', options),
     schematic('aggregate', options),
+    schematic('module', options),
+    schematic('service', options),
   ])
+}
+
+export function allWithRestController(options: EsCqrsSchema): Rule {
+  return chain([all(options), schematic('controller', options)])
 }

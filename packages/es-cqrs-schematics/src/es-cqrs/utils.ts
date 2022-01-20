@@ -6,6 +6,12 @@ export interface KeyValuesDefinition {
   [path: string]: string[]
 }
 
+const CREATION_VERBS = ['add', 'insert', 'create']
+
+export function isCreating(verb: string): boolean {
+  return CREATION_VERBS.includes(verb.toLowerCase())
+}
+
 export function updateImports(sourceFile: SourceFile, definition: KeyValuesDefinition): void {
   const importDeclarations = sourceFile.getImportDeclarations()
   Object.keys(definition).forEach(importPath => {
