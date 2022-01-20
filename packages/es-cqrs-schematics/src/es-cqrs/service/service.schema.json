@@ -1,0 +1,27 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "$id": "service",
+  "title": "ServiceSchema",
+  "type": "object",
+  "properties": {
+    "service": {
+      "type": "string"
+    },
+    "command": {
+      "type": "string"
+    },
+    "parameters": {
+      "type": "array",
+      "items": {
+        "$ref": "src/es-cqrs/schema.json#/definitions/parameter"
+      }
+    },
+    "imports": {
+      "type": "array",
+      "items": {
+        "$ref": "src/es-cqrs/schema.json#/definitions/import"
+      }
+    }
+  },
+  "required": ["command", "service"]
+}
