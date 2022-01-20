@@ -13,9 +13,9 @@ import {
 import { Project, VariableDeclarationKind } from 'ts-morph'
 
 import { pastParticiple } from '../../past-participle'
-import { appendToArray, formatCodeSettings } from '../format'
+import { formatCodeSettings } from '../format'
 import { EsCqrsSchema } from '../schema'
-import { getImports } from '../utils'
+import { appendToArrayString, getImports } from '../utils'
 import { EventSchema } from './event.schema'
 
 export function main(options: EsCqrsSchema): Rule {
@@ -92,7 +92,7 @@ function updateIndex(options: EventSchema): Rule {
       if (array) {
         exportAsArray
           .getDeclarations()[0]
-          .setInitializer(appendToArray(array.getText(), options.eventClass))
+          .setInitializer(appendToArrayString(array.getText(), options.eventClass))
       }
     }
     const namedExport = eventsIndex.getExportDeclaration(decl => !decl.hasModuleSpecifier())

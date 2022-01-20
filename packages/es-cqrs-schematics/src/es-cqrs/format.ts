@@ -62,17 +62,3 @@ export function eslint(): Rule {
 export function format(): Rule {
   return chain([prettier, eslint])
 }
-
-export function appendToArray(array: string, item: string): string {
-  const list = array
-    .replace('[', '')
-    .replace(']', '')
-    .split(',')
-    .map(str => str.trim())
-    .filter(str => str.length > 0)
-  if (!list.includes(item)) {
-    list.push(item)
-  }
-
-  return `[\n${list.join(',\n')}\n]`
-}
