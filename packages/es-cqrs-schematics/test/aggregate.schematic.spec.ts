@@ -184,5 +184,5 @@ describe('Aggregate Schematic', () => {
       await runner.callRule(format(), updatedTree).toPromise(),
     )
     expect(formattedTree.readContent(generatedFile)).toBe(generatedTextFormatted)
-  }, 15000)
+  }, 45000)
 })

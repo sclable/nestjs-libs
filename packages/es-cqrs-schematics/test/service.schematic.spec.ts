@@ -15,7 +15,7 @@ import { AddTestData } from './commands'
 export class SchematicTestService {
   public constructor(private readonly commandBus: CommandBus) {}
 
-  public async addTestData(id: string, userId: string): void {
+  public async addTestData(id: string, userId: string): Promise<void> {
     return this.commandBus.execute(new AddTestData(id, userId))
   }
 }
@@ -41,7 +41,7 @@ import { AddTestData } from "./commands"
 export class SchematicTestService {
   public constructor(private readonly userService: UserService, private readonly commandBus: CommandBus) { }
 
-  public async addTestData(id: string, userId: string): void {
+  public async addTestData(id: string, userId: string): Promise<void> {
     return this.commandBus.execute(new AddTestData(id, userId))
   }
 }
@@ -58,7 +58,7 @@ import { Parameter } from "./parameter"
 export class SchematicTestService {
   public constructor(private readonly userService: UserService, private readonly commandBus: CommandBus) { }
 
-  public async addTestData(id: string, userId: string, param1: string, param2: number, param3: Parameter): void {
+  public async addTestData(id: string, userId: string, param1: string, param2: number, param3: Parameter): Promise<void> {
     return this.commandBus.execute(new AddTestData(id, userId, param1, param2, param3))
   }
 }

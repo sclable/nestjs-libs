@@ -114,7 +114,7 @@ function updateService(options: ServiceSchema): Rule {
       if (!serviceClass.getMethod(commandMethodName)) {
         serviceClass.addMethod({
           name: commandMethodName,
-          returnType: 'void',
+          returnType: 'Promise<void>',
           isAsync: true,
           scope: Scope.Public,
           parameters: options.parameters ?? [],
