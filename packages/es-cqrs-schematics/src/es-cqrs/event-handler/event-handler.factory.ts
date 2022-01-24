@@ -45,7 +45,7 @@ function generate(options: EventHandlerSchema): Source {
       ...strings,
       ...options,
     }),
-    move(join('src' as Path, strings.dasherize(options.moduleName), 'event-handlers')),
+    move(join('src' as Path, strings.dasherize(options.moduleName))),
   ])
 }
 

@@ -58,7 +58,7 @@ import { TestDataRemovedHandler } from './test-data-removed.handler'
 export const eventHandlers = [TestDataAddedHandler, TestDataRemovedHandler]
 `
 
-describe('Event Schematic', () => {
+describe('Event Handler Schematic', () => {
   const mainData: EsCqrsSchema = {
     moduleName: 'SchematicTest',
     verb: 'add',

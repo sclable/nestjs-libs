@@ -4,7 +4,7 @@
   "title": "ServiceSchema",
   "type": "object",
   "properties": {
-    "service": {
+    "aggregate": {
       "type": "string"
     },
     "command": {
@@ -23,5 +23,5 @@
       }
     }
   },
-  "required": ["command", "service"]
+  "required": ["command", "aggregate"]
 }

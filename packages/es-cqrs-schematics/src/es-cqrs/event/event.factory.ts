@@ -51,7 +51,7 @@ function generate(options: EventSchema): Source {
       ...options,
       needEventDataType,
     }),
-    move(join('src' as Path, strings.dasherize(options.moduleName), 'events')),
+    move(join('src' as Path, strings.dasherize(options.moduleName))),
   ])
 }
 

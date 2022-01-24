@@ -28,8 +28,8 @@ export function standalone(options: ModuleSchema): Rule {
   return (tree: Tree, context: SchematicContext) => {
     const modulePath = pathJoin(
       'src' as Path,
-      strings.dasherize(options.module),
-      `${strings.dasherize(options.module)}.module.ts`,
+      strings.dasherize(options.aggregate),
+      `${strings.dasherize(options.aggregate)}.module.ts`,
     )
     if (tree.exists(modulePath)) {
       return updateModule(options)(tree, context)
@@ -41,7 +41,7 @@ export function standalone(options: ModuleSchema): Rule {
 
 function transform(options: EsCqrsSchema): ModuleSchema {
   return {
-    module: options.moduleName,
+    aggregate: options.moduleName,
   }
 }
 
@@ -51,7 +51,7 @@ function generate(options: ModuleSchema): Source {
       ...strings,
       ...options,
     }),
-    move(pathJoin('src' as Path, strings.dasherize(options.module))),
+    move(pathJoin('src' as Path)),
   ])
 }
 
@@ -59,15 +59,15 @@ function updateModule(options: ModuleSchema): Rule {
   return (tree: Tree) => {
     const modulePath = pathJoin(
       'src' as Path,
-      strings.dasherize(options.module),
-      `${strings.dasherize(options.module)}.module.ts`,
+      strings.dasherize(options.aggregate),
+      `${strings.dasherize(options.aggregate)}.module.ts`,
     )
     const moduleSrc = tree.read(modulePath)
     if (!moduleSrc) {
       return tree
     }
 
-    const aggregateClassName = strings.classify(options.module)
+    const aggregateClassName = strings.classify(options.aggregate)
     const serviceClassName = aggregateClassName + 'Service'
     const moduleClassName = aggregateClassName + 'Module'
 
@@ -76,8 +76,8 @@ function updateModule(options: ModuleSchema): Rule {
 
     const importDefinition: KeyValuesDefinition = {
       ['@sclable/nestjs-es-cqrs']: ['ESCQRSModule'],
-      [`./${strings.dasherize(options.module)}.aggregate`]: [aggregateClassName],
-      [`./${strings.dasherize(options.module)}.service`]: [serviceClassName],
+      [`./${strings.dasherize(options.aggregate)}.aggregate`]: [aggregateClassName],
+      [`./${strings.dasherize(options.aggregate)}.service`]: [serviceClassName],
       ['./command-handlers']: ['commandHandlers'],
       ['./event-handlers']: ['eventHandlers'],
     }

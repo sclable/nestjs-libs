@@ -4,9 +4,9 @@
   "title": "ModuleSchema",
   "type": "object",
   "properties": {
-    "module": {
+    "aggregate": {
       "type": "string"
     }
   },
-  "required": ["module"]
+  "required": ["aggregate"]
 }

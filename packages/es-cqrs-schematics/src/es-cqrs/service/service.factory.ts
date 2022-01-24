@@ -28,8 +28,8 @@ export function standalone(options: ServiceSchema): Rule {
   return (tree: Tree, context: SchematicContext) => {
     const servicePath = pathJoin(
       'src' as Path,
-      strings.dasherize(options.service),
-      `${strings.dasherize(options.service)}.service.ts`,
+      strings.dasherize(options.aggregate),
+      `${strings.dasherize(options.aggregate)}.service.ts`,
     )
     if (tree.exists(servicePath)) {
       return updateService(options)(tree, context)
@@ -49,7 +49,7 @@ function transform(options: EsCqrsSchema): ServiceSchema {
   }
 
   return {
-    service: options.moduleName,
+    aggregate: options.moduleName,
     command: `${strings.classify(options.verb)}${strings.classify(options.subject)}`,
     imports: getImports(parameters),
     parameters,
@@ -62,7 +62,7 @@ function generate(options: ServiceSchema): Source {
       ...strings,
       ...options,
     }),
-    move(pathJoin('src' as Path, strings.dasherize(options.service))),
+    move(pathJoin('src' as Path)),
   ])
 }
 
@@ -70,8 +70,8 @@ function updateService(options: ServiceSchema): Rule {
   return (tree: Tree) => {
     const servicePath = pathJoin(
       'src' as Path,
-      strings.dasherize(options.service),
-      `${strings.dasherize(options.service)}.service.ts`,
+      strings.dasherize(options.aggregate),
+      `${strings.dasherize(options.aggregate)}.service.ts`,
     )
     const serviceSrc = tree.read(servicePath)
     if (!serviceSrc) {
@@ -80,7 +80,7 @@ function updateService(options: ServiceSchema): Rule {
 
     const commandClassName = strings.classify(options.command)
     const commandMethodName = strings.camelize(options.command)
-    const serviceClassName = strings.classify(options.service) + 'Service'
+    const serviceClassName = strings.classify(options.aggregate) + 'Service'
 
     const project = new Project({ tsConfigFilePath: 'tsconfig.json' })
     const serviceSourceFile = project.createSourceFile('service.ts', serviceSrc.toString())

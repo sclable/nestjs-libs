@@ -68,7 +68,7 @@ function generate(options: AggregateSchema): Source {
       ...strings,
       ...options,
     }),
-    move(join('src' as Path, strings.dasherize(options.fileName))),
+    move(join('src' as Path)),
   ])
 }
 

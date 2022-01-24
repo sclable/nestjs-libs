@@ -41,7 +41,7 @@ function generate(options: CommandSchema): Source {
       ...strings,
       ...options,
     }),
-    move(join('src' as Path, strings.dasherize(options.moduleName), 'commands')),
+    move(join('src' as Path, strings.dasherize(options.moduleName))),
   ])
 }
 

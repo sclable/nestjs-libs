@@ -48,7 +48,7 @@ function generate(options: CommandHandlerSchema): Source {
       aggregate,
       aggregateClass,
     }),
-    move(join('src' as Path, strings.dasherize(options.moduleName), 'command-handlers')),
+    move(join('src' as Path, strings.dasherize(options.moduleName))),
   ])
 }
 

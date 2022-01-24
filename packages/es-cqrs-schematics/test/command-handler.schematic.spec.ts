@@ -73,7 +73,7 @@ import { RemoveTestDataHandler } from './remove-test-data.handler'
 export const commandHandlers = [AddTestDataHandler, RemoveTestDataHandler]
 `
 
-describe('Command Schematic', () => {
+describe('Command Handler Schematic', () => {
   const mainData: EsCqrsSchema = {
     moduleName: 'SchematicTest',
     verb: 'add',
