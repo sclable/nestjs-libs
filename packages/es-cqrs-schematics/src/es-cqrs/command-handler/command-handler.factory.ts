@@ -14,7 +14,7 @@ import { Project, VariableDeclarationKind } from 'ts-morph'
 
 import { formatCodeSettings } from '../format'
 import { EsCqrsSchema } from '../schema'
-import { appendToArrayString } from '../utils'
+import { appendToArrayString, isCreating } from '../utils'
 import { CommandHandlerSchema } from './command-handler.schema'
 
 export function main(options: EsCqrsSchema): Rule {
@@ -31,24 +31,19 @@ export function standalone(options: CommandHandlerSchema): Rule {
 function transform(options: EsCqrsSchema): CommandHandlerSchema {
   return {
     command: `${strings.dasherize(options.verb)}-${strings.dasherize(options.subject)}`,
-    commandClass: `${strings.classify(options.verb)}${strings.classify(options.subject)}`,
-    moduleName: options.moduleName || '',
+    aggregate: options.moduleName,
     parameters: options.parameters || [],
+    isCreating: isCreating(options),
   }
 }
 
 function generate(options: CommandHandlerSchema): Source {
-  const aggregate = strings.camelize(options.moduleName)
-  const aggregateClass = strings.classify(options.moduleName)
-
   return apply(url('./templates'), [
     template({
       ...strings,
       ...options,
-      aggregate,
-      aggregateClass,
     }),
-    move(join('src' as Path, strings.dasherize(options.moduleName))),
+    move(join('src' as Path, strings.dasherize(options.aggregate))),
   ])
 }
 
@@ -56,7 +51,7 @@ function updateIndex(options: CommandHandlerSchema): Rule {
   return (tree: Tree) => {
     const indexPath = join(
       'src' as Path,
-      strings.dasherize(options.moduleName),
+      strings.dasherize(options.aggregate),
       'command-handlers',
       'index.ts',
     )
@@ -67,8 +62,8 @@ function updateIndex(options: CommandHandlerSchema): Rule {
       indexSrc ? indexSrc.toString() : '',
     )
 
-    const moduleSpecifier = `./${options.command}.handler`
-    const commandHandlerClass = `${options.commandClass}Handler`
+    const moduleSpecifier = `./${strings.dasherize(options.command)}.handler`
+    const commandHandlerClass = `${strings.classify(options.command)}Handler`
     const namedImport = commandHandlersIndex.getImportDeclaration(moduleSpecifier)
     if (!namedImport) {
       commandHandlersIndex.addImportDeclaration({

@@ -1,15 +1,18 @@
 import { SourceFile } from 'ts-morph'
 
-import { Import, Parameter } from './schema'
+import { EsCqrsSchema, Import, Parameter } from './schema'
 
 export interface KeyValuesDefinition {
   [path: string]: string[]
 }
 
-const CREATION_VERBS = ['add', 'insert', 'create']
+const CREATION_VERBS = ['add', 'new', 'insert', 'create', 'make']
 
-export function isCreating(verb: string): boolean {
-  return CREATION_VERBS.includes(verb.toLowerCase())
+export function isCreating(schema: EsCqrsSchema): boolean {
+  return (
+    schema.moduleName.toLowerCase() === schema.subject.toLowerCase() &&
+    CREATION_VERBS.includes(schema.verb.toLowerCase())
+  )
 }
 
 export function updateImports(sourceFile: SourceFile, definition: KeyValuesDefinition): void {

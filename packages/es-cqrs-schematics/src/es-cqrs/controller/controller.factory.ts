@@ -52,8 +52,8 @@ function transform(options: EsCqrsSchema): ControllerSchema {
     command: `${strings.classify(options.verb)}${strings.classify(options.subject)}`,
     imports: getImports(options.parameters ?? []),
     parameters: options.parameters,
-    httpMethod: isCreating(options.verb) ? 'Post' : 'Put',
-    isCreating: isCreating(options.verb),
+    httpMethod: isCreating(options) ? 'Post' : 'Put',
+    isCreating: isCreating(options),
     needsDto: (options.parameters?.length ?? -1) > 0,
   }
 }

@@ -7,11 +7,11 @@
     "command": {
       "type": "string"
     },
-    "commandClass": {
+    "aggregate": {
       "type": "string"
     },
-    "moduleName": {
-      "type": "string"
+    "isCreating": {
+      "type": "boolean"
     },
     "parameters": {
       "type": "array",
@@ -26,5 +26,5 @@
       }
     }
   },
-  "required": ["command", "commandClass", "moduleName"]
+  "required": ["command", "aggregate", "isCreating"]
 }

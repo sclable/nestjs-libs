@@ -7,7 +7,46 @@ import { format } from '../src/es-cqrs/format'
 import { EsCqrsSchema } from '../src/es-cqrs/schema'
 import { SchematicTestRunner } from './schematic-test-runner'
 
-const generatedText1 = `import { CommandHandler, ICommandHandler, InjectRepository, Repository } from '@sclable/nestjs-es-cqrs'
+const generatedCreateText = `import { CommandHandler, ICommandHandler, InjectRepository, Repository } from '@sclable/nestjs-es-cqrs'
+
+import { CreateSchematicTest } from '../commands'
+import { SchematicTest } from '../schematic-test.aggregate'
+
+@CommandHandler(CreateSchematicTest)
+export class CreateSchematicTestHandler implements ICommandHandler<CreateSchematicTest> {
+  constructor(@InjectRepository(SchematicTest) private readonly schematicTestRepository: Repository<SchematicTest>) {}
+
+  public async execute(cmd: CreateSchematicTest): Promise<string> {
+    const schematicTest = SchematicTest.createSchematicTest()
+    await this.schematicTestRepository.persist(schematicTest)
+    return schematicTest.id
+  }
+}
+`
+
+const generatedCreateIndexText = `import { CreateSchematicTestHandler } from "./create-schematic-test.handler"
+
+export const commandHandlers = [CreateSchematicTestHandler]
+`
+
+const generatedCreateWithParametersText = `import { CommandHandler, ICommandHandler, InjectRepository, Repository } from '@sclable/nestjs-es-cqrs'
+
+import { CreateSchematicTest } from '../commands'
+import { SchematicTest } from '../schematic-test.aggregate'
+
+@CommandHandler(CreateSchematicTest)
+export class CreateSchematicTestHandler implements ICommandHandler<CreateSchematicTest> {
+  constructor(@InjectRepository(SchematicTest) private readonly schematicTestRepository: Repository<SchematicTest>) {}
+
+  public async execute(cmd: CreateSchematicTest): Promise<string> {
+    const schematicTest = SchematicTest.createSchematicTest(cmd.param1, cmd.param2, cmd.param3)
+    await this.schematicTestRepository.persist(schematicTest)
+    return schematicTest.id
+  }
+}
+`
+
+const generatedAddText = `import { CommandHandler, ICommandHandler, InjectRepository, Repository } from '@sclable/nestjs-es-cqrs'
 
 import { AddTestData } from '../commands'
 import { SchematicTest } from '../schematic-test.aggregate'
@@ -23,11 +62,13 @@ export class AddTestDataHandler implements ICommandHandler<AddTestData> {
   }
 }
 `
-const generatedIndexText = `import { AddTestDataHandler } from "./add-test-data.handler"
+
+const generatedAddIndexText = `import { AddTestDataHandler } from "./add-test-data.handler"
 
 export const commandHandlers = [AddTestDataHandler]
 `
-const generatedText1WithParams = `import { CommandHandler, ICommandHandler, InjectRepository, Repository } from '@sclable/nestjs-es-cqrs'
+
+const generatedAddWithParametersText = `import { CommandHandler, ICommandHandler, InjectRepository, Repository } from '@sclable/nestjs-es-cqrs'
 
 import { AddTestData } from '../commands'
 import { SchematicTest } from '../schematic-test.aggregate'
@@ -43,7 +84,7 @@ export class AddTestDataHandler implements ICommandHandler<AddTestData> {
   }
 }
 `
-const generatedText2WithParams = `import { CommandHandler, ICommandHandler, InjectRepository, Repository } from '@sclable/nestjs-es-cqrs'
+const generatedRemoveWithParametersText = `import { CommandHandler, ICommandHandler, InjectRepository, Repository } from '@sclable/nestjs-es-cqrs'
 
 import { RemoveTestData } from '../commands'
 import { SchematicTest } from '../schematic-test.aggregate'
@@ -59,7 +100,7 @@ export class RemoveTestDataHandler implements ICommandHandler<RemoveTestData> {
   }
 }
 `
-const generatedIndexUpdatedText = `import { AddTestDataHandler } from "./add-test-data.handler"
+const generatedRemoveIndexText = `import { AddTestDataHandler } from "./add-test-data.handler"
 import { RemoveTestDataHandler } from "./remove-test-data.handler"
 
 export const commandHandlers = [
@@ -74,20 +115,28 @@ export const commandHandlers = [AddTestDataHandler, RemoveTestDataHandler]
 `
 
 describe('Command Handler Schematic', () => {
-  const mainData: EsCqrsSchema = {
+  const createOperation: EsCqrsSchema = {
+    moduleName: 'SchematicTest',
+    verb: 'create',
+    subject: 'SchematicTest',
+  }
+  const addOperation: EsCqrsSchema = {
     moduleName: 'SchematicTest',
     verb: 'add',
     subject: 'testData',
   }
-  const updateData: EsCqrsSchema = {
+  const removeOperation: EsCqrsSchema = {
     moduleName: 'SchematicTest',
     verb: 'remove',
     subject: 'testData',
   }
 
   const generatedIndexFile = '/src/schematic-test/command-handlers/index.ts'
-  const generatedFile1 = '/src/schematic-test/command-handlers/add-test-data.handler.ts'
-  const generatedFile2 = '/src/schematic-test/command-handlers/remove-test-data.handler.ts'
+  const generatedCreateFile =
+    '/src/schematic-test/command-handlers/create-schematic-test.handler.ts'
+  const generatedAddFile = '/src/schematic-test/command-handlers/add-test-data.handler.ts'
+  const generatedRemoveFile =
+    '/src/schematic-test/command-handlers/remove-test-data.handler.ts'
 
   let runner: SchematicTestRunner
 
@@ -95,19 +144,19 @@ describe('Command Handler Schematic', () => {
     runner = new SchematicTestRunner('.', pathJoin(__dirname, '../src/collection.json'))
   })
 
-  test('main', async () => {
+  test('create operation', async () => {
     const tree = await runner
-      .runSchematicAsync('command-handler', mainData, Tree.empty())
+      .runSchematicAsync('command-handler', createOperation, Tree.empty())
       .toPromise()
     expect(tree.files).toHaveLength(2)
-    expect(tree.files).toEqual([generatedFile1, generatedIndexFile])
-    expect(tree.readContent(generatedFile1)).toBe(generatedText1)
-    expect(tree.readContent(generatedIndexFile)).toBe(generatedIndexText)
+    expect(tree.files).toEqual([generatedCreateFile, generatedIndexFile])
+    expect(tree.readContent(generatedCreateFile)).toBe(generatedCreateText)
+    expect(tree.readContent(generatedIndexFile)).toBe(generatedCreateIndexText)
   })
 
-  test('main with parameters', async () => {
-    const mainDataWithParameters = {
-      ...mainData,
+  test('add operation with parameters', async () => {
+    const createOperationWithParameters = {
+      ...createOperation,
       parameters: [
         { name: 'param1', type: 'string' },
         { name: 'param2', type: 'number' },
@@ -115,25 +164,53 @@ describe('Command Handler Schematic', () => {
       ],
     }
     const tree = await runner
-      .runSchematicAsync('command-handler', mainDataWithParameters, Tree.empty())
+      .runSchematicAsync('command-handler', createOperationWithParameters, Tree.empty())
       .toPromise()
     expect(tree.files).toHaveLength(2)
-    expect(tree.files).toEqual([generatedFile1, generatedIndexFile])
-    expect(tree.readContent(generatedFile1)).toBe(generatedText1WithParams)
-    expect(tree.readContent(generatedIndexFile)).toBe(generatedIndexText)
+    expect(tree.files).toEqual([generatedCreateFile, generatedIndexFile])
+    expect(tree.readContent(generatedCreateFile)).toBe(generatedCreateWithParametersText)
+    expect(tree.readContent(generatedIndexFile)).toBe(generatedCreateIndexText)
   })
 
-  test('main updated and formatted', async () => {
-    const mainDataWithParameters = {
-      ...mainData,
+  test('add operation', async () => {
+    const tree = await runner
+      .runSchematicAsync('command-handler', addOperation, Tree.empty())
+      .toPromise()
+    expect(tree.files).toHaveLength(2)
+    expect(tree.files).toEqual([generatedAddFile, generatedIndexFile])
+    expect(tree.readContent(generatedAddFile)).toBe(generatedAddText)
+    expect(tree.readContent(generatedIndexFile)).toBe(generatedAddIndexText)
+  })
+
+  test('add operation with parameters', async () => {
+    const addOperationWithParameters = {
+      ...addOperation,
       parameters: [
         { name: 'param1', type: 'string' },
         { name: 'param2', type: 'number' },
         { name: 'param3', type: 'Parameter', importPath: './parameter' },
       ],
     }
-    const updateDataWithParameters = {
-      ...updateData,
+    const tree = await runner
+      .runSchematicAsync('command-handler', addOperationWithParameters, Tree.empty())
+      .toPromise()
+    expect(tree.files).toHaveLength(2)
+    expect(tree.files).toEqual([generatedAddFile, generatedIndexFile])
+    expect(tree.readContent(generatedAddFile)).toBe(generatedAddWithParametersText)
+    expect(tree.readContent(generatedIndexFile)).toBe(generatedAddIndexText)
+  })
+
+  test('multiple handlers and formatting', async () => {
+    const addOperationWithParameters = {
+      ...addOperation,
+      parameters: [
+        { name: 'param1', type: 'string' },
+        { name: 'param2', type: 'number' },
+        { name: 'param3', type: 'Parameter', importPath: './parameter' },
+      ],
+    }
+    const removeOperationWithParameters = {
+      ...removeOperation,
       parameters: [
         { name: 'param1', type: 'string' },
         { name: 'param2', type: 'number' },
@@ -141,22 +218,26 @@ describe('Command Handler Schematic', () => {
       ],
     }
     const tree = await runner
-      .runSchematicAsync('command-handler', mainDataWithParameters, Tree.empty())
+      .runSchematicAsync('command-handler', addOperationWithParameters, Tree.empty())
       .toPromise()
     const updatedTree = await runner
-      .runSchematicAsync('command-handler', updateDataWithParameters, tree)
+      .runSchematicAsync('command-handler', removeOperationWithParameters, tree)
       .toPromise()
     expect(updatedTree.files).toHaveLength(3)
-    expect(tree.files).toEqual([generatedFile1, generatedIndexFile, generatedFile2])
-    expect(updatedTree.readContent(generatedFile1)).toBe(generatedText1WithParams)
-    expect(updatedTree.readContent(generatedFile2)).toBe(generatedText2WithParams)
-    expect(tree.readContent(generatedIndexFile)).toBe(generatedIndexUpdatedText)
+    expect(tree.files).toEqual([generatedAddFile, generatedIndexFile, generatedRemoveFile])
+    expect(updatedTree.readContent(generatedAddFile)).toBe(generatedAddWithParametersText)
+    expect(updatedTree.readContent(generatedRemoveFile)).toBe(
+      generatedRemoveWithParametersText,
+    )
+    expect(tree.readContent(generatedIndexFile)).toBe(generatedRemoveIndexText)
 
     const formattedTree = new UnitTestTree(
       await runner.callRule(format(), updatedTree).toPromise(),
     )
-    expect(formattedTree.readContent(generatedFile1)).toBe(generatedText1WithParams)
-    expect(formattedTree.readContent(generatedFile2)).toBe(generatedText2WithParams)
+    expect(formattedTree.readContent(generatedAddFile)).toBe(generatedAddWithParametersText)
+    expect(formattedTree.readContent(generatedRemoveFile)).toBe(
+      generatedRemoveWithParametersText,
+    )
     expect(tree.readContent(generatedIndexFile)).toBe(generatedIndexFormattedText)
   }, 45000)
 })
