@@ -44,3 +44,34 @@ There are targets other than `all` but they may need a different
 Example: to only create a command, you can use the upper mentioned
 JSON file with the `command` target or check `src/es-cqrs/command/command.schema.json`
 and run your JSON with the `command-standalone` target.
+
+## Additional features
+
+### REST-API generation
+
+Use the collection `all-rest` to create *nestjs controllers* as well. For create operation it will generate
+`Post` endpoints that returns the new ID, for other modification it will `Put` endpoint with `/:id` as parameter
+and returns nothing
+
+### Graphql generation
+
+TBD
+
+## Examples and recommendations
+
+### Aggregate creation
+
+Usually there is no ID associated with a creation, only a user, so the system can assign and return a new ID.
+To help with this logic this schematics can generate create component with UUID generation. It will create such
+components if the `verb` is one of `[add, create, new, insert]` and the `subject` is the same as the `moduleName`
+
+### Aggregate member generation
+
+If needed this schematics can generate member properties for the aggregate and will set their value from the
+events (otherwise handler contain just `/* no-op */` placeholder). To achieve this, set `isMember` to `true`
+for the parameter that needs a member created.
+
+### Using object parameters
+
+If the mutation uses a single object parameter and not a list of primitive types, set `isObject` to `true`.
+This will generate proper value assignments.

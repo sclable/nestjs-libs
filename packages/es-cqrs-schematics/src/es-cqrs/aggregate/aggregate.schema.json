@@ -7,11 +7,26 @@
     "aggregate": {
       "type": "string"
     },
-    "fileName": {
+    "command": {
       "type": "string"
     },
-    "command": {
-      "$ref": "#/definitions/command"
+    "event": {
+      "type": "string"
+    },
+    "isCreating": {
+      "type": "boolean"
+    },
+    "needsEventData": {
+      "type": "boolean"
+    },
+    "hasMembers": {
+      "type": "boolean"
+    },
+    "parameters": {
+      "type": "array",
+      "items": {
+        "$ref": "src/es-cqrs/schema.json#/definitions/parameter"
+      }
     },
     "imports": {
       "type": "array",
@@ -20,28 +35,5 @@
       }
     }
   },
-  "required": ["aggregate", "fileName", "command"],
-  "definitions": {
-    "command": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "eventClass": {
-          "type": "string"
-        },
-        "eventData": {
-          "type": "string"
-        },
-        "parameters": {
-          "type": "array",
-          "items": {
-            "$ref": "src/es-cqrs/schema.json#/definitions/parameter"
-          }
-        }
-      },
-      "required": ["name", "eventClass", "eventData"]
-    }
-  }
+  "required": ["aggregate", "command", "event", "isCreating"]
 }

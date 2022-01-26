@@ -19,10 +19,7 @@ import { appendToArrayString } from '../utils'
 import { EventHandlerSchema } from './event-handler.schema'
 
 export function main(options: EsCqrsSchema): Rule {
-  return chain([
-    standalone(transform(options)),
-    // format(),
-  ])
+  return standalone(transform(options))
 }
 
 export function standalone(options: EventHandlerSchema): Rule {
@@ -32,10 +29,7 @@ export function standalone(options: EventHandlerSchema): Rule {
 function transform(options: EsCqrsSchema): EventHandlerSchema {
   return {
     event: `${strings.dasherize(options.subject)}-${pastParticiple(options.verb)}`,
-    eventClass: `${strings.classify(options.subject)}${strings.classify(
-      pastParticiple(options.verb),
-    )}`,
-    moduleName: options.moduleName || '',
+    aggregate: options.moduleName,
   }
 }
 
@@ -45,7 +39,7 @@ function generate(options: EventHandlerSchema): Source {
       ...strings,
       ...options,
     }),
-    move(join('src' as Path, strings.dasherize(options.moduleName))),
+    move(join('src' as Path, strings.dasherize(options.aggregate))),
   ])
 }
 
@@ -53,7 +47,7 @@ function updateIndex(options: EventHandlerSchema): Rule {
   return (tree: Tree) => {
     const indexPath = join(
       'src' as Path,
-      strings.dasherize(options.moduleName),
+      strings.dasherize(options.aggregate),
       'event-handlers',
       'index.ts',
     )
@@ -65,7 +59,7 @@ function updateIndex(options: EventHandlerSchema): Rule {
     )
 
     const moduleSpecifier = `./${options.event}.handler`
-    const eventHandlerClass = `${options.eventClass}Handler`
+    const eventHandlerClass = `${strings.classify(options.event)}Handler`
     const namedImport = eventHandlersIndex.getImportDeclaration(moduleSpecifier)
     if (!namedImport) {
       eventHandlersIndex.addImportDeclaration({

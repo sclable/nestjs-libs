@@ -11,12 +11,12 @@ import {
   template,
   url,
 } from '@angular-devkit/schematics'
-import { Project, Scope } from 'ts-morph'
+import { ParameterDeclarationStructure, Project, Scope, StructureKind } from 'ts-morph'
 
 import { pastParticiple } from '../../past-participle'
 import { formatCodeSettings } from '../format'
 import { EsCqrsSchema, Parameter } from '../schema'
-import { getImports } from '../utils'
+import { KeyValuesDefinition, getImports, isCreating, updateImports } from '../utils'
 import { AggregateSchema } from './aggregate.schema'
 
 export function main(options: EsCqrsSchema): Rule {
@@ -27,8 +27,8 @@ export function standalone(options: AggregateSchema): Rule {
   return (tree: Tree, context: SchematicContext) => {
     const aggregatePath = join(
       'src' as Path,
-      options.fileName,
-      `${options.fileName}.aggregate.ts`,
+      strings.dasherize(options.aggregate),
+      `${strings.dasherize(options.aggregate)}.aggregate.ts`,
     )
     if (!tree.exists(aggregatePath)) {
       return mergeWith(generate(options))(tree, context)
@@ -40,25 +40,19 @@ export function standalone(options: AggregateSchema): Rule {
 
 function transform(options: EsCqrsSchema): AggregateSchema {
   const parameters = options.parameters || []
-  const needEventDataType =
-    parameters.length > 1 || parameters.filter(param => !!param.importPath).length === 0
 
   return {
     aggregate: options.moduleName,
-    command: {
-      eventClass: `${strings.classify(options.subject)}${strings.classify(
-        pastParticiple(options.verb),
-      )}`,
-      eventData: needEventDataType
-        ? parameters.length > 0
-          ? `{ ${parameters.map(param => param.name).join(', ')} }`
-          : '{}'
-        : parameters[0].name,
-      name: `${strings.camelize(options.verb)}${strings.classify(options.subject)}`,
-      parameters,
-    },
-    fileName: strings.dasherize(options.moduleName),
-    imports: getImports(options.parameters ?? []),
+    command: `${strings.camelize(options.verb)}${strings.classify(options.subject)}`,
+    event: `${strings.classify(options.subject)}${strings.classify(
+      pastParticiple(options.verb),
+    )}`,
+    parameters,
+    imports: getImports(parameters),
+    isCreating: isCreating(options),
+    needsEventData:
+      parameters.length > 1 || parameters.filter(param => param.isObject).length === 0,
+    hasMembers: parameters.filter(param => param.isMember).length > 0,
   }
 }
 
@@ -76,77 +70,108 @@ function updateAggregate(options: AggregateSchema): Rule {
   return (tree: Tree) => {
     const aggregatePath = join(
       'src' as Path,
-      options.fileName,
-      `${options.fileName}.aggregate.ts`,
+      strings.dasherize(options.aggregate),
+      `${strings.dasherize(options.aggregate)}.aggregate.ts`,
     )
     const aggregateSrc = tree.read(aggregatePath)
     if (!aggregateSrc) {
       return tree
     }
-    const project = new Project({ tsConfigFilePath: 'tsconfig.json' })
-    const aggregate = project.createSourceFile('aggregate.ts', aggregateSrc.toString())
-    const aggregateClass = aggregate.getClassOrThrow(strings.classify(options.fileName))
 
-    if (!aggregateClass.getInstanceMethod(options.command.name)) {
-      aggregateClass.addMethod({
-        statements: `this.applyEvent(${options.command.eventClass}, ${options.command.eventData})`,
-        name: options.command.name,
-        parameters:
-          options.command.parameters &&
-          options.command.parameters.map((param: Parameter) => ({
+    const aggregateClassName = strings.classify(options.aggregate)
+    const commandMethodName = strings.camelize(options.command)
+    const eventClassName = strings.classify(options.event)
+
+    const project = new Project({ tsConfigFilePath: 'tsconfig.json' })
+    const aggregateSourceFile = project.createSourceFile(
+      'aggregate.ts',
+      aggregateSrc.toString(),
+    )
+    const aggregateClass = aggregateSourceFile.getClassOrThrow(aggregateClassName)
+
+    const importDefinition: KeyValuesDefinition = {
+      ['@sclable/nestjs-es-cqrs']: ['Aggregate', 'EventSourcableAggregate'],
+      ['./events']: [eventClassName],
+    }
+    options.imports?.forEach(imp => {
+      importDefinition[imp.path] = imp.imports
+    })
+
+    updateImports(aggregateSourceFile, importDefinition)
+
+    if (options.hasMembers) {
+      const memberNames = aggregateClass.getInstanceMembers().map(member => member.getName())
+      options.parameters
+        ?.filter(param => param.isMember && !memberNames.includes(param.name))
+        .forEach(param =>
+          aggregateClass.addMember({
+            kind: StructureKind.Property,
             name: param.name,
             type: param.type,
-          })),
-        returnType: 'void',
+            scope: Scope.Private,
+          }),
+        )
+    }
+
+    if (!aggregateClass.getInstanceMethod(commandMethodName)) {
+      const parameterNameList = (options.parameters || []).map(param => param.name)
+      const parametersText = options.needsEventData
+        ? `{ ${parameterNameList.join(', ')} }`
+        : parameterNameList[0]
+      const parameterDeclarations: ParameterDeclarationStructure[] =
+        options.parameters?.map((param: Parameter) => ({
+          kind: StructureKind.Parameter,
+          name: param.name,
+          type: param.type,
+        })) ?? []
+      const statements: string[] = [`this.applyEvent(${eventClassName}, ${parametersText})`]
+      if (options.isCreating) {
+        parameterDeclarations.unshift({
+          kind: StructureKind.Parameter,
+          name: 'userId',
+          type: 'string',
+        })
+        parameterDeclarations.push({
+          kind: StructureKind.Parameter,
+          name: 'id',
+          type: 'string',
+          initializer: 'uuidv4()',
+        })
+        statements.unshift(`const self = new ${aggregateClassName}(id, userId)`)
+        statements.push('return self')
+      }
+      aggregateClass.addMethod({
+        statements,
+        name: commandMethodName,
+        parameters: parameterDeclarations,
+        returnType: options.isCreating ? aggregateClassName : 'void',
         scope: Scope.Public,
+        isStatic: options.isCreating,
       })
       aggregateClass.addMethod({
-        statements: '/* no-op */',
-        name: `on${options.command.eventClass}`,
-        parameters: [{ name: '_event', type: options.command.eventClass }],
+        statements: options.hasMembers
+          ? options.parameters
+              ?.filter(param => param.isMember)
+              .map(
+                param =>
+                  `this.${param.name} = event.data${param.isObject ? '' : '.' + param.name}`,
+              )
+          : '/* no-op */',
+        name: `on${eventClassName}`,
+        parameters: [
+          { name: (options.hasMembers ? '' : '_') + 'event', type: eventClassName },
+        ],
         returnType: 'void',
         scope: Scope.Public,
       })
-      const eventImports = aggregate.getImportDeclaration('./events')
-      if (eventImports) {
-        if (
-          !eventImports
-            .getNamedImports()
-            .map(ni => ni.getName())
-            .includes(options.command.eventClass)
-        ) {
-          eventImports.addNamedImport(options.command.eventClass)
-        }
-      }
     }
-    if (options.imports && options.imports.length > 0) {
-      options.imports.forEach(imp => {
-        const i = aggregate.getImportDeclaration(imp.path)
-        if (i) {
-          imp.imports.forEach(ii => {
-            if (
-              !i
-                .getNamedImports()
-                .map(ni => ni.getName())
-                .includes(ii)
-            ) {
-              i.addNamedImport(ii)
-            }
-          })
-        } else {
-          aggregate.addImportDeclaration({
-            moduleSpecifier: imp.path,
-            namedImports: imp.imports,
-          })
-        }
-      })
-    }
-    aggregate.formatText(formatCodeSettings)
+
+    aggregateSourceFile.formatText(formatCodeSettings)
 
     if (!tree.exists(aggregatePath)) {
-      tree.create(aggregatePath, aggregate.getFullText())
+      tree.create(aggregatePath, aggregateSourceFile.getFullText())
     } else {
-      tree.overwrite(aggregatePath, aggregate.getFullText())
+      tree.overwrite(aggregatePath, aggregateSourceFile.getFullText())
     }
 
     return tree

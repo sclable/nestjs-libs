@@ -7,11 +7,11 @@
     "event": {
       "type": "string"
     },
-    "eventClass": {
+    "aggregate": {
       "type": "string"
     },
-    "moduleName": {
-      "type": "string"
+    "needsEventData": {
+      "type": "boolean"
     },
     "parameters": {
       "type": "array",
@@ -26,5 +26,5 @@
       }
     }
   },
-  "required": ["event", "eventClass", "moduleName"]
+  "required": ["event", "aggregate"]
 }

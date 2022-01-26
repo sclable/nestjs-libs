@@ -40,6 +40,12 @@
         },
         "importPath": {
           "type": "string"
+        },
+        "isMember": {
+          "type": "boolean"
+        },
+        "isObject": {
+          "type": "boolean"
         }
       },
       "required": ["name", "type"]

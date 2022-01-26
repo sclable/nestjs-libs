@@ -17,3 +17,7 @@ export function all(options: EsCqrsSchema): Rule {
 export function allWithRestController(options: EsCqrsSchema): Rule {
   return chain([all(options), schematic('controller', options)])
 }
+
+export function allWithGraphqlResolver(options: EsCqrsSchema): Rule {
+  return chain([all(options), schematic('resolver', options)])
+}

@@ -11,6 +11,11 @@
       "factory": "./es-cqrs/index#allWithRestController",
       "schema": "./es-cqrs/schema.json"
     },
+    "all-graphql": {
+      "description": "ES/CQRS all with GraphQL resolver",
+      "factory": "./es-cqrs/index#allWithGraphqlResolver",
+      "schema": "./es-cqrs/schema.json"
+    },
     "json": {
       "description": "ES/CQRS form json",
       "factory": "./index#json",
@@ -105,6 +110,16 @@
       "description": "REST controller",
       "factory": "./es-cqrs/controller/controller.factory#standalone",
       "schema": "./es-cqrs/controller/controller.schema.json"
+    },
+    "resolver": {
+      "description": "GraphQL resolver",
+      "factory": "./es-cqrs/resolver/resolver.factory#main",
+      "schema": "./es-cqrs/schema.json"
+    },
+    "resolver.standalone": {
+      "description": "GraphQL resolver",
+      "factory": "./es-cqrs/resolver/resolver.factory#standalone",
+      "schema": "./es-cqrs/resolver/resolver.schema.json"
     }
   }
 }

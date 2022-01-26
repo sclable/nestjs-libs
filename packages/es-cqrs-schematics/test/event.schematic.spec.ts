@@ -12,13 +12,15 @@ const generatedText1 = `import { DefaultEvent } from '@sclable/nestjs-es-cqrs'
 
 export class TestDataAdded extends DefaultEvent<{}> {}
 `
-const generatedIndexText = `import { TestDataAdded } from "./test-data-added.event"
+
+const generatedAddIndexText = `import { TestDataAdded } from "./test-data-added.event"
 
 export const SchematicTestEvents = [TestDataAdded]
 
 export { TestDataAdded }
 `
-const generatedText1WithParams = `import { DefaultEvent } from '@sclable/nestjs-es-cqrs'
+
+const generatedAddWithParametersText = `import { DefaultEvent } from '@sclable/nestjs-es-cqrs'
 
 import { Parameter } from './parameter'
 
@@ -30,7 +32,14 @@ interface EventData {
 
 export class TestDataAdded extends DefaultEvent<EventData> {}
 `
-const generatedText2WithParams = `import { DefaultEvent } from '@sclable/nestjs-es-cqrs'
+
+const generatedAddWithSingleObjectParameterText = `import { DefaultEvent } from '@sclable/nestjs-es-cqrs'
+
+import { Parameter } from './parameter'
+
+export class TestDataAdded extends DefaultEvent<Parameter> {}
+`
+const generatedRemoveWithParametersText = `import { DefaultEvent } from '@sclable/nestjs-es-cqrs'
 
 import { UpdateParameter } from '../update-parameter'
 
@@ -42,7 +51,7 @@ interface EventData {
 
 export class TestDataRemoved extends DefaultEvent<EventData> {}
 `
-const generatedIndexUpdatedText = `import { TestDataAdded } from "./test-data-added.event"
+const generatedAddAndRemoveIndexText = `import { TestDataAdded } from "./test-data-added.event"
 import { TestDataRemoved } from "./test-data-removed.event"
 
 export const SchematicTestEvents = [
@@ -61,12 +70,12 @@ export { TestDataAdded, TestDataRemoved }
 `
 
 describe('Event Schematic', () => {
-  const mainData: EsCqrsSchema = {
+  const addOperation: EsCqrsSchema = {
     moduleName: 'SchematicTest',
     verb: 'add',
     subject: 'testData',
   }
-  const updateData: EsCqrsSchema = {
+  const removeOperation: EsCqrsSchema = {
     moduleName: 'SchematicTest',
     verb: 'remove',
     subject: 'testData',
@@ -82,17 +91,19 @@ describe('Event Schematic', () => {
     runner = new SchematicTestRunner('.', pathJoin(__dirname, '../src/collection.json'))
   })
 
-  test('main', async () => {
-    const tree = await runner.runSchematicAsync('event', mainData, Tree.empty()).toPromise()
+  test('add', async () => {
+    const tree = await runner
+      .runSchematicAsync('event', addOperation, Tree.empty())
+      .toPromise()
     expect(tree.files).toHaveLength(2)
     expect(tree.files).toEqual([generatedFile1, generatedIndexFile])
     expect(tree.readContent(generatedFile1)).toBe(generatedText1)
-    expect(tree.readContent(generatedIndexFile)).toBe(generatedIndexText)
+    expect(tree.readContent(generatedIndexFile)).toBe(generatedAddIndexText)
   })
 
-  test('main with parameters', async () => {
-    const mainDataWithParameters = {
-      ...mainData,
+  test('add with parameters', async () => {
+    const addOperationWithParameters = {
+      ...addOperation,
       parameters: [
         { name: 'param1', type: 'string' },
         { name: 'param2', type: 'number' },
@@ -100,25 +111,41 @@ describe('Event Schematic', () => {
       ],
     }
     const tree = await runner
-      .runSchematicAsync('event', mainDataWithParameters, Tree.empty())
+      .runSchematicAsync('event', addOperationWithParameters, Tree.empty())
       .toPromise()
     expect(tree.files).toHaveLength(2)
     expect(tree.files).toEqual([generatedFile1, generatedIndexFile])
-    expect(tree.readContent(generatedFile1)).toBe(generatedText1WithParams)
-    expect(tree.readContent(generatedIndexFile)).toBe(generatedIndexText)
+    expect(tree.readContent(generatedFile1)).toBe(generatedAddWithParametersText)
+    expect(tree.readContent(generatedIndexFile)).toBe(generatedAddIndexText)
   })
 
-  test('main updated and formatted', async () => {
-    const mainDataWithParameters = {
-      ...mainData,
+  test('add with single object parameter', async () => {
+    const addOperationWithParameters = {
+      ...addOperation,
+      parameters: [
+        { name: 'param3', type: 'Parameter', importPath: './parameter', isObject: true },
+      ],
+    }
+    const tree = await runner
+      .runSchematicAsync('event', addOperationWithParameters, Tree.empty())
+      .toPromise()
+    expect(tree.files).toHaveLength(2)
+    expect(tree.files).toEqual([generatedFile1, generatedIndexFile])
+    expect(tree.readContent(generatedFile1)).toBe(generatedAddWithSingleObjectParameterText)
+    expect(tree.readContent(generatedIndexFile)).toBe(generatedAddIndexText)
+  })
+
+  test('multiple events and formatting', async () => {
+    const addOperationWithParameters = {
+      ...addOperation,
       parameters: [
         { name: 'param1', type: 'string' },
         { name: 'param2', type: 'number' },
         { name: 'param3', type: 'Parameter', importPath: './parameter' },
       ],
     }
-    const updateDataWithParameters = {
-      ...updateData,
+    const removeOperationWithParameters = {
+      ...removeOperation,
       parameters: [
         { name: 'param1', type: 'string' },
         { name: 'param2', type: 'number' },
@@ -126,22 +153,22 @@ describe('Event Schematic', () => {
       ],
     }
     const tree = await runner
-      .runSchematicAsync('event', mainDataWithParameters, Tree.empty())
+      .runSchematicAsync('event', addOperationWithParameters, Tree.empty())
       .toPromise()
     const updatedTree = await runner
-      .runSchematicAsync('event', updateDataWithParameters, tree)
+      .runSchematicAsync('event', removeOperationWithParameters, tree)
       .toPromise()
     expect(updatedTree.files).toHaveLength(3)
     expect(tree.files).toEqual([generatedFile1, generatedIndexFile, generatedFile2])
-    expect(updatedTree.readContent(generatedFile1)).toBe(generatedText1WithParams)
-    expect(updatedTree.readContent(generatedFile2)).toBe(generatedText2WithParams)
-    expect(tree.readContent(generatedIndexFile)).toBe(generatedIndexUpdatedText)
+    expect(updatedTree.readContent(generatedFile1)).toBe(generatedAddWithParametersText)
+    expect(updatedTree.readContent(generatedFile2)).toBe(generatedRemoveWithParametersText)
+    expect(tree.readContent(generatedIndexFile)).toBe(generatedAddAndRemoveIndexText)
 
     const formattedTree = new UnitTestTree(
       await runner.callRule(format(), updatedTree).toPromise(),
     )
-    expect(formattedTree.readContent(generatedFile1)).toBe(generatedText1WithParams)
-    expect(formattedTree.readContent(generatedFile2)).toBe(generatedText2WithParams)
+    expect(formattedTree.readContent(generatedFile1)).toBe(generatedAddWithParametersText)
+    expect(formattedTree.readContent(generatedFile2)).toBe(generatedRemoveWithParametersText)
     expect(tree.readContent(generatedIndexFile)).toBe(generatedIndexFormattedText)
   }, 45000)
 })

@@ -1,10 +1,10 @@
 import { EventHandler, IEventHandler } from '@sclable/nestjs-es-cqrs'
 
-import { <%= eventClass %> } from '../events'
+import { <%= classify(event) %> } from '../events'
 
-@EventHandler(<%= eventClass %>)
-export class <%= eventClass %>Handler implements IEventHandler<<%= eventClass %>> {
-  public async handle(event: <%= eventClass %>) {
+@EventHandler(<%= classify(event) %>)
+export class <%= classify(event) %>Handler implements IEventHandler<<%= classify(event) %>> {
+  public async handle(_event: <%= classify(event) %>) {
     /* no-op */
   }
 }

@@ -13,7 +13,7 @@ import { TestDataAdded } from '../events'
 
 @EventHandler(TestDataAdded)
 export class TestDataAddedHandler implements IEventHandler<TestDataAdded> {
-  public async handle(event: TestDataAdded) {
+  public async handle(_event: TestDataAdded) {
     /* no-op */
   }
 }
@@ -28,7 +28,7 @@ import { TestDataAdded } from '../events'
 
 @EventHandler(TestDataAdded)
 export class TestDataAddedHandler implements IEventHandler<TestDataAdded> {
-  public async handle(event: TestDataAdded) {
+  public async handle(_event: TestDataAdded) {
     /* no-op */
   }
 }
@@ -39,7 +39,7 @@ import { TestDataRemoved } from '../events'
 
 @EventHandler(TestDataRemoved)
 export class TestDataRemovedHandler implements IEventHandler<TestDataRemoved> {
-  public async handle(event: TestDataRemoved) {
+  public async handle(_event: TestDataRemoved) {
     /* no-op */
   }
 }
