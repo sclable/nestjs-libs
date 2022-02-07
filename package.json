@@ -52,7 +52,7 @@
     "@nestjs/jwt": "8.0.0",
     "@nestjs/passport": "8.0.1",
     "@nestjs/platform-express": "8.2.5",
-    "@nestjs/testing": "8.2.5",
+    "@nestjs/testing": "8.2.6",
     "@sclable/lint": "1.7.3",
     "@sclable/tsconfig": "0.11.18",
     "@types/eslint": "8.4.1",
