@@ -50,7 +50,7 @@
     "@nestjs/common": "8.2.6",
     "@nestjs/core": "8.2.6",
     "@nestjs/jwt": "8.0.0",
-    "@nestjs/passport": "8.1.0",
+    "@nestjs/passport": "8.2.1",
     "@nestjs/platform-express": "8.2.6",
     "@nestjs/testing": "8.2.6",
     "@sclable/lint": "1.7.3",
