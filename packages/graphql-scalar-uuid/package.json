@@ -32,7 +32,7 @@
   ],
   "dependencies": {
     "@nestjs/class-validator": "^0.13.3",
-    "graphql": "^15.5.1"
+    "graphql": "^16.3.0"
   },
   "peerDependencies": {
     "@nestjs/graphql": ">=6.6.2"
