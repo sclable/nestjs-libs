@@ -9,7 +9,7 @@ jobs:
         node-version: [12.x, 14.x, 16.x]
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Setup NodeJS ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
@@ -32,7 +32,7 @@ jobs:
     needs: [build]
     steps:
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       with:
         fetch-depth: 0
         token: ${{ secrets.GIT_PUSH_TOKEN }}
@@ -67,7 +67,7 @@ jobs:
     needs: [publish]
     steps:
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       with:
         repository: ${{github.repository}}.wiki
         token: ${{ secrets.GIT_PUSH_TOKEN }}
