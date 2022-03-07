@@ -57,7 +57,7 @@
     "@sclable/tsconfig": "0.11.18",
     "@types/eslint": "8.4.1",
     "@types/fs-extra": "9.0.13",
-    "@types/jest": "27.4.0",
+    "@types/jest": "27.4.1",
     "@types/minio": "7.0.11",
     "@types/node": "16.11.26",
     "@types/passport-jwt": "3.0.6",
