@@ -39,8 +39,8 @@
     "@sclable/nestjs-storage": "file:packages/storage"
   },
   "devDependencies": {
-    "@angular-devkit/core": "13.3.0",
-    "@angular-devkit/schematics": "13.3.0",
+    "@angular-devkit/core": "13.3.1",
+    "@angular-devkit/schematics": "13.3.1",
     "@azure/abort-controller": "1.0.4",
     "@azure/service-bus": "7.5.1",
     "@azure/storage-blob": "12.9.0",
@@ -58,7 +58,7 @@
     "@types/eslint": "8.4.1",
     "@types/fs-extra": "9.0.13",
     "@types/jest": "27.4.1",
-    "@types/minio": "7.0.11",
+    "@types/minio": "7.0.12",
     "@types/node": "16.11.26",
     "@types/passport-jwt": "3.0.6",
     "@types/passport-local": "1.0.34",
@@ -66,8 +66,8 @@
     "@types/supertest": "2.0.11",
     "@types/uuid": "8.3.4",
     "amqp-ts": "1.8.0",
-    "apollo-server-core": "3.6.3",
-    "apollo-server-express": "3.6.3",
+    "apollo-server-core": "3.6.7",
+    "apollo-server-express": "3.6.7",
     "enhanced-resolve": "5.9.2",
     "glob": "7.2.0",
     "glob-promise": "4.2.2",
@@ -75,7 +75,7 @@
     "jest": "27.5.1",
     "json-schema-to-typescript": "10.1.5",
     "lerna": "4.0.0",
-    "lint-staged": "12.3.5",
+    "lint-staged": "12.3.7",
     "markdownlint-cli": "0.31.1",
     "minio": "7.0.26",
     "rimraf": "3.0.2",
@@ -86,7 +86,7 @@
     "ts-jest": "27.1.4",
     "typedoc": "0.22.13",
     "typedoc-github-wiki-theme": "1.0.0",
-    "typedoc-plugin-markdown": "3.11.13",
+    "typedoc-plugin-markdown": "3.11.14",
     "typescript": "4.6.2"
   },
   "commitlint": {
