@@ -71,7 +71,7 @@
     "enhanced-resolve": "5.9.3",
     "glob": "7.2.0",
     "glob-promise": "4.2.2",
-    "husky": "7.0.4",
+    "husky": "8.0.0",
     "jest": "27.5.1",
     "json-schema-to-typescript": "10.1.5",
     "lerna": "4.0.0",
