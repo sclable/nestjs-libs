@@ -47,7 +47,7 @@
     "@commitlint/cli": "16.2.4",
     "@commitlint/config-conventional": "16.2.4",
     "@commitlint/prompt-cli": "16.2.4",
-    "@nestjs/common": "8.4.4",
+    "@nestjs/common": "8.4.5",
     "@nestjs/core": "8.4.4",
     "@nestjs/jwt": "8.0.0",
     "@nestjs/passport": "8.2.1",
