@@ -41,7 +41,7 @@
   "devDependencies": {
     "@angular-devkit/core": "13.3.4",
     "@angular-devkit/schematics": "13.3.4",
-    "@azure/abort-controller": "1.0.4",
+    "@azure/abort-controller": "1.1.0",
     "@azure/service-bus": "7.5.1",
     "@azure/storage-blob": "12.9.0",
     "@commitlint/cli": "16.2.4",
