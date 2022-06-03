@@ -55,7 +55,7 @@ export class SchematicTestRunner {
   private _engine: SchematicEngine<{}, {}> = new SchematicEngine(this._engineHost)
   // eslint-disable-next-line @typescript-eslint/ban-types
   private _collection: Collection<{}, {}>
-  private _logger: logging.Logger
+  private _logger: logging.LoggerApi
 
   public constructor(private _collectionName: string, collectionPath: string) {
     this._engineHost.registerCollection(_collectionName, collectionPath)
@@ -85,7 +85,7 @@ export class SchematicTestRunner {
   public get engine(): SchematicEngine<{}, {}> {
     return this._engine
   }
-  public get logger(): logging.Logger {
+  public get logger(): logging.LoggerApi {
     return this._logger
   }
   public get tasks(): TaskConfiguration[] {
