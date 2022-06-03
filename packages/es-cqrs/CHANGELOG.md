@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [8.0.5](https://github.com/sclable/nestjs-libs/compare/@sclable/nestjs-es-cqrs@8.0.4...@sclable/nestjs-es-cqrs@8.0.5) (2022-06-03)
+
+
+### Bug Fixes
+
+* **es-cqrs:** fix explorer service ([7b375f2](https://github.com/sclable/nestjs-libs/commit/7b375f26b7c18c53fb505e5c1a0972a78bd4c130))
+
+
+
+
+
 ## [8.0.4](https://github.com/sclable/nestjs-libs/compare/@sclable/nestjs-es-cqrs@8.0.3...@sclable/nestjs-es-cqrs@8.0.4) (2021-11-15)
 
 
