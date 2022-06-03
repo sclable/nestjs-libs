@@ -4,9 +4,10 @@ import { InstanceWrapper } from '@nestjs/core/injector/instance-wrapper'
 import { Module } from '@nestjs/core/injector/module'
 import { ModulesContainer } from '@nestjs/core/injector/modules-container'
 import { ICommandHandler, IEventHandler } from '@nestjs/cqrs'
-
-export const COMMAND_HANDLER_METADATA = '__commandHandler__'
-export const EVENTS_HANDLER_METADATA = '__eventsHandler'
+import {
+  COMMAND_HANDLER_METADATA,
+  EVENTS_HANDLER_METADATA,
+} from '@nestjs/cqrs/dist/decorators/constants'
 
 export interface CqrsOptions {
   events?: Type<IEventHandler>[]
