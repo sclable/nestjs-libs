@@ -28,7 +28,7 @@
   "license": "MIT",
   "schematics": "./dist/src/collection.json",
   "dependencies": {
-    "eslint": "^8.1.0",
+    "eslint": "^8.17.0",
     "fs-extra": "^10.0.0",
     "pluralize": "^8.0.0",
     "prettier": "^2.4.1",
