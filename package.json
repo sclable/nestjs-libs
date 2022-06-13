@@ -26,7 +26,7 @@
     "url": "git@github.com:sclable/nestjs-libs.git"
   },
   "engines": {
-    "node": "^12.18.0 || ^14.5.0 || ^16.12.0",
+    "node": "^14.5.0 || ^16.12.0",
     "npm": "^8.1.0"
   },
   "dependencies": {
@@ -55,7 +55,7 @@
     "@nestjs/testing": "8.4.6",
     "@sclable/lint": "1.7.3",
     "@sclable/tsconfig": "0.11.18",
-    "@types/eslint": "8.4.2",
+    "@types/eslint": "8.4.3",
     "@types/fs-extra": "9.0.13",
     "@types/jest": "27.5.0",
     "@types/minio": "7.0.12",
@@ -69,7 +69,7 @@
     "apollo-server-core": "3.8.1",
     "apollo-server-express": "3.8.1",
     "enhanced-resolve": "5.9.3",
-    "glob": "7.2.0",
+    "glob": "7.2.3",
     "glob-promise": "4.2.2",
     "husky": "8.0.1",
     "jest": "27.5.1",
