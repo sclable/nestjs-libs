@@ -18,8 +18,8 @@ import { Event } from './interfaces'
 export class RateLimitedEventBus extends EventBus<Event> {
   private limits: { [key: string]: LimitFunction } = {}
 
-  public bind(handler: IEventHandler<Event>, name: string): void {
-    const stream$ = name ? this.ofEventName(name) : this.subject$
+  public bind(handler: IEventHandler<Event>, id: string): void {
+    const stream$ = id ? this.ofEventId(id) : this.subject$
     stream$.subscribe(event => {
       if (event.customOptions && event.customOptions.skipQueue) {
         handler.handle(event)
