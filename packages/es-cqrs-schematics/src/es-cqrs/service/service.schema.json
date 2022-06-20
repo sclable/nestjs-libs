@@ -10,6 +10,9 @@
     "command": {
       "type": "string"
     },
+    "isCreating": {
+      "type": "boolean"
+    },
     "parameters": {
       "type": "array",
       "items": {

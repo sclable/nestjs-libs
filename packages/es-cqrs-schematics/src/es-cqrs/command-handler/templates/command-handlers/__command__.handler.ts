@@ -8,7 +8,7 @@ export class <%= classify(command) %>Handler implements ICommandHandler<<%= clas
   constructor(@InjectRepository(<%= classify(aggregate) %>) private readonly <%= camelize(aggregate) %>Repository: Repository<<%= classify(aggregate) %>>) {}
 
   public async execute(cmd: <%= classify(command) %>): Promise<<%= isCreating ? 'string' : 'void' %>> {<% if (isCreating) { %>
-    const <%= camelize(aggregate) %> = <%= classify(aggregate) %>.<%= camelize(command) %>(cmd.userId<% if (parameters.length > 0) { %>, <% } %><%= parameters.map(p => 'cmd.' + p.name).join(', ') %>)<% } else { %>
+    const <%= camelize(aggregate) %> = <%= classify(aggregate) %>.<%= camelize(command) %>(<%= parameters.map(p => 'cmd.' + p.name).join(', ') %><% if (parameters.length > 0) { %>, <% } %>cmd.userId)<% } else { %>
     const <%= camelize(aggregate) %> = await this.<%= camelize(aggregate) %>Repository.find(cmd.id, cmd.userId)
     <%= camelize(aggregate) %>.<%= camelize(command) %>(<%= parameters.map(p => 'cmd.' + p.name).join(', ') %>)<% } %>
     await this.<%= camelize(aggregate) %>Repository.persist(<%= camelize(aggregate) %>)<% if (isCreating) { %>

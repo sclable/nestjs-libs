@@ -26,10 +26,10 @@ import { Parameter } from './parameter'
 
 export class CreateSchematicTest implements Command {
   constructor(
-    public readonly userId: string,
     public readonly param1: string,
     public readonly param2: number,
     public readonly param3: Parameter,
+    public readonly userId: string,
   ) {}
 }
 `
@@ -54,10 +54,10 @@ import { Parameter } from './parameter'
 export class AddTestData implements Command {
   constructor(
     public readonly id: string,
-    public readonly userId: string,
     public readonly param1: string,
     public readonly param2: number,
     public readonly param3: Parameter,
+    public readonly userId: string,
   ) {}
 }
 `
@@ -68,10 +68,10 @@ import { UpdateParameter } from '../update-parameter'
 export class RemoveTestData implements Command {
   constructor(
     public readonly id: string,
-    public readonly userId: string,
     public readonly param1: string,
     public readonly param2: number,
     public readonly param3: UpdateParameter,
+    public readonly userId: string,
   ) {}
 }
 `

@@ -36,7 +36,7 @@ import { schematicTestEvents, SchematicTestCreated } from './events'
 @EventSourcableAggregate(...schematicTestEvents)
 export class SchematicTest extends Aggregate {
 
-  public static createSchematicTest(userId: string, param1: string, param2: number, param3: Parameter, id: string = uuidv4()): SchematicTest {
+  public static createSchematicTest(param1: string, param2: number, param3: Parameter, userId: string, id: string = uuidv4()): SchematicTest {
     const self = new SchematicTest(id, userId)
     this.applyEvent(SchematicTestCreated, { param1, param2, param3 })
     return self
@@ -59,7 +59,7 @@ export class SchematicTest extends Aggregate {
   private param1: string
   private param3: Parameter
 
-  public static createSchematicTest(userId: string, param1: string, param2: number, param3: Parameter, id: string = uuidv4()): SchematicTest {
+  public static createSchematicTest(param1: string, param2: number, param3: Parameter, userId: string, id: string = uuidv4()): SchematicTest {
     const self = new SchematicTest(id, userId)
     this.applyEvent(SchematicTestCreated, { param1, param2, param3 })
     return self
@@ -317,7 +317,7 @@ describe('Aggregate Schematic', () => {
           type: 'Parameter',
           importPath: './parameter',
           isMember: true,
-          isObject: true,
+          isExistingObject: true,
         },
       ],
     }

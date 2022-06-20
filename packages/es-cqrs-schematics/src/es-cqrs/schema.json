@@ -38,13 +38,16 @@
         "type": {
           "type": "string"
         },
+        "graphqlType": {
+          "type": "string"
+        },
         "importPath": {
           "type": "string"
         },
         "isMember": {
           "type": "boolean"
         },
-        "isObject": {
+        "isExistingObject": {
           "type": "boolean"
         }
       },

@@ -17,7 +17,7 @@ import { Project, Scope } from 'ts-morph'
 
 import { formatCodeSettings } from '../format'
 import { EsCqrsSchema, Parameter } from '../schema'
-import { KeyValuesDefinition, getImports, updateImports } from '../utils'
+import { KeyValuesDefinition, getImports, isCreating, updateImports } from '../utils'
 import { ServiceSchema } from './service.schema'
 
 export function main(options: EsCqrsSchema): Rule {
@@ -40,19 +40,21 @@ export function standalone(options: ServiceSchema): Rule {
 }
 
 function transform(options: EsCqrsSchema): ServiceSchema {
-  const parameters: Parameter[] = [
-    { name: 'id', type: 'string' },
-    { name: 'userId', type: 'string' },
-  ]
+  const parameters: Parameter[] = []
+  if (!isCreating(options)) {
+    parameters.push({ name: 'id', type: 'string' })
+  }
   if (options.parameters) {
     parameters.push(...options.parameters)
   }
+  parameters.push({ name: 'userId', type: 'string' })
 
   return {
     aggregate: options.moduleName,
     command: `${strings.classify(options.verb)}${strings.classify(options.subject)}`,
     imports: getImports(parameters),
     parameters,
+    isCreating: isCreating(options),
   }
 }
 
@@ -114,7 +116,7 @@ function updateService(options: ServiceSchema): Rule {
       if (!serviceClass.getMethod(commandMethodName)) {
         serviceClass.addMethod({
           name: commandMethodName,
-          returnType: 'Promise<void>',
+          returnType: `Promise<${options.isCreating ? 'string' : 'void'}>`,
           isAsync: true,
           scope: Scope.Public,
           parameters: options.parameters ?? [],

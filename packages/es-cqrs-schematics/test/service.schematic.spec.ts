@@ -6,7 +6,22 @@ import { UnitTestTree } from '@angular-devkit/schematics/testing'
 import { EsCqrsSchema } from '../src/es-cqrs/schema'
 import { SchematicTestRunner } from './schematic-test-runner'
 
-const generatedText = `import { Injectable } from '@nestjs/common'
+const generatedTextForCreateOperation = `import { Injectable } from '@nestjs/common'
+import { CommandBus } from '@sclable/nestjs-es-cqrs'
+
+import { CreateSchematicTest } from './commands'
+
+@Injectable()
+export class SchematicTestService {
+  public constructor(private readonly commandBus: CommandBus) {}
+
+  public async createSchematicTest(userId: string): Promise<string> {
+    return this.commandBus.execute(new CreateSchematicTest(userId))
+  }
+}
+`
+
+const generatedTextForAddOperation = `import { Injectable } from '@nestjs/common'
 import { CommandBus } from '@sclable/nestjs-es-cqrs'
 
 import { AddTestData } from './commands'
@@ -17,6 +32,22 @@ export class SchematicTestService {
 
   public async addTestData(id: string, userId: string): Promise<void> {
     return this.commandBus.execute(new AddTestData(id, userId))
+  }
+}
+`
+
+const generatedTextForCreateOperationExistingFile = `import { Injectable } from '@nestjs/common'
+
+import { UserService } from '../user'
+import { CommandBus } from "@sclable/nestjs-es-cqrs"
+import { CreateSchematicTest } from "./commands"
+
+@Injectable()
+export class SchematicTestService {
+  public constructor(private readonly userService: UserService, private readonly commandBus: CommandBus) { }
+
+  public async createSchematicTest(userId: string): Promise<string> {
+    return this.commandBus.execute(new CreateSchematicTest(userId))
   }
 }
 `
@@ -58,14 +89,19 @@ import { Parameter } from "./parameter"
 export class SchematicTestService {
   public constructor(private readonly userService: UserService, private readonly commandBus: CommandBus) { }
 
-  public async addTestData(id: string, userId: string, param1: string, param2: number, param3: Parameter): Promise<void> {
-    return this.commandBus.execute(new AddTestData(id, userId, param1, param2, param3))
+  public async addTestData(id: string, param1: string, param2: number, param3: Parameter, userId: string): Promise<void> {
+    return this.commandBus.execute(new AddTestData(id, param1, param2, param3, userId))
   }
 }
 `
 
 describe('Service Schematic', () => {
-  const mainData: EsCqrsSchema = {
+  const createOperation: EsCqrsSchema = {
+    moduleName: 'SchematicTest',
+    verb: 'create',
+    subject: 'SchematicTest',
+  }
+  const addOperation: EsCqrsSchema = {
     moduleName: 'SchematicTest',
     verb: 'add',
     subject: 'testData',
@@ -78,25 +114,45 @@ describe('Service Schematic', () => {
     runner = new SchematicTestRunner('.', pathJoin(__dirname, '../src/collection.json'))
   })
 
-  test('main', async () => {
-    const tree = await runner.runSchematicAsync('service', mainData, Tree.empty()).toPromise()
+  test('create operation', async () => {
+    const tree = await runner
+      .runSchematicAsync('service', createOperation, Tree.empty())
+      .toPromise()
     expect(tree.files).toHaveLength(1)
     expect(tree.files).toContain(generatedFile)
-    expect(tree.readContent(generatedFile)).toBe(generatedText)
+    expect(tree.readContent(generatedFile)).toBe(generatedTextForCreateOperation)
   })
 
-  test('main with existing service', async () => {
+  test('add operation', async () => {
+    const tree = await runner
+      .runSchematicAsync('service', addOperation, Tree.empty())
+      .toPromise()
+    expect(tree.files).toHaveLength(1)
+    expect(tree.files).toContain(generatedFile)
+    expect(tree.readContent(generatedFile)).toBe(generatedTextForAddOperation)
+  })
+
+  test('create operation with existing service', async () => {
     let tree = new UnitTestTree(Tree.empty())
     tree.create(generatedFile, existingFileContentNonEsCqrs)
-    tree = await runner.runSchematicAsync('service', mainData, tree).toPromise()
+    tree = await runner.runSchematicAsync('service', createOperation, tree).toPromise()
+    expect(tree.files).toHaveLength(1)
+    expect(tree.files).toContain(generatedFile)
+    expect(tree.readContent(generatedFile)).toBe(generatedTextForCreateOperationExistingFile)
+  })
+
+  test('add operation with existing service', async () => {
+    let tree = new UnitTestTree(Tree.empty())
+    tree.create(generatedFile, existingFileContentNonEsCqrs)
+    tree = await runner.runSchematicAsync('service', addOperation, tree).toPromise()
     expect(tree.files).toHaveLength(1)
     expect(tree.files).toContain(generatedFile)
     expect(tree.readContent(generatedFile)).toBe(generatedTextForExistingFileNonEsCqrs)
   })
 
-  test('main with existing service and parameters', async () => {
-    const mainDataWithParameters = {
-      ...mainData,
+  test('add operation with existing service and parameters', async () => {
+    const addOperationWithParameters = {
+      ...addOperation,
       parameters: [
         { name: 'param1', type: 'string' },
         { name: 'param2', type: 'number' },
@@ -105,7 +161,9 @@ describe('Service Schematic', () => {
     }
     let tree = new UnitTestTree(Tree.empty())
     tree.create(generatedFile, existingFileContentNonEsCqrs)
-    tree = await runner.runSchematicAsync('service', mainDataWithParameters, tree).toPromise()
+    tree = await runner
+      .runSchematicAsync('service', addOperationWithParameters, tree)
+      .toPromise()
     expect(tree.files).toHaveLength(1)
     expect(tree.files).toContain(generatedFile)
     expect(tree.readContent(generatedFile)).toBe(generatedTextWithParameters)

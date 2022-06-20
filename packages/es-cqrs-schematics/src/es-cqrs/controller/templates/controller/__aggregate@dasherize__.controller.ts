@@ -9,13 +9,10 @@ export class <%= classify(aggregate) %>Controller {
 
   @<%= httpMethod %>(<% if (!isCreating) { %>'/:id'<% } %>)
   public async <%= camelize(command) %>(<% if (!isCreating) { %>
-    @Param('id') id: string,<% } %>
-    @RequestUser() user: ApplicationUserContract,<% if (needsDto) { %>
+    @Param('id') id: string,<% } %><% if (needsDto) { %>
     @Body() dto: <%= classify(command) %>Dto,<% } %>
-  ): Promise<void> {
-    return this.<%= camelize(aggregate) %>Service.<%= camelize(command) %>(<% if (!isCreating) { %>
-      id,<% } %>
-      user.id,
-      <%= parameters.map(p => 'dto.' + p.name).join(',\n') %>)
+    @RequestUser() user: ApplicationUserContract,
+  ): Promise<<%= isCreating ? 'string' : 'void' %>> {
+    return this.<%= camelize(aggregate) %>Service.<%= camelize(command) %>(<% if (!isCreating) { %>id, <% } %><%= parameters.map(p => 'dto.' + p.name).join(', ') %><%= parameters.length > 0 ? ', ': '' %>user.id)
   }
 }

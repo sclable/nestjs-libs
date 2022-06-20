@@ -35,7 +35,7 @@ function transform(options: EsCqrsSchema): EventSchema {
     imports: getImports(parameters),
     parameters,
     needsEventData:
-      parameters.length > 1 || (parameters.length !== 0 && !parameters[0].isObject),
+      parameters.length > 1 || (parameters.length !== 0 && !parameters[0].isExistingObject),
   }
 }
 

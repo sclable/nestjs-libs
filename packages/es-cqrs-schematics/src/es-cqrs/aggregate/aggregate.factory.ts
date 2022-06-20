@@ -51,7 +51,7 @@ function transform(options: EsCqrsSchema): AggregateSchema {
     imports: getImports(parameters),
     isCreating: isCreating(options),
     needsEventData:
-      parameters.length > 1 || parameters.filter(param => param.isObject).length === 0,
+      parameters.length > 1 || parameters.filter(param => param.isExistingObject).length === 0,
     hasMembers: parameters.filter(param => param.isMember).length > 0,
   }
 }
@@ -154,7 +154,9 @@ function updateAggregate(options: AggregateSchema): Rule {
               ?.filter(param => param.isMember)
               .map(
                 param =>
-                  `this.${param.name} = event.data${param.isObject ? '' : '.' + param.name}`,
+                  `this.${param.name} = event.data${
+                    param.isExistingObject ? '' : '.' + param.name
+                  }`,
               )
           : '/* no-op */',
         name: `on${eventClassName}`,

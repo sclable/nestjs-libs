@@ -73,5 +73,5 @@ for the parameter that needs a member created.
 
 ### Using object parameters
 
-If the mutation uses a single object parameter and not a list of primitive types, set `isObject` to `true`.
+If the mutation uses a single object parameter and not a list of primitive types, set `isExistingObject` to `true`.
 This will generate proper value assignments.

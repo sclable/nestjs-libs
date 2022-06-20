@@ -170,8 +170,8 @@ function updateController(options: ControllerSchema): Rule {
           serviceMethodParameters.push('id')
         }
         serviceMethodParameters.push(
-          'user.id',
           ...(options.parameters?.map(param => 'dto.' + param.name) ?? []),
+          'user.id',
         )
         const controllerMethodParameters: ParameterDeclarationStructure[] = []
         if (!options.isCreating) {
@@ -182,12 +182,6 @@ function updateController(options: ControllerSchema): Rule {
             decorators: [{ name: 'Param', arguments: [`'id'`] }],
           })
         }
-        controllerMethodParameters.push({
-          kind: StructureKind.Parameter,
-          name: 'user',
-          type: 'ApplicationUserContract',
-          decorators: [{ name: 'RequestUser', arguments: [] }],
-        })
         if (options.needsDto) {
           controllerMethodParameters.push({
             kind: StructureKind.Parameter,
@@ -196,6 +190,12 @@ function updateController(options: ControllerSchema): Rule {
             decorators: [{ name: 'Body', arguments: [] }],
           })
         }
+        controllerMethodParameters.push({
+          kind: StructureKind.Parameter,
+          name: 'user',
+          type: 'ApplicationUserContract',
+          decorators: [{ name: 'RequestUser', arguments: [] }],
+        })
         controllerClass.addMethod({
           decorators: [
             {
@@ -204,7 +204,7 @@ function updateController(options: ControllerSchema): Rule {
             },
           ],
           name: commandMethodName,
-          returnType: 'Promise<void>',
+          returnType: `Promise<${options.isCreating ? 'string' : 'void'}>`,
           isAsync: true,
           scope: Scope.Public,
           parameters: controllerMethodParameters,

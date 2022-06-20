@@ -8,7 +8,7 @@ import { <%= camelize(aggregate) %>Events, <%= classify(event) %> } from './even
 export class <%= classify(aggregate) %> extends Aggregate {<% if (hasMembers) { parameters.filter(param => param.isMember).forEach(param => { %>
   private <%= param.name %>: <%= param.type %><% }) } %>
 <% if (isCreating) { %>
-  public static <%= camelize(command) %>(userId: string, <%= parameters.map(p => `${p.name}: ${p.type}`).join(', ') %><%= parameters.length > 0 ? ', ' : '' %>id: string = uuidv4()): <%= classify(aggregate) %> {
+  public static <%= camelize(command) %>(<%= parameters.map(p => `${p.name}: ${p.type}`).join(', ') %><%= parameters.length > 0 ? ', ' : '' %>userId: string, id: string = uuidv4()): <%= classify(aggregate) %> {
     const self = new <%= classify(aggregate) %>(id, userId)
     this.applyEvent(<%= classify(event) %>, <% if (needsEventData) { %>{ <%= parameters.map(p => p.name).join(', ') %> }<% } else { %><%= parameters[0].name %><% } %>)
     return self
@@ -17,7 +17,7 @@ export class <%= classify(aggregate) %> extends Aggregate {<% if (hasMembers) { 
     this.applyEvent(<%= classify(event) %>, <% if (needsEventData) { %>{ <%= parameters.map(p => p.name).join(', ') %> }<% } else { %><%= parameters[0].name %><% } %>)
   }<% } %>
 
-  public on<%= classify(event) %>(<% if (!hasMembers) { %>_<% } %>event: <%= classify(event) %>): void {<% if (hasMembers) { parameters.filter(param => param.isMember).forEach(param => { if (param.isObject) {%>
+  public on<%= classify(event) %>(<% if (!hasMembers) { %>_<% } %>event: <%= classify(event) %>): void {<% if (hasMembers) { parameters.filter(param => param.isMember).forEach(param => { if (param.isExistingObject) {%>
     this.<%= camelize(param.name) %> = event.data<% } else { %>
     this.<%= camelize(param.name) %> = event.data.<%= camelize(param.name) %><% } }) } else { %>
     /* no-op */<% } %>

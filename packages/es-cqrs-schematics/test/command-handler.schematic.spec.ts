@@ -39,7 +39,7 @@ export class CreateSchematicTestHandler implements ICommandHandler<CreateSchemat
   constructor(@InjectRepository(SchematicTest) private readonly schematicTestRepository: Repository<SchematicTest>) {}
 
   public async execute(cmd: CreateSchematicTest): Promise<string> {
-    const schematicTest = SchematicTest.createSchematicTest(cmd.userId, cmd.param1, cmd.param2, cmd.param3)
+    const schematicTest = SchematicTest.createSchematicTest(cmd.param1, cmd.param2, cmd.param3, cmd.userId)
     await this.schematicTestRepository.persist(schematicTest)
     return schematicTest.id
   }

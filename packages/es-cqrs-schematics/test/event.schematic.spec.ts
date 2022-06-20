@@ -123,7 +123,12 @@ describe('Event Schematic', () => {
     const addOperationWithParameters = {
       ...addOperation,
       parameters: [
-        { name: 'param3', type: 'Parameter', importPath: './parameter', isObject: true },
+        {
+          name: 'param3',
+          type: 'Parameter',
+          importPath: './parameter',
+          isExistingObject: true,
+        },
       ],
     }
     const tree = await runner

@@ -15,12 +15,10 @@ export class SchematicTestController {
   public constructor(private readonly schematicTestService: SchematicTestService) {}
 
   @Post()
-  public async addTestData(
+  public async addSchematicTest(
     @RequestUser() user: ApplicationUserContract,
-  ): Promise<void> {
-    return this.schematicTestService.addTestData(
-      user.id,
-      )
+  ): Promise<string> {
+    return this.schematicTestService.addSchematicTest(user.id)
   }
 }
 `
@@ -38,10 +36,7 @@ export class SchematicTestController {
     @Param('id') id: string,
     @RequestUser() user: ApplicationUserContract,
   ): Promise<void> {
-    return this.schematicTestService.removeTestData(
-      id,
-      user.id,
-      )
+    return this.schematicTestService.removeTestData(id, user.id)
   }
 }
 `
@@ -67,8 +62,8 @@ export class SchematicTestController {
   public constructor(private readonly db: DatabaseService, private readonly schematicTestService: SchematicTestService) { }
 
   @Post()
-  public async addTestData(@RequestUser() user: ApplicationUserContract): Promise<void> {
-    return this.schematicTestService.addTestData(user.id)
+  public async addSchematicTest(@RequestUser() user: ApplicationUserContract): Promise<string> {
+    return this.schematicTestService.addSchematicTest(user.id)
   }
 }
 `
@@ -78,15 +73,15 @@ const generatedTextWithParameters = `import { Controller, Body, Param, Post, Put
 import { DatabaseService } from '../db'
 import { ApplicationUserContract, RequestUser } from "@sclable/nestjs-auth"
 import { SchematicTestService } from "./schematic-test.service"
-import { AddTestDataDto } from "./dto"
+import { AddSchematicTestDto } from "./dto"
 
 @Controller('schematic-test')
 export class SchematicTestController {
   public constructor(private readonly db: DatabaseService, private readonly schematicTestService: SchematicTestService) { }
 
   @Post()
-  public async addTestData(@RequestUser() user: ApplicationUserContract, @Body() dto: AddTestDataDto): Promise<void> {
-    return this.schematicTestService.addTestData(user.id, dto.param1, dto.param2, dto.param3)
+  public async addSchematicTest(@Body() dto: AddSchematicTestDto, @RequestUser() user: ApplicationUserContract): Promise<string> {
+    return this.schematicTestService.addSchematicTest(dto.param1, dto.param2, dto.param3, user.id)
   }
 
   @Put('/:id')
@@ -98,21 +93,21 @@ export class SchematicTestController {
 
 const generatedDtoText = `import { Parameter } from './parameter'
 
-export interface AddTestDataDto {
+export interface AddSchematicTestDto {
   param1: string
   param2: number
   param3: Parameter
 }
 `
 
-const generatedDtoIndexText = `export { AddTestDataDto } from "./add-test-data.dto"
+const generatedDtoIndexText = `export { AddSchematicTestDto } from "./add-schematic-test.dto"
 `
 
 describe('Controller Schematic', () => {
   const mainData: EsCqrsSchema = {
     moduleName: 'SchematicTest',
     verb: 'add',
-    subject: 'testData',
+    subject: 'SchematicTest',
   }
   const updateData: EsCqrsSchema = {
     moduleName: 'SchematicTest',
@@ -121,7 +116,7 @@ describe('Controller Schematic', () => {
   }
 
   const generatedFile = '/src/schematic-test/schematic-test.controller.ts'
-  const generatedDtoFile = '/src/schematic-test/dto/add-test-data.dto.ts'
+  const generatedDtoFile = '/src/schematic-test/dto/add-schematic-test.dto.ts'
   const generatedDtoIndexFile = '/src/schematic-test/dto/index.ts'
   let runner: SchematicTestRunner
 
