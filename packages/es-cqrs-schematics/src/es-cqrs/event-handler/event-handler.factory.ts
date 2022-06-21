@@ -15,7 +15,7 @@ import { Project, VariableDeclarationKind } from 'ts-morph'
 import { pastParticiple } from '../../past-participle'
 import { formatCodeSettings } from '../format'
 import { EsCqrsSchema } from '../schema'
-import { appendToArrayString } from '../utils'
+import { mergeWithArrayString } from '../utils'
 import { EventHandlerSchema } from './event-handler.schema'
 
 export function main(options: EsCqrsSchema): Rule {
@@ -79,7 +79,7 @@ function updateIndex(options: EventHandlerSchema): Rule {
       if (array) {
         exportAsArray
           .getDeclarations()[0]
-          .setInitializer(appendToArrayString(array.getText(), eventHandlerClass))
+          .setInitializer(mergeWithArrayString(array.getText(), eventHandlerClass))
       }
     }
     eventHandlersIndex.formatText(formatCodeSettings)

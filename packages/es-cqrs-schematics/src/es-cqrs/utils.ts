@@ -58,10 +58,10 @@ export function getImports(parameters: Parameter[]): Import[] {
   return imports
 }
 
-export function appendToArrayString(array: string, item: string): string {
+export function mergeWithArrayString(array: string, item: string): string {
   const list = array
-    .replace('[', '')
-    .replace(']', '')
+    .replace(/\[/, '')
+    .replace(/\]$/, '')
     .split(',')
     .map(str => str.trim())
     .filter(str => str.length > 0)

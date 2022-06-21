@@ -58,10 +58,40 @@ import { eventHandlers } from "./event-handlers"
 export class SchematicTestModule { }
 `
 
+const generatedTextForAlreadyGeneratedText = `import { Module } from '@nestjs/common'
+import { ESCQRSModule } from '@sclable/nestjs-es-cqrs'
+
+import { SchematicTest } from './schematic-test.aggregate'
+import { SchematicTestService } from './schematic-test.service'
+import { commandHandlers } from './command-handlers'
+import { eventHandlers } from './event-handlers'
+
+@Module({
+  imports: [
+    ESCQRSModule.forFeature([SchematicTest])
+  ],
+  providers: [
+    ...commandHandlers,
+    ...eventHandlers,
+    SchematicTestService
+  ],
+  exports: [
+    SchematicTestService
+  ],
+})
+export class SchematicTestModule { }
+`
+
 describe('Module Schematic', () => {
   const mainData: EsCqrsSchema = {
     moduleName: 'SchematicTest',
     verb: 'add',
+    subject: 'testData',
+  }
+
+  const otherData: EsCqrsSchema = {
+    moduleName: 'SchematicTest',
+    verb: 'set',
     subject: 'testData',
   }
 
@@ -86,5 +116,14 @@ describe('Module Schematic', () => {
     expect(tree.files).toHaveLength(1)
     expect(tree.files).toContain(generatedFile)
     expect(tree.readContent(generatedFile)).toBe(generatedTextForExistingFileNonEsCqrs)
+  })
+
+  test('main with es-cqrs module', async () => {
+    let tree = new UnitTestTree(Tree.empty())
+    tree.create(generatedFile, generatedText)
+    tree = await runner.runSchematicAsync('module', otherData, tree).toPromise()
+    expect(tree.files).toHaveLength(1)
+    expect(tree.files).toContain(generatedFile)
+    expect(tree.readContent(generatedFile)).toBe(generatedTextForAlreadyGeneratedText)
   })
 })

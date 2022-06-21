@@ -14,7 +14,7 @@ import { Project, VariableDeclarationKind } from 'ts-morph'
 
 import { formatCodeSettings } from '../format'
 import { EsCqrsSchema } from '../schema'
-import { appendToArrayString, isCreating } from '../utils'
+import { isCreating, mergeWithArrayString } from '../utils'
 import { CommandHandlerSchema } from './command-handler.schema'
 
 export function main(options: EsCqrsSchema): Rule {
@@ -83,7 +83,7 @@ function updateIndex(options: CommandHandlerSchema): Rule {
       if (array) {
         exportAsArray
           .getDeclarations()[0]
-          .setInitializer(appendToArrayString(array.getText(), commandHandlerClass))
+          .setInitializer(mergeWithArrayString(array.getText(), commandHandlerClass))
       }
     }
     commandHandlersIndex.formatText(formatCodeSettings)

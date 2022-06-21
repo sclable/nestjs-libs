@@ -17,7 +17,7 @@ import { ObjectLiteralExpression, Project, SyntaxKind } from 'ts-morph'
 
 import { formatCodeSettings } from '../format'
 import { EsCqrsSchema } from '../schema'
-import { KeyValuesDefinition, appendToArrayString, updateImports } from '../utils'
+import { KeyValuesDefinition, mergeWithArrayString, updateImports } from '../utils'
 import { ModuleSchema } from './module.schema'
 
 export function main(options: EsCqrsSchema): Rule {
@@ -108,7 +108,7 @@ function updateModule(options: ModuleSchema): Rule {
           if (property) {
             moduleDecoratorDefinition[propertyName].forEach(propertyValue => {
               property.array?.replaceWithText(
-                appendToArrayString(property.array.getFullText(), propertyValue),
+                mergeWithArrayString(property.array.getFullText(), propertyValue),
               )
             })
           } else {
