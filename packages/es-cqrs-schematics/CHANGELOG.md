@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.1.0](https://github.com/sclable/nestjs-libs/compare/@sclable/nestjs-es-cqrs-schematics@1.0.10...@sclable/nestjs-es-cqrs-schematics@1.1.0) (2022-06-21)
+
+
+### Features
+
+* **schematics:** add creation and member logic to aggregate ([dfd8b93](https://github.com/sclable/nestjs-libs/commit/dfd8b93ffb37a771e0d20ea92d4b5e06fdbd6792))
+* **schematics:** add creation logic to cmd and cmd-handler ([b11dbc9](https://github.com/sclable/nestjs-libs/commit/b11dbc96c900397a5a283ce22d0d66a98c5e3c42))
+* **schematics:** add nestjs controller generation ([59fb454](https://github.com/sclable/nestjs-libs/commit/59fb454943c1ee8e5e6cf98b46475f464b5a0851))
+* **schematics:** add nestjs module generation ([da34d93](https://github.com/sclable/nestjs-libs/commit/da34d9345832a9d8de0e0473ea0b4bec7aa69616))
+* **schematics:** add nestjs service generation ([dc515d6](https://github.com/sclable/nestjs-libs/commit/dc515d6d9675666535f0806fbfe9e3eec061aa65))
+* **schematics:** move userId to the end of the parameter list ([97a0c64](https://github.com/sclable/nestjs-libs/commit/97a0c64d2afeb2bd6afd9f868ab8ce69490039dd))
+
+
+
+
+
 ## [1.0.10](https://github.com/sclable/nestjs-libs/compare/@sclable/nestjs-es-cqrs-schematics@1.0.9...@sclable/nestjs-es-cqrs-schematics@1.0.10) (2022-06-13)
 
 **Note:** Version bump only for package @sclable/nestjs-es-cqrs-schematics

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.2.0](https://github.com/sclable/nestjs-libs/compare/@sclable/nestjs-auth@1.1.5...@sclable/nestjs-auth@1.2.0) (2022-06-21)
+
+
+### Features
+
+* **auth:** export RequestUser decorator for getting users in requests ([2208123](https://github.com/sclable/nestjs-libs/commit/2208123c228ad1c9b514ef2fd7e536567e78448e))
+
+
+
+
+
 ## [1.1.5](https://github.com/sclable/nestjs-libs/compare/@sclable/nestjs-auth@1.1.4...@sclable/nestjs-auth@1.1.5) (2022-06-03)
 
 **Note:** Version bump only for package @sclable/nestjs-auth
