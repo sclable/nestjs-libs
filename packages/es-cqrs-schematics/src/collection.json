@@ -6,6 +6,16 @@
       "factory": "./es-cqrs/index#all",
       "schema": "./es-cqrs/schema.json"
     },
+    "all-rest": {
+      "description": "ES/CQRS all with REST controller",
+      "factory": "./es-cqrs/index#allWithRestController",
+      "schema": "./es-cqrs/schema.json"
+    },
+    "all-graphql": {
+      "description": "ES/CQRS all with GraphQL resolver",
+      "factory": "./es-cqrs/index#allWithGraphqlResolver",
+      "schema": "./es-cqrs/schema.json"
+    },
     "json": {
       "description": "ES/CQRS form json",
       "factory": "./index#json",
@@ -70,6 +80,46 @@
       "description": "migrate from @nestjs/cqrs@5 to @nestjs/cqrs@6",
       "factory": "./es-cqrs/nest6-migration/nest6-migration.factory#main",
       "schema": "./es-cqrs/nest6-migration/nest6-migration.schema.json"
+    },
+    "module": {
+      "description": "ES/CQRS module",
+      "factory": "./es-cqrs/module/module.factory#main",
+      "schema": "./es-cqrs/schema.json"
+    },
+    "module.standalone": {
+      "description": "ES/CQRS module",
+      "factory": "./es-cqrs/module/module.factory#standalone",
+      "schema": "./es-cqrs/module/module.schema.json"
+    },
+    "service": {
+      "description": "ES/CQRS service",
+      "factory": "./es-cqrs/service/service.factory#main",
+      "schema": "./es-cqrs/schema.json"
+    },
+    "service.standalone": {
+      "description": "ES/CQRS service",
+      "factory": "./es-cqrs/service/service.factory#standalone",
+      "schema": "./es-cqrs/service/service.schema.json"
+    },
+    "controller": {
+      "description": "REST controller",
+      "factory": "./es-cqrs/controller/controller.factory#main",
+      "schema": "./es-cqrs/schema.json"
+    },
+    "controller.standalone": {
+      "description": "REST controller",
+      "factory": "./es-cqrs/controller/controller.factory#standalone",
+      "schema": "./es-cqrs/controller/controller.schema.json"
+    },
+    "resolver": {
+      "description": "GraphQL resolver",
+      "factory": "./es-cqrs/resolver/resolver.factory#main",
+      "schema": "./es-cqrs/schema.json"
+    },
+    "resolver.standalone": {
+      "description": "GraphQL resolver",
+      "factory": "./es-cqrs/resolver/resolver.factory#standalone",
+      "schema": "./es-cqrs/resolver/resolver.schema.json"
     }
   }
 }

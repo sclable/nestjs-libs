@@ -13,9 +13,9 @@ import {
 import { Project, VariableDeclarationKind } from 'ts-morph'
 
 import { pastParticiple } from '../../past-participle'
-import { appendToArray, formatCodeSettings } from '../format'
+import { formatCodeSettings } from '../format'
 import { EsCqrsSchema } from '../schema'
-import { getImports } from '../utils'
+import { appendToArrayString, getImports } from '../utils'
 import { EventSchema } from './event.schema'
 
 export function main(options: EsCqrsSchema): Rule {
@@ -27,31 +27,25 @@ export function standalone(options: EventSchema): Rule {
 }
 
 function transform(options: EsCqrsSchema): EventSchema {
+  const parameters = options.parameters || []
+
   return {
     event: `${strings.dasherize(options.subject)}-${pastParticiple(options.verb)}`,
-    eventClass: `${strings.classify(options.subject)}${strings.classify(
-      pastParticiple(options.verb),
-    )}`,
-    imports: getImports(options.parameters || []),
-    moduleName: options.moduleName || '',
-    parameters: options.parameters || [],
+    aggregate: strings.classify(options.moduleName),
+    imports: getImports(parameters),
+    parameters,
+    needsEventData:
+      parameters.length > 1 || (parameters.length !== 0 && !parameters[0].isExistingObject),
   }
 }
 
 function generate(options: EventSchema): Source {
-  const needEventDataType =
-    options.parameters &&
-    (options.parameters.length > 1 ||
-      (options.parameters.length > 0 &&
-        options.parameters.filter(param => !!param.importPath).length === 0))
-
   return apply(url('./templates'), [
     template({
       ...strings,
       ...options,
-      needEventDataType,
     }),
-    move(join('src' as Path, strings.dasherize(options.moduleName), 'events')),
+    move(join('src' as Path, strings.dasherize(options.aggregate))),
   ])
 }
 
@@ -59,7 +53,7 @@ function updateIndex(options: EventSchema): Rule {
   return (tree: Tree) => {
     const indexPath = join(
       'src' as Path,
-      strings.dasherize(options.moduleName),
+      strings.dasherize(options.aggregate),
       'events',
       'index.ts',
     )
@@ -69,22 +63,23 @@ function updateIndex(options: EventSchema): Rule {
       'events.index.ts',
       indexSrc ? indexSrc.toString() : '',
     )
+    const eventClassName = strings.classify(options.event)
 
     const moduleSpecifier = `./${options.event}.event`
     const namedImport = eventsIndex.getImportDeclaration(moduleSpecifier)
     if (!namedImport) {
       eventsIndex.addImportDeclaration({
         moduleSpecifier,
-        namedImports: [options.eventClass],
+        namedImports: [eventClassName],
       })
     }
 
-    const moduleEvents = `${options.moduleName}Events`
+    const moduleEvents = `${options.aggregate}Events`
     const exportAsArray = eventsIndex.getVariableStatement(moduleEvents)
     if (!exportAsArray) {
       eventsIndex.addVariableStatement({
         declarationKind: VariableDeclarationKind.Const,
-        declarations: [{ name: moduleEvents, initializer: `[${options.eventClass}]` }],
+        declarations: [{ name: moduleEvents, initializer: `[${eventClassName}]` }],
         isExported: true,
       })
     } else {
@@ -92,22 +87,22 @@ function updateIndex(options: EventSchema): Rule {
       if (array) {
         exportAsArray
           .getDeclarations()[0]
-          .setInitializer(appendToArray(array.getText(), options.eventClass))
+          .setInitializer(appendToArrayString(array.getText(), eventClassName))
       }
     }
     const namedExport = eventsIndex.getExportDeclaration(decl => !decl.hasModuleSpecifier())
     if (!namedExport) {
       eventsIndex.addExportDeclaration({
-        namedExports: [options.eventClass],
+        namedExports: [eventClassName],
       })
     } else {
       if (
         !namedExport
           .getNamedExports()
           .map(ne => ne.getName())
-          .includes(options.eventClass)
+          .includes(eventClassName)
       ) {
-        namedExport.addNamedExport(options.eventClass)
+        namedExport.addNamedExport(eventClassName)
       }
     }
     eventsIndex.formatText(formatCodeSettings)

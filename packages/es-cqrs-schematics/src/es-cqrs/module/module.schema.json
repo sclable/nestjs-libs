@@ -1,0 +1,12 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "$id": "module",
+  "title": "ModuleSchema",
+  "type": "object",
+  "properties": {
+    "aggregate": {
+      "type": "string"
+    }
+  },
+  "required": ["aggregate"]
+}

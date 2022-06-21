@@ -1,13 +1,13 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "$id": "command",
-  "title": "CommandHandlerSchema",
+  "$id": "service",
+  "title": "ServiceSchema",
   "type": "object",
   "properties": {
-    "command": {
+    "aggregate": {
       "type": "string"
     },
-    "aggregate": {
+    "command": {
       "type": "string"
     },
     "isCreating": {
@@ -26,5 +26,5 @@
       }
     }
   },
-  "required": ["command", "aggregate", "isCreating"]
+  "required": ["command", "aggregate"]
 }

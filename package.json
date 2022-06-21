@@ -95,7 +95,7 @@
     ]
   },
   "lint-staged": {
-    "*.{js,ts,jsx,tsx}": "eslint --cache --cache-location 'node_modules/.cache/.eslintcache' --max-warnings 0",
+    "**/!(templates)/*/*.{js,ts,jsx,tsx}": "eslint --cache --cache-location 'node_modules/.cache/.eslintcache' --max-warnings 0",
     "*.md": "markdownlint --ignore-path .gitignore --ignore '**/CHANGELOG.md' --config .markdownlintrc"
   },
   "jest": {

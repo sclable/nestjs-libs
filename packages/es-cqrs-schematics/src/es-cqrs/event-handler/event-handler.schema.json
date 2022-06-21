@@ -7,10 +7,7 @@
     "event": {
       "type": "string"
     },
-    "eventClass": {
-      "type": "string"
-    },
-    "moduleName": {
+    "aggregate": {
       "type": "string"
     },
     "parameters": {
@@ -26,5 +23,5 @@
       }
     }
   },
-  "required": ["event", "eventClass", "moduleName"]
+  "required": ["event", "aggregate"]
 }

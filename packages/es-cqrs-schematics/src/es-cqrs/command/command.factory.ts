@@ -14,7 +14,7 @@ import { Project } from 'ts-morph'
 
 import { formatCodeSettings } from '../format'
 import { EsCqrsSchema } from '../schema'
-import { getImports } from '../utils'
+import { getImports, isCreating } from '../utils'
 import { CommandSchema } from './command.schema'
 
 export function main(options: EsCqrsSchema): Rule {
@@ -28,10 +28,10 @@ export function standalone(options: CommandSchema): Rule {
 function transform(options: EsCqrsSchema): CommandSchema {
   return {
     command: `${strings.dasherize(options.verb)}-${strings.dasherize(options.subject)}`,
-    commandClass: `${strings.classify(options.verb)}${strings.classify(options.subject)}`,
     imports: getImports(options.parameters ?? []),
-    moduleName: options.moduleName || '',
+    aggregate: options.moduleName,
     parameters: options.parameters,
+    isCreating: isCreating(options),
   }
 }
 
@@ -41,7 +41,7 @@ function generate(options: CommandSchema): Source {
       ...strings,
       ...options,
     }),
-    move(join('src' as Path, strings.dasherize(options.moduleName), 'commands')),
+    move(join('src' as Path, strings.dasherize(options.aggregate))),
   ])
 }
 
@@ -49,7 +49,7 @@ function updateIndex(options: CommandSchema): Rule {
   return (tree: Tree) => {
     const indexPath = join(
       'src' as Path,
-      strings.dasherize(options.moduleName),
+      strings.dasherize(options.aggregate),
       'commands',
       'index.ts',
     )
@@ -65,7 +65,7 @@ function updateIndex(options: CommandSchema): Rule {
     if (!namedExport) {
       commandsIndex.addExportDeclaration({
         moduleSpecifier,
-        namedExports: [`${options.commandClass}`],
+        namedExports: [`${strings.classify(options.command)}`],
       })
     }
     commandsIndex.formatText(formatCodeSettings)

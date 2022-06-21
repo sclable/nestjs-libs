@@ -1,16 +1,23 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "$id": "command",
-  "title": "CommandHandlerSchema",
+  "$id": "controller",
+  "title": "ControllerSchema",
   "type": "object",
   "properties": {
-    "command": {
-      "type": "string"
-    },
     "aggregate": {
       "type": "string"
     },
+    "command": {
+      "type": "string"
+    },
+    "httpMethod": {
+      "type": "string",
+      "default": "Put"
+    },
     "isCreating": {
+      "type": "boolean"
+    },
+    "needsDto": {
       "type": "boolean"
     },
     "parameters": {
@@ -26,5 +33,5 @@
       }
     }
   },
-  "required": ["command", "aggregate", "isCreating"]
+  "required": ["aggregate", "command", "isCreating", "needsDto"]
 }

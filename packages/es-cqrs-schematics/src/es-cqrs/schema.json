@@ -38,8 +38,17 @@
         "type": {
           "type": "string"
         },
+        "graphqlType": {
+          "type": "string"
+        },
         "importPath": {
           "type": "string"
+        },
+        "isMember": {
+          "type": "boolean"
+        },
+        "isExistingObject": {
+          "type": "boolean"
         }
       },
       "required": ["name", "type"]
