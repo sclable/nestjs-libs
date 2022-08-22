@@ -1,3 +1,4 @@
+import { ApolloDriver } from '@nestjs/apollo'
 import { INestApplication } from '@nestjs/common'
 import { Args, GraphQLModule, Query, Resolver } from '@nestjs/graphql'
 import { Test as NestTest, TestingModule } from '@nestjs/testing'
@@ -41,7 +42,9 @@ class TestResolver {
 describe('GraphQL UUID scalar', () => {
   beforeAll(async () => {
     const module: TestingModule = await NestTest.createTestingModule({
-      imports: [GraphQLModule.forRoot({ typeDefs, introspection: true })],
+      imports: [
+        GraphQLModule.forRoot({ driver: ApolloDriver, typeDefs, introspection: true }),
+      ],
       providers: [UUIDv4Scalar, TestResolver],
     }).compile()
     app = module.createNestApplication()

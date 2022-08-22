@@ -26,13 +26,13 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.9.2",
-    "@nestjs/cqrs": "8.0.5",
+    "@nestjs/cqrs": "9.0.1",
     "lodash": "^4.17.12",
     "p-limit": "^3.1.0",
     "uuid": "^8.3.2"
   },
   "peerDependencies": {
-    "@nestjs/common": "^8",
-    "@nestjs/core": "^8"
+    "@nestjs/common": "^9",
+    "@nestjs/core": "^9"
   }
 }
