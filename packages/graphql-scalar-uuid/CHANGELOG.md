@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0](https://github.com/sclable/nestjs-libs/compare/@sclable/nestjs-graphql-scalar-uuid@1.0.3...@sclable/nestjs-graphql-scalar-uuid@2.0.0) (2022-08-22)
+
+
+### chore
+
+* **es-cqrs:** add version 9 ([c0a6bc8](https://github.com/sclable/nestjs-libs/commit/c0a6bc871d40e5b6f94ef1f4c486a3c88c43fdbf))
+
+
+### BREAKING CHANGES
+
+* **es-cqrs:** minimum nestjs version is increased to v9
+no actual breaking changes in the API
+
+
+
+
+
 ## [1.0.3](https://github.com/sclable/nestjs-libs/compare/@sclable/nestjs-graphql-scalar-uuid@1.0.2...@sclable/nestjs-graphql-scalar-uuid@1.0.3) (2022-02-28)
 
 **Note:** Version bump only for package @sclable/nestjs-graphql-scalar-uuid
