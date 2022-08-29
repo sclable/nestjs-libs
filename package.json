@@ -45,7 +45,7 @@
     "@azure/service-bus": "7.7.0",
     "@azure/storage-blob": "12.11.0",
     "@commitlint/cli": "17.0.3",
-    "@commitlint/config-conventional": "17.0.3",
+    "@commitlint/config-conventional": "17.1.0",
     "@commitlint/prompt-cli": "17.0.3",
     "@nestjs/apollo": "10.0.22",
     "@nestjs/common": "9.0.11",
