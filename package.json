@@ -68,7 +68,7 @@
     "@types/uuid": "8.3.4",
     "amqp-ts": "1.8.0",
     "apollo-server-core": "3.10.1",
-    "apollo-server-express": "3.10.1",
+    "apollo-server-express": "3.10.2",
     "enhanced-resolve": "5.10.0",
     "glob": "8.0.3",
     "glob-promise": "5.0.0",
