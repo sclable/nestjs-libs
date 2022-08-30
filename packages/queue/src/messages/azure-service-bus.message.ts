@@ -8,9 +8,7 @@ export interface AzureServiceBusMessagePayload {
   subject?: string
 }
 
-export class AzureServiceBusMessage<PayloadType extends AzureServiceBusMessagePayload>
-  implements QueueMessage<PayloadType>
-{
+export class AzureServiceBusMessage<PayloadType> implements QueueMessage<PayloadType> {
   public constructor(
     private readonly original: ServiceBusReceivedMessage,
     private readonly receiver: ServiceBusReceiver,
