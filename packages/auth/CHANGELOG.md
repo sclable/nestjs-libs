@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.1](https://github.com/sclable/nestjs-libs/compare/@sclable/nestjs-auth@1.2.0...@sclable/nestjs-auth@1.2.1) (2022-09-02)
+
+
+### Bug Fixes
+
+* **auth:** remove dependency on passport-mock-strategy ([864d1c9](https://github.com/sclable/nestjs-libs/commit/864d1c9f7b5e25e9f28bcbc54cb92c66d49cf32a))
+
+
+
+
+
 # [1.2.0](https://github.com/sclable/nestjs-libs/compare/@sclable/nestjs-auth@1.1.5...@sclable/nestjs-auth@1.2.0) (2022-06-21)
 
 
