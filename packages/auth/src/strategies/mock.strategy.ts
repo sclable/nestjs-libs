@@ -1,13 +1,13 @@
 import { Inject, Injectable, Logger } from '@nestjs/common'
 import { PassportStrategy } from '@nestjs/passport'
-import { Strategy } from 'passport-mock-strategy'
 
 import { USER_SERVICE } from '../constants'
 import { ApplicationUserContract, TestUserServiceContract } from '../contracts'
+import { PassportMockStrategy } from './passport-mock-strategy/passport-mock-strategy'
 
 @Injectable()
 export class MockStrategy<UserType extends ApplicationUserContract> extends PassportStrategy(
-  Strategy,
+  PassportMockStrategy,
 ) {
   private readonly logger: Logger = new Logger(MockStrategy.name)
   public constructor(
