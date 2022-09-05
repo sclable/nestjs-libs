@@ -47,7 +47,7 @@
     "@commitlint/cli": "17.1.2",
     "@commitlint/config-conventional": "17.1.0",
     "@commitlint/prompt-cli": "17.0.3",
-    "@nestjs/apollo": "10.0.22",
+    "@nestjs/apollo": "10.1.0",
     "@nestjs/common": "9.0.11",
     "@nestjs/core": "9.0.11",
     "@nestjs/jwt": "9.0.0",
