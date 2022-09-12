@@ -1,6 +1,6 @@
 {
   "name": "@sclable/nestjs-es-cqrs",
-  "version": "9.0.0",
+  "version": "9.0.1",
   "description": "Sclable ES-CQRS library for nestjs",
   "author": {
     "name": "Sclable Business Solutions GmbH",
