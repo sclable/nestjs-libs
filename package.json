@@ -40,7 +40,7 @@
   },
   "devDependencies": {
     "@angular-devkit/core": "14.2.2",
-    "@angular-devkit/schematics": "14.2.2",
+    "@angular-devkit/schematics": "14.2.3",
     "@azure/abort-controller": "1.1.0",
     "@azure/service-bus": "7.7.1",
     "@azure/storage-blob": "12.11.0",
