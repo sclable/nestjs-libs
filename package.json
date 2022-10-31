@@ -39,7 +39,7 @@
     "@sclable/nestjs-storage": "file:packages/storage"
   },
   "devDependencies": {
-    "@angular-devkit/core": "14.2.5",
+    "@angular-devkit/core": "14.2.7",
     "@angular-devkit/schematics": "14.2.5",
     "@azure/abort-controller": "1.1.0",
     "@azure/service-bus": "7.7.1",
