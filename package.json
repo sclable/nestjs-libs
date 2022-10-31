@@ -56,7 +56,7 @@
     "@nestjs/testing": "9.1.6",
     "@sclable/lint": "1.8.0",
     "@sclable/tsconfig": "0.11.18",
-    "@types/eslint": "8.4.6",
+    "@types/eslint": "8.4.9",
     "@types/fs-extra": "9.0.13",
     "@types/jest": "27.5.0",
     "@types/minio": "7.0.14",
