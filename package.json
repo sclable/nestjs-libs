@@ -80,7 +80,7 @@
     "markdownlint-cli": "0.32.2",
     "minio": "7.0.32",
     "rimraf": "3.0.2",
-    "rxjs": "7.5.7",
+    "rxjs": "7.6.0",
     "rxjs6": "npm:rxjs@6.6.7",
     "shelljs": "0.8.5",
     "supertest": "6.3.1",
