@@ -83,7 +83,7 @@
     "rxjs": "7.6.0",
     "rxjs6": "npm:rxjs@6.6.7",
     "shelljs": "0.8.5",
-    "supertest": "6.3.2",
+    "supertest": "6.3.3",
     "ts-jest": "29.0.3",
     "typedoc": "0.23.21",
     "typedoc-github-wiki-theme": "1.0.1",
