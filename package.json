@@ -79,7 +79,7 @@
     "lint-staged": "13.1.0",
     "markdownlint-cli": "0.32.2",
     "minio": "7.0.32",
-    "rimraf": "3.0.2",
+    "rimraf": "4.0.7",
     "rxjs": "7.8.0",
     "rxjs6": "npm:rxjs@6.6.7",
     "shelljs": "0.8.5",
