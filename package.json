@@ -57,7 +57,7 @@
     "@sclable/lint": "1.8.0",
     "@sclable/tsconfig": "0.11.18",
     "@types/eslint": "8.4.10",
-    "@types/fs-extra": "11.0.0",
+    "@types/fs-extra": "11.0.1",
     "@types/jest": "29.2.5",
     "@types/minio": "7.0.15",
     "@types/node": "18.11.18",
