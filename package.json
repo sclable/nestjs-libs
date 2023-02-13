@@ -51,7 +51,7 @@
     "@nestjs/common": "9.3.2",
     "@nestjs/core": "9.3.2",
     "@nestjs/jwt": "10.0.1",
-    "@nestjs/passport": "9.0.1",
+    "@nestjs/passport": "9.0.3",
     "@nestjs/platform-express": "9.3.2",
     "@nestjs/testing": "9.3.2",
     "@sclable/lint": "1.8.0",
