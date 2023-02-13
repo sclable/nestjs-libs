@@ -50,7 +50,7 @@
     "@nestjs/apollo": "10.1.7",
     "@nestjs/common": "9.3.2",
     "@nestjs/core": "9.3.2",
-    "@nestjs/jwt": "10.0.1",
+    "@nestjs/jwt": "10.0.2",
     "@nestjs/passport": "9.0.1",
     "@nestjs/platform-express": "9.3.2",
     "@nestjs/testing": "9.3.2",
