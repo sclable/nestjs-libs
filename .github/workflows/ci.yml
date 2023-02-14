@@ -43,7 +43,8 @@ jobs:
     - name: Setup NodeJS
       uses: actions/setup-node@v3
       with:
-        node-version: '18'
+        #node-version: '18'
+        node-version-file: 'package.json'
         cache: 'npm'
     - name: Install and generate docs
       run: npm ci
