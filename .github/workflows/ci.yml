@@ -46,7 +46,7 @@ jobs:
         node-version: '18'
         cache: 'npm'
     - name: Downgrade NPM
-        run: npm i -g npm@8 --registry=https://registry.npmjs.org
+      run: npm i -g npm@8 --registry=https://registry.npmjs.org
     - name: Install and generate docs
       run: npm ci
     - name: Publish
