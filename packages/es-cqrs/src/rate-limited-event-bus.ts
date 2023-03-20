@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { EventBus, IEventHandler } from '@nestjs/cqrs'
-import pLimit, { Limit } from 'p-limit'
+import pLimit, { LimitFunction } from 'p-limit'
 
 import { Event } from './interfaces'
 
@@ -16,7 +16,7 @@ import { Event } from './interfaces'
  */
 @Injectable()
 export class RateLimitedEventBus extends EventBus<Event> {
-  private limits: { [key: string]: Limit } = {}
+  private limits: { [key: string]: LimitFunction } = {}
 
   public bind(handler: IEventHandler<Event>, id: string): void {
     const stream$ = id ? this.ofEventId(id) : this.subject$
