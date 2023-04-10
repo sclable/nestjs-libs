@@ -89,7 +89,7 @@
     "typedoc": "0.23.28",
     "typedoc-github-wiki-theme": "1.0.1",
     "typedoc-plugin-markdown": "3.14.0",
-    "typescript": "5.0.3"
+    "typescript": "5.0.4"
   },
   "commitlint": {
     "extends": [
