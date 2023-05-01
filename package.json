@@ -81,7 +81,7 @@
     "minio": "7.0.33",
     "p-limit": "^4.0.0",
     "rimraf": "5.0.0",
-    "rxjs": "7.8.0",
+    "rxjs": "7.8.1",
     "rxjs6": "npm:rxjs@6.6.7",
     "shelljs": "0.8.5",
     "supertest": "6.3.3",
