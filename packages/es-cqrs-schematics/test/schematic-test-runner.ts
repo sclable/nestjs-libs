@@ -28,8 +28,8 @@ import {
   NodeModulesTestEngineHost,
   validateOptionsWithSchema,
 } from '@angular-devkit/schematics/tools'
-import { Observable, of as observableOf } from 'rxjs6'
-import { map } from 'rxjs6/operators'
+import { Observable, of as observableOf } from 'rxjs'
+import { map } from 'rxjs/operators'
 
 export class UnitTestTree extends DelegateTree {
   public get files(): string[] {
