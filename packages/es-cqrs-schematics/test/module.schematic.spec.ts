@@ -2,6 +2,7 @@ import { join as pathJoin } from 'path'
 
 import { Tree } from '@angular-devkit/schematics'
 import { UnitTestTree } from '@angular-devkit/schematics/testing'
+import { firstValueFrom } from 'rxjs'
 
 import { EsCqrsSchema } from '../src/es-cqrs/schema'
 import { SchematicTestRunner } from './schematic-test-runner'
@@ -103,7 +104,9 @@ describe('Module Schematic', () => {
   })
 
   test('main', async () => {
-    const tree = await runner.runSchematicAsync('module', mainData, Tree.empty()).toPromise()
+    const tree = await firstValueFrom(
+      runner.runSchematicAsync('module', mainData, Tree.empty()),
+    )
     expect(tree.files).toHaveLength(1)
     expect(tree.files).toContain(generatedFile)
     expect(tree.readContent(generatedFile)).toBe(generatedText)
@@ -112,7 +115,7 @@ describe('Module Schematic', () => {
   test('main with existing module', async () => {
     let tree = new UnitTestTree(Tree.empty())
     tree.create(generatedFile, existingFileContentNonEsCqrs)
-    tree = await runner.runSchematicAsync('module', mainData, tree).toPromise()
+    tree = await firstValueFrom(runner.runSchematicAsync('module', mainData, tree))
     expect(tree.files).toHaveLength(1)
     expect(tree.files).toContain(generatedFile)
     expect(tree.readContent(generatedFile)).toBe(generatedTextForExistingFileNonEsCqrs)
@@ -121,7 +124,7 @@ describe('Module Schematic', () => {
   test('main with es-cqrs module', async () => {
     let tree = new UnitTestTree(Tree.empty())
     tree.create(generatedFile, generatedText)
-    tree = await runner.runSchematicAsync('module', otherData, tree).toPromise()
+    tree = await firstValueFrom(runner.runSchematicAsync('module', otherData, tree))
     expect(tree.files).toHaveLength(1)
     expect(tree.files).toContain(generatedFile)
     expect(tree.readContent(generatedFile)).toBe(generatedTextForAlreadyGeneratedText)

@@ -2,6 +2,7 @@ import { join as pathJoin } from 'path'
 
 import { Tree } from '@angular-devkit/schematics'
 import { UnitTestTree } from '@angular-devkit/schematics/testing'
+import { firstValueFrom } from 'rxjs'
 
 import { format } from '../src/es-cqrs/format'
 import { EsCqrsSchema } from '../src/es-cqrs/schema'
@@ -240,9 +241,9 @@ describe('Aggregate Schematic', () => {
   })
 
   test('create operation', async () => {
-    const tree = await runner
-      .runSchematicAsync('aggregate', createOperation, Tree.empty())
-      .toPromise()
+    const tree = await firstValueFrom(
+      runner.runSchematicAsync('aggregate', createOperation, Tree.empty()),
+    )
     expect(tree.files).toHaveLength(1)
     expect(tree.files).toContain(generatedFile)
     expect(tree.readContent(generatedFile)).toBe(generatedCreateText)
@@ -257,9 +258,9 @@ describe('Aggregate Schematic', () => {
         { name: 'param3', type: 'Parameter', importPath: './parameter' },
       ],
     }
-    const tree = await runner
-      .runSchematicAsync('aggregate', createOperationWithParameters, Tree.empty())
-      .toPromise()
+    const tree = await firstValueFrom(
+      runner.runSchematicAsync('aggregate', createOperationWithParameters, Tree.empty()),
+    )
     expect(tree.files).toHaveLength(1)
     expect(tree.files).toContain(generatedFile)
     expect(tree.readContent(generatedFile)).toBe(generatedCreateWithParametersText)
@@ -274,18 +275,18 @@ describe('Aggregate Schematic', () => {
         { name: 'param3', type: 'Parameter', importPath: './parameter', isMember: true },
       ],
     }
-    const tree = await runner
-      .runSchematicAsync('aggregate', createOperationWithParameters, Tree.empty())
-      .toPromise()
+    const tree = await firstValueFrom(
+      runner.runSchematicAsync('aggregate', createOperationWithParameters, Tree.empty()),
+    )
     expect(tree.files).toHaveLength(1)
     expect(tree.files).toContain(generatedFile)
     expect(tree.readContent(generatedFile)).toBe(generatedCreateWithParametersAndMembersText)
   })
 
   test('add operation', async () => {
-    const tree = await runner
-      .runSchematicAsync('aggregate', addOperation, Tree.empty())
-      .toPromise()
+    const tree = await firstValueFrom(
+      runner.runSchematicAsync('aggregate', addOperation, Tree.empty()),
+    )
     expect(tree.files).toHaveLength(1)
     expect(tree.files).toContain(generatedFile)
     expect(tree.readContent(generatedFile)).toBe(generatedAddText)
@@ -300,9 +301,9 @@ describe('Aggregate Schematic', () => {
         { name: 'param3', type: 'Parameter', importPath: './parameter' },
       ],
     }
-    const tree = await runner
-      .runSchematicAsync('aggregate', addOperationWithParameters, Tree.empty())
-      .toPromise()
+    const tree = await firstValueFrom(
+      runner.runSchematicAsync('aggregate', addOperationWithParameters, Tree.empty()),
+    )
     expect(tree.files).toHaveLength(1)
     expect(tree.files).toContain(generatedFile)
     expect(tree.readContent(generatedFile)).toBe(generatedAddWithParametersText)
@@ -321,9 +322,13 @@ describe('Aggregate Schematic', () => {
         },
       ],
     }
-    const tree = await runner
-      .runSchematicAsync('aggregate', addOperationWithSingleObjectParameter, Tree.empty())
-      .toPromise()
+    const tree = await firstValueFrom(
+      runner.runSchematicAsync(
+        'aggregate',
+        addOperationWithSingleObjectParameter,
+        Tree.empty(),
+      ),
+    )
     expect(tree.files).toHaveLength(1)
     expect(tree.files).toContain(generatedFile)
     expect(tree.readContent(generatedFile)).toBe(generatedAddWithSingleObjectParameterText)
@@ -346,12 +351,12 @@ describe('Aggregate Schematic', () => {
         { name: 'param3', type: 'Parameter', importPath: './parameter', isMember: true },
       ],
     }
-    const tree = await runner
-      .runSchematicAsync('aggregate', addOperationWithParameters, Tree.empty())
-      .toPromise()
-    const updatedTree = await runner
-      .runSchematicAsync('aggregate', createOperationWithParameters, tree)
-      .toPromise()
+    const tree = await firstValueFrom(
+      runner.runSchematicAsync('aggregate', addOperationWithParameters, Tree.empty()),
+    )
+    const updatedTree = await firstValueFrom(
+      runner.runSchematicAsync('aggregate', createOperationWithParameters, tree),
+    )
     expect(updatedTree.files).toHaveLength(1)
     expect(updatedTree.files).toContain(generatedFile)
     expect(updatedTree.readContent(generatedFile)).toBe(generatedAddAndCreateText)
@@ -374,18 +379,18 @@ describe('Aggregate Schematic', () => {
         { name: 'param3', type: 'UpdateParameter', importPath: '../update-parameter' },
       ],
     }
-    const tree = await runner
-      .runSchematicAsync('aggregate', addOperationWithParameters, Tree.empty())
-      .toPromise()
-    const updatedTree = await runner
-      .runSchematicAsync('aggregate', removeOperationWithParameters, tree)
-      .toPromise()
+    const tree = await firstValueFrom(
+      runner.runSchematicAsync('aggregate', addOperationWithParameters, Tree.empty()),
+    )
+    const updatedTree = await firstValueFrom(
+      runner.runSchematicAsync('aggregate', removeOperationWithParameters, tree),
+    )
     expect(updatedTree.files).toHaveLength(1)
     expect(updatedTree.files).toContain(generatedFile)
     expect(updatedTree.readContent(generatedFile)).toBe(generatedRemoveText)
 
     const formattedTree = new UnitTestTree(
-      await runner.callRule(format(), updatedTree).toPromise(),
+      await firstValueFrom(runner.callRule(format(), updatedTree)),
     )
     expect(formattedTree.readContent(generatedFile)).toBe(generatedFormattedText)
   }, 45000)

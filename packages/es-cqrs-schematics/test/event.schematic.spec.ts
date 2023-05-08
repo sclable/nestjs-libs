@@ -2,6 +2,7 @@ import { join as pathJoin } from 'path'
 
 import { Tree } from '@angular-devkit/schematics'
 import { UnitTestTree } from '@angular-devkit/schematics/testing'
+import { firstValueFrom } from 'rxjs'
 
 import { format } from '../src/es-cqrs/format'
 import { EsCqrsSchema } from '../src/es-cqrs/schema'
@@ -92,9 +93,9 @@ describe('Event Schematic', () => {
   })
 
   test('add', async () => {
-    const tree = await runner
-      .runSchematicAsync('event', addOperation, Tree.empty())
-      .toPromise()
+    const tree = await firstValueFrom(
+      runner.runSchematicAsync('event', addOperation, Tree.empty()),
+    )
     expect(tree.files).toHaveLength(2)
     expect(tree.files).toEqual([generatedFile1, generatedIndexFile])
     expect(tree.readContent(generatedFile1)).toBe(generatedText1)
@@ -110,9 +111,9 @@ describe('Event Schematic', () => {
         { name: 'param3', type: 'Parameter', importPath: './parameter' },
       ],
     }
-    const tree = await runner
-      .runSchematicAsync('event', addOperationWithParameters, Tree.empty())
-      .toPromise()
+    const tree = await firstValueFrom(
+      runner.runSchematicAsync('event', addOperationWithParameters, Tree.empty()),
+    )
     expect(tree.files).toHaveLength(2)
     expect(tree.files).toEqual([generatedFile1, generatedIndexFile])
     expect(tree.readContent(generatedFile1)).toBe(generatedAddWithParametersText)
@@ -131,9 +132,9 @@ describe('Event Schematic', () => {
         },
       ],
     }
-    const tree = await runner
-      .runSchematicAsync('event', addOperationWithParameters, Tree.empty())
-      .toPromise()
+    const tree = await firstValueFrom(
+      runner.runSchematicAsync('event', addOperationWithParameters, Tree.empty()),
+    )
     expect(tree.files).toHaveLength(2)
     expect(tree.files).toEqual([generatedFile1, generatedIndexFile])
     expect(tree.readContent(generatedFile1)).toBe(generatedAddWithSingleObjectParameterText)
@@ -157,12 +158,12 @@ describe('Event Schematic', () => {
         { name: 'param3', type: 'UpdateParameter', importPath: '../update-parameter' },
       ],
     }
-    const tree = await runner
-      .runSchematicAsync('event', addOperationWithParameters, Tree.empty())
-      .toPromise()
-    const updatedTree = await runner
-      .runSchematicAsync('event', removeOperationWithParameters, tree)
-      .toPromise()
+    const tree = await firstValueFrom(
+      runner.runSchematicAsync('event', addOperationWithParameters, Tree.empty()),
+    )
+    const updatedTree = await firstValueFrom(
+      runner.runSchematicAsync('event', removeOperationWithParameters, tree),
+    )
     expect(updatedTree.files).toHaveLength(3)
     expect(tree.files).toEqual([generatedFile1, generatedIndexFile, generatedFile2])
     expect(updatedTree.readContent(generatedFile1)).toBe(generatedAddWithParametersText)
@@ -170,7 +171,7 @@ describe('Event Schematic', () => {
     expect(tree.readContent(generatedIndexFile)).toBe(generatedAddAndRemoveIndexText)
 
     const formattedTree = new UnitTestTree(
-      await runner.callRule(format(), updatedTree).toPromise(),
+      await firstValueFrom(runner.callRule(format(), updatedTree)),
     )
     expect(formattedTree.readContent(generatedFile1)).toBe(generatedAddWithParametersText)
     expect(formattedTree.readContent(generatedFile2)).toBe(generatedRemoveWithParametersText)

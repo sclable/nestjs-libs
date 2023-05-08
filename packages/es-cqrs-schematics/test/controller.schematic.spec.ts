@@ -2,6 +2,7 @@ import { join as pathJoin } from 'path'
 
 import { Tree } from '@angular-devkit/schematics'
 import { UnitTestTree } from '@angular-devkit/schematics/testing'
+import { firstValueFrom } from 'rxjs'
 
 import { EsCqrsSchema } from '../src/es-cqrs/schema'
 import { SchematicTestRunner } from './schematic-test-runner'
@@ -125,18 +126,18 @@ describe('Controller Schematic', () => {
   })
 
   test('main', async () => {
-    const tree = await runner
-      .runSchematicAsync('controller', mainData, Tree.empty())
-      .toPromise()
+    const tree = await firstValueFrom(
+      runner.runSchematicAsync('controller', mainData, Tree.empty()),
+    )
     expect(tree.files).toHaveLength(1)
     expect(tree.files).toEqual([generatedFile])
     expect(tree.readContent(generatedFile)).toBe(generatedText)
   })
 
   test('update', async () => {
-    const tree = await runner
-      .runSchematicAsync('controller', updateData, Tree.empty())
-      .toPromise()
+    const tree = await firstValueFrom(
+      runner.runSchematicAsync('controller', updateData, Tree.empty()),
+    )
     expect(tree.files).toHaveLength(1)
     expect(tree.files).toEqual([generatedFile])
     expect(tree.readContent(generatedFile)).toBe(generatedUpdateText)
@@ -145,7 +146,7 @@ describe('Controller Schematic', () => {
   test('main with existing controller', async () => {
     let tree = new UnitTestTree(Tree.empty())
     tree.create(generatedFile, existingFileContentWithoutMethods)
-    tree = await runner.runSchematicAsync('controller', mainData, tree).toPromise()
+    tree = await firstValueFrom(runner.runSchematicAsync('controller', mainData, tree))
     expect(tree.files).toHaveLength(1)
     expect(tree.files).toEqual([generatedFile])
     expect(tree.readContent(generatedFile)).toBe(generatedTextForExistingFileWithoutMethods)
@@ -162,10 +163,10 @@ describe('Controller Schematic', () => {
     }
     let tree = new UnitTestTree(Tree.empty())
     tree.create(generatedFile, existingFileContentWithoutMethods)
-    tree = await runner
-      .runSchematicAsync('controller', mainDataWithParameters, tree)
-      .toPromise()
-    tree = await runner.runSchematicAsync('controller', updateData, tree).toPromise()
+    tree = await firstValueFrom(
+      runner.runSchematicAsync('controller', mainDataWithParameters, tree),
+    )
+    tree = await firstValueFrom(runner.runSchematicAsync('controller', updateData, tree))
     expect(tree.files).toHaveLength(3)
     expect(tree.files).toEqual([generatedFile, generatedDtoFile, generatedDtoIndexFile])
     expect(tree.readContent(generatedFile)).toBe(generatedTextWithParameters)

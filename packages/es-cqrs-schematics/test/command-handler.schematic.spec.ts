@@ -2,6 +2,7 @@ import { join as pathJoin } from 'path'
 
 import { Tree } from '@angular-devkit/schematics'
 import { UnitTestTree } from '@angular-devkit/schematics/testing'
+import { firstValueFrom } from 'rxjs'
 
 import { format } from '../src/es-cqrs/format'
 import { EsCqrsSchema } from '../src/es-cqrs/schema'
@@ -145,9 +146,9 @@ describe('Command Handler Schematic', () => {
   })
 
   test('create operation', async () => {
-    const tree = await runner
-      .runSchematicAsync('command-handler', createOperation, Tree.empty())
-      .toPromise()
+    const tree = await firstValueFrom(
+      runner.runSchematicAsync('command-handler', createOperation, Tree.empty()),
+    )
     expect(tree.files).toHaveLength(2)
     expect(tree.files).toEqual([generatedCreateFile, generatedIndexFile])
     expect(tree.readContent(generatedCreateFile)).toBe(generatedCreateText)
@@ -163,9 +164,9 @@ describe('Command Handler Schematic', () => {
         { name: 'param3', type: 'Parameter', importPath: './parameter' },
       ],
     }
-    const tree = await runner
-      .runSchematicAsync('command-handler', createOperationWithParameters, Tree.empty())
-      .toPromise()
+    const tree = await firstValueFrom(
+      runner.runSchematicAsync('command-handler', createOperationWithParameters, Tree.empty()),
+    )
     expect(tree.files).toHaveLength(2)
     expect(tree.files).toEqual([generatedCreateFile, generatedIndexFile])
     expect(tree.readContent(generatedCreateFile)).toBe(generatedCreateWithParametersText)
@@ -173,9 +174,9 @@ describe('Command Handler Schematic', () => {
   })
 
   test('add operation', async () => {
-    const tree = await runner
-      .runSchematicAsync('command-handler', addOperation, Tree.empty())
-      .toPromise()
+    const tree = await firstValueFrom(
+      runner.runSchematicAsync('command-handler', addOperation, Tree.empty()),
+    )
     expect(tree.files).toHaveLength(2)
     expect(tree.files).toEqual([generatedAddFile, generatedIndexFile])
     expect(tree.readContent(generatedAddFile)).toBe(generatedAddText)
@@ -191,9 +192,9 @@ describe('Command Handler Schematic', () => {
         { name: 'param3', type: 'Parameter', importPath: './parameter' },
       ],
     }
-    const tree = await runner
-      .runSchematicAsync('command-handler', addOperationWithParameters, Tree.empty())
-      .toPromise()
+    const tree = await firstValueFrom(
+      runner.runSchematicAsync('command-handler', addOperationWithParameters, Tree.empty()),
+    )
     expect(tree.files).toHaveLength(2)
     expect(tree.files).toEqual([generatedAddFile, generatedIndexFile])
     expect(tree.readContent(generatedAddFile)).toBe(generatedAddWithParametersText)
@@ -217,12 +218,12 @@ describe('Command Handler Schematic', () => {
         { name: 'param3', type: 'UpdateParameter', importPath: '../update-parameter' },
       ],
     }
-    const tree = await runner
-      .runSchematicAsync('command-handler', addOperationWithParameters, Tree.empty())
-      .toPromise()
-    const updatedTree = await runner
-      .runSchematicAsync('command-handler', removeOperationWithParameters, tree)
-      .toPromise()
+    const tree = await firstValueFrom(
+      runner.runSchematicAsync('command-handler', addOperationWithParameters, Tree.empty()),
+    )
+    const updatedTree = await firstValueFrom(
+      runner.runSchematicAsync('command-handler', removeOperationWithParameters, tree),
+    )
     expect(updatedTree.files).toHaveLength(3)
     expect(tree.files).toEqual([generatedAddFile, generatedIndexFile, generatedRemoveFile])
     expect(updatedTree.readContent(generatedAddFile)).toBe(generatedAddWithParametersText)
@@ -232,7 +233,7 @@ describe('Command Handler Schematic', () => {
     expect(tree.readContent(generatedIndexFile)).toBe(generatedRemoveIndexText)
 
     const formattedTree = new UnitTestTree(
-      await runner.callRule(format(), updatedTree).toPromise(),
+      await firstValueFrom(runner.callRule(format(), updatedTree)),
     )
     expect(formattedTree.readContent(generatedAddFile)).toBe(generatedAddWithParametersText)
     expect(formattedTree.readContent(generatedRemoveFile)).toBe(

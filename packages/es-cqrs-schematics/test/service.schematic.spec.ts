@@ -2,6 +2,7 @@ import { join as pathJoin } from 'path'
 
 import { Tree } from '@angular-devkit/schematics'
 import { UnitTestTree } from '@angular-devkit/schematics/testing'
+import { firstValueFrom } from 'rxjs'
 
 import { EsCqrsSchema } from '../src/es-cqrs/schema'
 import { SchematicTestRunner } from './schematic-test-runner'
@@ -115,18 +116,18 @@ describe('Service Schematic', () => {
   })
 
   test('create operation', async () => {
-    const tree = await runner
-      .runSchematicAsync('service', createOperation, Tree.empty())
-      .toPromise()
+    const tree = await firstValueFrom(
+      runner.runSchematicAsync('service', createOperation, Tree.empty()),
+    )
     expect(tree.files).toHaveLength(1)
     expect(tree.files).toContain(generatedFile)
     expect(tree.readContent(generatedFile)).toBe(generatedTextForCreateOperation)
   })
 
   test('add operation', async () => {
-    const tree = await runner
-      .runSchematicAsync('service', addOperation, Tree.empty())
-      .toPromise()
+    const tree = await firstValueFrom(
+      runner.runSchematicAsync('service', addOperation, Tree.empty()),
+    )
     expect(tree.files).toHaveLength(1)
     expect(tree.files).toContain(generatedFile)
     expect(tree.readContent(generatedFile)).toBe(generatedTextForAddOperation)
@@ -135,7 +136,7 @@ describe('Service Schematic', () => {
   test('create operation with existing service', async () => {
     let tree = new UnitTestTree(Tree.empty())
     tree.create(generatedFile, existingFileContentNonEsCqrs)
-    tree = await runner.runSchematicAsync('service', createOperation, tree).toPromise()
+    tree = await firstValueFrom(runner.runSchematicAsync('service', createOperation, tree))
     expect(tree.files).toHaveLength(1)
     expect(tree.files).toContain(generatedFile)
     expect(tree.readContent(generatedFile)).toBe(generatedTextForCreateOperationExistingFile)
@@ -144,7 +145,7 @@ describe('Service Schematic', () => {
   test('add operation with existing service', async () => {
     let tree = new UnitTestTree(Tree.empty())
     tree.create(generatedFile, existingFileContentNonEsCqrs)
-    tree = await runner.runSchematicAsync('service', addOperation, tree).toPromise()
+    tree = await firstValueFrom(runner.runSchematicAsync('service', addOperation, tree))
     expect(tree.files).toHaveLength(1)
     expect(tree.files).toContain(generatedFile)
     expect(tree.readContent(generatedFile)).toBe(generatedTextForExistingFileNonEsCqrs)
@@ -161,9 +162,9 @@ describe('Service Schematic', () => {
     }
     let tree = new UnitTestTree(Tree.empty())
     tree.create(generatedFile, existingFileContentNonEsCqrs)
-    tree = await runner
-      .runSchematicAsync('service', addOperationWithParameters, tree)
-      .toPromise()
+    tree = await firstValueFrom(
+      runner.runSchematicAsync('service', addOperationWithParameters, tree),
+    )
     expect(tree.files).toHaveLength(1)
     expect(tree.files).toContain(generatedFile)
     expect(tree.readContent(generatedFile)).toBe(generatedTextWithParameters)
