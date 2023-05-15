@@ -39,8 +39,8 @@
     "@sclable/nestjs-storage": "file:packages/storage"
   },
   "devDependencies": {
-    "@angular-devkit/core": "16.0.0",
-    "@angular-devkit/schematics": "16.0.0",
+    "@angular-devkit/core": "16.0.1",
+    "@angular-devkit/schematics": "16.0.1",
     "@azure/abort-controller": "1.1.0",
     "@azure/service-bus": "7.9.0",
     "@azure/storage-blob": "12.14.0",
@@ -69,7 +69,7 @@
     "amqp-ts": "1.8.0",
     "apollo-server-core": "3.12.0",
     "apollo-server-express": "3.12.0",
-    "enhanced-resolve": "5.13.0",
+    "enhanced-resolve": "5.14.0",
     "glob": "8.1.0",
     "glob-promise": "6.0.2",
     "husky": "8.0.3",
