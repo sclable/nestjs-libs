@@ -69,7 +69,7 @@
     "amqp-ts": "1.8.0",
     "apollo-server-core": "3.12.0",
     "apollo-server-express": "3.12.0",
-    "enhanced-resolve": "5.14.0",
+    "enhanced-resolve": "5.14.1",
     "glob": "8.1.0",
     "glob-promise": "6.0.2",
     "husky": "8.0.3",
