@@ -32,11 +32,11 @@
     "fs-extra": "^11.0.0",
     "pluralize": "^8.0.0",
     "prettier": "^2.4.1",
-    "ts-morph": "^18.0.0"
+    "ts-morph": "^19.0.0"
   },
   "peerDependencies": {
-    "@angular-devkit/core": ">=13.0.0",
-    "@angular-devkit/schematics": ">=13.0.0"
+    "@angular-devkit/core": ">=16.0.0",
+    "@angular-devkit/schematics": ">=16.0.0"
   },
   "main": "dist/src/index.js",
   "types": "dist/index.d.ts",
