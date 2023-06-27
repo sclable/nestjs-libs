@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.0.1](https://github.com/sclable/nestjs-libs/compare/@sclable/nestjs-es-cqrs@10.0.0...@sclable/nestjs-es-cqrs@10.0.1) (2023-06-27)
+
+
+### Bug Fixes
+
+* **es-cqrs:** add unhandled exception bus ([bfef2a5](https://github.com/sclable/nestjs-libs/commit/bfef2a52df3e9c681489bfbee62ce7feaecad26b))
+
+
+
+
+
 # [10.0.0](https://github.com/sclable/nestjs-libs/compare/@sclable/nestjs-es-cqrs@9.0.4...@sclable/nestjs-es-cqrs@10.0.0) (2023-06-19)
 
 
