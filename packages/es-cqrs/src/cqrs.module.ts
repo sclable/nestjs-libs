@@ -1,12 +1,12 @@
 import { Inject, Module, OnModuleInit } from '@nestjs/common'
-import { CommandBus } from '@nestjs/cqrs'
+import { CommandBus, UnhandledExceptionBus } from '@nestjs/cqrs'
 
 import { ExplorerService } from './explorer.service'
 import { RateLimitedEventBus } from './rate-limited-event-bus'
 
 @Module({
   exports: [CommandBus, RateLimitedEventBus],
-  providers: [CommandBus, ExplorerService, RateLimitedEventBus],
+  providers: [CommandBus, ExplorerService, RateLimitedEventBus, UnhandledExceptionBus],
 })
 export class CqrsModule implements OnModuleInit {
   public constructor(
