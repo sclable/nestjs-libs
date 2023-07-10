@@ -1,4 +1,4 @@
-import { isUUID } from 'class-validator'
+import { isUUID } from '@nestjs/class-validator'
 import { ASTNode, Kind } from 'graphql'
 
 type UUIDVersion = '3' | '4' | '5'
