@@ -54,7 +54,7 @@
     "@nestjs/passport": "10.0.0",
     "@nestjs/platform-express": "10.0.5",
     "@nestjs/testing": "10.0.5",
-    "@sclable/lint": "1.8.0",
+    "@sclable/lint": "1.8.1",
     "@sclable/tsconfig": "0.11.18",
     "@types/eslint": "8.40.2",
     "@types/fs-extra": "11.0.1",
