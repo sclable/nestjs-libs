@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.1](https://github.com/sclable/nestjs-libs/compare/@sclable/nestjs-graphql-scalar-uuid@2.0.0...@sclable/nestjs-graphql-scalar-uuid@2.0.1) (2023-07-10)
+
+**Note:** Version bump only for package @sclable/nestjs-graphql-scalar-uuid
+
+
+
+
+
 # [2.0.0](https://github.com/sclable/nestjs-libs/compare/@sclable/nestjs-graphql-scalar-uuid@1.0.3...@sclable/nestjs-graphql-scalar-uuid@2.0.0) (2022-08-22)
 
 
