@@ -43,7 +43,7 @@
     "@angular-devkit/schematics": "16.1.4",
     "@azure/abort-controller": "1.1.0",
     "@azure/service-bus": "7.9.0",
-    "@azure/storage-blob": "12.14.0",
+    "@azure/storage-blob": "12.15.0",
     "@commitlint/cli": "17.6.6",
     "@commitlint/config-conventional": "17.6.6",
     "@commitlint/prompt-cli": "17.6.6",
