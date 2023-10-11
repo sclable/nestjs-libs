@@ -4,6 +4,7 @@ import { Aggregate } from '../aggregate'
 import { EventRegistry } from '../event-store/event-registry'
 import { EventStoreOptions } from '../event-store/event-store-options'
 import { ReplayOptions } from '../event-store/replay-options'
+
 import { Event } from './event'
 import { EventSourcedAggregate } from './event-sourced-aggregate'
 

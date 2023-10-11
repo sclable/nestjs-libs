@@ -18,6 +18,7 @@ import { ParameterDeclarationStructure, Project, Scope, StructureKind } from 'ts
 import { formatCodeSettings } from '../format'
 import { EsCqrsSchema } from '../schema'
 import { KeyValuesDefinition, getImports, isCreating, updateImports } from '../utils'
+
 import { ControllerSchema } from './controller.schema'
 
 export function main(options: EsCqrsSchema): Rule {

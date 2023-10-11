@@ -15,6 +15,7 @@ import { Project, VariableDeclarationKind } from 'ts-morph'
 import { formatCodeSettings } from '../format'
 import { EsCqrsSchema } from '../schema'
 import { isCreating, mergeWithArrayString } from '../utils'
+
 import { CommandHandlerSchema } from './command-handler.schema'
 
 export function main(options: EsCqrsSchema): Rule {

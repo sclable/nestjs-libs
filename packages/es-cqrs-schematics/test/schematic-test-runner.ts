@@ -57,7 +57,10 @@ export class SchematicTestRunner {
   private _collection: Collection<{}, {}>
   private _logger: logging.LoggerApi
 
-  public constructor(private _collectionName: string, collectionPath: string) {
+  public constructor(
+    private _collectionName: string,
+    collectionPath: string,
+  ) {
     this._engineHost.registerCollection(_collectionName, collectionPath)
     this._logger = new logging.Logger('test')
 

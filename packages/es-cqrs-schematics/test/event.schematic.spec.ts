@@ -6,6 +6,7 @@ import { firstValueFrom } from 'rxjs'
 
 import { format } from '../src/es-cqrs/format'
 import { EsCqrsSchema } from '../src/es-cqrs/schema'
+
 import { SchematicTestRunner } from './schematic-test-runner'
 
 const generatedText1 = `import { DefaultEvent } from '@sclable/nestjs-es-cqrs'

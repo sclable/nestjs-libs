@@ -9,6 +9,7 @@ import {
 } from '../contracts'
 import { CreateAuthProviderUser, JwtPayload } from '../interfaces'
 import { UserID } from '../types'
+
 import { AuthService } from './auth.service'
 
 @Injectable()

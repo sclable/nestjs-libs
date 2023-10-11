@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common'
 
 import { EventConstructor } from '../interfaces'
+
 import { EventStoreException } from './event-store.exception'
 
 /**

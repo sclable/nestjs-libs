@@ -18,6 +18,7 @@ import { Project, Scope } from 'ts-morph'
 import { formatCodeSettings } from '../format'
 import { EsCqrsSchema, Parameter } from '../schema'
 import { KeyValuesDefinition, getImports, isCreating, updateImports } from '../utils'
+
 import { ServiceSchema } from './service.schema'
 
 export function main(options: EsCqrsSchema): Rule {

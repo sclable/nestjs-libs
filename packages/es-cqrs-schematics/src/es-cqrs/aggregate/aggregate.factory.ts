@@ -17,6 +17,7 @@ import { pastParticiple } from '../../past-participle'
 import { formatCodeSettings } from '../format'
 import { EsCqrsSchema, Parameter } from '../schema'
 import { KeyValuesDefinition, getImports, isCreating, updateImports } from '../utils'
+
 import { AggregateSchema } from './aggregate.schema'
 
 export function main(options: EsCqrsSchema): Rule {

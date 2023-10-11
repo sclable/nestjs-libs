@@ -3,6 +3,7 @@ import { PassportStrategy } from '@nestjs/passport'
 
 import { USER_SERVICE } from '../constants'
 import { ApplicationUserContract, TestUserServiceContract } from '../contracts'
+
 import { PassportMockStrategy } from './passport-mock-strategy/passport-mock-strategy'
 
 @Injectable()

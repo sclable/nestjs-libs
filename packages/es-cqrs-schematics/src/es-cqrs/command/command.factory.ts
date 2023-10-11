@@ -15,6 +15,7 @@ import { Project } from 'ts-morph'
 import { formatCodeSettings } from '../format'
 import { EsCqrsSchema } from '../schema'
 import { getImports, isCreating } from '../utils'
+
 import { CommandSchema } from './command.schema'
 
 export function main(options: EsCqrsSchema): Rule {

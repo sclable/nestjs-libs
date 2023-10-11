@@ -16,6 +16,7 @@ import {
   EventStoreProvider,
   createAsyncProviders,
 } from '../interfaces'
+
 import { EventRegistry } from './event-registry'
 import { EVENT_STORE_OPTIONS, EventStoreOptions } from './event-store-options'
 import { ReplayService } from './replay.service'

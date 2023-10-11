@@ -5,6 +5,7 @@ import { UnitTestTree } from '@angular-devkit/schematics/testing'
 import { firstValueFrom } from 'rxjs'
 
 import { EsCqrsSchema } from '../src/es-cqrs/schema'
+
 import { SchematicTestRunner } from './schematic-test-runner'
 
 const generatedTextForCreateOperation = `import { Injectable } from '@nestjs/common'
