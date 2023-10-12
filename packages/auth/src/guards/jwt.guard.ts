@@ -4,7 +4,6 @@ import { AuthGuard } from '@nestjs/passport'
 import { Observable } from 'rxjs'
 
 import { IS_LOCAL_AUTH, IS_PUBLIC_ENDPOINT } from '../decorators'
-
 import { LocalGuard } from './local.guard'
 
 export class JwtGuard extends AuthGuard('jwt') {

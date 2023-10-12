@@ -18,7 +18,6 @@ import { ObjectLiteralExpression, Project, SyntaxKind } from 'ts-morph'
 import { formatCodeSettings } from '../format'
 import { EsCqrsSchema } from '../schema'
 import { KeyValuesDefinition, mergeWithArrayString, updateImports } from '../utils'
-
 import { ModuleSchema } from './module.schema'
 
 export function main(options: EsCqrsSchema): Rule {

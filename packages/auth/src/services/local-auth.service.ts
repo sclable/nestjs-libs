@@ -4,7 +4,6 @@ import { JwtService } from '@nestjs/jwt'
 import { USER_SERVICE } from '../constants'
 import { ApplicationUserContract, UserServiceContract } from '../contracts'
 import { JwtPayload } from '../interfaces'
-
 import { AuthService } from './auth.service'
 
 export class LocalAuthService<

@@ -10,10 +10,7 @@ export interface EventStoreExceptionInfo {
  * General exception for event store related errors
  */
 export class EventStoreException extends Error {
-  public constructor(
-    msg: string,
-    public readonly info: EventStoreExceptionInfo,
-  ) {
+  public constructor(msg: string, public readonly info: EventStoreExceptionInfo) {
     super(msg)
   }
 }

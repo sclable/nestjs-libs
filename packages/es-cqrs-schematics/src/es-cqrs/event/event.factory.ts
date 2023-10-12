@@ -16,7 +16,6 @@ import { pastParticiple } from '../../past-participle'
 import { formatCodeSettings } from '../format'
 import { EsCqrsSchema } from '../schema'
 import { getImports, mergeWithArrayString } from '../utils'
-
 import { EventSchema } from './event.schema'
 
 export function main(options: EsCqrsSchema): Rule {

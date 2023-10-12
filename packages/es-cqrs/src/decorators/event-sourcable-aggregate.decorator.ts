@@ -1,5 +1,4 @@
 import { EventConstructor } from '../interfaces'
-
 import { EVENTS_ON_AGGREGATE_METADATA } from './constants'
 
 /**

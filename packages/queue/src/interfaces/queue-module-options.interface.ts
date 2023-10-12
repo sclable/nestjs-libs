@@ -1,5 +1,4 @@
 import { QueueType } from '../enums'
-
 import {
   AzureServiceBusAdapterOptions,
   DummyAdapterOptions,

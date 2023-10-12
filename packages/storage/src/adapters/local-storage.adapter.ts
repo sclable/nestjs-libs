@@ -6,7 +6,6 @@ import fse from 'fs-extra'
 
 import { StorageDriverContract } from '../contracts'
 import { FileMetaData, LocalStorageAdapterOptions } from '../interfaces'
-
 import { AbstractAdapter } from './abstract.adapter'
 
 import ReadableStream = NodeJS.ReadableStream

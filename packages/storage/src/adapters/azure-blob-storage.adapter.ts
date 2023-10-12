@@ -16,7 +16,6 @@ import { QueueMessage, QueueServiceContract } from '@sclable/nestjs-queue'
 
 import { StorageDriverContract } from '../contracts'
 import { AzureBlobStorageAdapterOptions, FileMetaData } from '../interfaces'
-
 import { AbstractAdapter } from './abstract.adapter'
 
 import ReadableStream = NodeJS.ReadableStream

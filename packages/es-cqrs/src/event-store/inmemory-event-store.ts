@@ -1,6 +1,5 @@
 import { Aggregate } from '../aggregate'
 import { AsyncProvider, Event, EventSourcedAggregate, EventStoreProvider } from '../interfaces'
-
 import { EVENT_STORE_OPTIONS, EventStoreOptions } from './event-store-options'
 import { ReplayOptions } from './replay-options'
 

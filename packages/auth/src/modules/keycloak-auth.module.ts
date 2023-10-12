@@ -10,7 +10,6 @@ import { KeycloakAuthController } from '../controllers'
 import { AuthModuleOptions } from '../interfaces'
 import { ExternalAuthService } from '../services'
 import { KeycloakStrategy, MockStrategy } from '../strategies'
-
 import { AuthModule } from './auth.module'
 
 @Global()

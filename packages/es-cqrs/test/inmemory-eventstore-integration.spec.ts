@@ -181,10 +181,7 @@ describe('InmemoryEventStore-Integration', () => {
     const readSideStoreSubject: Subject<void> = new Subject()
 
     class CreateAggregateCommand implements Command {
-      public constructor(
-        public readonly id: string,
-        public readonly userId: string,
-      ) {}
+      public constructor(public readonly id: string, public readonly userId: string) {}
     }
 
     class TestCommand implements Command {

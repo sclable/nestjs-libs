@@ -8,7 +8,6 @@ import { Client } from 'minio'
 
 import { StorageDriverContract } from '../contracts'
 import { FileMetaData, MinioStorageAdapterOptions } from '../interfaces'
-
 import { AbstractAdapter } from './abstract.adapter'
 
 import ReadableStream = NodeJS.ReadableStream

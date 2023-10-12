@@ -4,7 +4,6 @@ import { v4 as uuidv4 } from 'uuid'
 import { DefaultEvent } from '../default-event'
 import { EVENT_STORE_PROVIDER, EventStoreProvider } from '../interfaces'
 import { RateLimitedEventBus } from '../rate-limited-event-bus'
-
 import { EVENT_STORE_OPTIONS, EventStoreOptions } from './event-store-options'
 import { ReplayOptions } from './replay-options'
 

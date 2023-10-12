@@ -1,7 +1,6 @@
 import { QueueServiceContract } from '@sclable/nestjs-queue'
 
 import { StorageType } from '../enums'
-
 import {
   AzureBlobStorageAdapterOptions,
   DummyStorageAdapterOptions,

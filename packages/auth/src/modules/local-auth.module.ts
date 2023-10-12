@@ -9,7 +9,6 @@ import { LocalGuard } from '../guards'
 import { AuthModuleOptions } from '../interfaces'
 import { LocalAuthService } from '../services'
 import { JwtStrategy, LocalStrategy, MockStrategy } from '../strategies'
-
 import { AuthModule } from './auth.module'
 
 @Global()
