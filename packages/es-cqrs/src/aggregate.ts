@@ -56,8 +56,11 @@ export class Aggregate extends AggregateRoot<Event> implements EventSourcedAggre
     return super.getUncommittedEvents() as Event[]
   }
 
-  public apply(event: Event, isFromHistory = false): void {
-    super.apply(event, isFromHistory)
+  public apply(
+    event: Event,
+    options: boolean | { isFromHistory?: boolean; skipHandler?: boolean } = false,
+  ): void {
+    super.apply(event, options as boolean)
     this.revision = event.revision
   }
 
