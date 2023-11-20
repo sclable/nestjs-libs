@@ -65,7 +65,7 @@
     "@types/passport-local": "1.0.38",
     "@types/pluralize": "0.0.31",
     "@types/supertest": "2.0.15",
-    "@types/uuid": "9.0.6",
+    "@types/uuid": "9.0.7",
     "amqp-ts": "1.8.0",
     "apollo-server-core": "3.12.1",
     "apollo-server-express": "3.12.1",
