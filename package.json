@@ -39,8 +39,8 @@
     "@sclable/nestjs-storage": "file:packages/storage"
   },
   "devDependencies": {
-    "@angular-devkit/core": "17.0.1",
-    "@angular-devkit/schematics": "17.0.1",
+    "@angular-devkit/core": "17.0.3",
+    "@angular-devkit/schematics": "17.0.3",
     "@azure/abort-controller": "1.1.0",
     "@azure/service-bus": "7.9.3",
     "@azure/storage-blob": "12.17.0",
