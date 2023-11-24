@@ -1,17 +1,25 @@
 {
-  "extends": "./node_modules/@sclable/tsconfig/tsconfig.json",
   "compilerOptions": {
+    "target": "es2018",
+    "module": "CommonJS",
+    "lib": [ "es2018" ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "declaration": true,
+    "sourceMap": true,
+    "outDir": "dist",
+    "strict": true,
+    "noImplicitAny": true,
     // We're using ESLint to check for unused locals, it is more flexible.
     "noUnusedLocals": false,
-    "baseUrl": ".",
-    "declaration": true,
-    "incremental": true,
-    "lib": [ "es2018" ],
-    "outDir": "dist",
-    "paths": {"*": ["packages/*"]},
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
     "moduleResolution": "node",
-    "target": "es2018",
-    "allowJs": true
+    "baseUrl": ".",
+    "paths": {"*": ["packages/*"]},
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "incremental": true
   },
   "exclude": [
     "node_modules",
