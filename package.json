@@ -55,7 +55,7 @@
     "@nestjs/platform-express": "10.2.8",
     "@nestjs/testing": "10.2.8",
     "@types/eslint": "8.44.2",
-    "@types/fs-extra": "11.0.3",
+    "@types/fs-extra": "11.0.4",
     "@types/jest": "29.5.5",
     "@types/minio": "7.1.1",
     "@types/node": "20.8.10",
