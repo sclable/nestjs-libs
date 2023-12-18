@@ -78,7 +78,7 @@ jobs:
         git config user.email "ci@sclable.com"
         git config user.name "Sclable CI"
     - name: Load documentation
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
       with:
         name: docs
         path: .
