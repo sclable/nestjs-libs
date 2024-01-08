@@ -2,7 +2,7 @@ import { ApolloDriver } from '@nestjs/apollo'
 import { INestApplication } from '@nestjs/common'
 import { Args, GraphQLModule, Query, Resolver } from '@nestjs/graphql'
 import { Test as NestTest, TestingModule } from '@nestjs/testing'
-import supertest, { SuperTest, Test } from 'supertest'
+import supertest from 'supertest'
 import { v4 as uuidv4 } from 'uuid'
 
 import { UUIDv4Scalar } from '..'
@@ -26,7 +26,7 @@ interface Data {
 }
 
 let app: INestApplication
-let testServer: SuperTest<Test>
+let testServer: ReturnType<typeof supertest>
 
 @Resolver()
 class TestResolver {
