@@ -1,6 +1,6 @@
 import { INestApplication, Module } from '@nestjs/common'
 import { Test as NestTest, TestingModule } from '@nestjs/testing'
-import request, { SuperTest, Test } from 'supertest'
+import request from 'supertest'
 
 import { UserService } from '../examples'
 import { JwtGuard, LocalAuthModule, LocalGuard } from '../src'
@@ -15,7 +15,7 @@ class UserModule {}
 describe('Local Authentication', () => {
   let testModule: TestingModule
   let app: INestApplication
-  let testServer: SuperTest<Test>
+  let testServer: ReturnType<typeof request>
   let bearerToken: string
 
   beforeAll(async () => {
