@@ -63,7 +63,7 @@
     "@types/passport-local": "1.0.38",
     "@types/pluralize": "0.0.33",
     "@types/supertest": "6.0.2",
-    "@types/uuid": "9.0.7",
+    "@types/uuid": "9.0.8",
     "@typescript-eslint/eslint-plugin": "6.19.1",
     "@typescript-eslint/parser": "6.19.1",
     "amqp-ts": "1.8.0",
