@@ -90,7 +90,7 @@
     "rxjs": "7.8.1",
     "shelljs": "0.8.5",
     "supertest": "6.3.4",
-    "ts-jest": "29.1.1",
+    "ts-jest": "29.1.2",
     "typedoc": "0.25.7",
     "typedoc-github-wiki-theme": "1.1.0",
     "typedoc-plugin-markdown": "3.17.1",
