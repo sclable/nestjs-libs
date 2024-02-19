@@ -58,7 +58,7 @@
     "@types/fs-extra": "11.0.4",
     "@types/jest": "29.5.12",
     "@types/minio": "7.1.1",
-    "@types/node": "20.11.16",
+    "@types/node": "20.11.19",
     "@types/passport-jwt": "3.0.13",
     "@types/passport-local": "1.0.38",
     "@types/pluralize": "0.0.33",
