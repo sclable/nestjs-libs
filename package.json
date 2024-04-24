@@ -39,14 +39,14 @@
     "@sclable/nestjs-storage": "file:packages/storage"
   },
   "devDependencies": {
-    "@angular-devkit/core": "17.2.2",
-    "@angular-devkit/schematics": "17.2.2",
+    "@angular-devkit/core": "17.3.4",
+    "@angular-devkit/schematics": "17.3.4",
     "@azure/abort-controller": "1.1.0",
     "@azure/service-bus": "7.9.4",
     "@azure/storage-blob": "12.17.0",
-    "@commitlint/cli": "18.6.1",
-    "@commitlint/config-conventional": "18.6.2",
-    "@commitlint/prompt-cli": "18.6.1",
+    "@commitlint/cli": "19.3.0",
+    "@commitlint/config-conventional": "19.2.2",
+    "@commitlint/prompt-cli": "19.3.0",
     "@nestjs/apollo": "12.0.11",
     "@nestjs/common": "10.3.3",
     "@nestjs/core": "10.3.3",
@@ -91,7 +91,7 @@
     "shelljs": "0.8.5",
     "supertest": "6.3.4",
     "ts-jest": "29.1.2",
-    "typedoc": "0.25.8",
+    "typedoc": "0.25.13",
     "typedoc-github-wiki-theme": "1.1.0",
     "typedoc-plugin-markdown": "3.17.1",
     "typescript": "5.3.3"
