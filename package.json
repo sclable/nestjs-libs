@@ -64,8 +64,8 @@
     "@types/pluralize": "0.0.33",
     "@types/supertest": "6.0.2",
     "@types/uuid": "9.0.8",
-    "@typescript-eslint/eslint-plugin": "6.7.5",
-    "@typescript-eslint/parser": "6.19.1",
+    "@typescript-eslint/eslint-plugin": "7.7.1",
+    "@typescript-eslint/parser": "7.6.0",
     "amqp-ts": "1.8.0",
     "apollo-server-core": "3.13.0",
     "apollo-server-express": "3.13.0",
@@ -94,7 +94,7 @@
     "typedoc": "0.25.13",
     "typedoc-github-wiki-theme": "1.1.0",
     "typedoc-plugin-markdown": "3.17.1",
-    "typescript": "5.3.3"
+    "typescript": "5.4.5"
   },
   "commitlint": {
     "extends": [
