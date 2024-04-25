@@ -1,7 +1,6 @@
-import KcAdminClient from '@keycloak/keycloak-admin-client'
-// eslint-disable-next-line import/default
-import UserRepresentation from '@keycloak/keycloak-admin-client/lib/defs/userRepresentation'
 import { Inject, Logger } from '@nestjs/common'
+import KcAdminClient from 'keycloak-admin'
+import UserRepresentation from 'keycloak-admin/lib/defs/userRepresentation'
 
 import { AUTH_MODULE_OPTIONS } from '../constants'
 import { AuthProviderServiceContract, AuthProviderUserContract } from '../contracts'
