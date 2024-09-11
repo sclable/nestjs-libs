@@ -1,6 +1,6 @@
 {
   "name": "@sclable/nestjs-queue",
-  "version": "1.1.6",
+  "version": "1.1.7",
   "description": "Queue adapters for NestJS.",
   "license": "MIT",
   "author": {
@@ -17,7 +17,7 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "dependencies": {
-    "@sclable/nestjs-async-provider": "^1.0.4",
+    "@sclable/nestjs-async-provider": "^1.0.5",
     "reflect-metadata": "^0.1.13"
   },
   "peerDependencies": {
