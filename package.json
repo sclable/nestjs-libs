@@ -4,7 +4,7 @@
   "scripts": {
     "precompile": "lerna run precompile",
     "compile": "tsc -p tsconfig-build.json",
-    "postinstall": "husky install",
+    "postinstall": "husky",
     "prepare": "husky && npm run compile && npm run dist",
     "lint": "eslint . --ext .js,.ts,.tsx --max-warnings 0 --cache --cache-location 'node_modules/.cache/.eslintcache'",
     "lintfix": "npm run lint -- --fix",
@@ -26,8 +26,8 @@
     "url": "git@github.com:sclable/nestjs-libs.git"
   },
   "engines": {
-    "node": "^16.19.0 || ^18.14.0 || ^20.2.0",
-    "npm": "^8.19.0 || ^9.6.0"
+    "node": "^18.14.0 || ^20.2.0 || ^22.8.0",
+    "npm": "^9.6.0 || ^10.8.0"
   },
   "dependencies": {
     "@sclable/nestjs-async-provider": "file:packages/async-provider",
@@ -58,7 +58,7 @@
     "@types/fs-extra": "11.0.4",
     "@types/jest": "29.5.12",
     "@types/minio": "7.1.1",
-    "@types/node": "20.14.11",
+    "@types/node": "22.5.4",
     "@types/passport-jwt": "4.0.1",
     "@types/passport-local": "1.0.38",
     "@types/pluralize": "0.0.33",
