@@ -78,7 +78,7 @@ export class Aggregate extends AggregateRoot<Event> implements EventSourcedAggre
    *
    * @param event event class
    * @param data event data
-   * @typeparam T event data type
+   * @typeParam T event data type
    */
   protected applyEvent<T>(event: EventConstructor, data: T): void {
     this.apply(

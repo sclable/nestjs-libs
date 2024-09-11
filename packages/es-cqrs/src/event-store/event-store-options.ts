@@ -10,7 +10,7 @@ export interface EventStoreOptions {
   snapshotInterval?: number
 
   /**
-   * Enables logging to the @nestjs logger
+   * Enables logging to the `@nestjs` logger
    */
   logging?: boolean
 

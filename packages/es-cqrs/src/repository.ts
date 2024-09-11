@@ -18,7 +18,7 @@ export function getRepositoryToken<T extends Aggregate>(
  * store, but to speed things up, it first tries to load up a snapshot of the aggregate. It is also responsible for
  * persisting the aggregate by saving its events.
  *
- * @typeparam T an [[Aggregate]]
+ * @typeParam T an [[Aggregate]]
  */
 @Injectable()
 export class Repository<T extends Aggregate> {

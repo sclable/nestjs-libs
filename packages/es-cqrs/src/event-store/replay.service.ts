@@ -63,7 +63,7 @@ export class ReplayService {
 
   /**
    * @param replayOptions replay options
-   * @retuns number of events replayed
+   * @returns number of events replayed
    */
   public async replay(replayOptions?: ReplayOptions): Promise<number> {
     const queueById = uuidv4() // events have to have the same id so that they are run in a single queue

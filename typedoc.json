@@ -3,7 +3,6 @@
      "typedoc-plugin-markdown",
      "typedoc-github-wiki-theme"
   ],
-  "theme": "github-wiki",
   "out": "docs",
   "tsconfig": "./tsconfig.json",
   "entryPoints": [

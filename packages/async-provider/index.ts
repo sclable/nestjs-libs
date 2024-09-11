@@ -51,7 +51,7 @@ function createAsyncProvider<T>(provider: AsyncProvider<T>, token: string): Prov
 
   @param provider an async provider
   @param token token for the provider (use this token with the `@Inject(<token>)` decorator)
-  @typeparam T type of the object provided by this provider
+  @typeParam T type of the object provided by this provider
 */
 export function createAsyncProviders<T>(
   provider: AsyncProvider<T>,
