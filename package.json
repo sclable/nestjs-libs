@@ -52,7 +52,7 @@
     "@nestjs/core": "10.3.10",
     "@nestjs/jwt": "10.2.0",
     "@nestjs/passport": "10.0.3",
-    "@nestjs/platform-express": "10.3.10",
+    "@nestjs/platform-express": "10.4.1",
     "@nestjs/testing": "10.3.10",
     "@types/eslint": "8.56.3",
     "@types/fs-extra": "11.0.4",
