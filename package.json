@@ -56,7 +56,7 @@
     "@nestjs/testing": "10.4.1",
     "@types/eslint": "8.56.3",
     "@types/fs-extra": "11.0.4",
-    "@types/jest": "29.5.12",
+    "@types/jest": "29.5.13",
     "@types/minio": "7.1.1",
     "@types/node": "22.5.4",
     "@types/passport-jwt": "4.0.1",
