@@ -82,7 +82,7 @@
     "json-schema-to-typescript": "13.1.2",
     "lerna": "8.1.8",
     "lint-staged": "15.2.10",
-    "markdownlint-cli": "0.41.0",
+    "markdownlint-cli": "0.42.0",
     "minio": "7.1.4",
     "p-limit": "4.0.0",
     "prettier": "2.8.8",
