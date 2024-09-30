@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.11](https://github.com/sclable/nestjs-libs/compare/@sclable/nestjs-storage@1.1.10...@sclable/nestjs-storage@1.1.11) (2024-09-30)
+
+**Note:** Version bump only for package @sclable/nestjs-storage
+
 ## [1.1.10](https://github.com/sclable/nestjs-libs/compare/@sclable/nestjs-storage@1.1.9...@sclable/nestjs-storage@1.1.10) (2024-09-16)
 
 **Note:** Version bump only for package @sclable/nestjs-storage
