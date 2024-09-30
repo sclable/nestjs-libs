@@ -19,7 +19,7 @@
   "dependencies": {
     "@sclable/nestjs-async-provider": "^1.0.5",
     "fs-extra": "^11.0.0",
-    "reflect-metadata": "^0.1.13",
+    "reflect-metadata": "^0.2.2",
     "rimraf": "^6.0.1",
     "uuid": "^10.0.0"
   },

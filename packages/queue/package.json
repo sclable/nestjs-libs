@@ -18,7 +18,7 @@
   "types": "dist/index.d.ts",
   "dependencies": {
     "@sclable/nestjs-async-provider": "^1.0.5",
-    "reflect-metadata": "^0.1.13"
+    "reflect-metadata": "^0.2.2"
   },
   "peerDependencies": {
     "@azure/service-bus": "^7.4.0",
