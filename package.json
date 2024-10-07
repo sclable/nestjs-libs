@@ -72,7 +72,7 @@
     "enhanced-resolve": "5.16.0",
     "eslint": "8.57.0",
     "eslint-config-prettier": "9.1.0",
-    "eslint-plugin-import": "2.26.0",
+    "eslint-plugin-import": "2.31.0",
     "eslint-plugin-no-only-tests": "3.3.0",
     "eslint-plugin-prettier": "4.2.1",
     "glob": "8.1.0",
