@@ -9,5 +9,6 @@
       "conventionalCommits": true,
       "registry": "https://registry.npmjs.org"
     }
-  }
+  },
+  "$schema": "node_modules/lerna/schemas/lerna-schema.json"
 }
