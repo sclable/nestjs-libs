@@ -4,9 +4,9 @@ import { Tree } from '@angular-devkit/schematics'
 import { UnitTestTree } from '@angular-devkit/schematics/testing'
 import { firstValueFrom } from 'rxjs'
 
+import { SchematicTestRunner } from './schematic-test-runner'
 import { format } from '../src/es-cqrs/format'
 import { EsCqrsSchema } from '../src/es-cqrs/schema'
-import { SchematicTestRunner } from './schematic-test-runner'
 
 const generatedText1 = `import { EventHandler, IEventHandler } from '@sclable/nestjs-es-cqrs'
 

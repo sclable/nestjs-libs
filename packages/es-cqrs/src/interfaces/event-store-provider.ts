@@ -1,11 +1,11 @@
 import { Logger } from '@nestjs/common'
 
 import { Aggregate } from '../aggregate'
+import { Event } from './event'
+import { EventSourcedAggregate } from './event-sourced-aggregate'
 import { EventRegistry } from '../event-store/event-registry'
 import { EventStoreOptions } from '../event-store/event-store-options'
 import { ReplayOptions } from '../event-store/replay-options'
-import { Event } from './event'
-import { EventSourcedAggregate } from './event-sourced-aggregate'
 
 /** @hidden */
 export const EVENT_STORE_PROVIDER = 'EventStoreProvider'

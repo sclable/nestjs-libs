@@ -4,8 +4,8 @@ import { Tree } from '@angular-devkit/schematics'
 import { UnitTestTree } from '@angular-devkit/schematics/testing'
 import { firstValueFrom } from 'rxjs'
 
-import { EsCqrsSchema } from '../src/es-cqrs/schema'
 import { SchematicTestRunner } from './schematic-test-runner'
+import { EsCqrsSchema } from '../src/es-cqrs/schema'
 
 const generatedTextForCreateOperation = `import { Injectable } from '@nestjs/common'
 import { CommandBus } from '@sclable/nestjs-es-cqrs'
