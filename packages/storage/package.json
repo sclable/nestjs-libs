@@ -21,7 +21,7 @@
     "fs-extra": "^11.0.0",
     "reflect-metadata": "^0.2.2",
     "rimraf": "^6.0.1",
-    "uuid": "^11.1.0"
+    "uuid": "^13.0.0"
   },
   "peerDependencies": {
     "@azure/abort-controller": "^1.0.1",
