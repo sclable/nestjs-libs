@@ -16,7 +16,7 @@ export class MockStrategy<UserType extends ApplicationUserContract> extends Pass
     super()
   }
 
-  protected async validate(): Promise<UserType | null> {
+  public async validate(): Promise<UserType | null> {
     const user = await this.userService.getTestUser()
 
     this.logger.debug(`MOCK user successfully authenticated (ID: ${user.id})`)
