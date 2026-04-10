@@ -148,15 +148,18 @@ export class AzureBlobStorageAdapter
     const blobClient = containerClient.getBlobClient(id)
     const blockBlobClient = blobClient.getBlockBlobClient()
 
+    let uploadContent: Readable
     if (content instanceof Buffer) {
       const readable = new Readable()
       readable.push(content)
       readable.push(null)
 
-      content = readable
+      uploadContent = readable
+    } else {
+      uploadContent = content as Readable
     }
 
-    const response = await blockBlobClient.uploadStream(content, 4 * 1024 * 1024, 20, {
+    const response = await blockBlobClient.uploadStream(uploadContent, 4 * 1024 * 1024, 20, {
       abortSignal: AbortController.timeout(30 * 60 * 1000),
     })
 

@@ -55,7 +55,7 @@ export class LocalStorageAdapter extends AbstractAdapter implements StorageDrive
       fse.writeFileSync(path, content)
     } else {
       const writeStream = fse.createWriteStream(path)
-      content.pipe(writeStream)
+      ;(content as Readable).pipe(writeStream)
     }
 
     if (metadata) {

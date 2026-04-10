@@ -73,7 +73,7 @@
     "amqp-ts": "1.8.0",
     "enhanced-resolve": "5.19.0",
     "eslint": "8.57.0",
-    "eslint-config-prettier": "9.1.0",
+    "eslint-config-prettier": "10.1.8",
     "eslint-plugin-import": "2.32.0",
     "eslint-plugin-no-only-tests": "3.3.0",
     "eslint-plugin-prettier": "4.2.1",
@@ -97,7 +97,7 @@
     "typedoc": "0.28.17",
     "typedoc-github-wiki-theme": "2.1.0",
     "typedoc-plugin-markdown": "4.10.0",
-    "typescript": "5.6.2"
+    "typescript": "5.9.3"
   },
   "overrides": {
     "axios": "^1.15.0"
