@@ -40,7 +40,7 @@
   },
   "devDependencies": {
     "@angular-devkit/core": "20.3.23",
-    "@angular-devkit/schematics": "20.3.23",
+    "@angular-devkit/schematics": "21.2.7",
     "@apollo/server": "5.5.0",
     "@as-integrations/express5": "1.1.2",
     "@azure/abort-controller": "1.1.0",
