@@ -18,7 +18,7 @@ export class JwtStrategy<UserType extends ApplicationUserContract> extends Passp
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       ignoreExpiration: false,
-      secretOrKey: authModuleOptions.config.jwtSecret,
+      secretOrKey: authModuleOptions.config.jwtSecret ?? '',
     })
   }
 

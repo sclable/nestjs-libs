@@ -35,6 +35,6 @@
     "graphql": "^16.8.1"
   },
   "peerDependencies": {
-    "@nestjs/graphql": ">=6.6.2"
+    "@nestjs/graphql": ">=13.0.0"
   }
 }

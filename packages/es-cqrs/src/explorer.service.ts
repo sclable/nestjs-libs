@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Inject, Injectable, Type } from '@nestjs/common'
+import { Inject, Injectable } from '@nestjs/common'
 import { InstanceWrapper } from '@nestjs/core/injector/instance-wrapper'
 import { Module } from '@nestjs/core/injector/module'
 import { ModulesContainer } from '@nestjs/core/injector/modules-container'
@@ -10,8 +10,8 @@ import {
 } from '@nestjs/cqrs/dist/decorators/constants'
 
 export interface CqrsOptions {
-  events?: Type<IEventHandler>[]
-  commands?: Type<ICommandHandler>[]
+  events?: InstanceWrapper<IEventHandler>[]
+  commands?: InstanceWrapper<ICommandHandler>[]
 }
 
 @Injectable()
@@ -35,33 +35,32 @@ export class ExplorerService {
 
   public flatMap<T>(
     modules: Module[],
-    callback: (instance: InstanceWrapper) => Type<any> | undefined,
-  ): Type<T>[] {
+    callback: (instance: InstanceWrapper) => InstanceWrapper<T> | undefined,
+  ): InstanceWrapper<T>[] {
     const items = modules
       .map(module => [...module.providers.values()].map(callback))
       .reduce((all, prvs) => all.concat(prvs), [])
 
-    return items.filter(element => !!element) as Type<T>[]
+    return items.filter(element => !!element) as InstanceWrapper<T>[]
   }
 
-  public filterProvider(wrapper: InstanceWrapper, metadataKey: string): Type<any> | undefined {
+  public filterProvider(
+    wrapper: InstanceWrapper,
+    metadataKey: string,
+  ): InstanceWrapper | undefined {
     const { instance } = wrapper
     if (!instance) {
       return undefined
     }
 
-    return this.extractMetadata(instance, metadataKey)
+    return this.extractMetadata(instance, metadataKey) ? wrapper : undefined
   }
 
-  public extractMetadata(
-    instance: Record<string, unknown>,
-    metadataKey: string,
-  ): Type<any> | undefined {
+  public extractMetadata(instance: Record<string, unknown>, metadataKey: string): boolean {
     if (!instance.constructor) {
-      return undefined
+      return false
     }
-    const metadata = Reflect.getMetadata(metadataKey, instance.constructor)
 
-    return metadata ? (instance.constructor as Type<any>) : undefined
+    return !!Reflect.getMetadata(metadataKey, instance.constructor)
   }
 }

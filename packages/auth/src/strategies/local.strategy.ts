@@ -16,7 +16,7 @@ export class LocalStrategy<UserType extends ApplicationUserContract> extends Pas
     super()
   }
 
-  protected async validate(username: string, password: string): Promise<UserType> {
+  public async validate(username: string, password: string): Promise<UserType> {
     const user = await this.authService.validateUser(username, password)
     if (!user) {
       throw new UnauthorizedException()

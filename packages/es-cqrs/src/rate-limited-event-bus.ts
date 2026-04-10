@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common'
+import { InstanceWrapper } from '@nestjs/core/injector/instance-wrapper'
 import { EventBus, IEventHandler } from '@nestjs/cqrs'
 import pLimit, { Limit } from 'p-limit'
 
@@ -18,24 +19,31 @@ import { Event } from './interfaces'
 export class RateLimitedEventBus extends EventBus<Event> {
   private limits: { [key: string]: Limit } = {}
 
-  public bind(handler: IEventHandler<Event>, id: string): void {
+  public bind(handler: InstanceWrapper<IEventHandler<Event>>, id: string): void {
+    if (!handler.isDependencyTreeStatic()) {
+      // Fall back to default behavior for request-scoped handlers
+      super.bind(handler, id)
+
+      return
+    }
+
     const stream$ = id ? this.ofEventId(id) : this.subject$
     stream$.subscribe(event => {
       if (event.customOptions && event.customOptions.skipQueue) {
-        handler.handle(event)
+        handler.instance.handle(event)
 
         return
       }
-      const id =
+      const queueId =
         event.customOptions && event.customOptions.queueById
           ? event.customOptions.queueById
           : event.aggregateId
 
-      if (!this.limits[id]) {
-        this.limits[id] = pLimit(1)
+      if (!this.limits[queueId]) {
+        this.limits[queueId] = pLimit(1)
       }
 
-      this.limits[id](() => handler.handle(event))
+      this.limits[queueId](() => handler.instance.handle(event))
     })
   }
 }

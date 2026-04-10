@@ -1,17 +1,14 @@
-import { createParamDecorator } from '@nestjs/common'
+import { ExecutionContext, createParamDecorator } from '@nestjs/common'
 
-export const RequestUser = createParamDecorator((_, req) => {
-  if (Array.isArray(req)) {
-    const [
-      ,
-      ,
-      {
-        req: { user },
-      },
-    ] = req
-
-    return user
+export const RequestUser = createParamDecorator((_data: unknown, ctx: ExecutionContext) => {
+  const type = ctx.getType<'http' | 'graphql' | 'ws'>()
+  if (type === 'http') {
+    return ctx.switchToHttp().getRequest<{ user?: unknown }>().user
   }
 
-  return req.user
+  // GraphQL context: args[2] is { req, res, ... }
+  const [, , gqlCtx] =
+    ctx.getArgs<[unknown, unknown, { req?: { user?: unknown }; user?: unknown }]>()
+
+  return gqlCtx?.req?.user ?? gqlCtx?.user
 })

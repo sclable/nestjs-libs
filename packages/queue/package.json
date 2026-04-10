@@ -22,7 +22,7 @@
   },
   "peerDependencies": {
     "@azure/service-bus": "^7.4.0",
-    "@nestjs/common": ">=6.11.11",
+    "@nestjs/common": ">=11.0.0",
     "amqp-ts": "^1.8.0",
     "rxjs": ">=6.6.7"
   },

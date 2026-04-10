@@ -17,9 +17,13 @@ export class KeycloakStrategy<
     @Inject(ExternalAuthService) private readonly authService: ExternalAuthService<UserType>,
   ) {
     super({
-      realm: authModuleOptions.config.providerRealm,
-      url: authModuleOptions.config.providerUrl,
-      loggingLevel: authModuleOptions.config.loglevel || 'error',
+      realm: authModuleOptions.config.providerRealm ?? '',
+      url: authModuleOptions.config.providerUrl ?? '',
+      loggingLevel: (authModuleOptions.config.loglevel || 'error') as
+        | 'error'
+        | 'debug'
+        | 'info'
+        | 'warn',
     })
   }
 

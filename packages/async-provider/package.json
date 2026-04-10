@@ -14,7 +14,7 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "peerDependencies": {
-    "@nestjs/common": ">=6.11.11"
+    "@nestjs/common": ">=11.0.0"
   },
   "repository": {
     "type": "git",

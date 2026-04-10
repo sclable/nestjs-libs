@@ -2,6 +2,7 @@ const mockedLimit = jest.fn().mockImplementation((cb: () => void) => cb())
 const mockedPLimit = jest.fn().mockImplementation(() => mockedLimit)
 jest.mock('p-limit', () => mockedPLimit)
 
+import { InstanceWrapper } from '@nestjs/core/injector/instance-wrapper'
 import { Test, TestingModule } from '@nestjs/testing'
 
 import {
@@ -87,7 +88,21 @@ describe('RateLimitedEventBus', () => {
   })
 
   it('should register and use handler', done => {
-    eventBus.register([TestEvent1Handler, CombinedEventHandler, TestEndHandler])
+    const wrap = <T>(
+      instance: T,
+      metatype: new (...args: unknown[]) => T,
+    ): InstanceWrapper<T> =>
+      ({
+        instance,
+        metatype,
+        isDependencyTreeStatic: () => true,
+      } as unknown as InstanceWrapper<T>)
+
+    eventBus.register([
+      wrap(mockedHandler, TestEvent1Handler),
+      wrap(mockedCombinedHandler, CombinedEventHandler),
+      wrap(testEndHandler, TestEndHandler),
+    ])
     eventBus.publish(new TestEvent1('id', TEST_AGGREGATE_NAME, 1, new Date(), 'user', {}))
     eventBus.publish(new TestEvent1('id', TEST_AGGREGATE_NAME, 2, new Date(), 'user', {}))
     eventBus.publish(new TestEvent1('id', TEST_AGGREGATE_NAME, 3, new Date(), 'user', {}))

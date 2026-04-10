@@ -29,7 +29,10 @@ export class LocalAuthModule extends AuthModule {
           inject: [AUTH_MODULE_OPTIONS],
           useFactory: (options: AuthModuleOptions) => ({
             secret: options.config.jwtSecret,
-            signOptions: { expiresIn: options.config.jwtExpiresIn },
+            // jwtExpiresIn is a valid ms-compatible string at runtime; cast to satisfy stricter type
+            signOptions: {
+              expiresIn: options.config.jwtExpiresIn as import('ms').StringValue,
+            },
           }),
         }),
         ...(asyncOptions.imports || []),
