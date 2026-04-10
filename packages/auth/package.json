@@ -1,6 +1,6 @@
 {
   "name": "@sclable/nestjs-auth",
-  "version": "1.2.8",
+  "version": "1.2.9",
   "description": "NestJS Authentication Package",
   "license": "MIT",
   "author": {
@@ -13,8 +13,8 @@
     "build": "rimraf dist && tsc -p tsconfig.build.json"
   },
   "dependencies": {
-    "@sclable/nestjs-async-provider": "^1.0.5",
     "@keycloak/keycloak-admin-client": "~26.5.7",
+    "@sclable/nestjs-async-provider": "^1.0.5",
     "passport": "^0.7.0",
     "passport-jwt": "^4.0.0",
     "passport-keycloak-bearer": "^2.4.0",
