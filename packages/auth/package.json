@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@sclable/nestjs-async-provider": "^1.0.5",
-    "keycloak-admin": "^1.14.22",
+    "@keycloak/keycloak-admin-client": "~26.5.7",
     "passport": "^0.7.0",
     "passport-jwt": "^4.0.0",
     "passport-keycloak-bearer": "^2.4.0",
