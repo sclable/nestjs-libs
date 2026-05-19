@@ -26,8 +26,8 @@
     "url": "git@github.com:sclable/nestjs-libs.git"
   },
   "engines": {
-    "node": "^20.20.0 || ^22.22.0 || ^24.13.0",
-    "npm": "^10.8.0 || ^10.9.0 || ^11.6.0"
+    "node": "^22.22.0 || ^24.13.0 || ^26.0.0",
+    "npm": "^10.9.0 || ^11.6.0"
   },
   "dependencies": {
     "@sclable/nestjs-async-provider": "file:packages/async-provider",

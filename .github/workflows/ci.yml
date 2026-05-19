@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [20.x, 22.x, 24.x]
+        node-version: [22.x, 24.x, 26.x]
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -28,6 +28,8 @@ jobs:
           npm run lint
           npm run lint:md
           npm test
+        env:
+          NODE_OPTIONS: ${{ matrix.node-version == '26.x' && '--no-experimental-webstorage' || '' }}
 
   publish:
     runs-on: ubuntu-latest
@@ -47,7 +49,7 @@ jobs:
     - name: Setup NodeJS
       uses: actions/setup-node@v6
       with:
-        node-version: '20'
+        node-version: '24'
         registry-url: 'https://registry.npmjs.org'
         always-auth: true
         cache: 'npm'
