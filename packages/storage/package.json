@@ -28,7 +28,7 @@
     "@azure/storage-blob": "^12.1.1",
     "@nestjs/common": ">=11.0.0",
     "@sclable/nestjs-queue": "^1.0.11",
-    "minio": "^7.0.14"
+    "minio": "^8.0.7"
   },
   "repository": {
     "type": "git",

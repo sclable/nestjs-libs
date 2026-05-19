@@ -104,11 +104,13 @@ export class MinioStorageAdapter extends AbstractAdapter implements StorageDrive
   }
 
   public async deleteObject(bucket: string, id: string): Promise<boolean> {
-    return new Promise(resolve => {
-      this.minioClient.removeObject(bucket, id, error => {
-        resolve(!!error)
-      })
-    })
+    try {
+      await this.minioClient.removeObject(bucket, id)
+
+      return false
+    } catch {
+      return true
+    }
   }
 
   public async getDownloadUrl(
