@@ -59,16 +59,16 @@ describe('ReplayService', () => {
 
   it('should only replay "ReplayFinished" event', async () => {
     await expect(service.replay()).resolves.toBe(0)
-    expect(mockEventStore.getReplayCount).toBeCalled()
-    expect(eventBus.publish).toBeCalled()
+    expect(mockEventStore.getReplayCount).toHaveBeenCalled()
+    expect(eventBus.publish).toHaveBeenCalled()
   })
 
   it('should publish events', async () => {
     const event = new TestEvent1(uuidv4(), 'TestAggregate1', 1, new Date(), '', {})
     events.push(event)
     await expect(service.replay()).resolves.toBe(1)
-    expect(mockEventStore.getReplay).toBeCalled()
-    expect(eventBus.publish).toBeCalledWith(event)
+    expect(mockEventStore.getReplay).toHaveBeenCalled()
+    expect(eventBus.publish).toHaveBeenCalledWith(event)
   })
 
   it('should apply paging if too many events match the filter', async () => {
@@ -77,8 +77,8 @@ describe('ReplayService', () => {
       events.push(new TestEvent1(aggregateId, 'TestAggregate1', i + 1, new Date(), '', {}))
     }
     await expect(service.replay({ pagingSize: 5 })).resolves.toBe(10)
-    expect(mockEventStore.getReplay).toBeCalledTimes(2)
-    expect(eventBus.publish).toBeCalledTimes(11)
+    expect(mockEventStore.getReplay).toHaveBeenCalledTimes(2)
+    expect(eventBus.publish).toHaveBeenCalledTimes(11)
   })
 })
 
@@ -93,5 +93,5 @@ test('ReplayService - logging', async () => {
 
   expect(loggingService).toBeDefined()
   await expect(service.replay()).resolves.toBe(0)
-  expect(mockedLogger.log).toBeCalled()
+  expect(mockedLogger.log).toHaveBeenCalled()
 })

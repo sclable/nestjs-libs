@@ -33,14 +33,14 @@ describe('Aggregate', () => {
   it('should store and handle applied events', () => {
     aggregate.apply(event1)
     expect(aggregate.getUncommittedEvents()).toEqual([event1])
-    expect(aggregate.onTestEvent).toBeCalledWith(event1)
+    expect(aggregate.onTestEvent).toHaveBeenCalledWith(event1)
   })
 
   it('should publish and remove commited events', () => {
     aggregate.commit()
     // TODO investigate why the function is called with an empty array
-    // expect(aggregate.publishAll).toBeCalledWith([event1])
-    expect(aggregate.publishAll).toBeCalled()
+    // expect(aggregate.publishAll).toHaveBeenCalledWith([event1])
+    expect(aggregate.publishAll).toHaveBeenCalled()
     expect(aggregate.getUncommittedEvents().length).toEqual(0)
   })
 

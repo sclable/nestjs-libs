@@ -1,5 +1,7 @@
 name: CI
-on: push
+on:
+  push:
+  workflow_dispatch:
 
 permissions:
   id-token: write
@@ -47,13 +49,10 @@ jobs:
       with:
         node-version: '20'
         registry-url: 'https://registry.npmjs.org'
+        always-auth: true
         cache: 'npm'
     - name: Install and generate docs
       run: npm ci
-    - name: Show npm identity context
-      run: |
-        npm config get registry
-        npm whoami || true
     - name: Publish
       run: npx lerna publish -y
       env:

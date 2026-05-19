@@ -134,10 +134,10 @@ describe('RateLimitedEventBus', () => {
       }),
     )
     testEndHandler.handle = (): void => {
-      expect(mockedPLimit).toBeCalledTimes(2) // for id, and customId
-      expect(mockedLimit).toBeCalledTimes(5) // 3+end for id, and 1 for customId
-      expect(mockedHandler.handle).toBeCalledTimes(3)
-      expect(mockedCombinedHandler.handle).toBeCalledTimes(3)
+      expect(mockedPLimit).toHaveBeenCalledTimes(2) // for id, and customId
+      expect(mockedLimit).toHaveBeenCalledTimes(5) // 3+end for id, and 1 for customId
+      expect(mockedHandler.handle).toHaveBeenCalledTimes(3)
+      expect(mockedCombinedHandler.handle).toHaveBeenCalledTimes(3)
       done()
     }
     eventBus.publish(new TestEnd('id', TEST_AGGREGATE_NAME, 7, new Date(), 'user', {}))

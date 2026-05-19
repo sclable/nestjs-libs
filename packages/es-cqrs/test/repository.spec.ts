@@ -81,7 +81,7 @@ describe('Repository', () => {
 
   it('should be defined and register events', () => {
     expect(repo).toBeDefined()
-    expect(eventRegistry.register).toBeCalledWith('TestEvent', TestEvent)
+    expect(eventRegistry.register).toHaveBeenCalledWith('TestEvent', TestEvent)
   })
 
   it('should persist an aggregate', async () => {
