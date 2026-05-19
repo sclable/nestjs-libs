@@ -50,10 +50,15 @@ jobs:
         cache: 'npm'
     - name: Install and generate docs
       run: npm ci
+    - name: Show npm identity context
+      run: |
+        npm config get registry
+        npm whoami || true
     - name: Publish
       run: npx lerna publish -y
       env:
         GH_TOKEN: ${{ secrets.GIT_PUSH_TOKEN }}
+        NPM_CONFIG_PROVENANCE: true
     - name: Generate documentation
       run: npx typedoc
     - name: Save documentation
