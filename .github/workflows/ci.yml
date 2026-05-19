@@ -21,11 +21,13 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
-      - name: Upgrade npm to 11
-        if: startsWith(matrix.node-version, '22')
-        run: npm install -g npm@11
       - name: Install
-        run: npm ci
+        run: |
+          if [[ "${{ matrix.node-version }}" == "22.x" ]]; then
+            npx --yes npm@11 ci
+          else
+            npm ci
+          fi
       - name: Lint and Test
         run: |
           npm run lint
@@ -95,4 +97,3 @@ jobs:
         git add .
         git commit -am "Update documentation"
         git push origin master
-
