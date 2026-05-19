@@ -21,6 +21,9 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
+      - name: Upgrade npm to 11
+        if: startsWith(matrix.node-version, '22')
+        run: npm install -g npm@11
       - name: Install
         run: npm ci
       - name: Lint and Test
