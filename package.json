@@ -81,7 +81,7 @@
     "glob-promise": "6.0.5",
     "graphql": "16.13.2",
     "husky": "9.1.7",
-    "jest": "30.3.0",
+    "jest": "30.4.2",
     "json-schema-to-typescript": "15.0.4",
     "lerna": "9.0.7",
     "lint-staged": "16.2.7",
