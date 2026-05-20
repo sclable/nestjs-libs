@@ -60,7 +60,7 @@
     "@types/eslint": "8.56.3",
     "@types/fs-extra": "11.0.4",
     "@types/jest": "30.0.0",
-    "@types/node": "25.6.0",
+    "@types/node": "25.9.1",
     "@types/prettier": "2.7.3",
     "@types/passport-jwt": "4.0.1",
     "@types/passport-local": "1.0.38",
