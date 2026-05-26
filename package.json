@@ -49,7 +49,7 @@
     "@commitlint/cli": "20.4.1",
     "@commitlint/config-conventional": "19.5.0",
     "@commitlint/prompt-cli": "19.5.0",
-    "@nestjs/apollo": "13.4.1",
+    "@nestjs/apollo": "13.4.2",
     "@nestjs/common": "11.1.18",
     "@nestjs/core": "11.1.18",
     "@nestjs/graphql": "13.4.1",
