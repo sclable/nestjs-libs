@@ -29,7 +29,7 @@
     "@nestjs/cqrs": "^11.0.3",
     "lodash": "^4.17.12",
     "p-limit": "^3.1.0",
-    "uuid": "^11.1.0"
+    "uuid": "^14.0.0"
   },
   "peerDependencies": {
     "@nestjs/common": "^11",
