@@ -84,7 +84,7 @@
     "jest": "30.4.2",
     "json-schema-to-typescript": "15.0.4",
     "lerna": "9.0.7",
-    "lint-staged": "16.2.7",
+    "lint-staged": "17.0.7",
     "markdownlint-cli": "0.48.0",
     "minio": "8.0.7",
     "p-limit": "4.0.0",
