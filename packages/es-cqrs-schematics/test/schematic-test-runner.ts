@@ -51,9 +51,7 @@ export class UnitTestTree extends DelegateTree {
 
 export class SchematicTestRunner {
   private _engineHost = new NodeModulesTestEngineHost()
-  // eslint-disable-next-line @typescript-eslint/ban-types
   private _engine: SchematicEngine<{}, {}> = new SchematicEngine(this._engineHost)
-  // eslint-disable-next-line @typescript-eslint/ban-types
   private _collection: Collection<{}, {}>
   private _logger: logging.LoggerApi
 
@@ -81,7 +79,6 @@ export class SchematicTestRunner {
     this._collection = this._engine.createCollection(this._collectionName)
   }
 
-  // eslint-disable-next-line @typescript-eslint/ban-types
   public get engine(): SchematicEngine<{}, {}> {
     return this._engine
   }
@@ -131,7 +128,6 @@ export class SchematicTestRunner {
     tree: Tree,
     parentContext?: Partial<SchematicContext>,
   ): Observable<Tree> {
-    // eslint-disable-next-line @typescript-eslint/ban-types
     const context = this._engine.createContext({} as Schematic<{}, {}>, parentContext)
 
     return callRule(rule, observableOf(tree), context)

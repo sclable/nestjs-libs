@@ -29,7 +29,7 @@ export class LocalStorageAdapter extends AbstractAdapter implements StorageDrive
 
     try {
       fse.accessSync(this.basePath, fse.constants.R_OK | fse.constants.W_OK)
-    } catch (error) {
+    } catch {
       throw new Error(
         `LocalStorageAdapter: base path "${this.basePath}" is not readable or writable.`,
       )

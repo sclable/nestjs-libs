@@ -7,7 +7,7 @@ export interface AsyncProviderFactory<T> {
 
 /** ASync provider interface */
 export interface AsyncProvider<T> extends Pick<ModuleMetadata, 'imports'> {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/ban-types
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   inject?: (string | symbol | Function | Type<any> | Abstract<any>)[]
   useClass?: Type<AsyncProviderFactory<T>>
   useExisting?: Type<AsyncProviderFactory<T>>

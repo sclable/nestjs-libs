@@ -15,9 +15,9 @@ jobs:
         node-version: [22.x, 24.x, 26.x]
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
       - name: Setup NodeJS ${{ matrix.node-version }}
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
@@ -42,7 +42,7 @@ jobs:
     needs: [build]
     steps:
     - name: Checkout
-      uses: actions/checkout@v6
+      uses: actions/checkout@v7
       with:
         fetch-depth: 0
         persist-credentials: true
@@ -52,7 +52,7 @@ jobs:
         git config user.email "ci@sclable.com"
         git config user.name "Sclable CI"
     - name: Setup NodeJS
-      uses: actions/setup-node@v6
+      uses: actions/setup-node@v7
       with:
         node-version: '24'
         registry-url: 'https://registry.npmjs.org'
@@ -79,7 +79,7 @@ jobs:
     needs: [publish]
     steps:
     - name: Checkout
-      uses: actions/checkout@v6
+      uses: actions/checkout@v7
       with:
         repository: ${{github.repository}}.wiki
         token: ${{ secrets.GIT_PUSH_TOKEN }}

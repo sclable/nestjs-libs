@@ -142,17 +142,11 @@ module.exports = {
     '@typescript-eslint/prefer-function-type': 'warn',
     '@typescript-eslint/indent': 'off',
     '@typescript-eslint/prefer-for-of': 'error',
-    '@typescript-eslint/member-delimiter-style': [
-      'warn',
-      {
-        multiline: { delimiter: 'none', requireLast: true },
-        singleline: { delimiter: 'semi', requireLast: false },
-      },
-    ],
+    '@typescript-eslint/no-unsafe-function-type': 'off',
+    '@typescript-eslint/no-empty-object-type': 'off',
     '@typescript-eslint/member-ordering': 'warn',
     '@typescript-eslint/no-explicit-any': 'warn',
     '@typescript-eslint/no-inferrable-types': 'off',
-    '@typescript-eslint/no-parameter-properties': 'off',
     '@typescript-eslint/no-this-alias': 'off',
     '@typescript-eslint/no-unused-expressions': [
       'error',
@@ -191,6 +185,7 @@ module.exports = {
         'import/no-commonjs': 'off',
         '@typescript-eslint/explicit-function-return-type': 'off',
         '@typescript-eslint/no-var-requires': 'off',
+        '@typescript-eslint/no-require-imports': 'off',
       },
     },
     {
@@ -203,6 +198,7 @@ module.exports = {
         'import/no-commonjs': 'off',
         '@typescript-eslint/explicit-function-return-type': 'off',
         '@typescript-eslint/no-var-requires': 'off',
+        '@typescript-eslint/no-require-imports': 'off',
       },
     },
   ],
