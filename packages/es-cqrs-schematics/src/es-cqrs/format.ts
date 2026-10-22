@@ -26,16 +26,17 @@ const defaultPrettierOptions: Options = {
 export function prettier(): Rule {
   return async (tree: Tree) => {
     const prettierOptions = await resolveConfig(process.cwd())
-    tree.actions.forEach(action => {
+    for (const action of tree.actions) {
       const src = tree.read(action.path)
       if (!src) {
-        return
+        continue
       }
-      tree.overwrite(
-        action.path,
-        prettierFormat(src.toString(), prettierOptions ?? defaultPrettierOptions),
+      const formatted = await prettierFormat(
+        src.toString(),
+        prettierOptions ?? defaultPrettierOptions,
       )
-    })
+      tree.overwrite(action.path, formatted)
+    }
   }
 }
 
@@ -43,19 +44,18 @@ export function prettier(): Rule {
  * Applies `eslint` fixing to the generated content
  *
  * If project has its own config it will be used, otherwise a default config is used
- * WARNING! `prettier/prettier` rules doesn't seem to apply as it can't defer the correct parser
  */
 export function eslint(): Rule {
   return async (tree: Tree) => {
     const eslint = new ESLint({ fix: true, extensions: ['.ts'] })
-    tree.actions.forEach(async action => {
+    for (const action of tree.actions) {
       const src = tree.read(action.path)
       if (!src) {
-        return
+        continue
       }
-      const lintResults = await eslint.lintText(src.toString())
-      tree.overwrite(action.path, lintResults[0].output ?? src)
-    })
+      const lintResults = await eslint.lintText(src.toString(), { filePath: action.path })
+      tree.overwrite(action.path, lintResults[0]?.output ?? src)
+    }
   }
 }
 

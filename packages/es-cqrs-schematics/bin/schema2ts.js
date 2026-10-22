@@ -1,7 +1,7 @@
 const path = require('path')
 
 const writeFile = require('fs-extra').writeFile
-const glob = require('glob-promise').promise
+const glob = require('glob').glob
 const compileFromFile = require('json-schema-to-typescript').compileFromFile
 
 async function run() {
