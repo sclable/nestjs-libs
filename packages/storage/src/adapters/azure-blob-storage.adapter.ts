@@ -3,7 +3,6 @@
  */
 import { Readable } from 'stream'
 
-import { AbortController } from '@azure/abort-controller'
 import {
   BlobSASPermissions,
   BlobSASSignatureValues,
@@ -160,7 +159,7 @@ export class AzureBlobStorageAdapter
     }
 
     const response = await blockBlobClient.uploadStream(uploadContent, 4 * 1024 * 1024, 20, {
-      abortSignal: AbortController.timeout(30 * 60 * 1000),
+      abortSignal: AbortSignal.timeout(30 * 60 * 1000),
     })
 
     if (response.errorCode) {

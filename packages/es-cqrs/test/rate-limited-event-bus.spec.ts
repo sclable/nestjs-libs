@@ -96,7 +96,7 @@ describe('RateLimitedEventBus', () => {
         instance,
         metatype,
         isDependencyTreeStatic: () => true,
-      } as unknown as InstanceWrapper<T>)
+      }) as unknown as InstanceWrapper<T>
 
     eventBus.register([
       wrap(mockedHandler, TestEvent1Handler),

@@ -6,8 +6,9 @@ const shelljs = require('shelljs')
 const packages = glob.sync('dist/*/')
 
 packages.forEach(match => {
-  const src = match + '*'
-  const pkg = 'packages' + match.substring(4)
+  const dir = match.endsWith('/') ? match : `${match}/`
+  const src = `${dir}*`
+  const pkg = 'packages' + dir.substring(4)
   const dst = pkg + 'dist/'
   shelljs.mkdir('-p', dst)
   if (process.platform === 'linux') {

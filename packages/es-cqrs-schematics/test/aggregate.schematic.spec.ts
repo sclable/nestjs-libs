@@ -193,8 +193,8 @@ export class SchematicTest extends Aggregate {
 const generatedFormattedText = `import { Aggregate, EventSourcableAggregate } from '@sclable/nestjs-es-cqrs'
 import { v4 as uuidv4 } from 'uuid'
 
-import { TestDataAdded, TestDataRemoved, schematicTestEvents } from './events'
 import { Parameter } from './parameter'
+import { schematicTestEvents, TestDataAdded, TestDataRemoved } from './events'
 import { UpdateParameter } from '../update-parameter'
 
 @EventSourcableAggregate(...schematicTestEvents)

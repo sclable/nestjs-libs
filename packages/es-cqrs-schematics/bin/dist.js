@@ -1,7 +1,7 @@
 const resolve = require('path').resolve
 
 const copy = require('fs-extra').copy
-const glob = require('glob-promise').promise
+const glob = require('glob').glob
 
 async function run() {
   const schemaFiles = await glob('**/*schema.*', {
