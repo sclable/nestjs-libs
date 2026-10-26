@@ -39,7 +39,7 @@
     "@sclable/nestjs-storage": "file:packages/storage"
   },
   "devDependencies": {
-    "@angular-devkit/core": "20.3.40",
+    "@angular-devkit/core": "22.2.4",
     "@angular-devkit/schematics": "20.3.40",
     "@apollo/server": "5.5.0",
     "@as-integrations/express5": "1.1.2",
