@@ -56,7 +56,7 @@
     "@nestjs/jwt": "11.0.2",
     "@nestjs/passport": "11.0.5",
     "@nestjs/platform-express": "11.1.18",
-    "@nestjs/testing": "11.1.18",
+    "@nestjs/testing": "12.2.0",
     "@types/eslint": "8.56.3",
     "@types/fs-extra": "11.0.4",
     "@types/jest": "30.0.0",
