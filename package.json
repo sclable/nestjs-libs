@@ -46,7 +46,7 @@
     "@azure/abort-controller": "2.1.2",
     "@azure/service-bus": "7.9.5",
     "@azure/storage-blob": "12.31.0",
-    "@commitlint/cli": "20.4.1",
+    "@commitlint/cli": "21.2.4",
     "@commitlint/config-conventional": "19.5.0",
     "@commitlint/prompt-cli": "21.0.1",
     "@nestjs/apollo": "13.4.2",
